@@ -11,7 +11,7 @@ toc: false
 
  - **Location**: SPH I 3755
 
- - **Course GitHub**: [https://github.com/dmcable/BIOSTAT620W26](https://github.com/USCbiostats/BIOSTAT620W26)
+ - **Course GitHub**: [https://github.com/dmcable/BIOSTAT620W26](https://github.com/dmcable/BIOSTAT620W26)
 
 ## Instructor
 

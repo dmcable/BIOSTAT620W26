@@ -95,8 +95,6 @@ Many of these websites offer publicly available datasets that can be used for re
 - Housing data [Zillow](https://www.zillow.com/howto/api/APIOverview.htm)
 - [Bureau of Justice Statistics](https://bjs.ojp.gov/data)
 National Center for Education Statistics: [The Nation's Report Card](https://www.nationsreportcard.gov/ndecore/landing)
-- Los Angeles [city data](https://data.lacity.org/)
-- Los Angeles [crime data](http://www.lapdonline.org/crime_mapping_and_compstat)
 
 ### Other data
 
