@@ -1,0 +1,32 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "BIOSTAT 620"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - syllabus.qmd
+      - schedule.qmd
+      - references.qmd
+  page-footer: 
+    left:
+      University of Michigan <br>
+      Department of Biostatistics, School of Public Health
+    right:
+      LICENSE <br>
+      View the [source at GitHub](https://github.com/dmcable/BIOSTAT620W26).
+      
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    respect-user-color-scheme: true
+    css: styles.css
+    toc: true
+
+
+

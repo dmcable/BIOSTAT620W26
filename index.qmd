@@ -1,0 +1,25 @@
+---
+title: "BIOSTAT 620"
+toc: false
+---
+
+## Introduction to Health Data Science 
+
+ - **Term**: Winter 2026
+
+ - **Time**: Tuesdays and Thursdays 8:30am - 9:50am
+
+ - **Location**: SPH I 3755
+
+ - **Course GitHub**: [https://github.com/dmcable/BIOSTAT620W26](https://github.com/USCbiostats/BIOSTAT620W26)
+
+## Instructor
+
+**Dylan Cable**
+
+ - **Email**: dmcable@umich.edu
+
+ - **Office**: SPH I 4635
+
+ - **Office Hours**: Friday 11am - 12pm
+

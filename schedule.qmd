@@ -1,0 +1,23 @@
+---
+title: "Schedule"
+---
+
+| Week | Date | Topic | Slides | Lab | Assignment Release (not due) |
+|:--:|:---:|:-----------------------|:--:|:--:|:--:|
+| 0 | 1/8 | Syllabus and Introduction | [Slides](slides/week01.qmd) |  |  |
+| 1 | 1/13-15 | Introduction to Data Science and R | [Slides](slides/week01.qmd) | Lab 1 |  |
+| 2 | 1/20-22 | Version Control & Reproducible Research |  | Lab 2 |  |
+| 3 | 1/27-29 | Exploratory data analysis |  | Lab 3 | HW1 |
+| 4 | 2/3-5 | Data visualization	 | | Lab 4 |  |
+| 5 | 2/10-12 | Data Cleaning and Wrangling	 | | Lab 5 | HW2 |
+| 6 | 2/17-19 | Text Mining & Sentiment Analysis	 |  | Lab 6 | Midterm Project  |
+| 7 | 2/24-26 | Scraping, APIs, and Regular Expressions	 | | Lab 7 | |
+|   | 3/3-5 | NO CLASS - SPRING RECESS	 |  |  |  |
+| 8 | 3/10-12 | Efficiency and High Performance Computing |  | Lab 8 | HW3 |
+| 9 | 3/17-19 | SQL and Managing Big Data	 |  | Lab 9 | Final Project  |
+| 10 | 3/24-26 | Interactive Visualization |  | Lab 10 | HW4 |
+| 11 | 3/31-4/2 | Building a Website with Quarto and GitHub |  | Lab 11 |  |
+| 12 | 4/7-9 | Special Topics	 |  | Final Project Workshop  | |
+| 13 | 4/14-16 | Special Topics	 |  |  |  |
+| 14 | 4/21 (NO CLASS ON 4/23) | Final Project Presentations	 |  |  |  |
+
