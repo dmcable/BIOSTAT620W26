@@ -4,8 +4,8 @@ title: "Schedule"
 
 | Week | Date | Topic | Slides | Lab | Assignment Release (not due) |
 |:--:|:---:|:-----------------------|:--:|:--:|:--:|
-| 0 | 1/8 | Syllabus and Introduction | [Slides](slides/week01.qmd) |  |  |
-| 1 | 1/13-15 | Introduction to Data Science and R | [Slides](slides/week01.qmd) | Lab 1 |  |
+| 0 | 1/8 | Syllabus and Introduction | [Slides](slides/week00.qmd) |  |  |
+| 1 | 1/13-15 | Introduction to Data Science and R | [Slides](slides/week01.qmd) | [Lab](labs/lab1.qmd) |  |
 | 2 | 1/20-22 | Version Control & Reproducible Research |  | Lab 2 |  |
 | 3 | 1/27-29 | Exploratory data analysis |  | Lab 3 | HW1 |
 | 4 | 2/3-5 | Data visualization	 | | Lab 4 |  |
