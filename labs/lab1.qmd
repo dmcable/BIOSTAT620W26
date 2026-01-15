@@ -264,6 +264,8 @@ Here is a Quarto [cheatsheet](https://rstudio.github.io/cheatsheets/quarto.pdf) 
 # Submitting your lab
 Since we have not covered GitHub yet, for this week (and ONLY this week) you may submit a fully rendered HTML (or PDF) version of your completed lab by emailing it to dmcable@umich.edu .
 
+You can submit your lab at any time, but to receive credit, submit no later than the beginning of next class (8:30am Jan 20th).
+
 
 
 ---

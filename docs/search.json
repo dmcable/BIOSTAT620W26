@@ -305,7 +305,7 @@
     "href": "slides/week01.html#factors-3",
     "title": "R Basics",
     "section": "Factors",
-    "text": "Factors\nExercise: How can we make this go much faster?\n\nsystem.time({levels(y) &lt;- tolower(levels(y))})\n\n   user  system elapsed \n  0.013   0.002   0.014"
+    "text": "Factors\nExercise: How can we make this go much faster?\n\nsystem.time({levels(y) &lt;- tolower(levels(y))})\n\n   user  system elapsed \n  0.013   0.001   0.014"
   },
   {
     "objectID": "slides/week01.html#factors-can-be-confusing",
@@ -529,7 +529,7 @@
     "href": "slides/week01.html#vectorization-4",
     "title": "R Basics",
     "section": "Vectorization",
-    "text": "Vectorization\n\nIf we operate on two vectors, vectorization is componentwise.\nHere is an example:\n\n\nheights &lt;- c(69, 62, 66, 70, 70, 73, 67, 73, 67, 70)\nerror &lt;- rnorm(length(heights), 0, 0.1)\nheights + error\n\n [1] 68.87062 62.06070 66.08608 70.04384 70.07364 73.01582 67.01219 73.05857\n [9] 67.19655 70.01557"
+    "text": "Vectorization\n\nIf we operate on two vectors, vectorization is componentwise.\nHere is an example:\n\n\nheights &lt;- c(69, 62, 66, 70, 70, 73, 67, 73, 67, 70)\nerror &lt;- rnorm(length(heights), 0, 0.1)\nheights + error\n\n [1] 68.96018 62.07544 66.27238 69.93623 70.01049 72.93201 66.83057 72.91581\n [9] 67.15303 69.87468"
   },
   {
     "objectID": "slides/week01.html#exercise",
