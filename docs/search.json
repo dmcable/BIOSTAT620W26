@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Week\nDate\nTopic\nSlides\nLab\nAssignment Release (not due)\n\n\n\n\n0\n1/8\nSyllabus and Introduction\nSlides\n\n\n\n\n1\n1/13-15\nIntroduction to Data Science and R\nSlides\nLab\n\n\n\n2\n1/20-22\nVersion Control & Reproducible Research\n\nLab 2\n\n\n\n3\n1/27-29\nExploratory data analysis\n\nLab 3\nHW1\n\n\n4\n2/3-5\nData visualization\n\nLab 4\n\n\n\n5\n2/10-12\nData Cleaning and Wrangling\n\nLab 5\nHW2\n\n\n6\n2/17-19\nText Mining & Sentiment Analysis\n\nLab 6\nMidterm Project\n\n\n7\n2/24-26\nScraping, APIs, and Regular Expressions\n\nLab 7\n\n\n\n\n3/3-5\nNO CLASS - SPRING RECESS\n\n\n\n\n\n8\n3/10-12\nEfficiency and High Performance Computing\n\nLab 8\nHW3\n\n\n9\n3/17-19\nSQL and Managing Big Data\n\nLab 9\nFinal Project\n\n\n10\n3/24-26\nInteractive Visualization\n\nLab 10\nHW4\n\n\n11\n3/31-4/2\nBuilding a Website with Quarto and GitHub\n\nLab 11\n\n\n\n12\n4/7-9\nSpecial Topics\n\nFinal Project Workshop\n\n\n\n13\n4/14-16\nSpecial Topics\n\n\n\n\n\n14\n4/21 (NO CLASS ON 4/23)\nFinal Project Presentations"
+    "text": "Week\nDate\nTopic\nSlides\nLab\nAssignment Release (not due)\n\n\n\n\n0\n1/8\nSyllabus and Introduction\nSlides\n\n\n\n\n1\n1/13-15\nIntroduction to Data Science and R\nSlides\nLab\n\n\n\n2\n1/20-22\nVersion Control & Reproducible Research\nSlides\nLab 2\n\n\n\n3\n1/27-29\nExploratory data analysis\n\nLab 3\nHW1\n\n\n4\n2/3-5\nData visualization\n\nLab 4\n\n\n\n5\n2/10-12\nData Cleaning and Wrangling\n\nLab 5\nHW2\n\n\n6\n2/17-19\nText Mining & Sentiment Analysis\n\nLab 6\nMidterm Project\n\n\n7\n2/24-26\nScraping, APIs, and Regular Expressions\n\nLab 7\n\n\n\n\n3/3-5\nNO CLASS - SPRING RECESS\n\n\n\n\n\n8\n3/10-12\nEfficiency and High Performance Computing\n\nLab 8\nHW3\n\n\n9\n3/17-19\nSQL and Managing Big Data\n\nLab 9\nFinal Project\n\n\n10\n3/24-26\nInteractive Visualization\n\nLab 10\nHW4\n\n\n11\n3/31-4/2\nBuilding a Website with Quarto and GitHub\n\nLab 11\n\n\n\n12\n4/7-9\nSpecial Topics\n\nFinal Project Workshop\n\n\n\n13\n4/14-16\nSpecial Topics\n\n\n\n\n\n14\n4/21 (NO CLASS ON 4/23)\nFinal Project Presentations"
   },
   {
     "objectID": "syllabus.html",
@@ -103,6 +103,524 @@
     "title": "Syllabus",
     "section": "Students and Disability Accommodations:",
     "text": "Students and Disability Accommodations:\nStudents should speak with their instructors before or during the first week of classes regarding any special needs. Students can also visit the Office for Student Affairs for assistance in coordinating communications around accommodations.\nStudents seeking academic accommodations should register with Services for Students with Disabilities (SSD). SSD arranges reasonable and appropriate academic accommodations for students with disabilities. Please visit the Services for Students with Disabilities website for more information on student accommodations.\nStudents who expect to miss classes, examinations, or other assignments as a consequence of their religious observance shall be provided with a reasonable alternative opportunity to complete such academic responsibilities. It is the obligation of students to provide faculty with reasonable notice of the dates of religious holidays on which they will be absent. Please visit the Office of the Provost website for the complete University policy.\nStudents who are feeling ill should not come to class in-person. Your grade will not be negatively impacted by not attending class due to illness. If you need flexibility due to being ill, having caregiving responsibilities, childcare responsibilities, etc., please email me as soon as possible so that we can come up with a plan to allow flexibility in assignment due dates."
+  },
+  {
+    "objectID": "slides/week02.html#naming-convention",
+    "href": "slides/week02.html#naming-convention",
+    "title": "Version control and reproducible research",
+    "section": "Naming convention",
+    "text": "Naming convention\n\nIn general you want to name your files in a way that is related to their contents and specifies how they relate to other files.\nThe Smithsonian Data Management Best Practices has “five precepts of file naming and organization”"
+  },
+  {
+    "objectID": "slides/week02.html#five-precepts-of-file-naming-and-organization",
+    "href": "slides/week02.html#five-precepts-of-file-naming-and-organization",
+    "title": "Version control and reproducible research",
+    "section": "Five precepts of file naming and organization",
+    "text": "Five precepts of file naming and organization\n\nHave a distinctive, human-readable name that gives an indication of the content.\nFollow a consistent pattern that is machine-friendly.\nOrganize files into directories (when necessary) that follow a consistent pattern.\nAvoid repetition of semantic elements among file and directory names.\nHave a file extension that matches the file format (no changing extensions!)\n\nFor specific recommendations we highly recommend you follow The Tidyverse Style Guide"
+  },
+  {
+    "objectID": "slides/week02.html#the-terminal",
+    "href": "slides/week02.html#the-terminal",
+    "title": "Version control and reproducible research",
+    "section": "The terminal",
+    "text": "The terminal\n\nInstead of clicking, dragging, and dropping to organize our files and folders, we will be typing Unix commands into the terminal.\nThe way we do this is similar to how we type commands into the R console, but instead of generating plots and statistical summaries, we will be organizing files on our system."
+  },
+  {
+    "objectID": "slides/week02.html#the-terminal-1",
+    "href": "slides/week02.html#the-terminal-1",
+    "title": "Version control and reproducible research",
+    "section": "The terminal",
+    "text": "The terminal\n\nThe terminal is integrated into Mac and Linux systems, but Windows users will have to install an emulator. Once you have a terminal open, you can start typing commands.\nYou should see a blinking cursor at the spot where what you type will show up. This position is called the command line."
+  },
+  {
+    "objectID": "slides/week02.html#the-filesystem",
+    "href": "slides/week02.html#the-filesystem",
+    "title": "Version control and reproducible research",
+    "section": "The filesystem",
+    "text": "The filesystem"
+  },
+  {
+    "objectID": "slides/week02.html#the-home-directory",
+    "href": "slides/week02.html#the-home-directory",
+    "title": "Version control and reproducible research",
+    "section": "The home directory",
+    "text": "The home directory"
+  },
+  {
+    "objectID": "slides/week02.html#windows",
+    "href": "slides/week02.html#windows",
+    "title": "Version control and reproducible research",
+    "section": "Windows",
+    "text": "Windows\nThe structure on Windows looks something like this:"
+  },
+  {
+    "objectID": "slides/week02.html#mac",
+    "href": "slides/week02.html#mac",
+    "title": "Version control and reproducible research",
+    "section": "Mac",
+    "text": "Mac\nAnd on MacOS something like this:"
+  },
+  {
+    "objectID": "slides/week02.html#working-directory",
+    "href": "slides/week02.html#working-directory",
+    "title": "Version control and reproducible research",
+    "section": "Working directory",
+    "text": "Working directory\n\nThe working directory is the directory you are currently in. Later we will see that we can move to other directories using the command line.\nIt’s similar to clicking on folders.\nYou can see your working directory using the Unix command pwd\n\nIn R we can use getwd()"
+  },
+  {
+    "objectID": "slides/week02.html#paths",
+    "href": "slides/week02.html#paths",
+    "title": "Version control and reproducible research",
+    "section": "Paths",
+    "text": "Paths\n\nThis string returned in previous command is full path to working directory.\nThe full path to your home directory is stored in an environment variable.\nYou can see it like this echo $HOME"
+  },
+  {
+    "objectID": "slides/week02.html#paths-1",
+    "href": "slides/week02.html#paths-1",
+    "title": "Version control and reproducible research",
+    "section": "Paths",
+    "text": "Paths\n\nIn Unix, we use the shorthand ~ as a nickname for your home directory\nExample: the full path for docs (in image above) can be written like this ~/docs.\nMost terminals will show the path to your working directory right on the command line.\nTry opening a terminal window and see if the working directory is listed."
+  },
+  {
+    "objectID": "slides/week02.html#unix-commands",
+    "href": "slides/week02.html#unix-commands",
+    "title": "Version control and reproducible research",
+    "section": "Unix commands",
+    "text": "Unix commands\n\nls: Listing directory content\nmkdir and rmdir: make and remove a directory\ncd: navigating the filesystem by changing directories\npwd: see your workding directory\nmv: moving files\ncp: copying files\nrm: removing files\nless: looking at a file"
+  },
+  {
+    "objectID": "slides/week02.html#autocomplete",
+    "href": "slides/week02.html#autocomplete",
+    "title": "Version control and reproducible research",
+    "section": "Autocomplete",
+    "text": "Autocomplete\n\nIn Unix you can auto-complete by hitting tab.\nThis means that we can type cd d then hit tab.\nUnix will either auto-complete if docs is the only directory/file starting with d or show you the options.\nTry it out! Using Unix without auto-complete would make it unbearable."
+  },
+  {
+    "objectID": "slides/week02.html#text-editors",
+    "href": "slides/week02.html#text-editors",
+    "title": "Version control and reproducible research",
+    "section": "Text editors",
+    "text": "Text editors\nCommand-line text editors are essential tools, especially for system administrators, developers, and other users who frequently work in a terminal environment. Here are some of the most popular command-line text editors:\n\nNano\nPico\nVi or Vim\nEmacs"
+  },
+  {
+    "objectID": "slides/week02.html#other-very-useful-commands-you-should-learn",
+    "href": "slides/week02.html#other-very-useful-commands-you-should-learn",
+    "title": "Version control and reproducible research",
+    "section": "Other very useful commands you should learn",
+    "text": "Other very useful commands you should learn\n\ncurl - download data from the internet.\ntar - archive files and subdirectories of a directory into one file.\nssh - connect to another computer.\nfind - search for files by filename in your system.\ngrep - search for patterns in a file.\nawk/sed - These are two very powerful commands that permit you to find specific strings in files and change them."
+  },
+  {
+    "objectID": "slides/week02.html#resources",
+    "href": "slides/week02.html#resources",
+    "title": "Version control and reproducible research",
+    "section": "Resources",
+    "text": "Resources\nTo get started.\n\nhttps://www.codecademy.com/learn/learn-the-command-line\nhttps://www.edx.org/course/introduction-linux-linuxfoundationx-lfs101x-1\nhttps://www.coursera.org/learn/unix"
+  },
+  {
+    "objectID": "slides/week02.html#what-is-version-control",
+    "href": "slides/week02.html#what-is-version-control",
+    "title": "Version control and reproducible research",
+    "section": "What is version control?",
+    "text": "What is version control?\n\n\n\n\n[I]s the management of changes to documents […] Changes are usually identified by a number or letter code, termed the “revision number”, “revision level”, or simply “revision”. For example, an initial set of files is “revision 1”. When the first change is made, the resulting set is “revision 2”, and so on. Each revision is associated with a timestamp and the person making the change. Revisions can be compared, restored, and with some types of files, merged. – Wikipedia"
+  },
+  {
+    "objectID": "slides/week02.html#motivation",
+    "href": "slides/week02.html#motivation",
+    "title": "Version control and reproducible research",
+    "section": "Motivation",
+    "text": "Motivation\nWe want to avoid this:\n\nPosted by rjkb041 on r/ProgrammerHumor"
+  },
+  {
+    "objectID": "slides/week02.html#motivation-1",
+    "href": "slides/week02.html#motivation-1",
+    "title": "Version control and reproducible research",
+    "section": "Motivation",
+    "text": "Motivation\n\nThis is particularly true when more than one person is collaborating and editing the file.\nEven more important when there are multiple files, as there is in software development, and to some extend data analysis."
+  },
+  {
+    "objectID": "slides/week02.html#motivation-2",
+    "href": "slides/week02.html#motivation-2",
+    "title": "Version control and reproducible research",
+    "section": "Motivation",
+    "text": "Motivation\n\nGit is a version control system that provides a systematic approach to keeping versions of files.\n\n\nPosted on devrant.com/ by bhimanshukalra"
+  },
+  {
+    "objectID": "slides/week02.html#motivation-3",
+    "href": "slides/week02.html#motivation-3",
+    "title": "Version control and reproducible research",
+    "section": "Motivation",
+    "text": "Motivation\nBut we have to learn some things.\n\nFrom Meme Git Compilation by Lulu Ilmaknun Qurotaini"
+  },
+  {
+    "objectID": "slides/week02.html#why-do-we-care",
+    "href": "slides/week02.html#why-do-we-care",
+    "title": "Version control and reproducible research",
+    "section": "Why do we care",
+    "text": "Why do we care\nHave you ever:\n\nMade a change to code, realised it was a mistake and wanted to revert back?\nLost code or had a backup that was too old?\nHad to maintain multiple versions of a product?\nWanted to see the difference between two (or more) versions of your code?\nWanted to prove that a particular change broke or fixed a piece of code?\nWanted to review the history of some code?"
+  },
+  {
+    "objectID": "slides/week02.html#why-do-we-care-contd",
+    "href": "slides/week02.html#why-do-we-care-contd",
+    "title": "Version control and reproducible research",
+    "section": "Why do we care (cont’d)",
+    "text": "Why do we care (cont’d)\n\nWanted to submit a change to someone else’s code?\nWanted to share your code, or let other people work on your code?\nWanted to see how much work is being done, and where, when and by whom?\nWanted to experiment with a new feature without interfering with working code?\n\nIn these cases, and no doubt others, a version control system should make your life easier.\n– Stackoverflow (by si618)"
+  },
+  {
+    "objectID": "slides/week02.html#git-the-stupid-content-tracker",
+    "href": "slides/week02.html#git-the-stupid-content-tracker",
+    "title": "Version control and reproducible research",
+    "section": "Git: The stupid content tracker",
+    "text": "Git: The stupid content tracker\n\n\n \n\n\nGit logo and Linus Torvalds, creator of git"
+  },
+  {
+    "objectID": "slides/week02.html#git-the-stupid-content-tracker-1",
+    "href": "slides/week02.html#git-the-stupid-content-tracker-1",
+    "title": "Version control and reproducible research",
+    "section": "Git: The stupid content tracker",
+    "text": "Git: The stupid content tracker\n\nDuring this class (and perhaps, the entire program) we will be using Git.\nGit is used by most developers in the world.\nA great reference about the tool can be found here\nMore on what’s stupid about git here."
+  },
+  {
+    "objectID": "slides/week02.html#how-can-i-use-git",
+    "href": "slides/week02.html#how-can-i-use-git",
+    "title": "Version control and reproducible research",
+    "section": "How can I use Git",
+    "text": "How can I use Git\nThere are several ways to include Git in your work-pipeline. A few are:\n\nThrough command line\nThrough one of the available Git GUIs:\n\nRStudio (link)\nGit-Cola (link)\nGithub Desktop (Link)\n\n\nMore alternatives here."
+  },
+  {
+    "objectID": "slides/week02.html#goal-for-the-day",
+    "href": "slides/week02.html#goal-for-the-day",
+    "title": "Version control and reproducible research",
+    "section": "Goal for the day",
+    "text": "Goal for the day\nLearn how to:\n\nCreate a repository\npush something to the repository\nconnect RStudio to GitHub"
+  },
+  {
+    "objectID": "slides/week02.html#do-you-have-git",
+    "href": "slides/week02.html#do-you-have-git",
+    "title": "Version control and reproducible research",
+    "section": "Do you have git?",
+    "text": "Do you have git?\nBefore we start:\n\nMake sure you have Git installed.\nOpen a terminal and type:\n\n\ngit --version\n\nIf not installed\n\non a Mac, follow the instructions after typing the above.\non Windows follow these instructions"
+  },
+  {
+    "objectID": "slides/week02.html#what-is-git",
+    "href": "slides/week02.html#what-is-git",
+    "title": "Version control and reproducible research",
+    "section": "What is Git?",
+    "text": "What is Git?"
+  },
+  {
+    "objectID": "slides/week02.html#what-is-github",
+    "href": "slides/week02.html#what-is-github",
+    "title": "Version control and reproducible research",
+    "section": "What is GitHub?",
+    "text": "What is GitHub?\n\nDescribed a social network for software developers.\nBasically, it’s a service that hosts the remote repository (repo) on the web.\nThis facilitates collaboration and sharing greatly."
+  },
+  {
+    "objectID": "slides/week02.html#what-is-github-1",
+    "href": "slides/week02.html#what-is-github-1",
+    "title": "Version control and reproducible research",
+    "section": "What is GitHub?",
+    "text": "What is GitHub?\nThere many other features such as\n\nRecognition system: reward, badges and stars.\nYou can host web pages, like the class notes for example.\nPermits contributions via forks and pull requests.\nIssue tracking\nAutomation tools."
+  },
+  {
+    "objectID": "slides/week02.html#what-is-github-2",
+    "href": "slides/week02.html#what-is-github-2",
+    "title": "Version control and reproducible research",
+    "section": "What is GitHub?",
+    "text": "What is GitHub?\n\nThe main tool behind GitHub is Git.\nSimilar to how the main tool behind RStudio is R."
+  },
+  {
+    "objectID": "slides/week02.html#github-accounts",
+    "href": "slides/week02.html#github-accounts",
+    "title": "Version control and reproducible research",
+    "section": "GitHub accounts",
+    "text": "GitHub accounts\n\nPick a professional sounding name.\nConsider adding a profile README.md.\nInstructions are here.\nExample here."
+  },
+  {
+    "objectID": "slides/week02.html#repositories",
+    "href": "slides/week02.html#repositories",
+    "title": "Version control and reproducible research",
+    "section": "Repositories",
+    "text": "Repositories\n\nA GitHub repository (repo) is where your store your code for a project.\nYou will have at least two copies of your code: one on your computer and one on GitHub.\nIf you add collaborators to this repo, then each will have a copy on their computer.\nThe GitHub copy is considered the main (previously called master) copy that everybody syncs to.\nGit will help you keep all the different copies synced."
+  },
+  {
+    "objectID": "slides/week02.html#overview-of-git",
+    "href": "slides/week02.html#overview-of-git",
+    "title": "Version control and reproducible research",
+    "section": "Overview of Git",
+    "text": "Overview of Git\nThe main actions in Git are to:\n\npull changes from the remote repo.\nadd files, or as we say in the Git lingo stage files.\ncommit changes to the local repo.\npush changes to the remote repo."
+  },
+  {
+    "objectID": "slides/week02.html#the-four-areas-of-git",
+    "href": "slides/week02.html#the-four-areas-of-git",
+    "title": "Version control and reproducible research",
+    "section": "The four areas of Git",
+    "text": "The four areas of Git"
+  },
+  {
+    "objectID": "slides/week02.html#status",
+    "href": "slides/week02.html#status",
+    "title": "Version control and reproducible research",
+    "section": "Status",
+    "text": "Status\n\n\ngit status filename"
+  },
+  {
+    "objectID": "slides/week02.html#add",
+    "href": "slides/week02.html#add",
+    "title": "Version control and reproducible research",
+    "section": "Add",
+    "text": "Add\nUse git add to put file to staging area.\n\n\ngit add &lt;filename&gt;\n\nWe say that this file has been staged. Check to see what happened:\n\ngit status &lt;filename&gt;"
+  },
+  {
+    "objectID": "slides/week02.html#commit",
+    "href": "slides/week02.html#commit",
+    "title": "Version control and reproducible research",
+    "section": "Commit",
+    "text": "Commit\n\nTo move all the staged files to the local repository we use git commit.\n\n\n\ngit commit -m \"must add comment\"\n\n\nOnce committed the files are tracked and a copy of this version is kept going forward.\nThis is like adding V1 to your filename."
+  },
+  {
+    "objectID": "slides/week02.html#commit-1",
+    "href": "slides/week02.html#commit-1",
+    "title": "Version control and reproducible research",
+    "section": "Commit",
+    "text": "Commit\n\n\n\n\n\n\nNote\n\n\nYou can commit files directly without using add by explicitely writing the files at the end of the commit:\n\n\n\n\ngit commit -m \"must add comment\" &lt;filename&gt;"
+  },
+  {
+    "objectID": "slides/week02.html#push",
+    "href": "slides/week02.html#push",
+    "title": "Version control and reproducible research",
+    "section": "Push",
+    "text": "Push\n\nTo move to upstream repo we use git push\n\n\n\ngit push -u origin main\n\n\nThe -u flag sets the upstream repo.\nBy using this flag, going forward you can simply use git push to push changes.\nSo going forward we can just type:\n\n\ngit push"
+  },
+  {
+    "objectID": "slides/week02.html#push-1",
+    "href": "slides/week02.html#push-1",
+    "title": "Version control and reproducible research",
+    "section": "Push",
+    "text": "Push\n\nWhen using git push we need to be careful as if collaborating this will affect the work of others.\nIt might also create a conflict.\n\n\nPosted by andortang on Nothing is Impossible!"
+  },
+  {
+    "objectID": "slides/week02.html#fetch",
+    "href": "slides/week02.html#fetch",
+    "title": "Version control and reproducible research",
+    "section": "Fetch",
+    "text": "Fetch\n\nTo update our local remote-tracking branch to match the remote repository.\n\n\ngit fetch"
+  },
+  {
+    "objectID": "slides/week02.html#merge",
+    "href": "slides/week02.html#merge",
+    "title": "Version control and reproducible research",
+    "section": "Merge",
+    "text": "Merge\n\nOnce we are sure this is good, we can merge with our local files:\n\n\ngit merge"
+  },
+  {
+    "objectID": "slides/week02.html#pull",
+    "href": "slides/week02.html#pull",
+    "title": "Version control and reproducible research",
+    "section": "Pull",
+    "text": "Pull\n\nI rarely use fetch and merge and instead use pull which does both of these in one step\n\n\ngit pull"
+  },
+  {
+    "objectID": "slides/week02.html#checkout",
+    "href": "slides/week02.html#checkout",
+    "title": "Version control and reproducible research",
+    "section": "Checkout",
+    "text": "Checkout\n\nIf you want to pull down a specific file you from the remote repo you can use:\n\n\ngit checkout filename\n\n\nI use this when I make changes but decide I want to go back to original version on remote repo.\n\n\n\n\n\n\n\nWarning\n\n\nIf you have a newer version in your local repository this will create a conflict. It won’t let you do it. If you are sure you want to get rid of your local copy you can remove it and then use checkout."
+  },
+  {
+    "objectID": "slides/week02.html#checkout-1",
+    "href": "slides/week02.html#checkout-1",
+    "title": "Version control and reproducible research",
+    "section": "Checkout",
+    "text": "Checkout\n\nYou can also use checkout to obtain older version:\n\n\ngit checkout &lt;commit-id&gt; &lt;filename&gt;\n\n\nYou can get the commit-id either on the GitHub webpage or using\n\n\ngit log filename"
+  },
+  {
+    "objectID": "slides/week02.html#reset",
+    "href": "slides/week02.html#reset",
+    "title": "Version control and reproducible research",
+    "section": "Reset",
+    "text": "Reset\n\nWhat if I commit and realize it was a mistake?\n\n\ngit reset HEAD~1\n\nundos the commit and unstages the files, but keeps your local copies. I use this on very often.\n\nThere are many wasy of using get reset and it covers most scenarios.\nChatGPT and stackoverflow are great resources to learn more."
+  },
+  {
+    "objectID": "slides/week02.html#branches",
+    "href": "slides/week02.html#branches",
+    "title": "Version control and reproducible research",
+    "section": "Branches",
+    "text": "Branches\n\nWe are just sratching the surface of Git.\nOne advanced feature to be aware of is that you can have several branches, useful for working in parallel or testing stuff out that might not make the main repo.\n\n\nArt by: Allison Horst"
+  },
+  {
+    "objectID": "slides/week02.html#branches-1",
+    "href": "slides/week02.html#branches-1",
+    "title": "Version control and reproducible research",
+    "section": "Branches",
+    "text": "Branches\n\nWe wont go over this, but we might need to use these two related commands:\n\n\ngit remote -v\ngit branch"
+  },
+  {
+    "objectID": "slides/week02.html#clone",
+    "href": "slides/week02.html#clone",
+    "title": "Version control and reproducible research",
+    "section": "Clone",
+    "text": "Clone\n\nAnother common command is git clone.\nIt let’s download an entire repo, including version history.\n\n\ngit clone &lt;repo-url&gt;"
+  },
+  {
+    "objectID": "slides/week02.html#using-git-in-rstudio",
+    "href": "slides/week02.html#using-git-in-rstudio",
+    "title": "Version control and reproducible research",
+    "section": "Using Git in RStudio",
+    "text": "Using Git in RStudio\n\nGo to file, new project, version control, and follow the instructions.\nThen notice the Git tab in the preferences."
+  },
+  {
+    "objectID": "slides/week02.html#basic-commands",
+    "href": "slides/week02.html#basic-commands",
+    "title": "Version control and reproducible research",
+    "section": "Basic commands",
+    "text": "Basic commands"
+  },
+  {
+    "objectID": "slides/week02.html#a-common-workflow",
+    "href": "slides/week02.html#a-common-workflow",
+    "title": "Version control and reproducible research",
+    "section": "A Common workflow",
+    "text": "A Common workflow\n\nStart the session by pulling (possible) updates: git pull\nMake changes to your files\n\n(optional) Revert changes on a file: git restore [target file]\n\nMove changes to the staging area: git add\n\n(optional) Add untracked (possibly new) files: git add [target file]\n(optional) Stage tracked files that were modified: git add -u\n\nCommit:\n\nIf finished staging: git commit -m \"Your comments go here.\"\nIf modifications not staged: git commit -a -m \"Your comments go here.\"\n\nUpload the commit to the remote repo: git push."
+  },
+  {
+    "objectID": "slides/week02.html#first-time",
+    "href": "slides/week02.html#first-time",
+    "title": "Version control and reproducible research",
+    "section": "First time",
+    "text": "First time"
+  },
+  {
+    "objectID": "slides/week02.html#the-rest-of-the-time",
+    "href": "slides/week02.html#the-rest-of-the-time",
+    "title": "Version control and reproducible research",
+    "section": "The rest of the time",
+    "text": "The rest of the time"
+  },
+  {
+    "objectID": "slides/week02.html#check-the-status",
+    "href": "slides/week02.html#check-the-status",
+    "title": "Version control and reproducible research",
+    "section": "Check the status",
+    "text": "Check the status\n\nCan’t remember if you’ve changed any files?\nDon’t know if your local repository is in sync with the remote repository?\n\nYou can always check the current state of your repository with git status!"
+  },
+  {
+    "objectID": "slides/week00.html#r-in-the-terminal",
+    "href": "slides/week00.html#r-in-the-terminal",
+    "title": "Welcome!",
+    "section": "R in the terminal",
+    "text": "R in the terminal"
+  },
+  {
+    "objectID": "slides/week00.html#r-rstudio",
+    "href": "slides/week00.html#r-rstudio",
+    "title": "Welcome!",
+    "section": "R + RStudio",
+    "text": "R + RStudio"
+  },
+  {
+    "objectID": "labs/lab1.html",
+    "href": "labs/lab1.html",
+    "title": "Lab 1 - Hello R!",
+    "section": "",
+    "text": "Get acquainted with R and RStudio, which we will be using throughout the course to analyze data.\nAppreciate the value of visualization in exploring the relationship between variables.\nStart using R for building plots and calculating summary statistics.\n\nNote: This lab contains a lot of material to help you get familiar with R and RStudio, but the only materials you need to submit are your responses to the six questions at the end of the lab (in the form of an HTML or PDF file)."
+  },
+  {
+    "objectID": "labs/lab1.html#download-r",
+    "href": "labs/lab1.html#download-r",
+    "title": "Lab 1 - Hello R!",
+    "section": "Download R",
+    "text": "Download R\n\nIf you don’t have R installed.\nGo to the CRAN and download R, make sure you get the version that matches your operating system.\n\n\nIf you have R installed\nIf you have R installed run the following code\n\nR.version\n\n               _                           \nplatform       aarch64-apple-darwin20      \narch           aarch64                     \nos             darwin20                    \nsystem         aarch64, darwin20           \nstatus                                     \nmajor          4                           \nminor          4.1                         \nyear           2024                        \nmonth          06                          \nday            14                          \nsvn rev        86737                       \nlanguage       R                           \nversion.string R version 4.4.1 (2024-06-14)\nnickname       Race for Your Life          \n\n\nThis should tell you what version of R you are currently using. If your R version is lower then 4.3.0, I would strongly recommend updating. In general, it is a good idea to keep your R version up to date, unless you have a project right now that depends on a specific version of R."
+  },
+  {
+    "objectID": "labs/lab1.html#download-rstudio",
+    "href": "labs/lab1.html#download-rstudio",
+    "title": "Lab 1 - Hello R!",
+    "section": "Download RStudio",
+    "text": "Download RStudio\nWe recommend using RStudio as your IDE if you don’t already have it installed. You can go to the RStudio website to download and install the software. Once it is installed, open RStudio and use it to complete the rest of this lab."
+  },
+  {
+    "objectID": "labs/lab1.html#start-a-new-project",
+    "href": "labs/lab1.html#start-a-new-project",
+    "title": "Lab 1 - Hello R!",
+    "section": "Start a new Project",
+    "text": "Start a new Project\nRStudio Projects are a great way to stay organized and keep all of your work on a particular topic in one place. Project files keep track of things like the R objects you are using and which files you have open, so that you can quickly jump in and out of different work environments.\nWe’re going to start a new Project called BIOSTAT620labs. If you want to keep all of your materials for this class in one place, you may want to open Finder (MacOS) or File Explorer (Windows) and create a new folder (directory) for this class.\nIn the top right of the RStudio window, you should see a drop-down menu that says “Project: (None)”. Click on this and then “New Project…”, which will open up a dialogue box. If you had already created a BIOSTAT620labs directory, you could choose the “Existing Directory” option to associate this Project with that directory. Since we haven’t done that, we’ll use the “New Directory” option, then select the generic Project type, “New Project”. Give your new directory the name BIOSTAT620labs and use the “Browse” button to choose where you want to save it on your computer, then click “Create Project”. Now in the top right, you should see “BIOSTAT620labs” next to the R Project logo."
+  },
+  {
+    "objectID": "labs/lab1.html#create-a-quarto-document",
+    "href": "labs/lab1.html#create-a-quarto-document",
+    "title": "Lab 1 - Hello R!",
+    "section": "Create a Quarto document",
+    "text": "Create a Quarto document\nWe will use Quarto documents a lot in this course because they are fully reproducible and allow us to seamlessly integrate code and text. We expect you to use Quarto for all homework assignments and (almost) all labs.\nIn the top left, you will see a “New File” icon (a white “plus” sign in a green circle over a blank document) that leads to a drop-down menu. Click on this and then select “Quarto document…”, which will open up a dialogue box. You can leave most of the settings on their defaults for now, just give your document a title (like “Lab 1”) and an author (yourself) and click “Create”. RStudio may ask you if you would like to install a package that is required, and if so, click “Install”.\nThis will open the default Quarto document, which already contains some example content. Read through it, then remove this content. Please do not hand in assignments that contain the default content, as I have seen it plenty of times! Set up new sections in your document titled “Question 1” through “Question 6”. This document will serve as the template for your responses to this lab. Under each section title, add an R code chunk via “Insert…”, “Executable Cell”, “R”. Alternatively, you can switch to the “Source” editor (in the top left of the Editor pane) and add an R chunk by typing the following:\n```{r}\n```\nThis will create an R code chunk and any code you add inside of it will be executed when you Render the document.\nSave your Quarto markdown (qmd) file as lab-01.qmd and see what happens when you click “Render”."
+  },
+  {
+    "objectID": "labs/lab1.html#yaml",
+    "href": "labs/lab1.html#yaml",
+    "title": "Lab 1 - Hello R!",
+    "section": "YAML",
+    "text": "YAML\nThe top portion of your Quarto file (between the three dashed lines) is called YAML. It stands for “YAML Ain’t Markup Language”. It is a human-friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.\nOpen the Quarto (qmd) file in your project, make sure the author name is your name. You can add additional lines to the YAML section to control more aspects of your document. For example, you can set the output to be a PDF or HTML document by adding either format: pdf or format: html.\nRegardless of what output format you choose, add another line to the YAML header that reads embed-resources: true. This tells Quarto that you want to produce a “stand-alone” document that contains all images directly in the document. If you don’t do this, Quarto will often create a separate directory (called &lt;document&gt;_files) that contains these images and your output will depend on this outside directory.\nWhen you’re done, click “Render” to compile the document."
+  },
+  {
+    "objectID": "labs/lab1.html#question-1",
+    "href": "labs/lab1.html#question-1",
+    "title": "Lab 1 - Hello R!",
+    "section": "Question 1",
+    "text": "Question 1\n\nBased on the help file, how many rows and how many columns does the datasaurus_dozen file have? What are the variables included in the data frame? Add your responses to your lab report, with relevant code in the associated R code chunk, and free-form text outside of the code chunk.\n\nLet’s take a look at what these datasets are. To start, we can make a frequency table of the dataset variable:\n\ntable(datasaurus_dozen$dataset)\n\nHere, we used the $ operator to access a specific column (variable) of the dataset. Then we used the table function to summarize that variable. table is great for quickly summarizing categorical variables, but it’s not very useful for summarizing continuous variables, where most unique values are only present once. For continuous variables, try the summary function.\nThe original Datasaurus (dino) was created by Alberto Cairo in a blog post. The other Dozen were generated using simulated annealing and the process is described in the paper Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing by Justin Matejka and George Fitzmaurice. In the paper, the authors simulate a variety of datasets with the same summary statistics as the Datasaurus, but with very different distributions."
+  },
+  {
+    "objectID": "labs/lab1.html#question-2",
+    "href": "labs/lab1.html#question-2",
+    "title": "Lab 1 - Hello R!",
+    "section": "Question 2",
+    "text": "Question 2\n\nPlot y vs. x for the dino dataset. Then, calculate the correlation coefficient between x and y for just this dataset.\n\nBelow is the code you will need to complete this exercise. Basically, the answer is already given, but you need to include relevant bits in your Quarto document and successfully Render it and view the results.\nWe’re going to start by subsetting our data down to just the dino dataset.\n\nSubsetting\n\ndino_data &lt;- datasaurus_dozen[datasaurus_dozen$dataset == 'dino', ]\n\nThere is a lot going on here, so let’s slow down and unpack it a bit.\nThe first thing to note is the assignment operator: &lt;-. This special symbol is used to create a new object or assign a new value to an existing one. In this case, we’re creating a new object called dino_data.\nThe second important feature is the set of square brackets: []. When these come immediately after the name of an object, they are used for subsetting that object, or taking a smaller piece of it. In this case, we want to subset the datasaurus_dozen object. Since this is a two-dimensional data.frame, we can subset it by either rows or columns, or both. The comma (,) separates our row subset from our column subset. In this case, we only want to subset by row and keep all the columns, so there is nothing after the comma.\nIn R (as in Python and many other programming languages), we can check whether or not two values are equal by using the == operator. Here, we again use the $ to access the dataset variable and we check if it is equal to the value 'dino'. If it is, this comparison will return TRUE and we will keep that row. If it isn’t, this comparison will return FALSE and we will not keep that row.\n\n\nPlotting\nNext, we need to visualize these data. We will use the plot function for this, which is R’s most basic plotting function. If you provide the plot function with two numeric vectors, it will plot them in a scatter plot. Let’s see what happens when we plot the x and y variables from our dino_data object:\n\nplot(dino_data$x, dino_data$y)\n# ggplot(data = dino_data, mapping = aes(x = x, y = y)) +\n#   geom_point()\n\n(I’ve also included code for producing similar plots using the ggplot function from the ggplot2 package. This is another widely-used plotting function that includes some more aesthetically pleasing defaults, but requires more complicated syntax)\nWe will talk a lot more about the philosophy of data visualization, how to choose the right plot type, and constructing visualizations in layers in the coming weeks. But for now, you can follow along with the code that is provided.\nFor the second part of these exercises, we need to calculate a summary statistic: the correlation coefficient. The correlation coefficient, often referred to as \\(r\\) in statistics, measures the linear association between two variables. You will see that some of the pairs of variables we plot do not have a linear relationship between them. This is exactly why we want to visualize first: visualize to assess the form of the relationship, and calculate \\(r\\) only if relevant. In this case, calculating a correlation coefficient really doesn’t make sense since the relationship between x and y is definitely not linear – it’s dinosaurial!\nBut, for illustrative purposes, let’s calculate correlation coefficient between x and y. Like plot, the cor function takes two numeric variables and calculates their correlation coefficient:\n\ncor(dino_data$x, dino_data$y)\n# dino_data |&gt;\n#   summarize(r = cor(x, y))\n\n(I’ve also included the “tidyverse” way of calculating this value. The “tidyverse” is a collection of packages that includes ggplot2 and is based on the concept of “tidy”, rectangular datasets. We will tend to focus on the “Base R” way of doing things, as learning the “tidyverse” coding style is almost like learning another language in addition to R)"
+  },
+  {
+    "objectID": "labs/lab1.html#question-3",
+    "href": "labs/lab1.html#question-3",
+    "title": "Lab 1 - Hello R!",
+    "section": "Question 3",
+    "text": "Question 3\n\nNow try it on your own! Plot y vs. x for the star dataset, another one of the datasaurus_dozen. You can (and should) re-use code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between x and y for this dataset. How does this value compare to the r of dino?"
+  },
+  {
+    "objectID": "labs/lab1.html#question-4",
+    "href": "labs/lab1.html#question-4",
+    "title": "Lab 1 - Hello R!",
+    "section": "Question 4",
+    "text": "Question 4\n\nPlot y vs. x for the circle dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between x and y for this dataset. How does this value compare to the r of dino?"
+  },
+  {
+    "objectID": "labs/lab1.html#question-5",
+    "href": "labs/lab1.html#question-5",
+    "title": "Lab 1 - Hello R!",
+    "section": "Question 5",
+    "text": "Question 5\nNow let’s plot all 13 datasets at once. In order to do this we will make use of the layout function. This function allows you to put multiple plots in the same plotting window. We will create a 4x4 matrix containing the values 1 through 16 and pass this to layout, which lets it know where we want each plot to go (we only have 13 datasets, so there will be a few empty spots at the end). This may be too many plots for a small viewing window, so if you get the error message Error in plot.new() : figure margins too large, try making your plotting window larger.\nThen we use a for loop to perform a set of actions over every unique value of the dataset variable. This creates a new object, called name, that takes on each of those unique values, but it only exists within the context (interior) of the loop. Then we subset and plot the data, as we have before.\n\nlayout(matrix(1:16, nrow=4, ncol=4))\nfor(name in unique(datasaurus_dozen$dataset)){\n  subset &lt;- datasaurus_dozen[datasaurus_dozen$dataset == name, ]\n  plot(subset$x, subset$y, main = name)\n}\nlayout(1)\n\n\n# ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+\n#   geom_point()+\n#   facet_wrap(~ dataset, ncol = 3) +\n#   theme(legend.position = \"none\")\n\nThe second call to layout will reset the plotting window, so that the next plot will take up the entire window, rather than 1/16th of it.\nOptional:If you really want to maximize the plotting area of this figure, you can also adjust the plotting margins via the par function (short for “graphical parameters”). The setting for margins is called mar and it takes a vector of length 4, specifying the bottom, left, top, and right margins, in order (the units are lines of text). You can set each margin to a value of 2 with par(mar = c(2,2,2,2)) and then reset to the default values with par(mar = c(5,4,4,2) + 0.1)."
+  },
+  {
+    "objectID": "labs/lab1.html#question-6",
+    "href": "labs/lab1.html#question-6",
+    "title": "Lab 1 - Hello R!",
+    "section": "Question 6",
+    "text": "Question 6\nFinally, we want to calculate the correlation between the x and y variables for all 13 datasets. Like before, we will use a loop, but this time, since we want to return a specific value every time through the loop, we will use the sapply function. sapply is useful way to apply a function to every element of a vector. In this case, we provide the vector of unique dataset names (like before) and then our own custom function. This function subsets the data as before, and then returns the correlation coefficient as the output of the function.\n\nsapply(unique(datasaurus_dozen$dataset), function(name){\n    subset &lt;- datasaurus_dozen[datasaurus_dozen$dataset == name, ]\n    return(cor(subset$x, subset$y))\n})\n\n\n# datasaurus_dozen |&gt;\n#   group_by(dataset) |&gt;\n#   summarize(r = cor(x, y))\n\nYou’re now done with the data analysis exercises, but we’d like you to do two more things:\nResize your figures:\nAdd the fields fig-width and fig-height to the YAML header of your document. These will allow you to specify the size (in inches) of any figures generated by the code chunks in your report.\nYou can also use different figure sizes for different figures. If you are in the Visual editor mode, switch to Source mode. Notice that each R chunk starts and ends with three backticks. Click on the gear icon in the top right of a code chunk and select “Use custom figure size” in the pop-up menu. Set the height and width of the figures and hit Apply when done. Then, render your document and see how you like the new sizes. Try making the plot for Question 5 larger, until you are happy with its size. Note that changing the figure sizes added new options to these chunks: fig.width and fig.height. You can change them by defining different values directly in your Quarto document as well.\nChange the look of your report:\nIf you have time, you can explore the different ways you can add styling to your document. Try adding a theme field to the YAML header and see if you can find valid names of different themes.\nHere is a Quarto cheatsheet and a general markdown cheatsheet that shows some of the many cool features you can make use of in a Quarto document."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BIOSTAT 620",
+    "section": "",
+    "text": "Term: Winter 2026\nTime: Tuesdays and Thursdays 8:30am - 9:50am\nLocation: SPH I 3755\nCourse GitHub: https://github.com/dmcable/BIOSTAT620W26"
+  },
+  {
+    "objectID": "index.html#introduction-to-health-data-science",
+    "href": "index.html#introduction-to-health-data-science",
+    "title": "BIOSTAT 620",
+    "section": "",
+    "text": "Term: Winter 2026\nTime: Tuesdays and Thursdays 8:30am - 9:50am\nLocation: SPH I 3755\nCourse GitHub: https://github.com/dmcable/BIOSTAT620W26"
+  },
+  {
+    "objectID": "index.html#instructor",
+    "href": "index.html#instructor",
+    "title": "BIOSTAT 620",
+    "section": "Instructor",
+    "text": "Instructor\nDylan Cable\n\nEmail: dmcable@umich.edu\nOffice: SPH I 4635\nOffice Hours: Friday 11am - 12pm"
   },
   {
     "objectID": "slides/week01.html#packages",
@@ -305,7 +823,7 @@
     "href": "slides/week01.html#factors-3",
     "title": "R Basics",
     "section": "Factors",
-    "text": "Factors\nExercise: How can we make this go much faster?\n\nsystem.time({levels(y) &lt;- tolower(levels(y))})\n\n   user  system elapsed \n  0.013   0.001   0.014"
+    "text": "Factors\nExercise: How can we make this go much faster?\n\nsystem.time({y &lt;- tolower(y)})\n\n   user  system elapsed \n  1.190   0.007   1.198"
   },
   {
     "objectID": "slides/week01.html#factors-can-be-confusing",
@@ -529,7 +1047,7 @@
     "href": "slides/week01.html#vectorization-4",
     "title": "R Basics",
     "section": "Vectorization",
-    "text": "Vectorization\n\nIf we operate on two vectors, vectorization is componentwise.\nHere is an example:\n\n\nheights &lt;- c(69, 62, 66, 70, 70, 73, 67, 73, 67, 70)\nerror &lt;- rnorm(length(heights), 0, 0.1)\nheights + error\n\n [1] 68.96018 62.07544 66.27238 69.93623 70.01049 72.93201 66.83057 72.91581\n [9] 67.15303 69.87468"
+    "text": "Vectorization\n\nIf we operate on two vectors, vectorization is componentwise.\nHere is an example:\n\n\nheights &lt;- c(69, 62, 66, 70, 70, 73, 67, 73, 67, 70)\nerror &lt;- rnorm(length(heights), 0, 0.1)\nheights + error\n\n [1] 68.90532 61.96459 66.03920 70.11614 70.17156 72.86783 66.77491 72.92110\n [9] 67.01227 69.89521"
   },
   {
     "objectID": "slides/week01.html#exercise",
@@ -642,125 +1160,6 @@
     "title": "R Basics",
     "section": "The apply functions",
     "text": "The apply functions\n\nThere are other apply functions:\n\nlapply - returns a list. Convenient when the function returns something other than a number.\ntapply - can apply to subsets defined by second variable.\nmapply - multivariate version of sapply.\napply - applies function to rows or columns o matrix.\n\nWe will learn some of these as we go."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BIOSTAT 620",
-    "section": "",
-    "text": "Term: Winter 2026\nTime: Tuesdays and Thursdays 8:30am - 9:50am\nLocation: SPH I 3755\nCourse GitHub: https://github.com/dmcable/BIOSTAT620W26"
-  },
-  {
-    "objectID": "index.html#introduction-to-health-data-science",
-    "href": "index.html#introduction-to-health-data-science",
-    "title": "BIOSTAT 620",
-    "section": "",
-    "text": "Term: Winter 2026\nTime: Tuesdays and Thursdays 8:30am - 9:50am\nLocation: SPH I 3755\nCourse GitHub: https://github.com/dmcable/BIOSTAT620W26"
-  },
-  {
-    "objectID": "index.html#instructor",
-    "href": "index.html#instructor",
-    "title": "BIOSTAT 620",
-    "section": "Instructor",
-    "text": "Instructor\nDylan Cable\n\nEmail: dmcable@umich.edu\nOffice: SPH I 4635\nOffice Hours: Friday 11am - 12pm"
-  },
-  {
-    "objectID": "labs/lab1.html",
-    "href": "labs/lab1.html",
-    "title": "Lab 1 - Hello R!",
-    "section": "",
-    "text": "Get acquainted with R and RStudio, which we will be using throughout the course to analyze data.\nAppreciate the value of visualization in exploring the relationship between variables.\nStart using R for building plots and calculating summary statistics.\n\nNote: This lab contains a lot of material to help you get familiar with R and RStudio, but the only materials you need to submit are your responses to the six questions at the end of the lab (in the form of an HTML or PDF file)."
-  },
-  {
-    "objectID": "labs/lab1.html#download-r",
-    "href": "labs/lab1.html#download-r",
-    "title": "Lab 1 - Hello R!",
-    "section": "Download R",
-    "text": "Download R\n\nIf you don’t have R installed.\nGo to the CRAN and download R, make sure you get the version that matches your operating system.\n\n\nIf you have R installed\nIf you have R installed run the following code\n\nR.version\n\n               _                           \nplatform       aarch64-apple-darwin20      \narch           aarch64                     \nos             darwin20                    \nsystem         aarch64, darwin20           \nstatus                                     \nmajor          4                           \nminor          4.1                         \nyear           2024                        \nmonth          06                          \nday            14                          \nsvn rev        86737                       \nlanguage       R                           \nversion.string R version 4.4.1 (2024-06-14)\nnickname       Race for Your Life          \n\n\nThis should tell you what version of R you are currently using. If your R version is lower then 4.3.0, I would strongly recommend updating. In general, it is a good idea to keep your R version up to date, unless you have a project right now that depends on a specific version of R."
-  },
-  {
-    "objectID": "labs/lab1.html#download-rstudio",
-    "href": "labs/lab1.html#download-rstudio",
-    "title": "Lab 1 - Hello R!",
-    "section": "Download RStudio",
-    "text": "Download RStudio\nWe recommend using RStudio as your IDE if you don’t already have it installed. You can go to the RStudio website to download and install the software. Once it is installed, open RStudio and use it to complete the rest of this lab."
-  },
-  {
-    "objectID": "labs/lab1.html#start-a-new-project",
-    "href": "labs/lab1.html#start-a-new-project",
-    "title": "Lab 1 - Hello R!",
-    "section": "Start a new Project",
-    "text": "Start a new Project\nRStudio Projects are a great way to stay organized and keep all of your work on a particular topic in one place. Project files keep track of things like the R objects you are using and which files you have open, so that you can quickly jump in and out of different work environments.\nWe’re going to start a new Project called BIOSTAT620labs. If you want to keep all of your materials for this class in one place, you may want to open Finder (MacOS) or File Explorer (Windows) and create a new folder (directory) for this class.\nIn the top right of the RStudio window, you should see a drop-down menu that says “Project: (None)”. Click on this and then “New Project…”, which will open up a dialogue box. If you had already created a BIOSTAT620labs directory, you could choose the “Existing Directory” option to associate this Project with that directory. Since we haven’t done that, we’ll use the “New Directory” option, then select the generic Project type, “New Project”. Give your new directory the name BIOSTAT620labs and use the “Browse” button to choose where you want to save it on your computer, then click “Create Project”. Now in the top right, you should see “BIOSTAT620labs” next to the R Project logo."
-  },
-  {
-    "objectID": "labs/lab1.html#create-a-quarto-document",
-    "href": "labs/lab1.html#create-a-quarto-document",
-    "title": "Lab 1 - Hello R!",
-    "section": "Create a Quarto document",
-    "text": "Create a Quarto document\nWe will use Quarto documents a lot in this course because they are fully reproducible and allow us to seamlessly integrate code and text. We expect you to use Quarto for all homework assignments and (almost) all labs.\nIn the top left, you will see a “New File” icon (a white “plus” sign in a green circle over a blank document) that leads to a drop-down menu. Click on this and then select “Quarto document…”, which will open up a dialogue box. You can leave most of the settings on their defaults for now, just give your document a title (like “Lab 1”) and an author (yourself) and click “Create”. RStudio may ask you if you would like to install a package that is required, and if so, click “Install”.\nThis will open the default Quarto document, which already contains some example content. Read through it, then remove this content. Please do not hand in assignments that contain the default content, as I have seen it plenty of times! Set up new sections in your document titled “Question 1” through “Question 6”. This document will serve as the template for your responses to this lab. Under each section title, add an R code chunk via “Insert…”, “Executable Cell”, “R”. Alternatively, you can switch to the “Source” editor (in the top left of the Editor pane) and add an R chunk by typing the following:\n```{r}\n```\nThis will create an R code chunk and any code you add inside of it will be executed when you Render the document.\nSave your Quarto markdown (qmd) file as lab-01.qmd and see what happens when you click “Render”."
-  },
-  {
-    "objectID": "labs/lab1.html#yaml",
-    "href": "labs/lab1.html#yaml",
-    "title": "Lab 1 - Hello R!",
-    "section": "YAML",
-    "text": "YAML\nThe top portion of your Quarto file (between the three dashed lines) is called YAML. It stands for “YAML Ain’t Markup Language”. It is a human-friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.\nOpen the Quarto (qmd) file in your project, make sure the author name is your name. You can add additional lines to the YAML section to control more aspects of your document. For example, you can set the output to be a PDF or HTML document by adding either format: pdf or format: html.\nRegardless of what output format you choose, add another line to the YAML header that reads embed-resources: true. This tells Quarto that you want to produce a “stand-alone” document that contains all images directly in the document. If you don’t do this, Quarto will often create a separate directory (called &lt;document&gt;_files) that contains these images and your output will depend on this outside directory.\nWhen you’re done, click “Render” to compile the document."
-  },
-  {
-    "objectID": "labs/lab1.html#question-1",
-    "href": "labs/lab1.html#question-1",
-    "title": "Lab 1 - Hello R!",
-    "section": "Question 1",
-    "text": "Question 1\n\nBased on the help file, how many rows and how many columns does the datasaurus_dozen file have? What are the variables included in the data frame? Add your responses to your lab report, with relevant code in the associated R code chunk, and free-form text outside of the code chunk.\n\nLet’s take a look at what these datasets are. To start, we can make a frequency table of the dataset variable:\n\ntable(datasaurus_dozen$dataset)\n\nHere, we used the $ operator to access a specific column (variable) of the dataset. Then we used the table function to summarize that variable. table is great for quickly summarizing categorical variables, but it’s not very useful for summarizing continuous variables, where most unique values are only present once. For continuous variables, try the summary function.\nThe original Datasaurus (dino) was created by Alberto Cairo in a blog post. The other Dozen were generated using simulated annealing and the process is described in the paper Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing by Justin Matejka and George Fitzmaurice. In the paper, the authors simulate a variety of datasets with the same summary statistics as the Datasaurus, but with very different distributions."
-  },
-  {
-    "objectID": "labs/lab1.html#question-2",
-    "href": "labs/lab1.html#question-2",
-    "title": "Lab 1 - Hello R!",
-    "section": "Question 2",
-    "text": "Question 2\n\nPlot y vs. x for the dino dataset. Then, calculate the correlation coefficient between x and y for just this dataset.\n\nBelow is the code you will need to complete this exercise. Basically, the answer is already given, but you need to include relevant bits in your Quarto document and successfully Render it and view the results.\nWe’re going to start by subsetting our data down to just the dino dataset.\n\nSubsetting\n\ndino_data &lt;- datasaurus_dozen[datasaurus_dozen$dataset == 'dino', ]\n\nThere is a lot going on here, so let’s slow down and unpack it a bit.\nThe first thing to note is the assignment operator: &lt;-. This special symbol is used to create a new object or assign a new value to an existing one. In this case, we’re creating a new object called dino_data.\nThe second important feature is the set of square brackets: []. When these come immediately after the name of an object, they are used for subsetting that object, or taking a smaller piece of it. In this case, we want to subset the datasaurus_dozen object. Since this is a two-dimensional data.frame, we can subset it by either rows or columns, or both. The comma (,) separates our row subset from our column subset. In this case, we only want to subset by row and keep all the columns, so there is nothing after the comma.\nIn R (as in Python and many other programming languages), we can check whether or not two values are equal by using the == operator. Here, we again use the $ to access the dataset variable and we check if it is equal to the value 'dino'. If it is, this comparison will return TRUE and we will keep that row. If it isn’t, this comparison will return FALSE and we will not keep that row.\n\n\nPlotting\nNext, we need to visualize these data. We will use the plot function for this, which is R’s most basic plotting function. If you provide the plot function with two numeric vectors, it will plot them in a scatter plot. Let’s see what happens when we plot the x and y variables from our dino_data object:\n\nplot(dino_data$x, dino_data$y)\n# ggplot(data = dino_data, mapping = aes(x = x, y = y)) +\n#   geom_point()\n\n(I’ve also included code for producing similar plots using the ggplot function from the ggplot2 package. This is another widely-used plotting function that includes some more aesthetically pleasing defaults, but requires more complicated syntax)\nWe will talk a lot more about the philosophy of data visualization, how to choose the right plot type, and constructing visualizations in layers in the coming weeks. But for now, you can follow along with the code that is provided.\nFor the second part of these exercises, we need to calculate a summary statistic: the correlation coefficient. The correlation coefficient, often referred to as \\(r\\) in statistics, measures the linear association between two variables. You will see that some of the pairs of variables we plot do not have a linear relationship between them. This is exactly why we want to visualize first: visualize to assess the form of the relationship, and calculate \\(r\\) only if relevant. In this case, calculating a correlation coefficient really doesn’t make sense since the relationship between x and y is definitely not linear – it’s dinosaurial!\nBut, for illustrative purposes, let’s calculate correlation coefficient between x and y. Like plot, the cor function takes two numeric variables and calculates their correlation coefficient:\n\ncor(dino_data$x, dino_data$y)\n# dino_data |&gt;\n#   summarize(r = cor(x, y))\n\n(I’ve also included the “tidyverse” way of calculating this value. The “tidyverse” is a collection of packages that includes ggplot2 and is based on the concept of “tidy”, rectangular datasets. We will tend to focus on the “Base R” way of doing things, as learning the “tidyverse” coding style is almost like learning another language in addition to R)"
-  },
-  {
-    "objectID": "labs/lab1.html#question-3",
-    "href": "labs/lab1.html#question-3",
-    "title": "Lab 1 - Hello R!",
-    "section": "Question 3",
-    "text": "Question 3\n\nNow try it on your own! Plot y vs. x for the star dataset, another one of the datasaurus_dozen. You can (and should) re-use code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between x and y for this dataset. How does this value compare to the r of dino?"
-  },
-  {
-    "objectID": "labs/lab1.html#question-4",
-    "href": "labs/lab1.html#question-4",
-    "title": "Lab 1 - Hello R!",
-    "section": "Question 4",
-    "text": "Question 4\n\nPlot y vs. x for the circle dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between x and y for this dataset. How does this value compare to the r of dino?"
-  },
-  {
-    "objectID": "labs/lab1.html#question-5",
-    "href": "labs/lab1.html#question-5",
-    "title": "Lab 1 - Hello R!",
-    "section": "Question 5",
-    "text": "Question 5\nNow let’s plot all 13 datasets at once. In order to do this we will make use of the layout function. This function allows you to put multiple plots in the same plotting window. We will create a 4x4 matrix containing the values 1 through 16 and pass this to layout, which lets it know where we want each plot to go (we only have 13 datasets, so there will be a few empty spots at the end). This may be too many plots for a small viewing window, so if you get the error message Error in plot.new() : figure margins too large, try making your plotting window larger.\nThen we use a for loop to perform a set of actions over every unique value of the dataset variable. This creates a new object, called name, that takes on each of those unique values, but it only exists within the context (interior) of the loop. Then we subset and plot the data, as we have before.\n\nlayout(matrix(1:16, nrow=4, ncol=4))\nfor(name in unique(datasaurus_dozen$dataset)){\n  subset &lt;- datasaurus_dozen[datasaurus_dozen$dataset == name, ]\n  plot(subset$x, subset$y, main = name)\n}\nlayout(1)\n\n\n# ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+\n#   geom_point()+\n#   facet_wrap(~ dataset, ncol = 3) +\n#   theme(legend.position = \"none\")\n\nThe second call to layout will reset the plotting window, so that the next plot will take up the entire window, rather than 1/16th of it.\nOptional:If you really want to maximize the plotting area of this figure, you can also adjust the plotting margins via the par function (short for “graphical parameters”). The setting for margins is called mar and it takes a vector of length 4, specifying the bottom, left, top, and right margins, in order (the units are lines of text). You can set each margin to a value of 2 with par(mar = c(2,2,2,2)) and then reset to the default values with par(mar = c(5,4,4,2) + 0.1)."
-  },
-  {
-    "objectID": "labs/lab1.html#question-6",
-    "href": "labs/lab1.html#question-6",
-    "title": "Lab 1 - Hello R!",
-    "section": "Question 6",
-    "text": "Question 6\nFinally, we want to calculate the correlation between the x and y variables for all 13 datasets. Like before, we will use a loop, but this time, since we want to return a specific value every time through the loop, we will use the sapply function. sapply is useful way to apply a function to every element of a vector. In this case, we provide the vector of unique dataset names (like before) and then our own custom function. This function subsets the data as before, and then returns the correlation coefficient as the output of the function.\n\nsapply(unique(datasaurus_dozen$dataset), function(name){\n    subset &lt;- datasaurus_dozen[datasaurus_dozen$dataset == name, ]\n    return(cor(subset$x, subset$y))\n})\n\n\n# datasaurus_dozen |&gt;\n#   group_by(dataset) |&gt;\n#   summarize(r = cor(x, y))\n\nYou’re now done with the data analysis exercises, but we’d like you to do two more things:\nResize your figures:\nAdd the fields fig-width and fig-height to the YAML header of your document. These will allow you to specify the size (in inches) of any figures generated by the code chunks in your report.\nYou can also use different figure sizes for different figures. If you are in the Visual editor mode, switch to Source mode. Notice that each R chunk starts and ends with three backticks. Click on the gear icon in the top right of a code chunk and select “Use custom figure size” in the pop-up menu. Set the height and width of the figures and hit Apply when done. Then, render your document and see how you like the new sizes. Try making the plot for Question 5 larger, until you are happy with its size. Note that changing the figure sizes added new options to these chunks: fig.width and fig.height. You can change them by defining different values directly in your Quarto document as well.\nChange the look of your report:\nIf you have time, you can explore the different ways you can add styling to your document. Try adding a theme field to the YAML header and see if you can find valid names of different themes.\nHere is a Quarto cheatsheet and a general markdown cheatsheet that shows some of the many cool features you can make use of in a Quarto document."
-  },
-  {
-    "objectID": "slides/week00.html#r-in-the-terminal",
-    "href": "slides/week00.html#r-in-the-terminal",
-    "title": "Welcome!",
-    "section": "R in the terminal",
-    "text": "R in the terminal"
-  },
-  {
-    "objectID": "slides/week00.html#r-rstudio",
-    "href": "slides/week00.html#r-rstudio",
-    "title": "Welcome!",
-    "section": "R + RStudio",
-    "text": "R + RStudio"
   },
   {
     "objectID": "schedule-ref.html",

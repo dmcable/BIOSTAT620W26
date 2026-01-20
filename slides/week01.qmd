@@ -419,7 +419,7 @@ object.size(y)
 Exercise: How can we make this go much faster?
 
 ```{r}
-system.time({levels(y) <- tolower(levels(y))})
+system.time({y <- tolower(y)})
 ```
 
 --- 
