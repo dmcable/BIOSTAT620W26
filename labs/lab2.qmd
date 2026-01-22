@@ -1,0 +1,329 @@
+---
+title: "Lab 2 - GitHub"
+link-citations: true
+---
+
+# Learning goals
+
+In this lab, you are expected to learn/practice the following skills:
+
+- Forking a repository on GitHub
+- Git workflow: clone/commit/push
+- Using pull requests (PRs)
+
+Note: We are assuming that you already [installed git in your system](https://git-scm.com).
+
+# Part 0: Introduce yourself
+
+Set up your git install with `git config`, start by telling who you are 
+
+```sh
+$ git config --global user.name "Juan Perez"
+$ git config --global user.email "jperez@treschanchitos.edu"
+```
+
+Try it yourself (more on how to configure git <a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration" target="_blank">here</a>)
+
+* This will change the Git configuration in way that anytime you use Git, it will know this information. 
+
+* Note that you need to use the email account that you used to open your GitHub account.
+
+# Part 1: First repository 
+
+We will start by working on our very first project. To do so, you are required to start using Git and Github so you can share your code with your team. For this exercise, you need to
+
+a. Log into GitHub and click on the "plus" icon ("Create new...") in the top right, then select "New repository"
+b. Give your repo a name, like `BIOSTAT620-first-project`, tell GitHub to add a [`README`](https://en.wikipedia.org/wiki/README) file, and click "Create repository"
+
+## Connect local repo to GitHub
+
+To connect working directory to the GitHub repo
+
+1. initialize the directory on your local machine:
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+
+git init
+```
+
+2. From your repository's page, click the green "Code" button and copy the _remote_ repository URL, which should end with `.git. We recommend that you use the HTTPS URL (see below).
+
+3. Let Git know what is the _remote_ repository URL.
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+
+git remote add origin <remote-url>
+```
+
+You now have a local version of your repository!
+
+:::{.callout-note}
+`origin` is a nickname we will use for the remote. We can call it something else, but everybody calls it origin so best to stick with that.
+:::
+
+
+## Connect credentials with HTTPS or SSH
+
+* When accessing GitHub you need credentials to verify your identity. 
+
+* There are two ways to connect: HTTPS or SSH, each requiring different credentials. 
+
+* We recommend using HTTPS, which uses a Personal Access Token (PAT). 
+
+* Note that **your GitHub website password isn’t your access token**.
+
+### Instructions
+
+* Detailed instructions are [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+
+* Go to your Github *user* (not repo) settings, then Developer Settings, then personal access tokens.
+
+* Click Tokens (classic), and generate a new classic token.
+
+* Give your token a note, and choose the expiration. _90 days_ is more secure, but _non-expiring_ is more convenient. Select the _repo_ option in the scopes section.
+
+### Finish Generating a token:
+
+* Once you complete these steps, GitHub will display your token—a lengthy string of characters. 
+
+* **Immediately copy this token to your clipboard**. This is the only time GitHub will show it to you.
+
+* For security, save this token in a password manager. This ensures you can access it if needed later on.
+
+* When git prompts you to enter your password, paste the token you’ve copied. After this, password prompts should no longer appear. 
+
+* If you ever need the token again, retrieve it from your password manager.
+
+* If you are on Mac, then we recommend for security and convenience that you use osxkeychain to store the credentials for git, rather than a plaintext file, using the following command: 
+  ```sh
+  $ git config --global credential.helper osxkeychain
+  ```
+
+More details available from  [Happy Git and GitHub for the use](https://happygitwithr.com/https-pat).
+
+## Making changes
+
+Now, let's make some changes!
+
+a. Begin by syncing up your local repo to match the Github repo:
+```sh
+  $ git pull origin main
+```
+
+b. Open the README file in a text editor and add a brief description of the project (this doesn't have to be accurate, just add some text), then save your changes. If you check the `git status` now, you'll see that you have unstaged changes.
+c. Add your changes to the staging area with `git add README.md` or `git add --all`. If you check the `git status` now, you'll see that you have staged changes, ready to commit.
+
+Note: Need a text editor? Checkout this website [link](https://alternativeto.net/software/vim/).
+
+
+d. Make the first commit using the `git commit` command adding a message, e.g.
+  ```sh
+  $ git commit -m "My first commit ever!"
+  ```
+  If you check the `git status` now, you'll see that you are 1 commit ahead of the remote repository (GitHub).
+
+e. Update your remote repository (on GitHub) with `git push`. If you check the `git status` now, you should see that you are fully up to date. (You may need to set the upstream repo as: `git push --set-upstream origin main`).
+
+Note: if you run into a permission error, then you need to correctly configure your credentials (see above).
+
+f. In your browser, refresh the page for your repository and see if your changes to the `README` file are there!
+    
+## Removing a file
+
+Oops! It seems that I added the wrong file to the tree. You can remove files from the tree using `git rm --cached`. For example, try creating and adding for Git staging
+the file `class-notes.txt` (which you are not supposed to track), then you can remove it from staging using
+
+```sh
+$ git rm --cached class-notes.txt
+```
+
+This will remove the file from the tree **but not from your computer**. You can
+go further and ask git to avoid adding .docx files using the
+[.gitignore file](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring)
+
+## `.gitignore` use-case
+
+I like to have my data and code for a project all in the same place, but I don't want to upload the data to GitHub, as this would exceed the size limit on a repository.
+
+Open (or create) the `.gitignore` file in a text editor and add the following line to ignore the directory (which you should create) called `data`:
+
+```txt
+/data
+```
+
+Try `git status` before and after making this change to `.gitignore`.
+
+### More examples for `.gitignore`
+
+Telling git to ignore files is a good way to make sure you don't go over your storage limit on GitHub. It's also just a convenient way to avoid unnecessary clutter. Example based on Pro-Git [(link)](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring).
+
+<pre style="font-size: 12pt;">
+# ignore specific file (something.pdf)
+something.pdf
+
+# ignore all .png files
+*.png
+
+# but do track bird.png, even though you're ignoring .png files
+!bird.png
+
+# only ignore the TODO file in the root directory, not subdir/TODO
+/TODO
+
+# ignore all files in any directory named build
+build/
+
+# ignore doc/notes.txt, but not doc/server/arch.txt
+doc/*.txt
+
+# ignore all .pdf files in the doc/ directory and any of its subdirectories
+doc/**/*.pdf
+</pre>
+
+---
+
+# Part 2: GitHub Desktop live demo
+
+---
+
+## Let's do the same sequence of tasks we just performed, but this time, using GitHub Desktop.
+
+---
+
+# Part 3: Updating a shared repo
+
+One of the most common tasks that people use git for is for collaborating. While
+in general team members organize such that there is no overlapping editing of
+the files, `git` is (usually) smart enough to avoid clashes when multiple edits are done in
+the same document[^multiedits]. To show this, we will do a collaborative edit of
+a file!
+
+[^multiedits]: Team-members could be working on the same file but editing
+different lines of code. If this is the case, after pull/push, git will integrate
+the changes without conflicts.
+
+We will be working with the repository [https://github.com/dmcable/BIOSTAT620-whoami](https://github.com/dmcable/BIOSTAT620-whoami)
+
+## Step 1: Fork the project to create your own repo
+
+Not a term/command actually available in Git, forking is a feature available in
+GitHub (as in other services) that allows users to create copies of other people's
+projects to propose changes (i.e. make **pull requests**, i.e. "I have this
+great update for your project! Would you like to add it by *pulling it* into your
+repo?").
+
+To start, you just need to use the Fork button available on the main page of the repository you would
+like to contribute to[^githubmanualfork]:
+
+[^githubmanualfork]: For more details, take a look at the [Forking Projects](https://guides.github.com/activities/forking/) article in GitHub guides.
+
+
+Once you "Fork" a project, GitHub will automatically:
+
+1. Create a copy (using `git clone`) of that project in your account.
+
+2. Set up a pipeline to generate pull requests for the original repository.
+
+
+Once you have a copy of the project in your account, you can proceed by
+"downloading it" to your computer. You can do this using either the command line (Terminal) or the GitHub Desktop app.
+
+### Command Line
+
+You can download your version of the `whoami` repository using the `git clone` command. You will need to copy the URL from **your version** of the repository, available under the "Code" button. For example, if
+your github user name is `statsnerd` and the repository name is `BIOSTAT620-whoami`, you could use the following in your command line
+
+```shell
+cd where/you/want/to/download/the/thing
+git clone https://github.com/statsnerd/BIOSTAT620-whoami.git
+```
+
+And if you have your ssh credentials set up, you can do instead
+
+```shell
+cd where/you/want/to/download/the/thing
+git clone git@github.com:statsnerd/BIOSTAT620-whoami.git
+```
+
+This way you will get a copy of the repository in your local machine. Now, let's
+see how can we update the project!
+
+### GitHub Desktop
+
+Alternatively, you can open GitHub Desktop, click the Current Repository tab in the upper left, click the Add button, and select Clone Repository. 
+If you are signed in to your GitHub account, this should open a dialog box allowing you to search your existing repositories.
+Find your version of the `BIOSTAT620-whoami` repo and Clone it.
+
+## Step 2: Modifying the corresponding line
+
+If you got the correct copy, you should find a very simple repository with only
+two files: `CODE_OF_CONDUCT.md` and `README.md`. The first file is a general code of conduct for the project, which we do not need to edit. The second file
+is the one that we will be playing with. The README file, which happens to be
+a [Markdown](https://en.wikipedia.org/wiki/Markdown) file, contains, or at least
+will contain, your and your team members' biographies. Here is what you need to
+do:
+
+1. Find the line with your name.
+
+2. In that single line (i.e. not spanning multiple lines), add your GitHub username (see instructor example), and write something about
+yourself, e.g. "I am from XYZ, I love doing ABC, ...".
+
+3. (optional) if you feel like it, add at the end of the line a picture
+of yourself (or avatar) using either html or markdown. This will require you
+to include the figure in the `images` folder of the repo, unless you provide a link to a picture online.
+
+4. Commit the changes and push the changes to your repo using `git commit` and
+`git push`, e.g.
+
+```sh
+git commit -a -m "[A short but meaningful message]"
+# git add [your-avatar.png] ... if you need to add a picture
+git push
+```
+
+Or using the "Commit [n] file(s) to main" and "Push origin" buttons in GitHub Desktop.
+
+You have now updated **your** online version of the `BIOSTAT620-whoami` repo and are one step closer to make your first Pull Request. We will see how
+that happens in the next part.
+
+
+## Step 3: Do the pull request
+
+This is the final step. Overall, pull requests (PRs) are as complex as the proposed
+changes are. The PR that you are about to make should go smoothly, yet, any time
+that you make a new PR, the changes should be able to be `merged` in the original
+repository without conflicts. Conflicts may only appear if the proposed changes
+are out-dated with respect to the main repository, meaning that the main repository
+was modified *after* your fork and your proposed changes cannot be merged without
+generating conflicts[^mergeconflicts]. For now, let's just look at the simple case.
+
+[^mergeconflicts]: More info about how to deal with conflicts in this very neat
+post on stackoverflow.com [How to resolve merge conflicts in Git](https://stackoverflow.com/questions/161813/how-to-resolve-merge-conflicts-in-git?page=1&tab=votes#tab-top).
+GitHub also has a way to solve conflicts in PRs, but this is only available to
+the admins of target repo. More info [here](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/resolving-a-merge-conflict-on-github),
+
+
+To create the PR, you just need to go to your online copy of the project and, in the panel under the branch selector,
+click on "Contribute" then "Open Pull Request".
+
+This will create a PR in the original repository. GitHub will automatically
+analyze the PR and check whether merging the PR to the main branch will result
+in a conflict or not. If all is OK, then the owner/admin of the repository can
+merge the PR. Otherwise, if there's a conflict, you can go back to your local
+repo, make the needed changes, commit the changes, and push the changes to
+your copy on GitHub. In this stage, the PR will automatically update to reflect
+the new changes you made in your copy of the project.
+
+For more information, check out [Creating a pull request from a fork
+](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork)
+on GitHub.
+
+## Submitting your lab
+
+Once you have created a Pull Request and it has been accepted, you should see your text on the [**original repository**](https://github.com/dmcable/BIOSTAT620-whoami) (not just your personal forked copy). If you can see your text on the original repo, then congratulations, you're done with Lab 2!
