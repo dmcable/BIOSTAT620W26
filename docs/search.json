@@ -529,7 +529,7 @@
     "href": "labs/lab2.html#connect-local-repo-to-github",
     "title": "Lab 2 - GitHub",
     "section": "Connect local repo to GitHub",
-    "text": "Connect local repo to GitHub\nTo connect working directory to the GitHub repo\n\ninitialize the directory on your local machine:\n\n\ngit init\n\n\nFrom your repository’s page, click the green “Code” button and copy the remote repository URL, which should end with `.git. We recommend that you use the HTTPS URL (see below).\nLet Git know what is the remote repository URL.\n\n\ngit remote add origin &lt;remote-url&gt;\n\nYou now have a local version of your repository!\n\n\n\n\n\n\nNote\n\n\n\norigin is a nickname we will use for the remote. We can call it something else, but everybody calls it origin so best to stick with that."
+    "text": "Connect local repo to GitHub\nTo connect working directory to the GitHub repo\n\ninitialize the directory on your local machine (Note: be sure to do this from a specific folder in command line where you would like your project to be, and not your home directory):\n\n\ngit init\n\n\nFrom your repository’s page, click the green “Code” button and copy the remote repository URL, which should end with `.git. We recommend that you use the HTTPS URL (see below).\nLet Git know what is the remote repository URL.\n\n\ngit remote add origin &lt;remote-url&gt;\n\nYou now have a local version of your repository!\n\n\n\n\n\n\nNote\n\n\n\norigin is a nickname we will use for the remote. We can call it something else, but everybody calls it origin so best to stick with that."
   },
   {
     "objectID": "labs/lab2.html#connect-credentials-with-https-or-ssh",
@@ -588,11 +588,11 @@
     "text": "Step 3: Do the pull request\nThis is the final step. Overall, pull requests (PRs) are as complex as the proposed changes are. The PR that you are about to make should go smoothly, yet, any time that you make a new PR, the changes should be able to be merged in the original repository without conflicts. Conflicts may only appear if the proposed changes are out-dated with respect to the main repository, meaning that the main repository was modified after your fork and your proposed changes cannot be merged without generating conflicts3. For now, let’s just look at the simple case.\nTo create the PR, you just need to go to your online copy of the project and, in the panel under the branch selector, click on “Contribute” then “Open Pull Request”.\nThis will create a PR in the original repository. GitHub will automatically analyze the PR and check whether merging the PR to the main branch will result in a conflict or not. If all is OK, then the owner/admin of the repository can merge the PR. Otherwise, if there’s a conflict, you can go back to your local repo, make the needed changes, commit the changes, and push the changes to your copy on GitHub. In this stage, the PR will automatically update to reflect the new changes you made in your copy of the project.\nFor more information, check out Creating a pull request from a fork on GitHub."
   },
   {
-    "objectID": "labs/lab2.html#submitting-your-lab",
-    "href": "labs/lab2.html#submitting-your-lab",
+    "objectID": "labs/lab2.html#submitting-your-lab-due-jan-27th-at-830am",
+    "href": "labs/lab2.html#submitting-your-lab-due-jan-27th-at-830am",
     "title": "Lab 2 - GitHub",
-    "section": "Submitting your lab",
-    "text": "Submitting your lab\nOnce you have created a Pull Request and it has been accepted, you should see your text on the original repository (not just your personal forked copy). If you can see your text on the original repo, then congratulations, you’re done with Lab 2!"
+    "section": "Submitting your lab (due Jan 27th at 8:30am)",
+    "text": "Submitting your lab (due Jan 27th at 8:30am)\nOnce you have created a Pull Request and it has been accepted, you should see your text on the original repository (not just your personal forked copy). If you can see your text on the original repo, then congratulations, you’re done with Lab 2!"
   },
   {
     "objectID": "labs/lab2.html#footnotes",
@@ -907,7 +907,7 @@
     "href": "slides/week01.html#factors-3",
     "title": "R Basics",
     "section": "Factors",
-    "text": "Factors\nExercise: How can we make this go much faster?\n\nsystem.time({y &lt;- tolower(y)})\n\n   user  system elapsed \n  1.237   0.010   1.248"
+    "text": "Factors\nExercise: How can we make this go much faster?\n\nsystem.time({y &lt;- tolower(y)})\n\n   user  system elapsed \n  1.235   0.007   1.243"
   },
   {
     "objectID": "slides/week01.html#factors-can-be-confusing",
@@ -1131,7 +1131,7 @@
     "href": "slides/week01.html#vectorization-4",
     "title": "R Basics",
     "section": "Vectorization",
-    "text": "Vectorization\n\nIf we operate on two vectors, vectorization is componentwise.\nHere is an example:\n\n\nheights &lt;- c(69, 62, 66, 70, 70, 73, 67, 73, 67, 70)\nerror &lt;- rnorm(length(heights), 0, 0.1)\nheights + error\n\n [1] 68.87011 62.08765 66.00010 70.02539 69.94501 73.03964 66.91575 72.83216\n [9] 67.12143 70.03896"
+    "text": "Vectorization\n\nIf we operate on two vectors, vectorization is componentwise.\nHere is an example:\n\n\nheights &lt;- c(69, 62, 66, 70, 70, 73, 67, 73, 67, 70)\nerror &lt;- rnorm(length(heights), 0, 0.1)\nheights + error\n\n [1] 68.91706 61.98656 66.12674 69.99721 69.87720 72.96627 67.06597 72.95937\n [9] 66.95805 69.94737"
   },
   {
     "objectID": "slides/week01.html#exercise",

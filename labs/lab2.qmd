@@ -39,7 +39,7 @@ b. Give your repo a name, like `BIOSTAT620-first-project`, tell GitHub to add a 
 
 To connect working directory to the GitHub repo
 
-1. initialize the directory on your local machine:
+1. initialize the directory on your local machine (Note: be sure to do this from a specific folder in command line where you would like your project to be, and not your home directory):
 
 ```{r}
 #| echo: true
@@ -324,6 +324,6 @@ For more information, check out [Creating a pull request from a fork
 ](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork)
 on GitHub.
 
-## Submitting your lab
+## Submitting your lab (due Jan 27th at 8:30am)
 
 Once you have created a Pull Request and it has been accepted, you should see your text on the [**original repository**](https://github.com/dmcable/BIOSTAT620-whoami) (not just your personal forked copy). If you can see your text on the original repo, then congratulations, you're done with Lab 2!
