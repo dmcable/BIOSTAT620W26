@@ -23,6 +23,6 @@ Yearly checklist:
  - Update Home page (`index.qmd`)
  - Update Schedule page (`schedule.qmd`)
  - Update HW, Midterm, and Final due dates
- - Update the [BIOSTAT620-whoami](https://github.com/dmcable/BIOSTAT620W26-whoami) repo before Week 2
+ - Update the [BIOSTAT620-whoami](https://github.com/dmcable/BIOSTAT620-whoami) repo before Week 2
  
  
