@@ -599,11 +599,9 @@ We can add a simple linear regression line to this plot using `lm()` and `abline
 
 ```{r eval=FALSE}
 mod <- lm(temp ~ lat, data = met_daily)
-met_daily[, plot(
-  lat, temp, pch=19, cex=0.5, 
+plot(met_daily$lat, met_daily$temp, pch=19, cex=0.5, 
   main = "Temperature and Latitude", 
   xlab = "Latitude", ylab = "Temperature (deg C)")
-  ]
 abline(mod, lwd=2, col="red")
 ```
 

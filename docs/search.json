@@ -1572,7 +1572,7 @@
     "href": "slides/week03.html#exploratory-graphs-12",
     "title": "Exploratory Data Analysis",
     "section": "Exploratory Graphs",
-    "text": "Exploratory Graphs\nWe can add a simple linear regression line to this plot using lm() and abline(). We can also add a title and change the axis labels.\n\nmod &lt;- lm(temp ~ lat, data = met_daily)\nmet_daily[, plot(\n  lat, temp, pch=19, cex=0.5, \n  main = \"Temperature and Latitude\", \n  xlab = \"Latitude\", ylab = \"Temperature (deg C)\")\n  ]\nabline(mod, lwd=2, col=\"red\")\n\n(next slide)"
+    "text": "Exploratory Graphs\nWe can add a simple linear regression line to this plot using lm() and abline(). We can also add a title and change the axis labels.\n\nmod &lt;- lm(temp ~ lat, data = met_daily)\nplot(met_daily$lat, met_daily$temp, pch=19, cex=0.5, \n  main = \"Temperature and Latitude\", \n  xlab = \"Latitude\", ylab = \"Temperature (deg C)\")\nabline(mod, lwd=2, col=\"red\")\n\n(next slide)"
   },
   {
     "objectID": "slides/week03.html#tidyverse",
