@@ -111,6 +111,6 @@ Some other useful plotting functions include:
 - `image` a low-level matrix visualization function 
 - `barplot`, especially with `table`, for visualizing frequencies of categorical variables.
 
-### 9. Submission
+### 9. Submission (due Tuesday, Feb 03 at 8:30am)
 
 Submit through the course [Github issues page](https://github.com/dmcable/BIOSTAT620W26/issues/1).
