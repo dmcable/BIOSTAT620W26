@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Schedule – BIOSTAT 620</title>
+<title>Lab 3 - Exploratory Data Analysis – BIOSTAT 620</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d1b12f2568ecbe55642fee6aa00bd082.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b2511bcbb01c2159fd96a78deb42ffd9.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-d1b12f2568ecbe55642fee6aa00bd082.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-b2511bcbb01c2159fd96a78deb42ffd9.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,17 +104,17 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">BIOSTAT 620</span>
     </a>
   </div>
@@ -91,19 +125,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus.html"> 
+    <a class="nav-link" href="../syllabus.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./schedule.html" aria-current="page"> 
+    <a class="nav-link" href="../schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
+    <a class="nav-link" href="../references.html"> 
 <span class="menu-text">References</span></a>
   </li>  
 </ul>
@@ -118,15 +152,13 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Schedule</h1>
+<h1 class="title">Lab 3 - Exploratory Data Analysis</h1>
 </div>
 
 
@@ -143,150 +175,104 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: center;">Week</th>
-<th style="text-align: center;">Date</th>
-<th style="text-align: left;">Topic</th>
-<th style="text-align: center;">Slides</th>
-<th style="text-align: center;">Lab</th>
-<th style="text-align: center;">Assignment Release (not due)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">1/8</td>
-<td style="text-align: left;">Syllabus and Introduction</td>
-<td style="text-align: center;"><a href="./slides/week00.html">Slides</a></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1/13-15</td>
-<td style="text-align: left;">Introduction to Data Science and R</td>
-<td style="text-align: center;"><a href="./slides/week01.html">Slides</a></td>
-<td style="text-align: center;"><a href="./labs/lab1.html">Lab</a></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1/20-22</td>
-<td style="text-align: left;">Version Control &amp; Reproducible Research</td>
-<td style="text-align: center;"><a href="./slides/week02.html">Slides</a></td>
-<td style="text-align: center;"><a href="./labs/lab2.html">Lab</a></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">1/27-29</td>
-<td style="text-align: left;">Exploratory data analysis</td>
-<td style="text-align: center;"><a href="./slides/week03.html">Slides</a></td>
-<td style="text-align: center;"><a href="./labs/lab3.html">Lab</a></td>
-<td style="text-align: center;">HW1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">2/3-5</td>
-<td style="text-align: left;">Data visualization</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Lab 4</td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">2/10-12</td>
-<td style="text-align: left;">Data Cleaning and Wrangling</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Lab 5</td>
-<td style="text-align: center;">HW2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">2/17-19</td>
-<td style="text-align: left;">Text Mining &amp; Sentiment Analysis</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Lab 6</td>
-<td style="text-align: center;">Midterm Project</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">2/24-26</td>
-<td style="text-align: left;">Scraping, APIs, and Regular Expressions</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Lab 7</td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;">3/3-5</td>
-<td style="text-align: left;">NO CLASS - SPRING RECESS</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">3/10-12</td>
-<td style="text-align: left;">Efficiency and High Performance Computing</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Lab 8</td>
-<td style="text-align: center;">HW3</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">9</td>
-<td style="text-align: center;">3/17-19</td>
-<td style="text-align: left;">SQL and Managing Big Data</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Lab 9</td>
-<td style="text-align: center;">Final Project</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">3/24-26</td>
-<td style="text-align: left;">Interactive Visualization</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Lab 10</td>
-<td style="text-align: center;">HW4</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">11</td>
-<td style="text-align: center;">3/31-4/2</td>
-<td style="text-align: left;">Building a Website with Quarto and GitHub</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Lab 11</td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">12</td>
-<td style="text-align: center;">4/7-9</td>
-<td style="text-align: left;">Special Topics</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Final Project Workshop</td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">13</td>
-<td style="text-align: center;">4/14-16</td>
-<td style="text-align: left;">Special Topics</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">14</td>
-<td style="text-align: center;">4/21 (NO CLASS ON 4/23)</td>
-<td style="text-align: left;">Final Project Presentations</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-</tbody>
-</table>
+<section id="learning-goals" class="level1">
+<h1>Learning Goals</h1>
+<ul>
+<li>Read in and get familiar with the meteorology dataset<br>
+</li>
+<li>Step through the EDA “checklist” presented in the class slides</li>
+<li>Practice making exploratory graphs</li>
+</ul>
+<p>As you do this, think about what questions you would like to ask regarding this data. What would you ask a collaborator who was more familiar with it?</p>
+</section>
+<section id="lab-description" class="level1">
+<h1>Lab Description</h1>
+<p>We will work with the meteorological data presented in lecture. Recall the dataset consists of weather station readings in the continental US.</p>
+<p><strong>The objective of the lab is to find the weather station with the highest elevation and look at patterns in the time series of its wind speed and temperature.</strong></p>
+</section>
+<section id="steps" class="level1">
+<h1>Steps</h1>
+<section id="read-in-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="read-in-the-data">1. Read in the data</h3>
+<p>The data for this lab is available at <a href="https://github.com/dmcable/BIOSTAT620W26/tree/main/data/met" class="uri">https://github.com/dmcable/BIOSTAT620W26/tree/main/data/met</a>. There’s some additional information about the dataset, but the main file you’ll need to download is <code>met_all.gz</code>.</p>
+<p>Once you’ve downloaded the file, you can read it into R with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>met <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"~/Downloads/met_all.gz"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check-the-dimensions-headers-footers" class="level3">
+<h3 class="anchored" data-anchor-id="check-the-dimensions-headers-footers">2. Check the dimensions, headers, footers</h3>
+<ul>
+<li>How many columns, rows are there?</li>
+</ul>
+</section>
+<section id="take-a-look-at-all-the-variables-hint-use-the-str-function." class="level3">
+<h3 class="anchored" data-anchor-id="take-a-look-at-all-the-variables-hint-use-the-str-function.">3. Take a look at all the variables (hint: use the str function).</h3>
+</section>
+<section id="take-a-closer-look-at-the-key-variables-year-day-hour-temp-elev-wind.sp.-hint-use-table-andor-summary." class="level3">
+<h3 class="anchored" data-anchor-id="take-a-closer-look-at-the-key-variables-year-day-hour-temp-elev-wind.sp.-hint-use-table-andor-summary.">4. Take a closer look at the key variables (year, day, hour, temp, elev, wind.sp). Hint: use table and/or summary).</h3>
+<p>It looks like the elevation variable has observations with 9999.0, which is probably an indicator for missing. We should take a deeper look at the data dictionary to confirm. The wind speed variable is OK but there are a lot of missing data.</p>
+<p>After checking the data we should make the appropriate modifications. Replace elevations with 9999 as <code>NA</code>.</p>
+<ul>
+<li>At what elevation is the highest weather station?</li>
+</ul>
+<p>We also have the issue of the minimum temperature being -40C, so we should remove those observations. Also, remove the NA temperature points.</p>
+<p>After removing the -40C points, what is the new lowest temperature? We again notice that there is a -17.2C temperature reading that seems suspicious.</p>
+</section>
+<section id="check-the-data-against-an-external-data-source." class="level3">
+<h3 class="anchored" data-anchor-id="check-the-data-against-an-external-data-source.">5. Check the data against an external data source.</h3>
+<p>Validate that the total range of elevations in the data make sense. Also, we should check the suspicious -17.2C temperature value (where is it located?).</p>
+<p>Google is your friend here.</p>
+<p>Fix any problems that arise in your checks.</p>
+</section>
+<section id="calculate-summary-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-summary-statistics">6. Calculate summary statistics</h3>
+<p>Remember to keep the initial question in mind. We want to pick out the weather station with maximum elevation and examine its windspeed and temperature.</p>
+<p>Some ideas: select the weather station with maximum elevation; within this station, look at the correlation between temperature and wind speed; look at the correlation between each of temperature and wind speed with each of hour and day.</p>
+</section>
+<section id="exploratory-graphs" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-graphs">7. Exploratory graphs</h3>
+<p>We should look at the distributions of all of the key variables to make sure there are no remaining issues with the data. Hint: using the hist function, make histograms of the elev, temp, and wind.sp variables.</p>
+<p>Note: one thing we should consider for later analyses (not today) is to log transform wind speed and elevation as they are very skewed.</p>
+<p>Look at where the weather station with highest elevation is located.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(elev) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(<span class="st">'OpenStreetMap'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircles</span>(<span class="at">lat=</span><span class="sc">~</span>lat,<span class="at">lng=</span><span class="sc">~</span>lon, <span class="at">opacity=</span><span class="dv">1</span>, <span class="at">fillOpacity=</span><span class="dv">1</span>, <span class="at">radius=</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Look at the time series of temperature and wind speed at this location. For this we will need to create a date-time variable for the x-axis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>elev<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">with</span>(elev, <span class="fu">ymd_h</span>(<span class="fu">paste</span>(year, month, day, hour, <span class="at">sep=</span> <span class="st">' '</span>)))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(elev<span class="sc">$</span>date)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>elev <span class="ot">&lt;-</span> elev[<span class="fu">order</span>(elev<span class="sc">$</span>date), ]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(elev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Given the date-time variable, plot the time series of temperature and also wind speed.</p>
+<ul>
+<li>Summarize any trends that you see in these time series plots.</li>
+</ul>
+</section>
+<section id="ask-questions" class="level3">
+<h3 class="anchored" data-anchor-id="ask-questions">8. Ask questions</h3>
+<p>By now, you might have some specific questions about how the data was gathered and what some of the different variables and values mean. Alternatively, maybe you have an idea for how some of the variable should be related and you want to explore that relationship. In a real-world analysis, these questions could potentially be answered by a collaborator, who may have been part of the team that collected the data. What questions do you have about the data?</p>
+<p>If you haven’t already, now would be a good time to look at the accompanying <a href="https://github.com/dmcable/BIOSTAT620W26/tree/main/data/met/met-datadictionary.pdf">data dictionary</a> for this dataset and see if it can answer any of your questions. If you have questions about the nature of the dataset and how it was gathered, this might be able to help.</p>
+<p>For questions about variables in the dataset or relationships between them, try making some more exploratory plots. Do you see the patterns you would expect? There are many different types of summaries and visualization strategies that we have not discussed, but which could provide interesting perspectives on the data.</p>
+<p>Some other useful plotting functions include:</p>
+<ul>
+<li><code>pairs</code> for making all pairwise scatter plots in a dataset with 2 dimensions.</li>
+<li><code>heatmap</code> and/or <code>corrplot</code> (from the <code>corrplot</code> package) for visualizing matrices in general or correlation matrices in particular.</li>
+<li><code>image</code> a low-level matrix visualization function</li>
+<li><code>barplot</code>, especially with <code>table</code>, for visualizing frequencies of categorical variables.</li>
+</ul>
+</section>
+<section id="submission" class="level3">
+<h3 class="anchored" data-anchor-id="submission">9. Submission</h3>
+<p>Submit through the course <a href="https://github.com/dmcable/BIOSTAT620W26/issues/1">Github issues page</a>.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

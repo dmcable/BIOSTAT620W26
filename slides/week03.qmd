@@ -124,7 +124,7 @@ There are plenty of ways to do these tasks, but we will focus on base R.
 Since our data is stored as a (gzipped) CSV file, we could load it into R with `read.csv`, but we will use the more flexible `read.table`. I have it stored locally, but we will see how to load it straight from GitHub in the lab.
 
 ```{r readin-in}
-met <- read.table('../data/met_all.gz',
+met <- read.table('../data/met/met_all.gz',
                   header = TRUE, sep = ',')
 ```
 
