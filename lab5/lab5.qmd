@@ -1,0 +1,131 @@
+---
+title: "lab5"
+format:
+  html:
+    embed-resources: true
+editor: visual
+---
+
+1
+
+```{r}
+library(data.table)
+library(dplyr)
+library(dtplyr)
+library(tidyverse)
+library(janitor)
+library(readr)
+```
+
+2
+
+```{r}
+url <- 'https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/covid/population.csv'
+if (!file.exists("covid_processed.csv"))
+  download.file(
+    url = url,
+    destfile = "population.csv",
+    method   = "libcurl",
+    timeout  = 60
+    )
+population <- read.csv('population.csv')
+```
+
+3
+
+```{r}
+population
+
+pop_tidy <- population %>%
+  as_tibble() %>%
+  row_to_names(1) %>%
+  select(-1) %>%                  
+  select(-last_col()) %>%         
+  rename(state_name = 3) %>%    
+  pivot_longer(
+    cols = starts_with("POP_"),
+    names_to = "year",
+    values_to = "population"
+  ) %>%
+  mutate(
+    year = parse_integer(sub("POP_", "", year)),
+    population = parse_number(population)
+  )
+
+abbr_map <- c(setNames(state.abb, state.name),
+              "District of Columbia"="DC",
+              "Puerto Rico"="PR")
+
+pop_tidy <- pop_tidy %>%
+  mutate(state = unname(abbr_map[state_name])) %>%
+  relocate(state, .after = state_name)
+
+
+
+
+
+```
+
+4
+
+```{r}
+library(jsonlite)
+url <- "https://github.com/datasciencelabs/2024/raw/refs/heads/main/data/regions.json"
+regions <- fromJSON(url) 
+regions <- regions %>%
+  mutate(region = as.integer(unlist(region))) %>%
+  unnest(states) %>%
+  rename(state_name = states) %>%
+  mutate(region = factor(region)) %>%
+  select(state_name, region, region_name)
+head(regions)
+```
+
+5
+
+```{r}
+pop_with_region <- pop_tidy %>%
+  left_join(regions, by = "state_name")
+
+head(pop_with_region)
+
+```
+
+6
+
+```{r}
+library(httr2)
+api <- "https://data.cdc.gov/resource/pwn4-m3yp.json"
+request <- request(paste0(api,paste0("?$limit=10000000000")))
+response <- request |> req_perform() |> resp_body_string()
+cases_raw <- fromJSON(response)
+head(cases_raw)
+
+## if limit=100000000000 replaced by "", will return defalut number of data, about 1000
+```
+
+7
+
+```{r}
+library(lubridate)
+cases <- cases_raw %>%
+  transmute(
+    state = state,
+    date  = as_date(end_date),
+    cases = as.numeric(new_cases)
+  )
+
+head(cases)
+```
+
+8
+
+```{r}
+cases <- cases %>%
+  mutate(year = year(date))
+cases_2020_2021 <- cases %>%
+  filter(year %in% c(2020, 2021))
+cases_pop <- cases_2020_2021 %>%
+  left_join(pop_with_region, by = c("state", "year"))
+head(cases_pop)
+```

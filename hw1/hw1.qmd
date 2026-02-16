@@ -1,0 +1,258 @@
+---
+title: "hw1"
+format:
+  html:
+    embed-resources: true
+editor: visual
+---
+
+0
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+library(leaflet)
+library(sf)
+library(tigris)
+library(stringr)
+data_2005 <- read_csv("C:/Users/57146/Downloads/2005_data.csv")
+data_2025 <- read_csv("C:/Users/57146/Downloads/2025_data.csv")
+```
+
+1
+
+```{r}
+dim(data_2005)
+dim(data_2025)
+
+
+print("---------------------------------------------")
+head(data_2005)
+head(data_2025)
+tail(data_2005)
+tail(data_2025)
+
+print("------------------------------------------------")
+
+names(data_2005)
+names(data_2025)
+
+print("------------------------------------------------")
+str(data_2005)
+str(data_2025)
+
+print("-----------------------------------------------")
+pm_2005 <- data_2005$`Daily Mean PM2.5 Concentration`
+pm_2025 <- data_2025$`Daily Mean PM2.5 Concentration`
+
+
+summary(pm_2005)
+summary(pm_2025)
+
+hist(pm_2005,
+     main = "PM2.5 Distribution in 2005",
+     xlab = "PM2.5",
+     col = "lightblue")
+
+hist(pm_2025,
+     main = "PM2.5 Distribution in 2025",
+     xlab = "PM2.5",
+     col = "lightgreen")
+
+
+##In 2005, the mean concentration (13.77 µg/m³) exceeds the median (11.0 µg/m³), consistent with the visible right tail of higher values. In contrast, the 2025 distribution is more heavily concentrated at lower levels, with a median of 6.3 µg/m³ and a mean of 8.3 µg/m³. Although the distribution in 2025 remains right-skewed , both the mean and median are substantially lower than in 2005. This shift in the center of the distribution suggests that overall PM2.5 levels have decreased over the 20-year period, despite the presence of occasional extreme values in both years.
+```
+
+2
+
+```{r}
+data_2005$Date <- as.Date(data_2005$Date, format = "%m/%d/%Y")
+data_2025$Date <- as.Date(data_2025$Date, format = "%m/%d/%Y")
+data_2005 <- data_2005 %>%
+  mutate(year = year(Date))
+
+data_2025 <- data_2025 %>%
+  mutate(year = year(Date))
+
+data_2005 <- data_2005 %>%
+  rename(
+    pm25 = `Daily Mean PM2.5 Concentration`,
+    site_id = `Site ID`
+  )
+
+data_2025 <- data_2025 %>%
+  rename(
+    pm25 = `Daily Mean PM2.5 Concentration`,
+    site_id = `Site ID`
+  )
+
+combined_data <- bind_rows(data_2005, data_2025)
+head(combined_data)
+```
+
+3
+
+```{r}
+
+
+sites <- combined_data %>%
+  distinct(year, site_id, `Site Latitude`, `Site Longitude`) %>%
+  filter(!is.na(`Site Latitude`), !is.na(`Site Longitude`))
+
+pal <- colorFactor(palette = c("2005" = "blue", "2025" = "red"),
+                   domain = as.character(sites$year))
+
+leaflet(sites) %>%
+  addProviderTiles("CartoDB.Positron") %>%
+  addCircleMarkers(
+    lng = ~`Site Longitude`, lat = ~`Site Latitude`,
+    color = ~pal(as.character(year)),
+    radius = 4, stroke = FALSE, fillOpacity = 0.7,
+    popup = ~paste0("Year: ", year, "<br>Site ID: ", site_id)
+  ) %>%
+  addLegend("bottomright", pal = pal, values = ~as.character(year), title = "Year")
+
+##The monitoring sites are primarily concentrated in the southern part of Michigan, particularly around the Detroit metropolitan area and other urban centers such as Lansing and Grand Rapids. Fewer sites are located in the northern regions and the Upper Peninsula.
+
+##Comparing 2005 and 2025, the overall spatial distribution of monitoring sites remains largely similar. The main clusters appear in the same regions across both years, with only minor differences in the number or specific locations of sites. Thus, the spatial coverage does not appear to have changed substantially over time.
+
+```
+
+4
+
+```{r}
+sum(is.na(combined_data$pm25))
+sum(combined_data$pm25 < 0, na.rm = TRUE)
+summary(combined_data$pm25)
+sum(combined_data$pm25 == 0, na.rm = TRUE)
+
+##The combined dataset was examined for potential data quality issues in the PM2.5 variable. No missing values were detected. Additionally, no negative concentrations were observed, indicating no physically implausible values.
+
+##The minimum value was 0 µg/m³, and only four observations had a value of zero, suggesting that zero concentrations are rare and unlikely to reflect systematic measurement error.
+
+##The maximum observed concentration was 116 µg/m³. Although this represents an extreme value, it is within a realistic range for daily PM2.5 levels. Overall, no major data quality concerns were identified in the combined dataset.
+```
+
+5
+
+```{r}
+print("---------------------LEVLE1----------------------------")
+ggplot(combined_data, aes(x = factor(year), y = pm25)) +
+  geom_boxplot() +
+  labs(title = "Statewide PM2.5: 2005 vs 2025",
+       x = "Year",
+       y = "PM2.5")
+combined_data %>%
+  group_by(year) %>%
+  summarise(
+    mean = mean(pm25),
+    median = median(pm25),
+    sd = sd(pm25)
+  )
+
+##At the statewide level, the boxplots show a clear downward shift in PM2.5 concentrations from 2005 to 2025. The median concentration decreases substantially, indicating an overall reduction in daily PM2.5 levels. In addition, the interquartile range is narrower in 2025, suggesting reduced variability in concentrations.
+
+##Although extreme values are still present in 2025, the majority of observations are concentrated at lower levels compared to 2005. Overall, the statewide distribution provides strong evidence that PM2.5 concentrations declined over the 20-year period.
+
+print("---------------------LEVLE2----------------------------")
+county_summary <- combined_data %>%
+  group_by(County, year) %>%
+  summarise(mean_pm25 = mean(pm25, na.rm = TRUE), .groups = "drop")
+ggplot(county_summary,
+       aes(x = factor(year), y = mean_pm25, group = County)) +
+  geom_line(alpha = 0.5) +
+  labs(title = "County-Level PM2.5 Change (2005–2025)",
+       x = "Year",
+       y = "Mean PM2.5")
+
+
+county_change <- county_summary %>%
+  mutate(year = as.character(year)) %>%
+  pivot_wider(names_from = year, values_from = mean_pm25) %>%
+  mutate(delta_pm25 = `2025` - `2005`)
+
+options(tigris_use_cache = TRUE)  
+
+mi_counties <- counties(state = "MI", cb = TRUE, class = "sf") %>%
+  st_transform(4326) %>%
+  mutate(
+    County = str_to_title(NAME) 
+  )
+
+county_change2 <- county_change %>%
+  mutate(County = str_to_title(str_trim(County)))
+
+mi_map_delta <- mi_counties %>%
+  left_join(county_change2, by = "County")
+
+ggplot(mi_map_delta) +
+  geom_sf(aes(fill = delta_pm25), color = "white", linewidth = 0.2) +
+  scale_fill_gradient2(midpoint = 0) +
+  labs(
+    title = "Change in Mean PM2.5 by County (2025 − 2005)",
+    fill = "Δ Mean PM2.5"
+  ) +
+  theme_minimal()
+
+##At the county level, the majority of counties exhibit a decline in mean PM2.5 concentrations from 2005 to 2025, as shown by the downward-sloping lines in the time comparison plot. While reductions are observed in most counties, the magnitude of decline varies, indicating spatial heterogeneity in air quality improvement.
+
+##The spatial change map further illustrates that larger reductions are concentrated in southern Michigan, particularly in more urbanized counties near the Detroit metropolitan area. In contrast, northern counties show smaller changes, likely reflecting lower baseline pollution levels and fewer monitoring sites.
+
+##Overall, the evidence suggests that PM2.5 reductions were widespread across Michigan, though the magnitude of improvement differs geographically.
+
+print("---------------------LEVLE3----------------------------")
+
+wayne_data <- combined_data %>%
+  filter(County == "Wayne")
+wayne_summary <- wayne_data %>%
+  group_by(site_id, year) %>%
+  summarise(mean_pm25 = mean(pm25, na.rm = TRUE), .groups = "drop")
+ggplot(wayne_summary,
+       aes(x = factor(year), y = mean_pm25, group = site_id)) +
+  geom_line(alpha = 0.6) +
+  geom_point(size = 2) +
+  labs(title = "Wayne County: Site-Level PM2.5 Change (2005–2025)",
+       x = "Year",
+       y = "Mean PM2.5") +
+  theme_minimal()
+wayne_wide <- wayne_summary %>%
+  mutate(year = as.character(year)) %>%
+  pivot_wider(names_from = year, values_from = mean_pm25)
+
+wayne_change <- wayne_wide %>%
+  mutate(delta_pm25 = `2025` - `2005`)
+wayne_locations <- wayne_data %>%
+  group_by(site_id) %>%
+  summarise(
+    lat = mean(`Site Latitude`),
+    lon = mean(`Site Longitude`),
+    .groups = "drop"
+  )
+wayne_map_data <- left_join(wayne_locations, wayne_change, by = "site_id")
+wayne_map_data2 <- wayne_map_data %>%
+  filter(!is.na(delta_pm25),
+         !is.na(lat), !is.na(lon))
+
+pal <- colorNumeric(palette = "RdBu", domain = wayne_map_data2$delta_pm25, reverse = TRUE)
+
+leaflet(wayne_map_data2) %>%
+  addProviderTiles("CartoDB.Positron") %>%
+  addCircleMarkers(
+    lng = ~lon, lat = ~lat,
+    color = ~pal(delta_pm25),
+    radius = ~4 + 2*abs(delta_pm25),
+    stroke = FALSE, fillOpacity = 0.8,
+    popup = ~paste0("Site: ", site_id,
+                    "<br>Δ PM2.5: ", round(delta_pm25, 2))
+  ) %>%
+  addLegend("bottomright", pal = pal, values = ~delta_pm25,
+            title = "Δ PM2.5 (2025-2005)")
+
+##At the site level within Wayne County, all monitoring sites exhibit substantial declines in mean PM2.5 concentrations between 2005 and 2025. The line plot shows consistent downward trends across sites, with reductions of approximately 8–10 µg/m³.
+
+##The spatial change map further demonstrates that these reductions are geographically consistent across monitoring locations. No site shows an increase in PM2.5, and the magnitude of improvement is similar across the county.
+
+##Together, these findings indicate that air quality improvements in Wayne County were broad and systematic rather than driven by isolated changes at specific monitoring sites.
+```

@@ -1,0 +1,98 @@
+---
+title: "lab3"
+format:
+  html:
+    embed-resources: true
+editor: visual
+---
+
+1
+
+```{r}
+library(leaflet)
+library(magrittr)
+met <- read.csv("C:/Users/57146/Desktop/hw/620/lab3/met_all.gz")
+```
+
+2
+
+```{r}
+dim(met)
+```
+
+3
+
+```{r}
+str(met)
+```
+
+4
+
+```{r}
+summary(met[, c("year","day","hour","temp","elev","wind.sp")])
+
+met$elev[met$elev == 9999] <- NA
+
+
+max(met$elev, na.rm = TRUE)
+
+met <- met[met$temp != -40, ]
+
+met <- met[!is.na(met$temp), ]
+
+min(met$temp, na.rm = TRUE)
+```
+
+5
+
+```{r}
+##find in google, the lowest tempeture in colorado is under 17c
+```
+
+6
+
+```{r}
+max_elev <- max(met$elev, na.rm = TRUE)
+
+station_max <- met[met$elev == max_elev, ]
+
+cor(station_max$temp, station_max$wind.sp, use="complete.obs")
+
+cor(station_max$temp, station_max$hour, use="complete.obs")
+cor(station_max$temp, station_max$day, use="complete.obs")
+cor(station_max$wind.sp, station_max$hour, use="complete.obs")
+cor(station_max$wind.sp, station_max$day, use="complete.obs")
+```
+
+7
+
+```{r}
+hist(met$elev, main="Elevation", xlab="elev")
+hist(met$temp, main="Temperature", xlab="temp")
+hist(met$wind.sp, main="Wind speed", xlab="wind.sp")
+
+
+max_elev <- max(met$elev, na.rm=TRUE)
+elev <- subset(met, elev == max_elev)
+
+leaflet(elev) %>%
+  addProviderTiles('OpenStreetMap') %>% 
+  addCircles(lat=~lat,lng=~lon, opacity=1, fillOpacity=1, radius=100)
+
+library(lubridate)
+
+elev$date <- with(elev, ymd_h(paste(year, month, day, hour, sep=" ")))
+summary(elev$date)
+
+elev <- elev[order(elev$date), ]
+head(elev)
+Sys.setlocale("LC_TIME", "C")
+
+
+plot(elev$date, elev$temp, type="l",
+     xlab="Date", ylab="Temperature", main="Temperature Time Series")
+plot(elev$date, elev$wind.sp, type="l",
+     xlab="Date", ylab="Wind Speed", main="Wind Speed Time Series")
+##Temperature displays clear daily cycles, whereas wind speed shows high variability with no obvious seasonal or diurnal trend.
+
+```
