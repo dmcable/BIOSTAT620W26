@@ -60,7 +60,7 @@ The primary questions of interest are:
 2. What is the association between smoke and gas exposure and FEV?
 3. What is the association between PM2.5 exposure and FEV?
 
-Follow the EDA checklist from week 3 and the previous assignment. Be sure to focus on the key variables.
+Follow the EDA checklist from week 3 and the previous assignment. Be sure to focus on the key variables. Hint: the variable for total PM2.5 is `pm25_mass`.
 
 ## Visualization (30 points)
 
