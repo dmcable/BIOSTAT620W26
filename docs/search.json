@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Week\nDate\nTopic\nSlides\nLab\nAssignment Release (not due)\n\n\n\n\n0\n1/8\nSyllabus and Introduction\nSlides\n\n\n\n\n1\n1/13-15\nIntroduction to Data Science and R\nSlides\nLab\n\n\n\n2\n1/20-22\nVersion Control & Reproducible Research\nSlides\nLab\n\n\n\n3\n1/27-29\nExploratory data analysis\nSlides\nLab\nHW1\n\n\n4\n2/3-5\nData visualization\nSlides\nLab\n\n\n\n5\n2/10-12\nData Cleaning and Wrangling\nSlides\nLab\nHW2\n\n\n6\n2/17-19\nText Mining & Sentiment Analysis\n\nLab 6\nMidterm Project\n\n\n7\n2/24-26\nScraping, APIs, and Regular Expressions\n\nLab 7\n\n\n\n\n3/3-5\nNO CLASS - SPRING RECESS\n\n\n\n\n\n8\n3/10-12\nEfficiency and High Performance Computing\n\nLab 8\nHW3\n\n\n9\n3/17-19\nSQL and Managing Big Data\n\nLab 9\nFinal Project\n\n\n10\n3/24-26\nInteractive Visualization\n\nLab 10\nHW4\n\n\n11\n3/31-4/2\nBuilding a Website with Quarto and GitHub\n\nLab 11\n\n\n\n12\n4/7-9\nSpecial Topics\n\nFinal Project Workshop\n\n\n\n13\n4/14-16\nSpecial Topics\n\n\n\n\n\n14\n4/21 (NO CLASS ON 4/23)\nFinal Project Presentations"
+    "text": "Week\nDate\nTopic\nSlides\nLab\nAssignment Release (not due)\n\n\n\n\n0\n1/8\nSyllabus and Introduction\nSlides\n\n\n\n\n1\n1/13-15\nIntroduction to Data Science and R\nSlides\nLab\n\n\n\n2\n1/20-22\nVersion Control & Reproducible Research\nSlides\nLab\n\n\n\n3\n1/27-29\nExploratory data analysis\nSlides\nLab\nHW1\n\n\n4\n2/3-5\nData visualization\nSlides\nLab\n\n\n\n5\n2/10-12\nData Cleaning and Wrangling\nSlides\nLab\nHW2\n\n\n6\n2/17-19\nText Mining & Sentiment Analysis\nSlides\nLab 6\nMidterm Project\n\n\n7\n2/24-26\nScraping, APIs, and Regular Expressions\n\nLab 7\n\n\n\n\n3/3-5\nNO CLASS - SPRING RECESS\n\n\n\n\n\n8\n3/10-12\nEfficiency and High Performance Computing\n\nLab 8\nHW3\n\n\n9\n3/17-19\nSQL and Managing Big Data\n\nLab 9\nFinal Project\n\n\n10\n3/24-26\nInteractive Visualization\n\nLab 10\nHW4\n\n\n11\n3/31-4/2\nBuilding a Website with Quarto and GitHub\n\nLab 11\n\n\n\n12\n4/7-9\nSpecial Topics\n\nFinal Project Workshop\n\n\n\n13\n4/14-16\nSpecial Topics\n\n\n\n\n\n14\n4/21 (NO CLASS ON 4/23)\nFinal Project Presentations"
   },
   {
     "objectID": "syllabus.html",
@@ -3407,5 +3407,418 @@
     "title": "References",
     "section": "Data",
     "text": "Data\nMany of these websites offer publicly available datasets that can be used for research or class projects.\n\nHealth and Biological data\n\nCDC National Center for Health Statistics\nNIH Cancer Surveillance\nWorld Health Organization WHO data\nUniProt data\nThe Gene Ontology Project\nGene Expression Omnibus Data\nUS Center for Disease Control and Prevention Data\nCovid Data CovidTracker\nBureau of Transportation Statistics\n\n\n\nAcademic Publications and related\n\nFigshare data repository\nZenodo data repository\nHarvard Dataverse\nElsevier Developers API\n\n\n\nGovernment data\n\nUS Open Data Initiative DATA.GOV\nCensus Data Explorer and National Historical Geographic Information System (NHGIS)\nBureau of Economic Analysis\nBureau of Labor Statistics\nHousing data Zillow\nBureau of Justice Statistics National Center for Education Statistics: The Nation’s Report Card\n\n\n\nOther data\n\nWorld Bank open data\nInter-university Consortium for Political and Social Research (ICPSR)\nFiveThirtyEight open data\nKaggle datasets\nLiterally all of Wikipedia\n\n\n\nSocial Networks\n\nGitHub Developers API\nInstagram Developers API\nLinkedIn Developers API"
+  },
+  {
+    "objectID": "slides/week06.html#acknowledgment",
+    "href": "slides/week06.html#acknowledgment",
+    "title": "Week 6: Text Mining",
+    "section": "Acknowledgment",
+    "text": "Acknowledgment\nThese slides were originally developed by Emil Hvitfeldt and modified by Dylan Cable, George G. Vega Yon, and Kelly Street."
+  },
+  {
+    "objectID": "slides/week06.html#alices-adventures-in-wonderland",
+    "href": "slides/week06.html#alices-adventures-in-wonderland",
+    "title": "Week 6: Text Mining",
+    "section": "Alice’s Adventures in Wonderland",
+    "text": "Alice’s Adventures in Wonderland\nDownload the alice dataset from https://github.com/dmcable/BIOSTAT620/blob/main/data/text/alice.rds)\n\nlibrary(tidyverse)\nalice &lt;- readRDS(\"../data/text/alice.rds\") # \"~/Downloads/alice.rds\"\nalice\n\n# A tibble: 3,351 × 3\n   text                                                     chapter chapter_name\n   &lt;chr&gt;                                                      &lt;int&gt; &lt;chr&gt;       \n 1 \"CHAPTER I.\"                                                   1 CHAPTER I.  \n 2 \"Down the Rabbit-Hole\"                                         1 CHAPTER I.  \n 3 \"\"                                                             1 CHAPTER I.  \n 4 \"\"                                                             1 CHAPTER I.  \n 5 \"Alice was beginning to get very tired of sitting by he…       1 CHAPTER I.  \n 6 \"bank, and of having nothing to do: once or twice she h…       1 CHAPTER I.  \n 7 \"the book her sister was reading, but it had no picture…       1 CHAPTER I.  \n 8 \"conversations in it, “and what is the use of a book,” …       1 CHAPTER I.  \n 9 \"“without pictures or conversations?”\"                         1 CHAPTER I.  \n10 \"\"                                                             1 CHAPTER I.  \n# ℹ 3,341 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#turning-the-data-into-a-tidy-format",
+    "href": "slides/week06.html#turning-the-data-into-a-tidy-format",
+    "title": "Week 6: Text Mining",
+    "section": "Turning the data into a tidy format",
+    "text": "Turning the data into a tidy format\n\nlibrary(tidytext)\nalice |&gt;\n  unnest_tokens(token, text)\n\n# A tibble: 26,687 × 3\n   chapter chapter_name token    \n     &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;    \n 1       1 CHAPTER I.   chapter  \n 2       1 CHAPTER I.   i        \n 3       1 CHAPTER I.   down     \n 4       1 CHAPTER I.   the      \n 5       1 CHAPTER I.   rabbit   \n 6       1 CHAPTER I.   hole     \n 7       1 CHAPTER I.   alice    \n 8       1 CHAPTER I.   was      \n 9       1 CHAPTER I.   beginning\n10       1 CHAPTER I.   to       \n# ℹ 26,677 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#using-dplyr-verbs",
+    "href": "slides/week06.html#using-dplyr-verbs",
+    "title": "Week 6: Text Mining",
+    "section": "Using dplyr verbs",
+    "text": "Using dplyr verbs\n\nlibrary(dplyr)\nalice |&gt;\n  unnest_tokens(token, text)\n\n# A tibble: 26,687 × 3\n   chapter chapter_name token    \n     &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;    \n 1       1 CHAPTER I.   chapter  \n 2       1 CHAPTER I.   i        \n 3       1 CHAPTER I.   down     \n 4       1 CHAPTER I.   the      \n 5       1 CHAPTER I.   rabbit   \n 6       1 CHAPTER I.   hole     \n 7       1 CHAPTER I.   alice    \n 8       1 CHAPTER I.   was      \n 9       1 CHAPTER I.   beginning\n10       1 CHAPTER I.   to       \n# ℹ 26,677 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#using-dplyr-verbs-1",
+    "href": "slides/week06.html#using-dplyr-verbs-1",
+    "title": "Week 6: Text Mining",
+    "section": "Using dplyr verbs",
+    "text": "Using dplyr verbs\n\nlibrary(dplyr)\nalice |&gt;\n  unnest_tokens(token, text) |&gt;\n  count(token)\n\n# A tibble: 2,740 × 2\n   token        n\n   &lt;chr&gt;    &lt;int&gt;\n 1 _alice’s     1\n 2 _all         1\n 3 _all_        1\n 4 _and         1\n 5 _are_        4\n 6 _at          1\n 7 _before      1\n 8 _beg_        1\n 9 _began_      1\n10 _best_       2\n# ℹ 2,730 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#using-dplyr-verbs-2",
+    "href": "slides/week06.html#using-dplyr-verbs-2",
+    "title": "Week 6: Text Mining",
+    "section": "Using dplyr verbs",
+    "text": "Using dplyr verbs\n\nlibrary(dplyr)\nalice |&gt;\n  unnest_tokens(token, text) |&gt;\n  count(token, sort = TRUE)\n\n# A tibble: 2,740 × 2\n   token     n\n   &lt;chr&gt; &lt;int&gt;\n 1 the    1643\n 2 and     871\n 3 to      729\n 4 a       632\n 5 she     538\n 6 it      527\n 7 of      514\n 8 said    460\n 9 i       393\n10 alice   386\n# ℹ 2,730 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#using-dplyr-verbs-3",
+    "href": "slides/week06.html#using-dplyr-verbs-3",
+    "title": "Week 6: Text Mining",
+    "section": "Using dplyr verbs",
+    "text": "Using dplyr verbs\n\nlibrary(dplyr)\nalice |&gt;\n  unnest_tokens(token, text) |&gt;\n  count(chapter, token)\n\n# A tibble: 7,549 × 3\n   chapter token            n\n     &lt;int&gt; &lt;chr&gt;        &lt;int&gt;\n 1       1 _curtseying_     1\n 2       1 _never_          1\n 3       1 _not_            1\n 4       1 _one_            1\n 5       1 _poison_         1\n 6       1 _that_           1\n 7       1 _through_        1\n 8       1 _took            1\n 9       1 _very_           4\n10       1 _was_            1\n# ℹ 7,539 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#using-dplyr-verbs-4",
+    "href": "slides/week06.html#using-dplyr-verbs-4",
+    "title": "Week 6: Text Mining",
+    "section": "Using dplyr verbs",
+    "text": "Using dplyr verbs\n\nlibrary(dplyr)\nalice |&gt;\n  unnest_tokens(token, text) |&gt;\n  group_by(chapter) |&gt;\n  count(token) |&gt;\n  top_n(10, n)\n\n# A tibble: 122 × 3\n# Groups:   chapter [12]\n   chapter token     n\n     &lt;int&gt; &lt;chr&gt; &lt;int&gt;\n 1       1 a        52\n 2       1 alice    27\n 3       1 and      65\n 4       1 i        30\n 5       1 it       62\n 6       1 of       43\n 7       1 she      79\n 8       1 the      92\n 9       1 to       75\n10       1 was      52\n# ℹ 112 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#dplyr-verbs-and-ggplot2",
+    "href": "slides/week06.html#dplyr-verbs-and-ggplot2",
+    "title": "Week 6: Text Mining",
+    "section": "dplyr verbs and ggplot2",
+    "text": "dplyr verbs and ggplot2\n\nlibrary(dplyr)\nlibrary(ggplot2)\nalice |&gt;\n  unnest_tokens(token, text) |&gt;\n  count(token) |&gt;\n  top_n(10, n) |&gt;\n  ggplot(aes(n, token)) +\n  geom_col()"
+  },
+  {
+    "objectID": "slides/week06.html#dplyr-verbs-and-ggplot2-1",
+    "href": "slides/week06.html#dplyr-verbs-and-ggplot2-1",
+    "title": "Week 6: Text Mining",
+    "section": "dplyr verbs and ggplot2",
+    "text": "dplyr verbs and ggplot2\n\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(forcats)\nalice |&gt;\n  unnest_tokens(token, text) |&gt;\n  count(token) |&gt;\n  top_n(10, n) |&gt;\n  ggplot(aes(n, fct_reorder(token, n))) +\n  geom_col()"
+  },
+  {
+    "objectID": "slides/week06.html#stop-words-in-tidytext",
+    "href": "slides/week06.html#stop-words-in-tidytext",
+    "title": "Week 6: Text Mining",
+    "section": "Stop words in tidytext",
+    "text": "Stop words in tidytext\ntidytext comes with a built-in data.frame of stop words\n\nstop_words\n\n# A tibble: 1,149 × 2\n   word        lexicon\n   &lt;chr&gt;       &lt;chr&gt;  \n 1 a           SMART  \n 2 a's         SMART  \n 3 able        SMART  \n 4 about       SMART  \n 5 above       SMART  \n 6 according   SMART  \n 7 accordingly SMART  \n 8 across      SMART  \n 9 actually    SMART  \n10 after       SMART  \n# ℹ 1,139 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#stop-word-lexicons",
+    "href": "slides/week06.html#stop-word-lexicons",
+    "title": "Week 6: Text Mining",
+    "section": "Stop word lexicons",
+    "text": "Stop word lexicons\n\ntable(stop_words$lexicon)\n\n\n    onix    SMART snowball \n     404      571      174"
+  },
+  {
+    "objectID": "slides/week06.html#snowball-stopwords",
+    "href": "slides/week06.html#snowball-stopwords",
+    "title": "Week 6: Text Mining",
+    "section": "snowball stopwords",
+    "text": "snowball stopwords\n\nstop_words |&gt;\n  filter(lexicon == \"snowball\") |&gt;\n  pull(word)\n\n  [1] \"i\"          \"me\"         \"my\"         \"myself\"     \"we\"        \n  [6] \"our\"        \"ours\"       \"ourselves\"  \"you\"        \"your\"      \n [11] \"yours\"      \"yourself\"   \"yourselves\" \"he\"         \"him\"       \n [16] \"his\"        \"himself\"    \"she\"        \"her\"        \"hers\"      \n [21] \"herself\"    \"it\"         \"its\"        \"itself\"     \"they\"      \n [26] \"them\"       \"their\"      \"theirs\"     \"themselves\" \"what\"      \n [31] \"which\"      \"who\"        \"whom\"       \"this\"       \"that\"      \n [36] \"these\"      \"those\"      \"am\"         \"is\"         \"are\"       \n [41] \"was\"        \"were\"       \"be\"         \"been\"       \"being\"     \n [46] \"have\"       \"has\"        \"had\"        \"having\"     \"do\"        \n [51] \"does\"       \"did\"        \"doing\"      \"would\"      \"should\"    \n [56] \"could\"      \"ought\"      \"i'm\"        \"you're\"     \"he's\"      \n [61] \"she's\"      \"it's\"       \"we're\"      \"they're\"    \"i've\"      \n [66] \"you've\"     \"we've\"      \"they've\"    \"i'd\"        \"you'd\"     \n [71] \"he'd\"       \"she'd\"      \"we'd\"       \"they'd\"     \"i'll\"      \n [76] \"you'll\"     \"he'll\"      \"she'll\"     \"we'll\"      \"they'll\"   \n [81] \"isn't\"      \"aren't\"     \"wasn't\"     \"weren't\"    \"hasn't\"    \n [86] \"haven't\"    \"hadn't\"     \"doesn't\"    \"don't\"      \"didn't\"    \n [91] \"won't\"      \"wouldn't\"   \"shan't\"     \"shouldn't\"  \"can't\"     \n [96] \"cannot\"     \"couldn't\"   \"mustn't\"    \"let's\"      \"that's\"    \n[101] \"who's\"      \"what's\"     \"here's\"     \"there's\"    \"when's\"    \n[106] \"where's\"    \"why's\"      \"how's\"      \"a\"          \"an\"        \n[111] \"the\"        \"and\"        \"but\"        \"if\"         \"or\"        \n[116] \"because\"    \"as\"         \"until\"      \"while\"      \"of\"        \n[121] \"at\"         \"by\"         \"for\"        \"with\"       \"about\"     \n[126] \"against\"    \"between\"    \"into\"       \"through\"    \"during\"    \n[131] \"before\"     \"after\"      \"above\"      \"below\"      \"to\"        \n[136] \"from\"       \"up\"         \"down\"       \"in\"         \"out\"       \n[141] \"on\"         \"off\"        \"over\"       \"under\"      \"again\"     \n[146] \"further\"    \"then\"       \"once\"       \"here\"       \"there\"     \n[151] \"when\"       \"where\"      \"why\"        \"how\"        \"all\"       \n[156] \"any\"        \"both\"       \"each\"       \"few\"        \"more\"      \n[161] \"most\"       \"other\"      \"some\"       \"such\"       \"no\"        \n[166] \"nor\"        \"not\"        \"only\"       \"own\"        \"same\"      \n[171] \"so\"         \"than\"       \"too\"        \"very\""
+  },
+  {
+    "objectID": "slides/week06.html#duplicated-stopwords",
+    "href": "slides/week06.html#duplicated-stopwords",
+    "title": "Week 6: Text Mining",
+    "section": "Duplicated stopwords",
+    "text": "Duplicated stopwords\n\nsort(table(stop_words$word), decreasing = TRUE)\n\n\n         down         would             a         about         above \n            4             4             3             3             3 \n        after         again       against           all            an \n            3             3             3             3             3 \n          and           any           are            as            at \n            3             3             3             3             3 \n           be       because          been        before         being \n            3             3             3             3             3 \n      between          both           but            by        cannot \n            3             3             3             3             3 \n        could           did            do          does        during \n            3             3             3             3             3 \n         each           few           for          from       further \n            3             3             3             3             3 \n          had           has          have        having            he \n            3             3             3             3             3 \n          her          here       herself          high           him \n            3             3             3             3             3 \n      himself           his           how             i            if \n            3             3             3             3             3 \n           in          into            is            it           its \n            3             3             3             3             3 \n       itself            me          more          most            my \n            3             3             3             3             3 \n       myself           new            no           not            of \n            3             3             3             3             3 \n          off            on          once          only            or \n            3             3             3             3             3 \n        other           our           out          over         right \n            3             3             3             3             3 \n         same           she        should          some         still \n            3             3             3             3             3 \n         such          than          that           the         their \n            3             3             3             3             3 \n         them          then         there         these          they \n            3             3             3             3             3 \n         this         those       through            to           too \n            3             3             3             3             3 \n        under         until            up          very           was \n            3             3             3             3             3 \n           we          were          what          when         where \n            3             3             3             3             3 \n        which         while           who           why          with \n            3             3             3             3             3 \n          you          your         yours        across        almost \n            3             3             3             2             2 \n        alone         along       already          also      although \n            2             2             2             2             2 \n       always            am         among       another       anybody \n            2             2             2             2             2 \n       anyone      anything      anywhere        aren't        around \n            2             2             2             2             2 \n          ask        asking          away        became        become \n            2             2             2             2             2 \n      becomes        behind         below          best        better \n            2             2             2             2             2 \n         came           can         can't       certain     certainly \n            2             2             2             2             2 \n      clearly          come      couldn't        didn't     different \n            2             2             2             2             2 \n      doesn't         doing         don't          done        either \n            2             2             2             2             2 \n       enough          even          ever         every     everybody \n            2             2             2             2             2 \n     everyone    everything    everywhere           far         first \n            2             2             2             2             2 \n         four           get          gets         given         gives \n            2             2             2             2             2 \n           go         going           got        hadn't        hasn't \n            2             2             2             2             2 \n      haven't          he's        here's          hers       however \n            2             2             2             2             2 \n          i'd          i'll           i'm          i've         isn't \n            2             2             2             2             2 \n         it's          just          keep         keeps          know \n            2             2             2             2             2 \n        known         knows          last         later         least \n            2             2             2             2             2 \n         less           let         let's          like        likely \n            2             2             2             2             2 \n         many           may         might        mostly          much \n            2             2             2             2             2 \n         must     necessary          need         needs         never \n            2             2             2             2             2 \n         next        nobody           non         noone           nor \n            2             2             2             2             2 \n      nothing           now       nowhere         often           old \n            2             2             2             2             2 \n          one        others         ought          ours     ourselves \n            2             2             2             2             2 \n          own           per       perhaps      possible         quite \n            2             2             2             2             2 \n       rather        really          said           saw           say \n            2             2             2             2             2 \n         says        second           see          seem        seemed \n            2             2             2             2             2 \n      seeming         seems       several         shall     shouldn't \n            2             2             2             2             2 \n        since            so      somebody       someone     something \n            2             2             2             2             2 \n    somewhere          sure          take         taken        that's \n            2             2             2             2             2 \n       theirs    themselves       there's     therefore        they'd \n            2             2             2             2             2 \n      they'll       they're       they've         think        though \n            2             2             2             2             2 \n        three          thus      together          took        toward \n            2             2             2             2             2 \n          two          upon            us           use          used \n            2             2             2             2             2 \n         uses          want         wants        wasn't           way \n            2             2             2             2             2 \n         we'd         we'll         we're         we've          well \n            2             2             2             2             2 \n         went       weren't        what's       where's       whether \n            2             2             2             2             2 \n        who's         whole          whom         whose          will \n            2             2             2             2             2 \n       within       without         won't      wouldn't           yet \n            2             2             2             2             2 \n        you'd        you'll        you're        you've      yourself \n            2             2             2             2             2 \n   yourselves           a's          able     according   accordingly \n            2             1             1             1             1 \n     actually    afterwards         ain't         allow        allows \n            1             1             1             1             1 \n      amongst        anyhow        anyway       anyways         apart \n            1             1             1             1             1 \n       appear    appreciate   appropriate          area         areas \n            1             1             1             1             1 \n        aside         asked          asks    associated     available \n            1             1             1             1             1 \n      awfully             b          back        backed       backing \n            1             1             1             1             1 \n        backs      becoming    beforehand         began        beings \n            1             1             1             1             1 \n      believe        beside       besides        beyond           big \n            1             1             1             1             1 \n        brief             c         c'mon           c's          cant \n            1             1             1             1             1 \n         case         cases         cause        causes       changes \n            1             1             1             1             1 \n        clear            co           com         comes    concerning \n            1             1             1             1             1 \n consequently      consider   considering       contain    containing \n            1             1             1             1             1 \n     contains corresponding        course     currently             d \n            1             1             1             1             1 \n   definitely     described       despite        differ   differently \n            1             1             1             1             1 \n       downed       downing         downs     downwards             e \n            1             1             1             1             1 \n        early           edu            eg         eight          else \n            1             1             1             1             1 \n    elsewhere           end         ended        ending          ends \n            1             1             1             1             1 \n     entirely    especially            et           etc        evenly \n            1             1             1             1             1 \n           ex       exactly       example        except             f \n            1             1             1             1             1 \n         face         faces          fact         facts          felt \n            1             1             1             1             1 \n        fifth          find         finds          five      followed \n            1             1             1             1             1 \n    following       follows        former      formerly         forth \n            1             1             1             1             1 \n         full         fully     furthered    furthering   furthermore \n            1             1             1             1             1 \n     furthers             g          gave       general     generally \n            1             1             1             1             1 \n      getting          give          goes          gone          good \n            1             1             1             1             1 \n        goods        gotten         great       greater      greatest \n            1             1             1             1             1 \n    greetings         group       grouped      grouping        groups \n            1             1             1             1             1 \n            h       happens        hardly          he'd         he'll \n            1             1             1             1             1 \n        hello          help         hence     hereafter        hereby \n            1             1             1             1             1 \n       herein      hereupon            hi        higher       highest \n            1             1             1             1             1 \n       hither     hopefully         how's       howbeit            ie \n            1             1             1             1             1 \n      ignored     immediate     important      inasmuch           inc \n            1             1             1             1             1 \n       indeed      indicate     indicated     indicates         inner \n            1             1             1             1             1 \n      insofar       instead      interest    interested   interesting \n            1             1             1             1             1 \n    interests        inward          it'd         it'll             j \n            1             1             1             1             1 \n            k          kept          kind          knew             l \n            1             1             1             1             1 \n        large       largely        lately        latest        latter \n            1             1             1             1             1 \n     latterly          lest          lets         liked        little \n            1             1             1             1             1 \n         long        longer       longest          look       looking \n            1             1             1             1             1 \n        looks           ltd             m          made        mainly \n            1             1             1             1             1 \n         make        making           man         maybe          mean \n            1             1             1             1             1 \n    meanwhile        member       members           men        merely \n            1             1             1             1             1 \n     moreover            mr           mrs       mustn't             n \n            1             1             1             1             1 \n         name        namely            nd          near        nearly \n            1             1             1             1             1 \n       needed       needing       neither  nevertheless         newer \n            1             1             1             1             1 \n       newest          nine          none      normally         novel \n            1             1             1             1             1 \n       number       numbers             o     obviously            oh \n            1             1             1             1             1 \n           ok          okay         older        oldest          ones \n            1             1             1             1             1 \n         onto          open        opened       opening         opens \n            1             1             1             1             1 \n        order       ordered      ordering        orders     otherwise \n            1             1             1             1             1 \n      outside       overall             p          part        parted \n            1             1             1             1             1 \n   particular  particularly       parting         parts         place \n            1             1             1             1             1 \n       placed        places        please          plus         point \n            1             1             1             1             1 \n      pointed      pointing        points       present     presented \n            1             1             1             1             1 \n   presenting      presents    presumably      probably       problem \n            1             1             1             1             1 \n     problems      provides           put          puts             q \n            1             1             1             1             1 \n          que            qv             r            rd            re \n            1             1             1             1             1 \n   reasonably     regarding    regardless       regards    relatively \n            1             1             1             1             1 \n respectively          room         rooms             s        saying \n            1             1             1             1             1 \n     secondly       seconds        seeing          seen          sees \n            1             1             1             1             1 \n         self        selves      sensible          sent       serious \n            1             1             1             1             1 \n    seriously         seven        shan't         she'd        she'll \n            1             1             1             1             1 \n        she's          show        showed       showing         shows \n            1             1             1             1             1 \n         side         sides           six         small       smaller \n            1             1             1             1             1 \n     smallest       somehow      sometime     sometimes      somewhat \n            1             1             1             1             1 \n         soon         sorry     specified       specify    specifying \n            1             1             1             1             1 \n        state        states           sub           sup             t \n            1             1             1             1             1 \n          t's          tell         tends            th         thank \n            1             1             1             1             1 \n       thanks         thanx         thats        thence    thereafter \n            1             1             1             1             1 \n      thereby       therein        theres     thereupon         thing \n            1             1             1             1             1 \n       things        thinks         third      thorough    thoroughly \n            1             1             1             1             1 \n      thought      thoughts    throughout          thru         today \n            1             1             1             1             1 \n      towards         tried         tries         truly           try \n            1             1             1             1             1 \n       trying          turn        turned       turning         turns \n            1             1             1             1             1 \n        twice             u            un unfortunately        unless \n            1             1             1             1             1 \n     unlikely          unto        useful         using       usually \n            1             1             1             1             1 \n         uucp             v         value       various           via \n            1             1             1             1             1 \n          viz            vs             w        wanted       wanting \n            1             1             1             1             1 \n         ways       welcome         wells      whatever        when's \n            1             1             1             1             1 \n       whence      whenever    whereafter       whereas       whereby \n            1             1             1             1             1 \n      wherein     whereupon      wherever       whither       whoever \n            1             1             1             1             1 \n        why's       willing          wish        wonder          work \n            1             1             1             1             1 \n       worked       working         works             x             y \n            1             1             1             1             1 \n         year         years           yes         young       younger \n            1             1             1             1             1 \n     youngest             z          zero \n            1             1             1"
+  },
+  {
+    "objectID": "slides/week06.html#removing-stopwords",
+    "href": "slides/week06.html#removing-stopwords",
+    "title": "Week 6: Text Mining",
+    "section": "Removing stopwords",
+    "text": "Removing stopwords\nWe can use an anti_join() to remove the tokens that also appear in the stop_words data.frame\n\nalice |&gt;\n  unnest_tokens(token, text) |&gt;\n  anti_join(stop_words, by = c(\"token\" = \"word\")) |&gt;\n  count(token, sort = TRUE)\n\n# A tibble: 2,314 × 2\n   token       n\n   &lt;chr&gt;   &lt;int&gt;\n 1 alice     386\n 2 time       71\n 3 queen      68\n 4 king       61\n 5 don’t      60\n 6 it’s       57\n 7 i’m        56\n 8 mock       56\n 9 turtle     56\n10 gryphon    55\n# ℹ 2,304 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#anti-join-with-same-variable-name",
+    "href": "slides/week06.html#anti-join-with-same-variable-name",
+    "title": "Week 6: Text Mining",
+    "section": "Anti-join with same variable name",
+    "text": "Anti-join with same variable name\n\nalice |&gt;\n  unnest_tokens(word, text) |&gt;\n  anti_join(stop_words, by = c(\"word\")) |&gt;\n  count(word, sort = TRUE)\n\n# A tibble: 2,314 × 2\n   word        n\n   &lt;chr&gt;   &lt;int&gt;\n 1 alice     386\n 2 time       71\n 3 queen      68\n 4 king       61\n 5 don’t      60\n 6 it’s       57\n 7 i’m        56\n 8 mock       56\n 9 turtle     56\n10 gryphon    55\n# ℹ 2,304 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#stop-words-removed",
+    "href": "slides/week06.html#stop-words-removed",
+    "title": "Week 6: Text Mining",
+    "section": "Stop words removed",
+    "text": "Stop words removed\n\nalice |&gt;\n  unnest_tokens(word, text) |&gt;\n  anti_join(stop_words, by = c(\"word\")) |&gt;\n  count(word, sort = TRUE) |&gt;\n  top_n(10, n) |&gt;\n  ggplot(aes(n, fct_reorder(word, n))) +\n  geom_col()"
+  },
+  {
+    "objectID": "slides/week06.html#which-words-appear-together",
+    "href": "slides/week06.html#which-words-appear-together",
+    "title": "Week 6: Text Mining",
+    "section": "Which words appear together?",
+    "text": "Which words appear together?\nngrams are sets of n consecutive words and we can count these to see which words appear together most frequently.\n\nngrams with n = 1 are called “unigrams”: “which”, “words”, “appear”, “together”\nngrams with n = 2 are called “bigrams”: “which words”, “words appear”, “appear together”\nngrams with n = 3 are called “trigrams”: “which words appear”, “words appear together”"
+  },
+  {
+    "objectID": "slides/week06.html#which-words-appear-together-1",
+    "href": "slides/week06.html#which-words-appear-together-1",
+    "title": "Week 6: Text Mining",
+    "section": "Which words appear together?",
+    "text": "Which words appear together?\nWe can extract bigrams using unnest_ngrams() with n = 2\n\nalice |&gt;\n  unnest_ngrams(ngram, text, n = 2)\n\n# A tibble: 25,170 × 3\n   chapter chapter_name ngram        \n     &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;        \n 1       1 CHAPTER I.   chapter i    \n 2       1 CHAPTER I.   down the     \n 3       1 CHAPTER I.   the rabbit   \n 4       1 CHAPTER I.   rabbit hole  \n 5       1 CHAPTER I.   &lt;NA&gt;         \n 6       1 CHAPTER I.   &lt;NA&gt;         \n 7       1 CHAPTER I.   alice was    \n 8       1 CHAPTER I.   was beginning\n 9       1 CHAPTER I.   beginning to \n10       1 CHAPTER I.   to get       \n# ℹ 25,160 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#which-words-appear-together-2",
+    "href": "slides/week06.html#which-words-appear-together-2",
+    "title": "Week 6: Text Mining",
+    "section": "Which words appear together?",
+    "text": "Which words appear together?\nTallying up the bigrams still shows a lot of stop words, but it is able to pick up some common phrases:\n\nalice |&gt;\n  unnest_ngrams(ngram, text, n = 2) |&gt;\n  count(ngram, sort = TRUE)\n\n# A tibble: 13,424 × 2\n   ngram          n\n   &lt;chr&gt;      &lt;int&gt;\n 1 &lt;NA&gt;         951\n 2 said the     206\n 3 of the       130\n 4 said alice   112\n 5 in a          96\n 6 and the       75\n 7 in the        75\n 8 it was        72\n 9 to the        68\n10 the queen     60\n# ℹ 13,414 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#which-words-appear-together-3",
+    "href": "slides/week06.html#which-words-appear-together-3",
+    "title": "Week 6: Text Mining",
+    "section": "Which words appear together?",
+    "text": "Which words appear together?\n\nalice |&gt;\n  unnest_ngrams(ngram, text, n = 2) |&gt;\n  separate(ngram, into = c(\"word1\", \"word2\"), sep = \" \") |&gt;\n  select(word1, word2)\n\n# A tibble: 25,170 × 2\n   word1     word2    \n   &lt;chr&gt;     &lt;chr&gt;    \n 1 chapter   i        \n 2 down      the      \n 3 the       rabbit   \n 4 rabbit    hole     \n 5 &lt;NA&gt;      &lt;NA&gt;     \n 6 &lt;NA&gt;      &lt;NA&gt;     \n 7 alice     was      \n 8 was       beginning\n 9 beginning to       \n10 to        get      \n# ℹ 25,160 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-lexicons",
+    "href": "slides/week06.html#sentiment-lexicons",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Lexicons",
+    "text": "Sentiment Lexicons\nThe tidytext and textdata packages provide access to three different databases of words and their associated sentiments (known as “sentiment lexicons”). Obviously, none of these can be perfect, as there is no “correct” way to quantify feelings, but they all attempt to capture different elements of how a text makes you feel.\nThe readily available lexicons are:\n\nafinn from Finn Årup Nielsen\nbing from Bing Liu and collaborators\nnrc from Saif Mohammad and Peter Turney"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-lexicons---bing",
+    "href": "slides/week06.html#sentiment-lexicons---bing",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Lexicons - bing",
+    "text": "Sentiment Lexicons - bing\nThe bing lexicon contains a large list of words and a binary association, either “positive” or “negative”:\n\nlibrary(textdata)\nget_sentiments('bing')\n\n# A tibble: 6,786 × 2\n   word        sentiment\n   &lt;chr&gt;       &lt;chr&gt;    \n 1 2-faces     negative \n 2 abnormal    negative \n 3 abolish     negative \n 4 abominable  negative \n 5 abominably  negative \n 6 abominate   negative \n 7 abomination negative \n 8 abort       negative \n 9 aborted     negative \n10 aborts      negative \n# ℹ 6,776 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-lexicons---afinn",
+    "href": "slides/week06.html#sentiment-lexicons---afinn",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Lexicons - afinn",
+    "text": "Sentiment Lexicons - afinn\nThe afinn lexicon goes slightly further, assigning words a value between -5 and 5 that represents their positivity or negativity.\n\nget_sentiments('afinn')\n\n# A tibble: 2,477 × 2\n   word       value\n   &lt;chr&gt;      &lt;dbl&gt;\n 1 abandon       -2\n 2 abandoned     -2\n 3 abandons      -2\n 4 abducted      -2\n 5 abduction     -2\n 6 abductions    -2\n 7 abhor         -3\n 8 abhorred      -3\n 9 abhorrent     -3\n10 abhors        -3\n# ℹ 2,467 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-lexicons---nrc",
+    "href": "slides/week06.html#sentiment-lexicons---nrc",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Lexicons - nrc",
+    "text": "Sentiment Lexicons - nrc\nThe nrc lexicon takes a different approach and assigns each word an associated sentiment. Some words appear more than once because they have multiple associations:\n\nget_sentiments('nrc')\n\n# A tibble: 13,872 × 2\n   word        sentiment\n   &lt;chr&gt;       &lt;chr&gt;    \n 1 abacus      trust    \n 2 abandon     fear     \n 3 abandon     negative \n 4 abandon     sadness  \n 5 abandoned   anger    \n 6 abandoned   fear     \n 7 abandoned   negative \n 8 abandoned   sadness  \n 9 abandonment anger    \n10 abandonment fear     \n# ℹ 13,862 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-2",
+    "href": "slides/week06.html#sentiment-analysis-2",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\nWe can use one of these databases to analyze Alice’s Adventures in Wonderland by breaking the text down into words and combining the result with a lexicon. Let’s use bing to assign “positive” and “negative” labels to as many words as possible in the book. (Note that this time the variable created by unnest_tokens is called word, to match the column name in bing).\n\nalice |&gt;\n  unnest_tokens(word, text) |&gt;\n  inner_join(get_sentiments(\"bing\"))\n\n# A tibble: 1,409 × 4\n   chapter chapter_name word        sentiment\n     &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;    \n 1       1 CHAPTER I.   tired       negative \n 2       1 CHAPTER I.   well        positive \n 3       1 CHAPTER I.   hot         positive \n 4       1 CHAPTER I.   stupid      negative \n 5       1 CHAPTER I.   pleasure    positive \n 6       1 CHAPTER I.   worth       positive \n 7       1 CHAPTER I.   trouble     negative \n 8       1 CHAPTER I.   remarkable  positive \n 9       1 CHAPTER I.   burning     negative \n10       1 CHAPTER I.   fortunately positive \n# ℹ 1,399 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-3",
+    "href": "slides/week06.html#sentiment-analysis-3",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\nWe can now group and summarize this new dataset the same as any other. For example, let’s look at the sentiment by chapter. We’ll do this by counting the number of “positive” words and subtracting the number of “negative” words:\n\ndiff_by_chap &lt;- alice |&gt;\n  unnest_tokens(word, text) |&gt;\n  inner_join(get_sentiments(\"bing\")) |&gt; \n  group_by(chapter) |&gt; \n  summarise(sentiment = sum(sentiment == \"positive\") - sum(sentiment == \"negative\"))"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-4",
+    "href": "slides/week06.html#sentiment-analysis-4",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\n\ndiff_by_chap\n\n# A tibble: 12 × 2\n   chapter sentiment\n     &lt;int&gt;     &lt;int&gt;\n 1       1        13\n 2       2        -3\n 3       3       -14\n 4       4         1\n 5       5         5\n 6       6       -17\n 7       7        19\n 8       8        -9\n 9       9       -10\n10      10        -8\n11      11       -15\n12      12       -15"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-5",
+    "href": "slides/week06.html#sentiment-analysis-5",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\n\nbarplot(diff_by_chap$sentiment, names.arg = diff_by_chap$chapter)"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-6",
+    "href": "slides/week06.html#sentiment-analysis-6",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\nAlternatively, we could use the afinn lexicon and quantify the “sentiment” of each chapter by the average of all words with numeric associations:\n\navg_by_chap &lt;- alice |&gt;\n  unnest_tokens(word, text) |&gt;\n  inner_join(get_sentiments(\"afinn\")) |&gt; \n  group_by(chapter) |&gt; \n  summarise(sentiment = mean(value))"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-7",
+    "href": "slides/week06.html#sentiment-analysis-7",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\n\nbarplot(avg_by_chap$sentiment, names.arg = avg_by_chap$chapter)"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-8",
+    "href": "slides/week06.html#sentiment-analysis-8",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\nSimilarly, we can find the most frequent sentiment association in the nrc lexicon for each chapter. Unfortunately, for all chapters, the most frequent sentiment association ends up being the rather bland “positive” or “negative”:\n\nalice |&gt;\n  unnest_tokens(word, text) |&gt;\n  inner_join(get_sentiments(\"nrc\")) |&gt; \n  group_by(chapter) |&gt; \n  summarise(sentiment = names(which.max(table(sentiment))))\n\n# A tibble: 12 × 2\n   chapter sentiment\n     &lt;int&gt; &lt;chr&gt;    \n 1       1 positive \n 2       2 positive \n 3       3 positive \n 4       4 positive \n 5       5 positive \n 6       6 negative \n 7       7 positive \n 8       8 positive \n 9       9 positive \n10      10 positive \n11      11 positive \n12      12 positive"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-9",
+    "href": "slides/week06.html#sentiment-analysis-9",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\nWe’ll try to spice things up by removing “positive” and “negative” from the nrc lexicon:\n\nnrc_fun &lt;- get_sentiments(\"nrc\")\nnrc_fun &lt;- nrc_fun[!nrc_fun$sentiment %in% c(\"positive\",\"negative\"), ]"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-10",
+    "href": "slides/week06.html#sentiment-analysis-10",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\nNow we see a lot of “anticipation”:\n\nalice |&gt;\n  unnest_tokens(word, text) |&gt;\n  inner_join(nrc_fun) |&gt; \n  group_by(chapter) |&gt; \n  summarise(sentiment = names(which.max(table(sentiment))))\n\n# A tibble: 12 × 2\n   chapter sentiment   \n     &lt;int&gt; &lt;chr&gt;       \n 1       1 anticipation\n 2       2 anticipation\n 3       3 sadness     \n 4       4 anticipation\n 5       5 trust       \n 6       6 anticipation\n 7       7 anticipation\n 8       8 anticipation\n 9       9 trust       \n10      10 joy         \n11      11 anticipation\n12      12 trust"
+  },
+  {
+    "objectID": "slides/week06.html#importing-data",
+    "href": "slides/week06.html#importing-data",
+    "title": "Week 6: Text Mining",
+    "section": "Importing data",
+    "text": "Importing data\n\nOne of the most common ways of storing and sharing data is through electronic spreadsheets.\nA spreadsheet is a file version of a data frame.\nBut there are many ways to store spreadsheets in files."
+  },
+  {
+    "objectID": "slides/week06.html#importing-data-1",
+    "href": "slides/week06.html#importing-data-1",
+    "title": "Week 6: Text Mining",
+    "section": "Importing data",
+    "text": "Importing data\nTo import data we need to:\n\nIdentify the file’s location.\nKnow what function or parsers to use.\n\nFor the second step it helps to know the file type and encoding."
+  },
+  {
+    "objectID": "slides/week06.html#file-types",
+    "href": "slides/week06.html#file-types",
+    "title": "Week 6: Text Mining",
+    "section": "File types",
+    "text": "File types\n\nFiles can generally be classified into two categories: text and binary.\nWe describe the most widely used format for storing data for both these types and learn how to identify them."
+  },
+  {
+    "objectID": "slides/week06.html#text-files",
+    "href": "slides/week06.html#text-files",
+    "title": "Week 6: Text Mining",
+    "section": "Text files",
+    "text": "Text files\n\nYou have already worked with text files: R scripts and Quarto files, for example.\ndslabs offers examples:\n\n\ndir &lt;- system.file(package = \"dslabs\") \nfile_path &lt;- file.path(dir, \"extdata/murders.csv\") \nfile.copy(file_path, \"murders.csv\") \n\n[1] TRUE"
+  },
+  {
+    "objectID": "slides/week06.html#text-files-1",
+    "href": "slides/week06.html#text-files-1",
+    "title": "Week 6: Text Mining",
+    "section": "Text files",
+    "text": "Text files\n\nAn advantage of text files is that we can easily “look” at them without having to purchase any kind of special software or follow complicated instructions.\nExercise:\n\ncopy murders.csv into your working directory and examine it with less.\nThen try the Open file RStudio tool."
+  },
+  {
+    "objectID": "slides/week06.html#text-files-2",
+    "href": "slides/week06.html#text-files-2",
+    "title": "Week 6: Text Mining",
+    "section": "Text files",
+    "text": "Text files\n\nLine breaks are used to separate rows and a delimiter to separate columns within a row.\nThe most common delimiters are comma (,), semicolon (;), space (), and tab (\\t).\nDifferent parsers are used to read these files, so we need to know what delimiter was used.\nIn some cases, the delimiter can be inferred from file suffix: csv, tsv, for example.\nBut we recommend looking at the file rather than inferring from the suffix."
+  },
+  {
+    "objectID": "slides/week06.html#text-files-3",
+    "href": "slides/week06.html#text-files-3",
+    "title": "Week 6: Text Mining",
+    "section": "Text files",
+    "text": "Text files\n\nIn R, you can look at any number of lines from within R using the readLines function:\n\n\nreadLines(\"murders.csv\", n = 3) \n\n[1] \"state,abb,region,population,total\" \"Alabama,AL,South,4779736,135\"     \n[3] \"Alaska,AK,West,710231,19\""
+  },
+  {
+    "objectID": "slides/week06.html#binary-files",
+    "href": "slides/week06.html#binary-files",
+    "title": "Week 6: Text Mining",
+    "section": "Binary files",
+    "text": "Binary files\n\nOpening image files such as jpg or png in a text editor or using readLines in R will not show comprehensible content: these are binary files.\nUnlike text files, which are designed for human readability and have standardized conventions, binary files have many formats specific to their data type.\nWhile R’s readBin function can process any binary file, interpreting the output necessitates a thorough understanding of the file’s structure.\nWe focus on the the most prevalent binary formats for spreadsheets: Microsoft Excel xls and xlsx."
+  },
+  {
+    "objectID": "slides/week06.html#r-base-parsers",
+    "href": "slides/week06.html#r-base-parsers",
+    "title": "Week 6: Text Mining",
+    "section": "R Base Parsers",
+    "text": "R Base Parsers\nHere example of useful R base parsers:\n\nx &lt;- read.table(\"murders.csv\", sep = \"\\t\")\nx &lt;- read.csv(\"murders.csv\")"
+  },
+  {
+    "objectID": "slides/week06.html#readr-parsers",
+    "href": "slides/week06.html#readr-parsers",
+    "title": "Week 6: Text Mining",
+    "section": "readr Parsers",
+    "text": "readr Parsers\nreadr provides alternatives that produce tibbles:\n\nlibrary(readr)\nx &lt;- read_csv(\"murders.csv\")\nx &lt;- read_delim(\"murders.csv\", delim = \"\\t\")\n\nNotice the messages produced."
+  },
+  {
+    "objectID": "slides/week06.html#readr-parsers-1",
+    "href": "slides/week06.html#readr-parsers-1",
+    "title": "Week 6: Text Mining",
+    "section": "readr Parsers",
+    "text": "readr Parsers\n\n\n\n\n\n\n\n\nFunction\nFormat\nSuffix\n\n\n\n\nread_table\nwhite space separated values\ntxt\n\n\nread_csv\ncomma separated values\ncsv\n\n\nread_csv2\nsemicolon separated values\ncsv\n\n\nread_tsv\ntab separated values\ntsv\n\n\nread_delim\nmust define delimiter\ntxt\n\n\nread_lines\nsimilar to readLines\nany file"
+  },
+  {
+    "objectID": "slides/week06.html#readxl-parsers",
+    "href": "slides/week06.html#readxl-parsers",
+    "title": "Week 6: Text Mining",
+    "section": "readxl Parsers",
+    "text": "readxl Parsers\nFor Excel files you can use the readxl package.\n\nlibrary(readxl)\nfn &lt;- file.path(dir, \"extdata/2010_bigfive_regents.xls\") \ny &lt;- read_xls(fn)"
+  },
+  {
+    "objectID": "slides/week06.html#readxl-parsers-1",
+    "href": "slides/week06.html#readxl-parsers-1",
+    "title": "Week 6: Text Mining",
+    "section": "readxl Parsers",
+    "text": "readxl Parsers\nYou can read specific sheets and see them using\n\nexcel_sheets(fn)\n\n[1] \"Sheet1\" \"Sheet2\" \"Sheet3\"\n\n\nNote that read_xls has a sheet argument."
+  },
+  {
+    "objectID": "slides/week06.html#readxl-parsers-2",
+    "href": "slides/week06.html#readxl-parsers-2",
+    "title": "Week 6: Text Mining",
+    "section": "readxl Parsers",
+    "text": "readxl Parsers\n\n\n\n\n\n\n\n\nFunction\nFormat\nSuffix\n\n\n\n\nread_excel\nauto detect the format\nxls, xlsx\n\n\nread_xls\noriginal format\nxls\n\n\nread_xlsx\nnew format\nxlsx\n\n\nexcel_sheets\ndetects sheets\nxls, xlsx"
+  },
+  {
+    "objectID": "slides/week06.html#data.table-parsers",
+    "href": "slides/week06.html#data.table-parsers",
+    "title": "Week 6: Text Mining",
+    "section": "data.table Parsers",
+    "text": "data.table Parsers\nThe data.table package provide a very fast parser:\n\nlibrary(data.table)\nx &lt;- fread(\"murders.csv\")\n\nNote: It returns a file in data.table format which we have mentioned but not explained."
+  },
+  {
+    "objectID": "slides/week06.html#scan",
+    "href": "slides/week06.html#scan",
+    "title": "Week 6: Text Mining",
+    "section": "scan",
+    "text": "scan\n\nThe scan function is the most general parser.\nIt will read in any text file and return a vector so you are on your own coverting it to a data frame.\nBecause it returns a vector, you need to tell it in advance what data type to expect:\n\n\nscan(\"murders.csv\", what = \"c\", sep = \",\", n = 10)\n\n [1] \"state\"      \"abb\"        \"region\"     \"population\" \"total\"     \n [6] \"Alabama\"    \"AL\"         \"South\"      \"4779736\"    \"135\"       \n\n\n\nIt can also be used to read from the console. Try typing scan(). Hit return to stop."
+  },
+  {
+    "objectID": "slides/week06.html#encoding",
+    "href": "slides/week06.html#encoding",
+    "title": "Week 6: Text Mining",
+    "section": "Encoding",
+    "text": "Encoding\n\nComputer translates everything into 0s and 1s.\nASCII is an encoding system that assigns specific numbers to characters.\nUsing 7 bits, ASCII can represent \\(2^7 = 128\\) unique symbols, sufficient for all English keyboard characters.\nHowever, many global languages contain characters outside ASCII’s range."
+  },
+  {
+    "objectID": "slides/week06.html#encoding-1",
+    "href": "slides/week06.html#encoding-1",
+    "title": "Week 6: Text Mining",
+    "section": "Encoding",
+    "text": "Encoding\n\nFor instance, the é in “México” isn’t in ASCII’s catalog.\nTo address this, broader encodings emerged.\nUnicode offers variations using 8, 16, or 32 bits, known as UTF-8, UTF-16, and UTF-32.\nRStudio typically uses UTF-8 as its default.\nNotably, ASCII is a subset of UTF-8, meaning that if a file is ASCII-encoded, presuming it’s UTF-8 encoded won’t cause issues."
+  },
+  {
+    "objectID": "slides/week06.html#encoding-2",
+    "href": "slides/week06.html#encoding-2",
+    "title": "Week 6: Text Mining",
+    "section": "Encoding",
+    "text": "Encoding\n\nHowever, there other encodings, such as ISO-8859-1 (also known as Latin-1) developed for the western European languages, Big5 for Traditional Chinese, and ISO-8859-6 for Arabic.\nTake a look at this file:\n\n\nfn &lt;- \"calificaciones.csv\" \nfile.copy(file.path(system.file(\"extdata\", package = \"dslabs\"), fn), fn) \n\n[1] FALSE\n\nreadLines(fn, n = 1) \n\n[1] \"\\\"nombre\\\",\\\"f.n.\\\",\\\"estampa\\\",\\\"puntuaci\\xf3n\\\"\""
+  },
+  {
+    "objectID": "slides/week06.html#encoding-3",
+    "href": "slides/week06.html#encoding-3",
+    "title": "Week 6: Text Mining",
+    "section": "Encoding",
+    "text": "Encoding\n\nThe readr parsers permit us to specify an encoding.\nIt also includes a function that tries to guess the encoding:\n\n\nguess_encoding(\"murders.csv\") \n\n# A tibble: 1 × 2\n  encoding confidence\n  &lt;chr&gt;         &lt;dbl&gt;\n1 ASCII             1\n\nguess_encoding(\"calificaciones.csv\") \n\n# A tibble: 3 × 2\n  encoding   confidence\n  &lt;chr&gt;           &lt;dbl&gt;\n1 ISO-8859-1       0.92\n2 ISO-8859-2       0.72\n3 ISO-8859-9       0.53"
+  },
+  {
+    "objectID": "slides/week06.html#encoding-4",
+    "href": "slides/week06.html#encoding-4",
+    "title": "Week 6: Text Mining",
+    "section": "Encoding",
+    "text": "Encoding\n\nOnce we know the encoding we can specify it through the locale argument:\n\n\ndat &lt;- read_csv(\"calificaciones.csv\", show_col_types = FALSE, \n                locale = locale(encoding = \"ISO-8859-1\")) \n\n\nWe’ll learn more about locales later."
+  },
+  {
+    "objectID": "slides/week06.html#encoding-5",
+    "href": "slides/week06.html#encoding-5",
+    "title": "Week 6: Text Mining",
+    "section": "Encoding",
+    "text": "Encoding\n\nWe can now see that the characters in the header were read in correctly:\n\n\ndat\n\n# A tibble: 7 × 4\n  nombre   f.n.                     estampa             puntuación\n  &lt;chr&gt;    &lt;chr&gt;                    &lt;dttm&gt;                   &lt;dbl&gt;\n1 Beyoncé  04 de septiembre de 1981 2023-09-22 02:11:02        875\n2 Blümchen 20 de abril de 1980      2023-09-22 03:23:05        990\n3 João     10 de junio de 1931      2023-09-21 22:43:28        989\n4 López    24 de julio de 1969      2023-09-22 01:06:59        887\n5 Ñengo    15 de diciembre de 1981  2023-09-21 23:35:37        931\n6 Plácido  24 de enero de 1941      2023-09-21 23:17:21        887\n7 Thalía   26 de agosto de 1971     2023-09-21 23:08:02        830"
+  },
+  {
+    "objectID": "slides/week06.html#downloading-files",
+    "href": "slides/week06.html#downloading-files",
+    "title": "Week 6: Text Mining",
+    "section": "Downloading files",
+    "text": "Downloading files\n\nA common place for data to reside is on the internet.\nWe can download these files and then import them.\nWe can also read them directly from the web.\n\n\nurl &lt;- paste0(\"https://raw.githubusercontent.com/\", \n              \"rafalab/dslabs/master/inst/extdata/murders.csv\") \nx &lt;- read.csv(url)"
+  },
+  {
+    "objectID": "slides/week06.html#downloading-files-1",
+    "href": "slides/week06.html#downloading-files-1",
+    "title": "Week 6: Text Mining",
+    "section": "Downloading files",
+    "text": "Downloading files\n\nIf you want a local copy, you can use download.file:\n\n\ndownload.file(url, \"murders.csv\") \n\n\nThis will download the file and save it on your system with the name murders.csv.\nNote You can use any name here, not necessarily murders.csv."
+  },
+  {
+    "objectID": "slides/week06.html#downloading-files-2",
+    "href": "slides/week06.html#downloading-files-2",
+    "title": "Week 6: Text Mining",
+    "section": "Downloading files",
+    "text": "Downloading files\n\n\n\n\n\n\nWarning\n\n\nThe function download.file overwrites existing files without warning.\n\n\n\n\nTwo functions that are sometimes useful when downloading data from the internet are tempdir and tempfile.\n\n\ntmp_filename &lt;- tempfile() \ndownload.file(url, tmp_filename) \ndat &lt;- read_csv(tmp_filename) \nfile.remove(tmp_filename)"
   }
 ]
