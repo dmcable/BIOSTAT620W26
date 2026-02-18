@@ -244,7 +244,7 @@ Dylan Cable
 </section>
 <section id="alices-adventures-in-wonderland" class="slide level2">
 <h2>Alice’s Adventures in Wonderland</h2>
-<p>Download the <code>alice</code> dataset from <a href="https://github.com/dmcable/BIOSTAT620/blob/main/data/text/alice.rds">https://github.com/dmcable/BIOSTAT620/blob/main/data/text/alice.rds</a>)</p>
+<p>Download the <code>alice</code> dataset from <a href="https://github.com/dmcable/BIOSTAT620W26/blob/main/data/text/alice.rds">https://github.com/dmcable/BIOSTAT620W26/blob/main/data/text/alice.rds</a>)</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a></a>alice <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"../data/text/alice.rds"</span>) <span class="co"># "~/Downloads/alice.rds"</span></span>
@@ -1728,7 +1728,7 @@ Dylan Cable
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a></a>fn <span class="ot">&lt;-</span> <span class="st">"calificaciones.csv"</span> </span>
 <span id="cb81-2"><a></a><span class="fu">file.copy</span>(<span class="fu">file.path</span>(<span class="fu">system.file</span>(<span class="st">"extdata"</span>, <span class="at">package =</span> <span class="st">"dslabs"</span>), fn), fn) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a></a><span class="fu">readLines</span>(fn, <span class="at">n =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1845,6 +1845,697 @@ Dylan Cable
 <span id="cb94-3"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(tmp_filename) </span>
 <span id="cb94-4"><a></a><span class="fu">file.remove</span>(tmp_filename) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="parsing-dates-and-times" class="slide level2">
+<h2>Parsing dates and times</h2>
+<ul>
+<li><p>We have described three main types of vectors: numeric, character, and logical.</p></li>
+<li><p>When analyzing data, we often encounter variables that are dates.</p></li>
+<li><p>Although we can represent a date with a string, for example <code>November 2, 2017</code>, once we pick a reference day, referred to as the <em>epoch</em> by computer programmers, they can be converted to numbers by calculating the number of days since the epoch.</p></li>
+<li><p>In R and Unix, the epoch is defined as January 1, 1970.</p></li>
+</ul>
+</section>
+<section id="parsing-dates-and-times-1" class="slide level2">
+<h2>Parsing dates and times</h2>
+<ul>
+<li><p>If I tell you it’s November 2, 2017, you know what this means immediately.</p></li>
+<li><p>If I tell you it’s day 17,204, you will be quite confused.</p></li>
+<li><p>Similar problems arise with times and even more complications can appear due to time zones.</p></li>
+<li><p>For this reason, R defines a data type just for dates and times.</p></li>
+</ul>
+</section>
+<section id="the-date-data-type" class="slide level2">
+<h2>The date data type</h2>
+<ul>
+<li>We can see an example of the data type R uses for data here:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a></a><span class="fu">library</span>(tidyverse) </span>
+<span id="cb95-2"><a></a><span class="fu">library</span>(dslabs) </span>
+<span id="cb95-3"><a></a>polls_us_election_2016<span class="sc">$</span>startdate <span class="sc">|&gt;</span> <span class="fu">head</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2016-11-03" "2016-11-01" "2016-11-02" "2016-11-04" "2016-11-03"
+[6] "2016-11-03"</code></pre>
+</div>
+</div>
+<ul>
+<li>The dates look like strings, but they are not:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a></a><span class="fu">class</span>(polls_us_election_2016<span class="sc">$</span>startdate) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Date"</code></pre>
+</div>
+</div>
+</section>
+<section id="the-date-data-type-1" class="slide level2">
+<h2>The date data type</h2>
+<ul>
+<li>Look at what happens when we convert them to numbers:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a></a><span class="fu">as.numeric</span>(polls_us_election_2016<span class="sc">$</span>startdate) <span class="sc">|&gt;</span> <span class="fu">head</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 17108 17106 17107 17109 17108 17108</code></pre>
+</div>
+</div>
+<ul>
+<li>It turns them into days since the epoch.</li>
+</ul>
+</section>
+<section id="the-date-data-type-2" class="slide level2">
+<h2>The date data type</h2>
+<ul>
+<li><p><code>as.Date</code> converts characters into dates.</p></li>
+<li><p>So to see that the epoch is day 0 we can type.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a></a><span class="fu">as.Date</span>(<span class="st">"1970-01-01"</span>) <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<ul>
+<li>Plotting functions, such as those in ggplot, are aware of the date format.</li>
+</ul>
+</section>
+<section id="the-date-data-type-3" class="slide level2">
+<h2>The date data type</h2>
+<ul>
+<li>Scatterplots use the numeric representation to assign positions, but include the string in the labels:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a></a>polls_us_election_2016 <span class="sc">|&gt;</span> </span>
+<span id="cb103-2"><a></a>  <span class="fu">filter</span>(startdate <span class="sc">&gt;=</span> <span class="fu">make_date</span>(<span class="dv">2016</span>, <span class="dv">6</span>, <span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb103-3"><a></a>  <span class="fu">filter</span>(pollster <span class="sc">==</span> <span class="st">"Ipsos"</span> <span class="sc">&amp;</span> state <span class="sc">==</span> <span class="st">"U.S."</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb103-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(startdate, rawpoll_clinton)) <span class="sc">+</span> </span>
+<span id="cb103-5"><a></a>  <span class="fu">geom_line</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="week06_files/figure-revealjs/rawpolls-vs-time-1.png" class="quarto-figure quarto-figure-center r-stretch" width="700"></section>
+<section id="the-date-data-type-4" class="slide level2">
+<h2>The date data type</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Code</a></li><li><a href="#tabset-1-2">Plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<p><strong>ggplot</strong> offers convenient functions to change labels:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a></a>polls_us_election_2016 <span class="sc">|&gt;</span> </span>
+<span id="cb104-2"><a></a>  <span class="fu">filter</span>(startdate <span class="sc">&gt;=</span> <span class="fu">make_date</span>(<span class="dv">2016</span>, <span class="dv">6</span>, <span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb104-3"><a></a>  <span class="fu">filter</span>(pollster <span class="sc">==</span> <span class="st">"Ipsos"</span> <span class="sc">&amp;</span> state <span class="sc">==</span> <span class="st">"U.S."</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb104-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(startdate, rawpoll_clinton)) <span class="sc">+</span> </span>
+<span id="cb104-5"><a></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb104-6"><a></a>  <span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">"2 weeks"</span>, <span class="at">date_labels =</span> <span class="st">"%b %d"</span>) <span class="sc">+</span> </span>
+<span id="cb104-7"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.Date</span>(<span class="st">"2016-10-28"</span>), <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="week06_files/figure-revealjs/rawpolls-vs-time-2-1.png" class="quarto-figure quarto-figure-center" width="700"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-lubridate-package" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li>The <strong>lubridate</strong> package provides tools to work with date and times.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a></a><span class="fu">library</span>(lubridate) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>We will take a random sample of dates to show some of the useful things one can do:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a></a><span class="fu">set.seed</span>(<span class="dv">2002</span>) </span>
+<span id="cb106-2"><a></a>dates <span class="ot">&lt;-</span> <span class="fu">sample</span>(polls_us_election_2016<span class="sc">$</span>startdate, <span class="dv">10</span>) <span class="sc">|&gt;</span> <span class="fu">sort</span>() </span>
+<span id="cb106-3"><a></a>dates </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "2016-05-31" "2016-08-08" "2016-08-19" "2016-09-22" "2016-09-27"
+ [6] "2016-10-12" "2016-10-24" "2016-10-26" "2016-10-29" "2016-10-30"</code></pre>
+</div>
+</div>
+</section>
+<section id="the-lubridate-package-1" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li>The functions <code>year</code>, <code>month</code> and <code>day</code> extract those values:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a></a><span class="fu">tibble</span>(<span class="at">date =</span> dates, <span class="at">month =</span> <span class="fu">month</span>(dates), <span class="at">day =</span> <span class="fu">day</span>(dates), <span class="at">year =</span> <span class="fu">year</span>(dates)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 4
+   date       month   day  year
+   &lt;date&gt;     &lt;int&gt; &lt;int&gt; &lt;int&gt;
+ 1 2016-05-31     5    31  2016
+ 2 2016-08-08     8     8  2016
+ 3 2016-08-19     8    19  2016
+ 4 2016-09-22     9    22  2016
+ 5 2016-09-27     9    27  2016
+ 6 2016-10-12    10    12  2016
+ 7 2016-10-24    10    24  2016
+ 8 2016-10-26    10    26  2016
+ 9 2016-10-29    10    29  2016
+10 2016-10-30    10    30  2016</code></pre>
+</div>
+</div>
+</section>
+<section id="the-lubridate-package-2" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li>We can also extract the month labels:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a></a>lubridate<span class="sc">::</span><span class="fu">month</span>(dates, <span class="at">label =</span> <span class="cn">TRUE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] May Aug Aug Sep Sep Oct Oct Oct Oct Oct
+12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec</code></pre>
+</div>
+</div>
+</section>
+<section id="the-lubridate-package-3" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li><p>Another useful set of functions are the <em>parsers</em> that convert strings into dates.</p></li>
+<li><p>The function <code>ymd</code> assumes the dates are in the format YYYY-MM-DD and tries to parse as well as possible.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20090101</span>, <span class="st">"2009-01-02"</span>, <span class="st">"2009 01 03"</span>, <span class="st">"2009-1-4"</span>, </span>
+<span id="cb112-2"><a></a>       <span class="st">"2009-1, 5"</span>, <span class="st">"Created on 2009 1 6"</span>, <span class="st">"200901 !!! 07"</span>) </span>
+<span id="cb112-3"><a></a><span class="fu">ymd</span>(x) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2009-01-01" "2009-01-02" "2009-01-03" "2009-01-04" "2009-01-05"
+[6] "2009-01-06" "2009-01-07"</code></pre>
+</div>
+</div>
+</section>
+<section id="the-lubridate-package-4" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li><p>A further complication comes from the fact that dates often come in different formats in which the order of year, month, and day are different.</p></li>
+<li><p>The preferred format is to show year (with all four digits), month (two digits), and then day, or what is called the ISO 8601.</p></li>
+<li><p>Specifically we use YYYY-MM-DD so that if we order the string, it will be ordered by date.</p></li>
+<li><p>You can see the function <code>ymd</code> returns them in this format.</p></li>
+</ul>
+</section>
+<section id="the-lubridate-package-5" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li><p>But, what if you encounter dates such as “09/01/02”? This could be September 1, 2002 or January 2, 2009 or January 9, 2002.</p></li>
+<li><p>In these cases, examining the entire vector of dates will help you determine what format it is by process of elimination.</p></li>
+<li><p>Once you know, you can use the many parsers provided by <strong>lubridate</strong>.</p></li>
+<li><p>For example, if the string is:</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a></a>x <span class="ot">&lt;-</span> <span class="st">"09/01/02"</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="the-lubridate-package-6" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li>The <code>ymd</code> function assumes the first entry is the year, the second is the month, and the third is the day, so it converts it to:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a></a><span class="fu">ymd</span>(x) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2009-01-02"</code></pre>
+</div>
+</div>
+</section>
+<section id="the-lubridate-package-7" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li>The <code>mdy</code> function assumes the first entry is the month, then the day, then the year:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a></a><span class="fu">mdy</span>(x) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2002-09-01"</code></pre>
+</div>
+</div>
+</section>
+<section id="the-lubridate-package-8" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li><p>The <em>lubridate</em> package provides a function for every possibility.</p></li>
+<li><p>Here is the other common one:</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a></a><span class="fu">dmy</span>(x) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2002-01-09"</code></pre>
+</div>
+</div>
+</section>
+<section id="the-lubridate-package-9" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li><p>The <strong>lubridate</strong> package is also useful for dealing with times.</p></li>
+<li><p>In base R, you can get the current time typing <code>Sys.time()</code>.</p></li>
+<li><p>The <strong>lubridate</strong> package provides a slightly more advanced function, <code>now</code>, that permits you to define the time zone:</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a></a><span class="fu">now</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2026-02-17 19:16:45 EST"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a></a><span class="fu">now</span>(<span class="st">"GMT"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2026-02-18 00:16:45 GMT"</code></pre>
+</div>
+</div>
+</section>
+<section id="the-lubridate-package-10" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li>You can see all the available time zones with:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a></a><span class="fu">OlsonNames</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "Africa/Abidjan"                   "Africa/Accra"                    
+  [3] "Africa/Addis_Ababa"               "Africa/Algiers"                  
+  [5] "Africa/Asmara"                    "Africa/Asmera"                   
+  [7] "Africa/Bamako"                    "Africa/Bangui"                   
+  [9] "Africa/Banjul"                    "Africa/Bissau"                   
+ [11] "Africa/Blantyre"                  "Africa/Brazzaville"              
+ [13] "Africa/Bujumbura"                 "Africa/Cairo"                    
+ [15] "Africa/Casablanca"                "Africa/Ceuta"                    
+ [17] "Africa/Conakry"                   "Africa/Dakar"                    
+ [19] "Africa/Dar_es_Salaam"             "Africa/Djibouti"                 
+ [21] "Africa/Douala"                    "Africa/El_Aaiun"                 
+ [23] "Africa/Freetown"                  "Africa/Gaborone"                 
+ [25] "Africa/Harare"                    "Africa/Johannesburg"             
+ [27] "Africa/Juba"                      "Africa/Kampala"                  
+ [29] "Africa/Khartoum"                  "Africa/Kigali"                   
+ [31] "Africa/Kinshasa"                  "Africa/Lagos"                    
+ [33] "Africa/Libreville"                "Africa/Lome"                     
+ [35] "Africa/Luanda"                    "Africa/Lubumbashi"               
+ [37] "Africa/Lusaka"                    "Africa/Malabo"                   
+ [39] "Africa/Maputo"                    "Africa/Maseru"                   
+ [41] "Africa/Mbabane"                   "Africa/Mogadishu"                
+ [43] "Africa/Monrovia"                  "Africa/Nairobi"                  
+ [45] "Africa/Ndjamena"                  "Africa/Niamey"                   
+ [47] "Africa/Nouakchott"                "Africa/Ouagadougou"              
+ [49] "Africa/Porto-Novo"                "Africa/Sao_Tome"                 
+ [51] "Africa/Timbuktu"                  "Africa/Tripoli"                  
+ [53] "Africa/Tunis"                     "Africa/Windhoek"                 
+ [55] "America/Adak"                     "America/Anchorage"               
+ [57] "America/Anguilla"                 "America/Antigua"                 
+ [59] "America/Araguaina"                "America/Argentina/Buenos_Aires"  
+ [61] "America/Argentina/Catamarca"      "America/Argentina/ComodRivadavia"
+ [63] "America/Argentina/Cordoba"        "America/Argentina/Jujuy"         
+ [65] "America/Argentina/La_Rioja"       "America/Argentina/Mendoza"       
+ [67] "America/Argentina/Rio_Gallegos"   "America/Argentina/Salta"         
+ [69] "America/Argentina/San_Juan"       "America/Argentina/San_Luis"      
+ [71] "America/Argentina/Tucuman"        "America/Argentina/Ushuaia"       
+ [73] "America/Aruba"                    "America/Asuncion"                
+ [75] "America/Atikokan"                 "America/Atka"                    
+ [77] "America/Bahia"                    "America/Bahia_Banderas"          
+ [79] "America/Barbados"                 "America/Belem"                   
+ [81] "America/Belize"                   "America/Blanc-Sablon"            
+ [83] "America/Boa_Vista"                "America/Bogota"                  
+ [85] "America/Boise"                    "America/Buenos_Aires"            
+ [87] "America/Cambridge_Bay"            "America/Campo_Grande"            
+ [89] "America/Cancun"                   "America/Caracas"                 
+ [91] "America/Catamarca"                "America/Cayenne"                 
+ [93] "America/Cayman"                   "America/Chicago"                 
+ [95] "America/Chihuahua"                "America/Ciudad_Juarez"           
+ [97] "America/Coral_Harbour"            "America/Cordoba"                 
+ [99] "America/Costa_Rica"               "America/Coyhaique"               
+[101] "America/Creston"                  "America/Cuiaba"                  
+[103] "America/Curacao"                  "America/Danmarkshavn"            
+[105] "America/Dawson"                   "America/Dawson_Creek"            
+[107] "America/Denver"                   "America/Detroit"                 
+[109] "America/Dominica"                 "America/Edmonton"                
+[111] "America/Eirunepe"                 "America/El_Salvador"             
+[113] "America/Ensenada"                 "America/Fort_Nelson"             
+[115] "America/Fort_Wayne"               "America/Fortaleza"               
+[117] "America/Glace_Bay"                "America/Godthab"                 
+[119] "America/Goose_Bay"                "America/Grand_Turk"              
+[121] "America/Grenada"                  "America/Guadeloupe"              
+[123] "America/Guatemala"                "America/Guayaquil"               
+[125] "America/Guyana"                   "America/Halifax"                 
+[127] "America/Havana"                   "America/Hermosillo"              
+[129] "America/Indiana/Indianapolis"     "America/Indiana/Knox"            
+[131] "America/Indiana/Marengo"          "America/Indiana/Petersburg"      
+[133] "America/Indiana/Tell_City"        "America/Indiana/Vevay"           
+[135] "America/Indiana/Vincennes"        "America/Indiana/Winamac"         
+[137] "America/Indianapolis"             "America/Inuvik"                  
+[139] "America/Iqaluit"                  "America/Jamaica"                 
+[141] "America/Jujuy"                    "America/Juneau"                  
+[143] "America/Kentucky/Louisville"      "America/Kentucky/Monticello"     
+[145] "America/Knox_IN"                  "America/Kralendijk"              
+[147] "America/La_Paz"                   "America/Lima"                    
+[149] "America/Los_Angeles"              "America/Louisville"              
+[151] "America/Lower_Princes"            "America/Maceio"                  
+[153] "America/Managua"                  "America/Manaus"                  
+[155] "America/Marigot"                  "America/Martinique"              
+[157] "America/Matamoros"                "America/Mazatlan"                
+[159] "America/Mendoza"                  "America/Menominee"               
+[161] "America/Merida"                   "America/Metlakatla"              
+[163] "America/Mexico_City"              "America/Miquelon"                
+[165] "America/Moncton"                  "America/Monterrey"               
+[167] "America/Montevideo"               "America/Montreal"                
+[169] "America/Montserrat"               "America/Nassau"                  
+[171] "America/New_York"                 "America/Nipigon"                 
+[173] "America/Nome"                     "America/Noronha"                 
+[175] "America/North_Dakota/Beulah"      "America/North_Dakota/Center"     
+[177] "America/North_Dakota/New_Salem"   "America/Nuuk"                    
+[179] "America/Ojinaga"                  "America/Panama"                  
+[181] "America/Pangnirtung"              "America/Paramaribo"              
+[183] "America/Phoenix"                  "America/Port_of_Spain"           
+[185] "America/Port-au-Prince"           "America/Porto_Acre"              
+[187] "America/Porto_Velho"              "America/Puerto_Rico"             
+[189] "America/Punta_Arenas"             "America/Rainy_River"             
+[191] "America/Rankin_Inlet"             "America/Recife"                  
+[193] "America/Regina"                   "America/Resolute"                
+[195] "America/Rio_Branco"               "America/Rosario"                 
+[197] "America/Santa_Isabel"             "America/Santarem"                
+[199] "America/Santiago"                 "America/Santo_Domingo"           
+[201] "America/Sao_Paulo"                "America/Scoresbysund"            
+[203] "America/Shiprock"                 "America/Sitka"                   
+[205] "America/St_Barthelemy"            "America/St_Johns"                
+[207] "America/St_Kitts"                 "America/St_Lucia"                
+[209] "America/St_Thomas"                "America/St_Vincent"              
+[211] "America/Swift_Current"            "America/Tegucigalpa"             
+[213] "America/Thule"                    "America/Thunder_Bay"             
+[215] "America/Tijuana"                  "America/Toronto"                 
+[217] "America/Tortola"                  "America/Vancouver"               
+[219] "America/Virgin"                   "America/Whitehorse"              
+[221] "America/Winnipeg"                 "America/Yakutat"                 
+[223] "America/Yellowknife"              "Antarctica/Casey"                
+[225] "Antarctica/Davis"                 "Antarctica/DumontDUrville"       
+[227] "Antarctica/Macquarie"             "Antarctica/Mawson"               
+[229] "Antarctica/McMurdo"               "Antarctica/Palmer"               
+[231] "Antarctica/Rothera"               "Antarctica/South_Pole"           
+[233] "Antarctica/Syowa"                 "Antarctica/Troll"                
+[235] "Antarctica/Vostok"                "Arctic/Longyearbyen"             
+[237] "Asia/Aden"                        "Asia/Almaty"                     
+[239] "Asia/Amman"                       "Asia/Anadyr"                     
+[241] "Asia/Aqtau"                       "Asia/Aqtobe"                     
+[243] "Asia/Ashgabat"                    "Asia/Ashkhabad"                  
+[245] "Asia/Atyrau"                      "Asia/Baghdad"                    
+[247] "Asia/Bahrain"                     "Asia/Baku"                       
+[249] "Asia/Bangkok"                     "Asia/Barnaul"                    
+[251] "Asia/Beirut"                      "Asia/Bishkek"                    
+[253] "Asia/Brunei"                      "Asia/Calcutta"                   
+[255] "Asia/Chita"                       "Asia/Choibalsan"                 
+[257] "Asia/Chongqing"                   "Asia/Chungking"                  
+[259] "Asia/Colombo"                     "Asia/Dacca"                      
+[261] "Asia/Damascus"                    "Asia/Dhaka"                      
+[263] "Asia/Dili"                        "Asia/Dubai"                      
+[265] "Asia/Dushanbe"                    "Asia/Famagusta"                  
+[267] "Asia/Gaza"                        "Asia/Harbin"                     
+[269] "Asia/Hebron"                      "Asia/Ho_Chi_Minh"                
+[271] "Asia/Hong_Kong"                   "Asia/Hovd"                       
+[273] "Asia/Irkutsk"                     "Asia/Istanbul"                   
+[275] "Asia/Jakarta"                     "Asia/Jayapura"                   
+[277] "Asia/Jerusalem"                   "Asia/Kabul"                      
+[279] "Asia/Kamchatka"                   "Asia/Karachi"                    
+[281] "Asia/Kashgar"                     "Asia/Kathmandu"                  
+[283] "Asia/Katmandu"                    "Asia/Khandyga"                   
+[285] "Asia/Kolkata"                     "Asia/Krasnoyarsk"                
+[287] "Asia/Kuala_Lumpur"                "Asia/Kuching"                    
+[289] "Asia/Kuwait"                      "Asia/Macao"                      
+[291] "Asia/Macau"                       "Asia/Magadan"                    
+[293] "Asia/Makassar"                    "Asia/Manila"                     
+[295] "Asia/Muscat"                      "Asia/Nicosia"                    
+[297] "Asia/Novokuznetsk"                "Asia/Novosibirsk"                
+[299] "Asia/Omsk"                        "Asia/Oral"                       
+[301] "Asia/Phnom_Penh"                  "Asia/Pontianak"                  
+[303] "Asia/Pyongyang"                   "Asia/Qatar"                      
+[305] "Asia/Qostanay"                    "Asia/Qyzylorda"                  
+[307] "Asia/Rangoon"                     "Asia/Riyadh"                     
+[309] "Asia/Saigon"                      "Asia/Sakhalin"                   
+[311] "Asia/Samarkand"                   "Asia/Seoul"                      
+[313] "Asia/Shanghai"                    "Asia/Singapore"                  
+[315] "Asia/Srednekolymsk"               "Asia/Taipei"                     
+[317] "Asia/Tashkent"                    "Asia/Tbilisi"                    
+[319] "Asia/Tehran"                      "Asia/Tel_Aviv"                   
+[321] "Asia/Thimbu"                      "Asia/Thimphu"                    
+[323] "Asia/Tokyo"                       "Asia/Tomsk"                      
+[325] "Asia/Ujung_Pandang"               "Asia/Ulaanbaatar"                
+[327] "Asia/Ulan_Bator"                  "Asia/Urumqi"                     
+[329] "Asia/Ust-Nera"                    "Asia/Vientiane"                  
+[331] "Asia/Vladivostok"                 "Asia/Yakutsk"                    
+[333] "Asia/Yangon"                      "Asia/Yekaterinburg"              
+[335] "Asia/Yerevan"                     "Atlantic/Azores"                 
+[337] "Atlantic/Bermuda"                 "Atlantic/Canary"                 
+[339] "Atlantic/Cape_Verde"              "Atlantic/Faeroe"                 
+[341] "Atlantic/Faroe"                   "Atlantic/Jan_Mayen"              
+[343] "Atlantic/Madeira"                 "Atlantic/Reykjavik"              
+[345] "Atlantic/South_Georgia"           "Atlantic/St_Helena"              
+[347] "Atlantic/Stanley"                 "Australia/ACT"                   
+[349] "Australia/Adelaide"               "Australia/Brisbane"              
+[351] "Australia/Broken_Hill"            "Australia/Canberra"              
+[353] "Australia/Currie"                 "Australia/Darwin"                
+[355] "Australia/Eucla"                  "Australia/Hobart"                
+[357] "Australia/LHI"                    "Australia/Lindeman"              
+[359] "Australia/Lord_Howe"              "Australia/Melbourne"             
+[361] "Australia/North"                  "Australia/NSW"                   
+[363] "Australia/Perth"                  "Australia/Queensland"            
+[365] "Australia/South"                  "Australia/Sydney"                
+[367] "Australia/Tasmania"               "Australia/Victoria"              
+[369] "Australia/West"                   "Australia/Yancowinna"            
+[371] "Brazil/Acre"                      "Brazil/DeNoronha"                
+[373] "Brazil/East"                      "Brazil/West"                     
+[375] "Canada/Atlantic"                  "Canada/Central"                  
+[377] "Canada/Eastern"                   "Canada/Mountain"                 
+[379] "Canada/Newfoundland"              "Canada/Pacific"                  
+[381] "Canada/Saskatchewan"              "Canada/Yukon"                    
+[383] "CET"                              "Chile/Continental"               
+[385] "Chile/EasterIsland"               "CST6CDT"                         
+[387] "Cuba"                             "EET"                             
+[389] "Egypt"                            "Eire"                            
+[391] "EST"                              "EST5EDT"                         
+[393] "Etc/GMT"                          "Etc/GMT-0"                       
+[395] "Etc/GMT-1"                        "Etc/GMT-10"                      
+[397] "Etc/GMT-11"                       "Etc/GMT-12"                      
+[399] "Etc/GMT-13"                       "Etc/GMT-14"                      
+[401] "Etc/GMT-2"                        "Etc/GMT-3"                       
+[403] "Etc/GMT-4"                        "Etc/GMT-5"                       
+[405] "Etc/GMT-6"                        "Etc/GMT-7"                       
+[407] "Etc/GMT-8"                        "Etc/GMT-9"                       
+[409] "Etc/GMT+0"                        "Etc/GMT+1"                       
+[411] "Etc/GMT+10"                       "Etc/GMT+11"                      
+[413] "Etc/GMT+12"                       "Etc/GMT+2"                       
+[415] "Etc/GMT+3"                        "Etc/GMT+4"                       
+[417] "Etc/GMT+5"                        "Etc/GMT+6"                       
+[419] "Etc/GMT+7"                        "Etc/GMT+8"                       
+[421] "Etc/GMT+9"                        "Etc/GMT0"                        
+[423] "Etc/Greenwich"                    "Etc/UCT"                         
+[425] "Etc/Universal"                    "Etc/UTC"                         
+[427] "Etc/Zulu"                         "Europe/Amsterdam"                
+[429] "Europe/Andorra"                   "Europe/Astrakhan"                
+[431] "Europe/Athens"                    "Europe/Belfast"                  
+[433] "Europe/Belgrade"                  "Europe/Berlin"                   
+[435] "Europe/Bratislava"                "Europe/Brussels"                 
+[437] "Europe/Bucharest"                 "Europe/Budapest"                 
+[439] "Europe/Busingen"                  "Europe/Chisinau"                 
+[441] "Europe/Copenhagen"                "Europe/Dublin"                   
+[443] "Europe/Gibraltar"                 "Europe/Guernsey"                 
+[445] "Europe/Helsinki"                  "Europe/Isle_of_Man"              
+[447] "Europe/Istanbul"                  "Europe/Jersey"                   
+[449] "Europe/Kaliningrad"               "Europe/Kiev"                     
+[451] "Europe/Kirov"                     "Europe/Kyiv"                     
+[453] "Europe/Lisbon"                    "Europe/Ljubljana"                
+[455] "Europe/London"                    "Europe/Luxembourg"               
+[457] "Europe/Madrid"                    "Europe/Malta"                    
+[459] "Europe/Mariehamn"                 "Europe/Minsk"                    
+[461] "Europe/Monaco"                    "Europe/Moscow"                   
+[463] "Europe/Nicosia"                   "Europe/Oslo"                     
+[465] "Europe/Paris"                     "Europe/Podgorica"                
+[467] "Europe/Prague"                    "Europe/Riga"                     
+[469] "Europe/Rome"                      "Europe/Samara"                   
+[471] "Europe/San_Marino"                "Europe/Sarajevo"                 
+[473] "Europe/Saratov"                   "Europe/Simferopol"               
+[475] "Europe/Skopje"                    "Europe/Sofia"                    
+[477] "Europe/Stockholm"                 "Europe/Tallinn"                  
+[479] "Europe/Tirane"                    "Europe/Tiraspol"                 
+[481] "Europe/Ulyanovsk"                 "Europe/Uzhgorod"                 
+[483] "Europe/Vaduz"                     "Europe/Vatican"                  
+[485] "Europe/Vienna"                    "Europe/Vilnius"                  
+[487] "Europe/Volgograd"                 "Europe/Warsaw"                   
+[489] "Europe/Zagreb"                    "Europe/Zaporozhye"               
+[491] "Europe/Zurich"                    "Factory"                         
+[493] "GB"                               "GB-Eire"                         
+[495] "GMT"                              "GMT-0"                           
+[497] "GMT+0"                            "GMT0"                            
+[499] "Greenwich"                        "Hongkong"                        
+[501] "HST"                              "Iceland"                         
+[503] "Indian/Antananarivo"              "Indian/Chagos"                   
+[505] "Indian/Christmas"                 "Indian/Cocos"                    
+[507] "Indian/Comoro"                    "Indian/Kerguelen"                
+[509] "Indian/Mahe"                      "Indian/Maldives"                 
+[511] "Indian/Mauritius"                 "Indian/Mayotte"                  
+[513] "Indian/Reunion"                   "Iran"                            
+[515] "Israel"                           "Jamaica"                         
+[517] "Japan"                            "Kwajalein"                       
+[519] "Libya"                            "MET"                             
+[521] "Mexico/BajaNorte"                 "Mexico/BajaSur"                  
+[523] "Mexico/General"                   "MST"                             
+[525] "MST7MDT"                          "Navajo"                          
+[527] "NZ"                               "NZ-CHAT"                         
+[529] "Pacific/Apia"                     "Pacific/Auckland"                
+[531] "Pacific/Bougainville"             "Pacific/Chatham"                 
+[533] "Pacific/Chuuk"                    "Pacific/Easter"                  
+[535] "Pacific/Efate"                    "Pacific/Enderbury"               
+[537] "Pacific/Fakaofo"                  "Pacific/Fiji"                    
+[539] "Pacific/Funafuti"                 "Pacific/Galapagos"               
+[541] "Pacific/Gambier"                  "Pacific/Guadalcanal"             
+[543] "Pacific/Guam"                     "Pacific/Honolulu"                
+[545] "Pacific/Johnston"                 "Pacific/Kanton"                  
+[547] "Pacific/Kiritimati"               "Pacific/Kosrae"                  
+[549] "Pacific/Kwajalein"                "Pacific/Majuro"                  
+[551] "Pacific/Marquesas"                "Pacific/Midway"                  
+[553] "Pacific/Nauru"                    "Pacific/Niue"                    
+[555] "Pacific/Norfolk"                  "Pacific/Noumea"                  
+[557] "Pacific/Pago_Pago"                "Pacific/Palau"                   
+[559] "Pacific/Pitcairn"                 "Pacific/Pohnpei"                 
+[561] "Pacific/Ponape"                   "Pacific/Port_Moresby"            
+[563] "Pacific/Rarotonga"                "Pacific/Saipan"                  
+[565] "Pacific/Samoa"                    "Pacific/Tahiti"                  
+[567] "Pacific/Tarawa"                   "Pacific/Tongatapu"               
+[569] "Pacific/Truk"                     "Pacific/Wake"                    
+[571] "Pacific/Wallis"                   "Pacific/Yap"                     
+[573] "Poland"                           "Portugal"                        
+[575] "PRC"                              "PST8PDT"                         
+[577] "ROC"                              "ROK"                             
+[579] "Singapore"                        "Turkey"                          
+[581] "UCT"                              "Universal"                       
+[583] "US/Alaska"                        "US/Aleutian"                     
+[585] "US/Arizona"                       "US/Central"                      
+[587] "US/East-Indiana"                  "US/Eastern"                      
+[589] "US/Hawaii"                        "US/Indiana-Starke"               
+[591] "US/Michigan"                      "US/Mountain"                     
+[593] "US/Pacific"                       "US/Samoa"                        
+[595] "UTC"                              "W-SU"                            
+[597] "WET"                              "Zulu"                            
+attr(,"Version")
+[1] "2025b"</code></pre>
+</div>
+</div>
+</section>
+<section id="the-lubridate-package-11" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li>We can also extract hours, minutes, and seconds:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a></a><span class="fu">now</span>() <span class="sc">|&gt;</span> <span class="fu">hour</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a></a><span class="fu">now</span>() <span class="sc">|&gt;</span> <span class="fu">minute</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a></a><span class="fu">now</span>() <span class="sc">|&gt;</span> <span class="fu">second</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 45</code></pre>
+</div>
+</div>
+</section>
+<section id="the-lubridate-package-12" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li>The package also includes a function to parse strings into times as well as parsers for time objects that include dates:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"12:34:56"</span>) </span>
+<span id="cb133-2"><a></a><span class="fu">hms</span>(x) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "12H 34M 56S"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a></a>x <span class="ot">&lt;-</span> <span class="st">"Nov/2/2012 12:34:56"</span> </span>
+<span id="cb135-2"><a></a><span class="fu">mdy_hms</span>(x) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2012-11-02 12:34:56 UTC"</code></pre>
+</div>
+</div>
+</section>
+<section id="the-lubridate-package-13" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li><p>The <code>make_date</code> function can be used to quickly create a date object.</p></li>
+<li><p>For example, to create an date object representing, for example, July 6, 2019 we write:</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a></a><span class="fu">make_date</span>(<span class="dv">2019</span>, <span class="dv">7</span>, <span class="dv">6</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2019-07-06"</code></pre>
+</div>
+</div>
+</section>
+<section id="the-lubridate-package-14" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li><p>We can use it to make vectors of dates.</p></li>
+<li><p>To make a vector of January 1 for the 80s we write:</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a></a><span class="fu">make_date</span>(<span class="dv">1980</span><span class="sc">:</span><span class="dv">1989</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "1980-01-01" "1981-01-01" "1982-01-01" "1983-01-01" "1984-01-01"
+ [6] "1985-01-01" "1986-01-01" "1987-01-01" "1988-01-01" "1989-01-01"</code></pre>
+</div>
+</div>
+</section>
+<section id="the-lubridate-package-15" class="slide level2">
+<h2>The lubridate package</h2>
+<ul>
+<li><p>Another very useful function is <code>round_date</code>.</p></li>
+<li><p>It can be used to <em>round</em> dates to nearest year, quarter, month, week, day, hour, minutes, or seconds.</p></li>
+</ul>
+</section>
+<section id="the-lubridate-package-16" class="slide level2">
+<h2>The lubridate package</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Code</a></li><li><a href="#tabset-2-2">Plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<ul>
+<li>Example: if we want to group all the polls by week of the year we can do the following:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a></a>polls_us_election_2016 <span class="sc">|&gt;</span>  </span>
+<span id="cb141-2"><a></a>  <span class="fu">mutate</span>(<span class="at">week =</span> <span class="fu">round_date</span>(startdate, <span class="st">"week"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb141-3"><a></a>  <span class="fu">group_by</span>(week) <span class="sc">|&gt;</span> </span>
+<span id="cb141-4"><a></a>  <span class="fu">summarize</span>(<span class="at">margin =</span> <span class="fu">mean</span>(rawpoll_clinton <span class="sc">-</span> rawpoll_trump)) <span class="sc">|&gt;</span> </span>
+<span id="cb141-5"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(week, margin)) <span class="sc">+</span> </span>
+<span id="cb141-6"><a></a>  <span class="fu">geom_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="week06_files/figure-revealjs/poll-margin-versus-week-1.png" class="quarto-figure quarto-figure-center" width="700"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="final-pointers" class="slide level2">
+<h2>Final pointers</h2>
+<ul>
+<li><p>You should be aware the there are useful functions for computing operations on time such a <code>difftime</code>, <code>time_length</code>, and <code>interval</code>.</p></li>
+<li><p>We don’t cover it here but be aware that the <strong>data.table</strong> package includes some of the same functionality as <strong>lubridate</strong>.</p></li>
+</ul>
 
 
 </section></section>
