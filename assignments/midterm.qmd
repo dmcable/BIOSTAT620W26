@@ -4,7 +4,7 @@ link-citations: true
 toc: false
 ---
 
-Due **Friday, March 13th, 2026** by 11:59pm Pacific Time.
+Due **Friday, March 13th, 2026** by 11:59pm Eastern Time.
 
 **Learning Objective**:
 To apply the skills learned in BIOSTAT620 (through Week 6) by analyzing and
