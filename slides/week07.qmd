@@ -804,15 +804,13 @@ health_advises
 
 ## * Web API Example 3: HHS health recommendation (cont. 2){.smaller}
 
-```{r health-advice-print, results='asis', echo=TRUE, eval=FALSE}
+```{r health-advice-print, results='asis', echo=TRUE}
 # Extracting the content
 health_advises_ans <- content(health_advises)
 
 # Getting the titles
 txt <- with(health_advises_ans$Result$Resources, c(
-  sapply(all$Resource, "[[", "Title"),
-  sapply(some$Resource, "[[", "Title"),
-  sapply(`You may also be interested in these health topics:`$Resource, "[[", "Title")
+  sapply(All$Resource, "[[", "Title")
 ))
 cat(txt, sep = "; ")
 ```

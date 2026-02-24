@@ -1318,11 +1318,10 @@ endometrial cancer  esophageal cancer        lung cancer     ovarian cancer
 <span id="cb40-3"><a></a></span>
 <span id="cb40-4"><a></a><span class="co"># Getting the titles</span></span>
 <span id="cb40-5"><a></a>txt <span class="ot">&lt;-</span> <span class="fu">with</span>(health_advises_ans<span class="sc">$</span>Result<span class="sc">$</span>Resources, <span class="fu">c</span>(</span>
-<span id="cb40-6"><a></a>  <span class="fu">sapply</span>(all<span class="sc">$</span>Resource, <span class="st">"[["</span>, <span class="st">"Title"</span>),</span>
-<span id="cb40-7"><a></a>  <span class="fu">sapply</span>(some<span class="sc">$</span>Resource, <span class="st">"[["</span>, <span class="st">"Title"</span>),</span>
-<span id="cb40-8"><a></a>  <span class="fu">sapply</span>(<span class="st">`</span><span class="at">You may also be interested in these health topics:</span><span class="st">`</span><span class="sc">$</span>Resource, <span class="st">"[["</span>, <span class="st">"Title"</span>)</span>
-<span id="cb40-9"><a></a>))</span>
-<span id="cb40-10"><a></a><span class="fu">cat</span>(txt, <span class="at">sep =</span> <span class="st">"; "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb40-6"><a></a>  <span class="fu">sapply</span>(All<span class="sc">$</span>Resource, <span class="st">"[["</span>, <span class="st">"Title"</span>)</span>
+<span id="cb40-7"><a></a>))</span>
+<span id="cb40-8"><a></a><span class="fu">cat</span>(txt, <span class="at">sep =</span> <span class="st">"; "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Get Your Blood Pressure Checked; Hepatitis C Screening: Questions for the Doctor; Get Tested for HIV; Get Vaccines to Protect Your Health (Adults Ages 19 to 49 Years); Testing for Syphilis: Questions for the Doctor; Drink Alcohol Only in Moderation; Talk with Your Doctor About Anxiety; Talk with Your Doctor About Depression; Talk with Your Doctor About Drug Misuse and Substance Use Disorder; Eat Healthy; Protect Yourself from Hepatitis B; Testing for Latent Tuberculosis: Questions for the Doctor</p>
 </section>
 <section id="summary" class="slide level2 smaller">
 <h2>Summary</h2>
