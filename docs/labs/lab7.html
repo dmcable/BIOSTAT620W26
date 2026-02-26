@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Schedule – BIOSTAT 620</title>
+<title>Lab 7 - Web Scraping and Regular Expressions – BIOSTAT 620</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d1b12f2568ecbe55642fee6aa00bd082.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b2511bcbb01c2159fd96a78deb42ffd9.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-d1b12f2568ecbe55642fee6aa00bd082.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-b2511bcbb01c2159fd96a78deb42ffd9.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,17 +104,17 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">BIOSTAT 620</span>
     </a>
   </div>
@@ -91,19 +125,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus.html"> 
+    <a class="nav-link" href="../syllabus.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./schedule.html" aria-current="page"> 
+    <a class="nav-link" href="../schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
+    <a class="nav-link" href="../references.html"> 
 <span class="menu-text">References</span></a>
   </li>  
 </ul>
@@ -118,15 +152,13 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Schedule</h1>
+<h1 class="title">Lab 7 - Web Scraping and Regular Expressions</h1>
 </div>
 
 
@@ -143,150 +175,127 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: center;">Week</th>
-<th style="text-align: center;">Date</th>
-<th style="text-align: left;">Topic</th>
-<th style="text-align: center;">Slides</th>
-<th style="text-align: center;">Lab</th>
-<th style="text-align: center;">Assignment Release (not due)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">1/8</td>
-<td style="text-align: left;">Syllabus and Introduction</td>
-<td style="text-align: center;"><a href="./slides/week00.html">Slides</a></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1/13-15</td>
-<td style="text-align: left;">Introduction to Data Science and R</td>
-<td style="text-align: center;"><a href="./slides/week01.html">Slides</a></td>
-<td style="text-align: center;"><a href="./labs/lab1.html">Lab</a></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1/20-22</td>
-<td style="text-align: left;">Version Control &amp; Reproducible Research</td>
-<td style="text-align: center;"><a href="./slides/week02.html">Slides</a></td>
-<td style="text-align: center;"><a href="./labs/lab2.html">Lab</a></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">1/27-29</td>
-<td style="text-align: left;">Exploratory data analysis</td>
-<td style="text-align: center;"><a href="./slides/week03.html">Slides</a></td>
-<td style="text-align: center;"><a href="./labs/lab3.html">Lab</a></td>
-<td style="text-align: center;"><a href="./assignments/hw1.html">HW1</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">2/3-5</td>
-<td style="text-align: left;">Data visualization</td>
-<td style="text-align: center;"><a href="./slides/week04.html">Slides</a></td>
-<td style="text-align: center;"><a href="./labs/lab4.html">Lab</a></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">2/10-12</td>
-<td style="text-align: left;">Data Cleaning and Wrangling</td>
-<td style="text-align: center;"><a href="./slides/week05.html">Slides</a></td>
-<td style="text-align: center;"><a href="./labs/lab5.html">Lab</a></td>
-<td style="text-align: center;"><a href="./assignments/hw2.html">HW2</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">2/17-19</td>
-<td style="text-align: left;">Text Mining &amp; Sentiment Analysis</td>
-<td style="text-align: center;"><a href="./slides/week06.html">Slides</a></td>
-<td style="text-align: center;"><a href="./labs/lab6.html">Lab</a></td>
-<td style="text-align: center;"><a href="./assignments/midterm.html">Midterm Project</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">2/24-26</td>
-<td style="text-align: left;">Scraping, APIs, and Regular Expressions</td>
-<td style="text-align: center;"><a href="./slides/week07.html">Slides</a></td>
-<td style="text-align: center;"><a href="./labs/lab7.html">Lab</a></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;">3/3-5</td>
-<td style="text-align: left;">NO CLASS - SPRING RECESS</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">3/10-12</td>
-<td style="text-align: left;">Efficiency and High Performance Computing</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Lab 8</td>
-<td style="text-align: center;">HW3</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">9</td>
-<td style="text-align: center;">3/17-19</td>
-<td style="text-align: left;">SQL and Managing Big Data</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Lab 9</td>
-<td style="text-align: center;">Final Project</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">3/24-26</td>
-<td style="text-align: left;">Interactive Visualization</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Lab 10</td>
-<td style="text-align: center;">HW4</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">11</td>
-<td style="text-align: center;">3/31-4/2</td>
-<td style="text-align: left;">Building a Website with Quarto and GitHub</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Lab 11</td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">12</td>
-<td style="text-align: center;">4/7-9</td>
-<td style="text-align: left;">Special Topics</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Final Project Workshop</td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">13</td>
-<td style="text-align: center;">4/14-16</td>
-<td style="text-align: left;">Special Topics</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">14</td>
-<td style="text-align: center;">4/21 (NO CLASS ON 4/23)</td>
-<td style="text-align: left;">Final Project Presentations</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-</tbody>
-</table>
+<section id="learning-goals" class="level1">
+<h1>Learning goals</h1>
+<ul>
+<li>Use real-time data pulled from the internet.</li>
+<li>Use regular expressions to parse the information.</li>
+<li>Practice your GitHub skills.</li>
+</ul>
+</section>
+<section id="lab-description" class="level1">
+<h1>Lab description</h1>
+<p>In this lab (due Tuesday Mar 3rd at 8:30am EST), we will be working with the <a href="https://www.ncbi.nlm.nih.gov/home/develop/api/">NCBI API</a> to make queries and extract information using XML and regular expressions. For this lab, we will be using the <code>httr</code>, <code>xml2</code>, and <code>stringr</code> R packages.</p>
+<section id="question-1-how-many-sars-cov-2-papers" class="level2">
+<h2 class="anchored" data-anchor-id="question-1-how-many-sars-cov-2-papers">Question 1: How many Sars-Cov-2 papers?</h2>
+<p>We will build an automatic counter of Sars-Cov-2 papers available on PubMed. You will need to apply XPath as we did during the lecture to extract the number of results returned by PubMed when you search for “sars-cov-2.”</p>
+<p>The following URL will perform the search: <a href="https://pubmed.ncbi.nlm.nih.gov/?term=sars-cov-2">https://pubmed.ncbi.nlm.nih.gov/?term=sars-cov-2</a></p>
+<p>And you can find the total number of results in the top left corner of the search results.</p>
+<p>Complete the lines of code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Downloading the website</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>website <span class="ot">&lt;-</span> xml2<span class="sc">::</span><span class="fu">read_html</span>(<span class="st">"[URL]"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding the counts</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> xml2<span class="sc">::</span><span class="fu">xml_find_first</span>(website, <span class="st">"[XPath]"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Turning it into text</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">as.character</span>(counts)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting the data using regex</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>totalcount <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_extract</span>(counts, <span class="st">"[REGEX FOR NUMBERS WITH COMMAS/DOTS]"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Removing any commas/dots so that we can convert to numeric</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>totalcount <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">'[REGEX FOR COMMAS/DOTS]'</span>, <span class="st">''</span>, totalcount)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>totalcount <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(totalcount)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(totalcount)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-2-get-article-abstracts-and-authors" class="level2">
+<h2 class="anchored" data-anchor-id="question-2-get-article-abstracts-and-authors">Question 2: Get article abstracts and authors</h2>
+<p>That’s quite a few articles, so let’s narrow our focus by including “michigan” in our search:</p>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/?term=sars-cov-2%20michigan">https://pubmed.ncbi.nlm.nih.gov/?term=sars-cov-2%20michigan</a></p>
+<p>In your web browser, use the slider on the left to narrow your search down to just the years 2020 and 2021.</p>
+<p>Now we will download the abstracts and author information for all of these articles. Under the search bar, click “Save,” set the Selection to “All results,” set the Format to “Abstract (text),” and click “Create file.” This should start downloading a large-ish text file (<code>abstract-sars-cov-2-set.txt</code>)</p>
+<p>We can read this into R with the following code. We need to do some formatting because the abstracts are separated by two blank lines. COMPLETE THE FOLLOWING LINES OF CODE.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in text, each line is a separate character</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>abstracts <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">'TEXTFILE'</span>, <span class="at">warn =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># combine all text into one character</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>abstracts <span class="ot">&lt;-</span> <span class="fu">paste</span>(YOURCODEHERE) </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># split the text whenever 3 new lines occur in a row (indicating two blank lines)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>abstracts <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(YOURCODEHERE)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># replace any remaining "\n" symbols with spaces</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>abstracts <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"REGEX"</span>, <span class="st">" "</span>, abstracts)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># replace multiple spaces with single space</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>abstracts <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"REGEX"</span>, <span class="st">" "</span>, abstracts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-3-distribution-of-universities" class="level2">
+<h2 class="anchored" data-anchor-id="question-3-distribution-of-universities">Question 3: Distribution of universities</h2>
+<p>Look through the first couple abstracts and see how the author affiliations are formatted.</p>
+<p>Using the function <code>stringr::str_extract_all()</code> applied on <code>abstracts</code>, capture all the terms of the form:</p>
+<ol type="1">
+<li>“… University”</li>
+<li>“… State University”</li>
+<li>“University of …”</li>
+<li>“… Institute of …”</li>
+</ol>
+<p>Write a regular expression that captures all such instances.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>institution <span class="ot">&lt;-</span> <span class="fu">str_extract_all</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  abstracts,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"[REGEX FOR INSTITUTIONS]"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>institution <span class="ot">&lt;-</span> <span class="fu">unlist</span>(institution)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(institution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What are the 10 most common institutions? Discuss how you could you improve these results.</p>
+</section>
+<section id="question-4-make-a-tidy-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="question-4-make-a-tidy-dataset">Question 4: Make a tidy dataset</h2>
+<p>We want to build a dataset which includes the journal, article title, authors, and affiliations for each paper. In order to do this, we will go back to the original input, but not do all the formatting we did previously.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in text, each line is a separate character</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>abstracts <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">'TEXTFILE'</span>, <span class="at">warn =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># combine all text into one character</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>abstracts <span class="ot">&lt;-</span> <span class="fu">paste</span>(YOUR CODE HERE) </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># split the text whenever 3 new lines occur in a row (indicating two blank lines)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>abstracts <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(YOURCODEHERE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now extract the journal title for each article. This is in the first line of each entry, immediately after the citation number (ie. “1.”) and before the year (e.g.&nbsp;“2020”). Notice that we are using <code>str_extract</code> rather than <code>str_extract_all</code>, because we only want (at most) one result per entry.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>journal <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(abstracts, <span class="st">"[YOUR REGULAR EXPRESSION]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we’re going to extract the title of each article. This is the second non-empty line in each entry, with blank lines before and after. We could do this with a regular expression, but instead, we’ll use the <code>strsplit()</code> function, as we did above.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>titles <span class="ot">&lt;-</span> <span class="fu">sapply</span>(abstracts, <span class="cf">function</span>(x){</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>(<span class="fu">strsplit</span>(x, <span class="at">split =</span> <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>))[<span class="dv">2</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}, <span class="at">USE.NAMES =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note that each title could still contain a <em>single</em> <code>\n</code> symbol, in the case of a particularly long title. We could remove those as we did the first time we read in the data.</p>
+<p>Use the same technique to extract the list of authors and call this object <code>authors</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">### YOUR CODE HERE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now use a regular expression to extract the author affiliations section for each abstract. This always starts with a blank line followed by “Author information:” and ends with another blank line.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>affiliations <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(abstracts, <span class="st">"[YOUR REGULAR EXPRESSION]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, put everything together into a single <code>data.frame</code> and use <code>knitr::kable</code> to print the first five results. Hint: cut off the affiliations and authors to each be at most 100 characters per abstract for better rendering.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>papers <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  [DATA TO COMBINE]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(papers[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Done! Render the document, commit, and push.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

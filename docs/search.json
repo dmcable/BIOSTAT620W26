@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Week\nDate\nTopic\nSlides\nLab\nAssignment Release (not due)\n\n\n\n\n0\n1/8\nSyllabus and Introduction\nSlides\n\n\n\n\n1\n1/13-15\nIntroduction to Data Science and R\nSlides\nLab\n\n\n\n2\n1/20-22\nVersion Control & Reproducible Research\nSlides\nLab\n\n\n\n3\n1/27-29\nExploratory data analysis\nSlides\nLab\nHW1\n\n\n4\n2/3-5\nData visualization\nSlides\nLab\n\n\n\n5\n2/10-12\nData Cleaning and Wrangling\nSlides\nLab\nHW2\n\n\n6\n2/17-19\nText Mining & Sentiment Analysis\nSlides\nLab\nMidterm Project\n\n\n7\n2/24-26\nScraping, APIs, and Regular Expressions\nSlides\nLab 7\n\n\n\n\n3/3-5\nNO CLASS - SPRING RECESS\n\n\n\n\n\n8\n3/10-12\nEfficiency and High Performance Computing\n\nLab 8\nHW3\n\n\n9\n3/17-19\nSQL and Managing Big Data\n\nLab 9\nFinal Project\n\n\n10\n3/24-26\nInteractive Visualization\n\nLab 10\nHW4\n\n\n11\n3/31-4/2\nBuilding a Website with Quarto and GitHub\n\nLab 11\n\n\n\n12\n4/7-9\nSpecial Topics\n\nFinal Project Workshop\n\n\n\n13\n4/14-16\nSpecial Topics\n\n\n\n\n\n14\n4/21 (NO CLASS ON 4/23)\nFinal Project Presentations"
+    "text": "Week\nDate\nTopic\nSlides\nLab\nAssignment Release (not due)\n\n\n\n\n0\n1/8\nSyllabus and Introduction\nSlides\n\n\n\n\n1\n1/13-15\nIntroduction to Data Science and R\nSlides\nLab\n\n\n\n2\n1/20-22\nVersion Control & Reproducible Research\nSlides\nLab\n\n\n\n3\n1/27-29\nExploratory data analysis\nSlides\nLab\nHW1\n\n\n4\n2/3-5\nData visualization\nSlides\nLab\n\n\n\n5\n2/10-12\nData Cleaning and Wrangling\nSlides\nLab\nHW2\n\n\n6\n2/17-19\nText Mining & Sentiment Analysis\nSlides\nLab\nMidterm Project\n\n\n7\n2/24-26\nScraping, APIs, and Regular Expressions\nSlides\nLab\n\n\n\n\n3/3-5\nNO CLASS - SPRING RECESS\n\n\n\n\n\n8\n3/10-12\nEfficiency and High Performance Computing\n\nLab 8\nHW3\n\n\n9\n3/17-19\nSQL and Managing Big Data\n\nLab 9\nFinal Project\n\n\n10\n3/24-26\nInteractive Visualization\n\nLab 10\nHW4\n\n\n11\n3/31-4/2\nBuilding a Website with Quarto and GitHub\n\nLab 11\n\n\n\n12\n4/7-9\nSpecial Topics\n\nFinal Project Workshop\n\n\n\n13\n4/14-16\nSpecial Topics\n\n\n\n\n\n14\n4/21 (NO CLASS ON 4/23)\nFinal Project Presentations"
   },
   {
     "objectID": "syllabus.html",
@@ -4295,7 +4295,7 @@
     "href": "slides/week07.html#web-api-example-1-gene-ontology-cont.-2",
     "title": "Week 7: Regular Expressions and Web Scraping",
     "section": "* Web API Example 1: Gene Ontology (cont. 2)",
-    "text": "* Web API Example 1: Gene Ontology (cont. 2)\nLet’s take a look at the response:\n\ngo_query\n\nResponse [https://api.geneontology.org/api/bioentity/function/GO:0140374/genes?evidence=ECO%3A0000006&relationship_type=involved_in]\n  Date: 2026-02-24 13:11\n  Status: 200\n  Content-Type: application/json\n  Size: 119 kB\n\n\nRemember the codes:\n\n1xx: Information message\n2xx: Success\n3xx: Redirection\n4xx: Client error\n5xx: Server error"
+    "text": "* Web API Example 1: Gene Ontology (cont. 2)\nLet’s take a look at the response:\n\ngo_query\n\nResponse [https://api.geneontology.org/api/bioentity/function/GO:0140374/genes?evidence=ECO%3A0000006&relationship_type=involved_in]\n  Date: 2026-02-26 01:41\n  Status: 200\n  Content-Type: application/json\n  Size: 119 kB\n\n\nRemember the codes:\n\n1xx: Information message\n2xx: Success\n3xx: Redirection\n4xx: Client error\n5xx: Server error"
   },
   {
     "objectID": "slides/week07.html#web-api-example-1-gene-ontology-cont.-3",
@@ -4344,7 +4344,7 @@
     "href": "slides/week07.html#web-api-example-3-hhs-health-recommendation-cont.-1",
     "title": "Week 7: Regular Expressions and Web Scraping",
     "section": "* Web API Example 3: HHS health recommendation (cont. 1)",
-    "text": "* Web API Example 3: HHS health recommendation (cont. 1)\nLet’s see the response\n\nhealth_advises\n\nResponse [https://odphp.health.gov/myhealthfinder/api/v4/myhealthfinder.json?lang=en&age=32&sex=male&tobaccoUse=no]\n  Date: 2026-02-24 13:13\n  Status: 200\n  Content-Type: application/json\n  Size: 236 kB\n{\n    \"Result\": {\n        \"Error\": \"False\",\n        \"Total\": 16,\n        \"Query\": {\n            \"ApiVersion\": \"4\",\n            \"ApiType\": \"myhealthfinder\",\n            \"TopicId\": null,\n            \"CategoryId\": null,\n            \"Keyword\": null,\n..."
+    "text": "* Web API Example 3: HHS health recommendation (cont. 1)\nLet’s see the response\n\nhealth_advises\n\nResponse [https://odphp.health.gov/myhealthfinder/api/v4/myhealthfinder.json?lang=en&age=32&sex=male&tobaccoUse=no]\n  Date: 2026-02-26 01:41\n  Status: 200\n  Content-Type: application/json\n  Size: 236 kB\n{\n    \"Result\": {\n        \"Error\": \"False\",\n        \"Total\": 16,\n        \"Query\": {\n            \"ApiVersion\": \"4\",\n            \"ApiType\": \"myhealthfinder\",\n            \"TopicId\": null,\n            \"CategoryId\": null,\n            \"Keyword\": null,\n..."
   },
   {
     "objectID": "slides/week07.html#web-api-example-3-hhs-health-recommendation-cont.-2",
@@ -4380,5 +4380,40 @@
     "title": "Week 7: Regular Expressions and Web Scraping",
     "section": "Regular Expressions: Email validation",
     "text": "Regular Expressions: Email validation\nThis is the official regex for email validation implemented by RCF 5322\n(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\n\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?\n:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[\n0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0\n-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\\nx7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])\nSee the corresponding post in StackOverflow"
+  },
+  {
+    "objectID": "labs/lab7.html",
+    "href": "labs/lab7.html",
+    "title": "Lab 7 - Web Scraping and Regular Expressions",
+    "section": "",
+    "text": "Use real-time data pulled from the internet.\nUse regular expressions to parse the information.\nPractice your GitHub skills."
+  },
+  {
+    "objectID": "labs/lab7.html#question-1-how-many-sars-cov-2-papers",
+    "href": "labs/lab7.html#question-1-how-many-sars-cov-2-papers",
+    "title": "Lab 7 - Web Scraping and Regular Expressions",
+    "section": "Question 1: How many Sars-Cov-2 papers?",
+    "text": "Question 1: How many Sars-Cov-2 papers?\nWe will build an automatic counter of Sars-Cov-2 papers available on PubMed. You will need to apply XPath as we did during the lecture to extract the number of results returned by PubMed when you search for “sars-cov-2.”\nThe following URL will perform the search: https://pubmed.ncbi.nlm.nih.gov/?term=sars-cov-2\nAnd you can find the total number of results in the top left corner of the search results.\nComplete the lines of code:\n\n# Downloading the website\nwebsite &lt;- xml2::read_html(\"[URL]\")\n\n# Finding the counts\ncounts &lt;- xml2::xml_find_first(website, \"[XPath]\")\n\n# Turning it into text\ncounts &lt;- as.character(counts)\n\n# Extracting the data using regex\ntotalcount &lt;- stringr::str_extract(counts, \"[REGEX FOR NUMBERS WITH COMMAS/DOTS]\")\n\n# Removing any commas/dots so that we can convert to numeric\ntotalcount &lt;- gsub('[REGEX FOR COMMAS/DOTS]', '', totalcount)\n\ntotalcount &lt;- as.numeric(totalcount)\nprint(totalcount)"
+  },
+  {
+    "objectID": "labs/lab7.html#question-2-get-article-abstracts-and-authors",
+    "href": "labs/lab7.html#question-2-get-article-abstracts-and-authors",
+    "title": "Lab 7 - Web Scraping and Regular Expressions",
+    "section": "Question 2: Get article abstracts and authors",
+    "text": "Question 2: Get article abstracts and authors\nThat’s quite a few articles, so let’s narrow our focus by including “michigan” in our search:\nhttps://pubmed.ncbi.nlm.nih.gov/?term=sars-cov-2%20michigan\nIn your web browser, use the slider on the left to narrow your search down to just the years 2020 and 2021.\nNow we will download the abstracts and author information for all of these articles. Under the search bar, click “Save,” set the Selection to “All results,” set the Format to “Abstract (text),” and click “Create file.” This should start downloading a large-ish text file (abstract-sars-cov-2-set.txt)\nWe can read this into R with the following code. We need to do some formatting because the abstracts are separated by two blank lines. COMPLETE THE FOLLOWING LINES OF CODE.\n\n# read in text, each line is a separate character\nabstracts &lt;- readLines('TEXTFILE', warn = FALSE)\n# combine all text into one character\nabstracts &lt;- paste(YOURCODEHERE) \n# split the text whenever 3 new lines occur in a row (indicating two blank lines)\nabstracts &lt;- strsplit(YOURCODEHERE)\n# replace any remaining \"\\n\" symbols with spaces\nabstracts &lt;- gsub(\"REGEX\", \" \", abstracts)\n# replace multiple spaces with single space\nabstracts &lt;- gsub(\"REGEX\", \" \", abstracts)"
+  },
+  {
+    "objectID": "labs/lab7.html#question-3-distribution-of-universities",
+    "href": "labs/lab7.html#question-3-distribution-of-universities",
+    "title": "Lab 7 - Web Scraping and Regular Expressions",
+    "section": "Question 3: Distribution of universities",
+    "text": "Question 3: Distribution of universities\nLook through the first couple abstracts and see how the author affiliations are formatted.\nUsing the function stringr::str_extract_all() applied on abstracts, capture all the terms of the form:\n\n“… University”\n“… State University”\n“University of …”\n“… Institute of …”\n\nWrite a regular expression that captures all such instances.\n\nlibrary(stringr)\ninstitution &lt;- str_extract_all(\n  abstracts,\n  \"[REGEX FOR INSTITUTIONS]\"\n  ) \ninstitution &lt;- unlist(institution)\ntable(institution)\n\nWhat are the 10 most common institutions? Discuss how you could you improve these results."
+  },
+  {
+    "objectID": "labs/lab7.html#question-4-make-a-tidy-dataset",
+    "href": "labs/lab7.html#question-4-make-a-tidy-dataset",
+    "title": "Lab 7 - Web Scraping and Regular Expressions",
+    "section": "Question 4: Make a tidy dataset",
+    "text": "Question 4: Make a tidy dataset\nWe want to build a dataset which includes the journal, article title, authors, and affiliations for each paper. In order to do this, we will go back to the original input, but not do all the formatting we did previously.\n\n# read in text, each line is a separate character\nabstracts &lt;- readLines('TEXTFILE', warn = FALSE)\n# combine all text into one character\nabstracts &lt;- paste(YOUR CODE HERE) \n# split the text whenever 3 new lines occur in a row (indicating two blank lines)\nabstracts &lt;- strsplit(YOURCODEHERE)\n\nNow extract the journal title for each article. This is in the first line of each entry, immediately after the citation number (ie. “1.”) and before the year (e.g. “2020”). Notice that we are using str_extract rather than str_extract_all, because we only want (at most) one result per entry.\n\njournal &lt;- str_extract(abstracts, \"[YOUR REGULAR EXPRESSION]\")\n\nNow we’re going to extract the title of each article. This is the second non-empty line in each entry, with blank lines before and after. We could do this with a regular expression, but instead, we’ll use the strsplit() function, as we did above.\n\ntitles &lt;- sapply(abstracts, function(x){\n  unlist(strsplit(x, split = \"\\n\\n\"))[2]\n}, USE.NAMES = FALSE)\n\nNote that each title could still contain a single \\n symbol, in the case of a particularly long title. We could remove those as we did the first time we read in the data.\nUse the same technique to extract the list of authors and call this object authors.\n\n### YOUR CODE HERE\n\nNow use a regular expression to extract the author affiliations section for each abstract. This always starts with a blank line followed by “Author information:” and ends with another blank line.\n\naffiliations &lt;- str_extract(abstracts, \"[YOUR REGULAR EXPRESSION]\")\n\nFinally, put everything together into a single data.frame and use knitr::kable to print the first five results. Hint: cut off the affiliations and authors to each be at most 100 characters per abstract for better rendering.\n\npapers &lt;- data.frame(\n  [DATA TO COMBINE]\n)\nknitr::kable(papers[1:5, ])\n\nDone! Render the document, commit, and push."
   }
 ]

@@ -11,7 +11,7 @@ title: "Schedule"
 | 4 | 2/3-5 | Data visualization	 |[Slides](slides/week04.qmd) | [Lab](labs/lab4.qmd) |  |
 | 5 | 2/10-12 | Data Cleaning and Wrangling	 | [Slides](slides/week05.qmd) | [Lab](labs/lab5.qmd) | [HW2](assignments/hw2.qmd) |
 | 6 | 2/17-19 | Text Mining & Sentiment Analysis	 | [Slides](slides/week06.qmd)  | [Lab](labs/lab6.qmd) | [Midterm Project](assignments/midterm.qmd)  |
-| 7 | 2/24-26 | Scraping, APIs, and Regular Expressions	 | [Slides](slides/week07.qmd)  | Lab 7 | |
+| 7 | 2/24-26 | Scraping, APIs, and Regular Expressions	 | [Slides](slides/week07.qmd)  | [Lab](labs/lab7.qmd) | |
 |   | 3/3-5 | NO CLASS - SPRING RECESS	 |  |  |  |
 | 8 | 3/10-12 | Efficiency and High Performance Computing |  | Lab 8 | HW3 |
 | 9 | 3/17-19 | SQL and Managing Big Data	 |  | Lab 9 | Final Project  |

@@ -589,7 +589,7 @@ We use the `httr` R package to make life easier.
 
 - We want to know what genes (human or not) are **involved in** the function **antiviral innate immune response** (go term [GO:0140374](http://amigo.geneontology.org/amigo/term/GO:0140374)), looking only at those annotations that have evidence code [ECO:0000006](https://evidenceontology.org/browse/#ECO_0000006) (experimental evidence):
 
-```{r example-gene-ontology, cache=TRUE, echo=TRUE}
+```{r example-gene-ontology, cache=FALSE, echo=TRUE}
 library(httr)
 go_query <- GET(
   url   = "http://api.geneontology.org/",
@@ -639,7 +639,7 @@ What `httr::GET()` does:
 
 Let's take a look at the response:
 
-```{r example-gene-ontology-cont, cache=TRUE, echo=TRUE}
+```{r example-gene-ontology-cont, cache=FALSE, echo=TRUE}
 go_query
 ```
 
@@ -772,7 +772,7 @@ ans$results[[1]]
 Here is a last example. We will use the Department of Health and Human Services
 API for "[...] demographic-specific health recommendations" (details at [health.gov](https://health.gov/our-work/health-literacy/consumer-health-content/free-web-content/apis-developers/documentation))
 
-```{r health-advice, cache=TRUE, echo=TRUE}
+```{r health-advice, cache=FALSE, echo=TRUE}
 health_advises <- GET(
   url = "https://odphp.health.gov", 
   path  = "myhealthfinder/api/v4/myhealthfinder.json",
