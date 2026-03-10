@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Week\nDate\nTopic\nSlides\nLab\nAssignment Release (not due)\n\n\n\n\n0\n1/8\nSyllabus and Introduction\nSlides\n\n\n\n\n1\n1/13-15\nIntroduction to Data Science and R\nSlides\nLab\n\n\n\n2\n1/20-22\nVersion Control & Reproducible Research\nSlides\nLab\n\n\n\n3\n1/27-29\nExploratory data analysis\nSlides\nLab\nHW1\n\n\n4\n2/3-5\nData visualization\nSlides\nLab\n\n\n\n5\n2/10-12\nData Cleaning and Wrangling\nSlides\nLab\nHW2\n\n\n6\n2/17-19\nText Mining & Sentiment Analysis\nSlides\nLab\nMidterm Project\n\n\n7\n2/24-26\nScraping, APIs, and Regular Expressions\nSlides\nLab\n\n\n\n\n3/3-5\nNO CLASS - SPRING RECESS\n\n\n\n\n\n8\n3/10-12\nEfficiency and High Performance Computing\n\nLab 8\nHW3\n\n\n9\n3/17-19\nSQL and Managing Big Data\n\nLab 9\nFinal Project\n\n\n10\n3/24-26\nInteractive Visualization\n\nLab 10\nHW4\n\n\n11\n3/31-4/2\nBuilding a Website with Quarto and GitHub\n\nLab 11\n\n\n\n12\n4/7-9\nSpecial Topics\n\nFinal Project Workshop\n\n\n\n13\n4/14-16\nSpecial Topics\n\n\n\n\n\n14\n4/21 (NO CLASS ON 4/23)\nFinal Project Presentations"
+    "text": "Week\nDate\nTopic\nSlides\nLab\nAssignment Release (not due)\n\n\n\n\n0\n1/8\nSyllabus and Introduction\nSlides\n\n\n\n\n1\n1/13-15\nIntroduction to Data Science and R\nSlides\nLab\n\n\n\n2\n1/20-22\nVersion Control & Reproducible Research\nSlides\nLab\n\n\n\n3\n1/27-29\nExploratory data analysis\nSlides\nLab\nHW1\n\n\n4\n2/3-5\nData visualization\nSlides\nLab\n\n\n\n5\n2/10-12\nData Cleaning and Wrangling\nSlides\nLab\nHW2\n\n\n6\n2/17-19\nText Mining & Sentiment Analysis\nSlides\nLab\nMidterm Project\n\n\n7\n2/24-26\nScraping, APIs, and Regular Expressions\nSlides\nLab\n\n\n\n\n3/3-5\nNO CLASS - SPRING RECESS\n\n\n\n\n\n8\n3/10-12\nEfficiency and High Performance Computing\nSlides\nLab 8\nHW3\n\n\n9\n3/17-19\nSQL and Managing Big Data\n\nLab 9\nFinal Project\n\n\n10\n3/24-26\nInteractive Visualization\n\nLab 10\nHW4\n\n\n11\n3/31-4/2\nBuilding a Website with Quarto and GitHub\n\nLab 11\n\n\n\n12\n4/7-9\nSpecial Topics\n\nFinal Project Workshop\n\n\n\n13\n4/14-16\nSpecial Topics\n\n\n\n\n\n14\n4/21 (NO CLASS ON 4/23)\nFinal Project Presentations"
   },
   {
     "objectID": "syllabus.html",
@@ -4415,5 +4415,369 @@
     "title": "Lab 7 - Web Scraping and Regular Expressions",
     "section": "Question 4: Make a tidy dataset",
     "text": "Question 4: Make a tidy dataset\nWe want to build a dataset which includes the journal, article title, authors, and affiliations for each paper. In order to do this, we will go back to the original input, but not do all the formatting we did previously.\n\n# read in text, each line is a separate character\nabstracts &lt;- readLines('TEXTFILE', warn = FALSE)\n# combine all text into one character\nabstracts &lt;- paste(YOUR CODE HERE) \n# split the text whenever 3 new lines occur in a row (indicating two blank lines)\nabstracts &lt;- strsplit(YOURCODEHERE)\n\nNow extract the journal title for each article. This is in the first line of each entry, immediately after the citation number (ie. “1.”) and before the year (e.g. “2020”). Notice that we are using str_extract rather than str_extract_all, because we only want (at most) one result per entry.\n\njournal &lt;- str_extract(abstracts, \"[YOUR REGULAR EXPRESSION]\")\n\nNow we’re going to extract the title of each article. This is the second non-empty line in each entry, with blank lines before and after. We could do this with a regular expression, but instead, we’ll use the strsplit() function, as we did above.\n\ntitles &lt;- sapply(abstracts, function(x){\n  unlist(strsplit(x, split = \"\\n\\n\"))[2]\n}, USE.NAMES = FALSE)\n\nNote that each title could still contain a single \\n symbol, in the case of a particularly long title. We could remove those as we did the first time we read in the data.\nUse the same technique to extract the list of authors and call this object authors.\n\n### YOUR CODE HERE\n\nNow use a regular expression to extract the author affiliations section for each abstract. This always starts with a blank line followed by “Author information:” and ends with another blank line.\n\naffiliations &lt;- str_extract(abstracts, \"[YOUR REGULAR EXPRESSION]\")\n\nFinally, put everything together into a single data.frame and use knitr::kable to print the first five results. Hint: cut off the affiliations and authors to each be at most 100 characters per abstract for better rendering.\n\npapers &lt;- data.frame(\n  [DATA TO COMBINE]\n)\nknitr::kable(papers[1:5, ])\n\nDone! Render the document, commit, and push."
+  },
+  {
+    "objectID": "slides/week08.html#efficiency-loops",
+    "href": "slides/week08.html#efficiency-loops",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Efficiency: Loops",
+    "text": "Efficiency: Loops\nWe’ve seen various examples of loops so far in this class.\nClassic examples that are common to most programming languages include for and while loops.\nOther types of loops are more specific to R, such as the various *apply functions (apply, sapply, lapply, etc.).\nKnowing when to use a loop and when not to is a critical concern in computational efficiency."
+  },
+  {
+    "objectID": "slides/week08.html#example-square-roots",
+    "href": "slides/week08.html#example-square-roots",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Example: Square Roots",
+    "text": "Example: Square Roots\nLet’s say we want to take the square roots of the numbers 1 to 10,000. We could achieve this in a number of different ways.\nHere, we use a for loop:\n\nforLoopRoots &lt;- function(n){\n  roots &lt;- rep(NA, n)\n  for(i in 1:n){\n    roots[i] &lt;- sqrt(i)\n  }\n  return(roots)\n}\n\nhead(forLoopRoots(10000))\n\n[1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490"
+  },
+  {
+    "objectID": "slides/week08.html#example-square-roots-cont.-1",
+    "href": "slides/week08.html#example-square-roots-cont.-1",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Example: Square Roots (cont. 1)",
+    "text": "Example: Square Roots (cont. 1)\nHere, we’ll use sapply:\n\nSapplyRoots &lt;- function(n){\n  roots &lt;- sapply(1:n, sqrt)\n  return(roots)\n}\n\nhead(SapplyRoots(10000))\n\n[1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490"
+  },
+  {
+    "objectID": "slides/week08.html#example-square-roots-cont.-2",
+    "href": "slides/week08.html#example-square-roots-cont.-2",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Example: Square Roots (cont. 2)",
+    "text": "Example: Square Roots (cont. 2)\nHow fast are these methods? Let’s use the microbenchmark package to find out!\n\nlibrary(microbenchmark)\nmicrobenchmark(forLoopRoots(10000), SapplyRoots(10000))\n\nUnit: microseconds\n                expr      min       lq     mean   median        uq      max\n forLoopRoots(10000)  226.894  246.697  253.751  254.241  260.8215  312.215\n  SapplyRoots(10000) 1229.467 1337.727 1455.975 1372.352 1427.1690 2885.990\n neval\n   100\n   100"
+  },
+  {
+    "objectID": "slides/week08.html#example-square-roots-cont.-3",
+    "href": "slides/week08.html#example-square-roots-cont.-3",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Example: Square Roots (cont. 3)",
+    "text": "Example: Square Roots (cont. 3)\nBut do we really need a loop for this job? Here, we’ll use vectorization to perform all the calculations “at once.”\n\nVectorizedRoots &lt;- function(n){\n  sqrt(1:n)\n}\n\nhead(VectorizedRoots(10000))\n\n[1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490"
+  },
+  {
+    "objectID": "slides/week08.html#example-square-roots-cont.-4",
+    "href": "slides/week08.html#example-square-roots-cont.-4",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Example: Square Roots (cont. 4)",
+    "text": "Example: Square Roots (cont. 4)\nThat’s a lot faster!\n\nlibrary(microbenchmark)\nmicrobenchmark(forLoopRoots(10000), VectorizedRoots(10000))\n\nUnit: microseconds\n                   expr     min       lq      mean  median      uq     max\n    forLoopRoots(10000) 226.115 237.6565 250.95362 251.535 259.776 299.833\n VectorizedRoots(10000)  10.004  16.4410  22.94196  17.179  18.450 585.357\n neval\n   100\n   100\n\n\nAnytime that you can use vectorized computation, you should! It will (almost) always save you a lot of computation time!"
+  },
+  {
+    "objectID": "slides/week08.html#use-pre-made-functions",
+    "href": "slides/week08.html#use-pre-made-functions",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Use pre-made functions",
+    "text": "Use pre-made functions\nLet’s say there’s a relatively simple operation you want to perform. You know how to write the code for it, but you’re pretty sure there’s also a built-in function that performs the same task. Which should you use?\nGenerally speaking, you should aim to write as little code as possible. Built-in functions (especially in the base package) are highly optimized and likely to run much faster than manual implementations."
+  },
+  {
+    "objectID": "slides/week08.html#example-repeated-elements",
+    "href": "slides/week08.html#example-repeated-elements",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Example: Repeated elements",
+    "text": "Example: Repeated elements\nLet’s say we have a long vector and we want to find all of the repeated elements.\n\nset.seed(1)\nvec &lt;- sample(letters, 100, replace = TRUE)\nvec\n\n  [1] \"y\" \"d\" \"g\" \"a\" \"b\" \"w\" \"k\" \"n\" \"r\" \"s\" \"a\" \"u\" \"u\" \"j\" \"v\" \"n\" \"j\" \"g\"\n [19] \"i\" \"o\" \"u\" \"e\" \"i\" \"y\" \"n\" \"e\" \"e\" \"b\" \"j\" \"y\" \"l\" \"o\" \"a\" \"t\" \"c\" \"f\"\n [37] \"j\" \"j\" \"f\" \"o\" \"t\" \"t\" \"z\" \"l\" \"y\" \"w\" \"f\" \"y\" \"h\" \"l\" \"y\" \"w\" \"x\" \"f\"\n [55] \"z\" \"g\" \"s\" \"j\" \"f\" \"x\" \"n\" \"b\" \"m\" \"r\" \"v\" \"n\" \"f\" \"a\" \"s\" \"s\" \"h\" \"f\"\n [73] \"w\" \"l\" \"f\" \"h\" \"g\" \"k\" \"q\" \"d\" \"m\" \"h\" \"y\" \"p\" \"y\" \"w\" \"n\" \"t\" \"g\" \"m\"\n [91] \"v\" \"l\" \"p\" \"a\" \"m\" \"u\" \"f\" \"q\" \"i\" \"g\""
+  },
+  {
+    "objectID": "slides/week08.html#example-repeated-elements-cont.-1",
+    "href": "slides/week08.html#example-repeated-elements-cont.-1",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Example: Repeated elements (cont. 1)",
+    "text": "Example: Repeated elements (cont. 1)\nWe can achieve this with two nested loops:\n\nmethod1 &lt;- function(x){\n  # first element cannot be a duplicate\n  out &lt;- sapply(2:length(x), function(i){\n    matches &lt;- sapply(1:(i-1), function(i2){\n      x[i2] == x[i]\n    })\n    return(any(matches))\n  })\n  out &lt;- c(FALSE, out)\n  return(out)\n}\n\nvec[1:11]\n\n [1] \"y\" \"d\" \"g\" \"a\" \"b\" \"w\" \"k\" \"n\" \"r\" \"s\" \"a\"\n\nmethod1(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE"
+  },
+  {
+    "objectID": "slides/week08.html#example-repeated-elements-cont.-2",
+    "href": "slides/week08.html#example-repeated-elements-cont.-2",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Example: Repeated elements (cont. 2)",
+    "text": "Example: Repeated elements (cont. 2)\nOr slightly faster with a loop and vectorized comparison:\n\nmethod2 &lt;- function(x){\n  # first element cannot be a duplicate\n  out &lt;- sapply(2:length(x), function(i){\n    return(any(x[1:(i-1)] == x[i]))\n  })\n  out &lt;- c(FALSE, out)\n  return(out)\n}\n\nmethod2(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nmicrobenchmark(method1(vec), method2(vec))\n\nUnit: microseconds\n         expr      min        lq      mean   median       uq      max neval\n method1(vec) 2603.787 2754.8310 3008.0589 2795.298 2928.261 6641.918   100\n method2(vec)   89.667   97.6825  122.9541  100.614  106.805 2079.643   100"
+  },
+  {
+    "objectID": "slides/week08.html#example-repeated-elements-cont.-3",
+    "href": "slides/week08.html#example-repeated-elements-cont.-3",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Example: Repeated elements (cont. 3)",
+    "text": "Example: Repeated elements (cont. 3)\nBut the real speed-up comes when we use the base function duplicated:\n\nmethod3 &lt;- function(x){\n  duplicated(x)\n}\n\nmethod3(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nmicrobenchmark(method2(vec), method3(vec))\n\nUnit: microseconds\n         expr    min      lq      mean  median      uq     max neval\n method2(vec) 92.537 95.8375 103.23103 99.8145 107.420 152.479   100\n method3(vec)  1.640  1.8450   6.42429  2.0090   2.214 433.206   100"
+  },
+  {
+    "objectID": "slides/week08.html#what-is-hpc",
+    "href": "slides/week08.html#what-is-hpc",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "What is HPC?",
+    "text": "What is HPC?\nHigh Performance Computing (HPC) can relate to any of the following:\n\nParallel computing, i.e. using multiple resources (could be threads, cores, nodes, etc.) simultaneously to complete a task.\nBig data working with large datasets (in/out-of-memory).\n\nWe will mostly focus on parallel computing."
+  },
+  {
+    "objectID": "slides/week08.html#serial-computation",
+    "href": "slides/week08.html#serial-computation",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Serial computation",
+    "text": "Serial computation\n\n\n\n\nHere we are using a single core. The function is applied one element at a time, leaving the other 3 cores without usage."
+  },
+  {
+    "objectID": "slides/week08.html#parallel-computation",
+    "href": "slides/week08.html#parallel-computation",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Parallel computation",
+    "text": "Parallel computation\n\n\n\n\nIn this more intelligent way of computation, we are taking full advantage of our computer by using all 4 cores at the same time. This will reduce computation time which, in the case of complicated/long calculations, can be an important speed gain."
+  },
+  {
+    "objectID": "slides/week08.html#parallel-computing-hardware",
+    "href": "slides/week08.html#parallel-computing-hardware",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Parallel computing: Hardware",
+    "text": "Parallel computing: Hardware\nWhen it comes to parallel computing, there are several ways (levels) in which we can speed up our analysis. From the bottom up:\n\nThread level SIMD instructions: Most modern processors support some level of what is called vectorization, this is, applying a single (same) instruction to streams of data. For example: adding vector A and B.\nHyper-Threading Technology (HTT): Intel’s hyper-threading generates a virtual partition of a single core (processor) which, while not equivalent to having multiple physical threads, does speed things up.\nMulti-core processor: Most modern CPUs (Central Processing Unit) have two or more physical cores. A typical laptop computer has about 8 cores.\nGeneral-Purpose Computing on Graphics Processing Unit (GP-GPU): While modern CPUs have multiple cores, GPUs can hold thousands of cores. Designed for image processing, there’s an increasing use of GPUs as an alternative to CPUs for scientific computing."
+  },
+  {
+    "objectID": "slides/week08.html#parallel-computing-hardware-cont.",
+    "href": "slides/week08.html#parallel-computing-hardware-cont.",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Parallel computing: Hardware (cont.)",
+    "text": "Parallel computing: Hardware (cont.)\n\nHigh-Performance Computing Cluster (HPC): A collection of computing nodes that are interconnected using a fast Ethernet network.\nGrid Computing: A collection of loosely interconnected machines that may or may not be in the same physical place, for example: HTCondor clusters."
+  },
+  {
+    "objectID": "slides/week08.html#parallel-computing-cpu-components",
+    "href": "slides/week08.html#parallel-computing-cpu-components",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Parallel computing: CPU components",
+    "text": "Parallel computing: CPU components\n\n\n\n\nTaxonomy of CPUs (Downloaded from https://slurm.schedmd.com/mc_support.html)"
+  },
+  {
+    "objectID": "slides/week08.html#parallel-computing-in-r",
+    "href": "slides/week08.html#parallel-computing-in-r",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Parallel computing in R",
+    "text": "Parallel computing in R\nWhile there are several alternatives (just take a look at the High-Performance Computing Task View), we’ll focus on the following R-packages for explicit parallelism\nSome examples:\n\n\n\nparallel: R package that provides ‘[s]upport for parallel computation, including random-number generation’.\n\n\n\n\n\n\nforeach: R package for ‘general iteration over elements’ in parallel fashion.\n\n\n\n\n\n\nfuture: ‘[A] lightweight and unified Future API for sequential and parallel processing of R expression via futures.’ (won’t cover here)\n\n\n\nImplicit parallelism, on the other hand, are out-of-the-box tools that allow the programmer not to worry about parallelization, e.g. such as gpuR for Matrix manipulation using GPU, tensorflow"
+  },
+  {
+    "objectID": "slides/week08.html#the-parallel-package",
+    "href": "slides/week08.html#the-parallel-package",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "The parallel package",
+    "text": "The parallel package\n\nBased on the snow and multicore R Packages.\nExplicit parallelism.\nSimple yet powerful idea: Parallel computing as multiple R sessions.\nClusters can be made of both local and remote sessions\nMultiple types of cluster: PSOCK, Fork, MPI, etc."
+  },
+  {
+    "objectID": "slides/week08.html#parallel-workflow",
+    "href": "slides/week08.html#parallel-workflow",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Parallel workflow",
+    "text": "Parallel workflow\n(Usually) We do the following:\n\nCreate a PSOCK/FORK (or other) cluster using makePSOCKCluster/makeForkCluster (or simply makeCluster)\nCopy/prepare each R session (if you are using a PSOCK cluster):\n\nCopy objects with clusterExport\nSet a seed with clusterSetRNGStream\n\nDo your call:\n\nPass expressions with clusterEvalQ\nRun a parallelized loop with parApply, parLapply, etc.\n\nStop the cluster with stopCluster"
+  },
+  {
+    "objectID": "slides/week08.html#ex-1-hello-world",
+    "href": "slides/week08.html#ex-1-hello-world",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Ex 1: Hello world!",
+    "text": "Ex 1: Hello world!\n\n# 1. CREATING A CLUSTER\nlibrary(parallel)\ncl &lt;- makeCluster(4)    \nx  &lt;- 20\n\n# 2. PREPARING THE CLUSTER\nclusterSetRNGStream(cl, 123) # Equivalent to `set.seed(123)` (not necessary for this example)\nclusterExport(cl, \"x\")\n\n# 3. DO YOUR CALL\nclusterEvalQ(cl, {\n  paste0(\"Hello from process #\", Sys.getpid(), \". I see x and it is equal to \", x)\n})\n\n[[1]]\n[1] \"Hello from process #5733. I see x and it is equal to 20\"\n\n[[2]]\n[1] \"Hello from process #5734. I see x and it is equal to 20\"\n\n[[3]]\n[1] \"Hello from process #5731. I see x and it is equal to 20\"\n\n[[4]]\n[1] \"Hello from process #5732. I see x and it is equal to 20\"\n\n# 4. STOP THE CLUSTER\nstopCluster(cl)"
+  },
+  {
+    "objectID": "slides/week08.html#ex-1-hello-world-redux",
+    "href": "slides/week08.html#ex-1-hello-world-redux",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Ex 1: Hello world! (redux)",
+    "text": "Ex 1: Hello world! (redux)\nMulti-core versions of the *apply functions are simpler, but may not work on Windows machines.\n\n# 1. SETUP\nlibrary(parallel)\nx  &lt;- 20\n\n# 2. DO YOUR CALL\nmclapply(1:4, function(i){\n    paste0(\"Hello from process #\", Sys.getpid(), \". I see x and it is equal to \", x)\n}, mc.cores = 4)\n\n[[1]]\n[1] \"Hello from process #5786. I see x and it is equal to 20\"\n\n[[2]]\n[1] \"Hello from process #5787. I see x and it is equal to 20\"\n\n[[3]]\n[1] \"Hello from process #5788. I see x and it is equal to 20\"\n\n[[4]]\n[1] \"Hello from process #5789. I see x and it is equal to 20\""
+  },
+  {
+    "objectID": "slides/week08.html#ex-2-parallel-regressions",
+    "href": "slides/week08.html#ex-2-parallel-regressions",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Ex 2: Parallel regressions",
+    "text": "Ex 2: Parallel regressions\nProblem: Run multiple regressions on a very wide dataset. We need to fit the following model:\n\\[\ny = X_i\\beta_i + \\varepsilon,\\quad \\varepsilon\\sim N(0, \\sigma^2_i),\\quad\\forall i\n\\]\n\n\n[1] 500 999\n\n\n         x001        x002       x003       x004      x005\n1  0.61827227  1.72847041 -1.4810695 -0.2471871 1.4776281\n2  0.96777456 -0.19358426 -0.8176465  0.6356714 0.7292221\n3 -0.04303734 -0.06692844  0.9048826 -1.9277964 2.2947675\n4  0.84237608 -1.13685605 -1.8559158  0.4687967 0.9881953\n5 -1.91921443  1.83865873  0.5937039 -0.1410556 0.6507415\n6  0.59146153  0.81743419  0.3348553 -1.8771819 0.8181764\n\n\n num [1:500] -0.8188 -0.5438 1.0209 0.0467 -0.4501 ..."
+  },
+  {
+    "objectID": "slides/week08.html#ex-2-parallel-regressions-cont.-1",
+    "href": "slides/week08.html#ex-2-parallel-regressions-cont.-1",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Ex 2: Parallel regressions (cont. 1)",
+    "text": "Ex 2: Parallel regressions (cont. 1)\nSerial solution: Use apply (basic loop) to solve it\n\n#\n#\n#\n#\nans &lt;- apply(\n  X = X,\n  MARGIN = 2,\n  FUN = function(x) coef(lm(y ~ x))\n)\n\nans[,1:5]\n\n                   x001        x002        x003        x004        x005\n(Intercept) -0.03449819 -0.03339681 -0.03728140 -0.03644192 -0.03717344\nx           -0.06082548  0.02748265 -0.01327855 -0.08012361 -0.04067826"
+  },
+  {
+    "objectID": "slides/week08.html#ex-2-parallel-regressions-cont.-2",
+    "href": "slides/week08.html#ex-2-parallel-regressions-cont.-2",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Ex 2: Parallel regressions (cont. 2)",
+    "text": "Ex 2: Parallel regressions (cont. 2)\nParallel solution: Use parApply\n\nlibrary(parallel)\ncl &lt;- makeCluster(4L)\nclusterExport(cl, \"y\")\nans &lt;- parApply(\n  cl = cl,\n  X = X,\n  MARGIN = 2,\n  FUN = function(x) coef(lm(y ~ x))\n)\n \nans[,1:5]\n\n                   x001        x002        x003        x004        x005\n(Intercept) -0.03449819 -0.03339681 -0.03728140 -0.03644192 -0.03717344\nx           -0.06082548  0.02748265 -0.01327855 -0.08012361 -0.04067826"
+  },
+  {
+    "objectID": "slides/week08.html#ex-2-parallel-regressions-cont.-3",
+    "href": "slides/week08.html#ex-2-parallel-regressions-cont.-3",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Ex 2: Parallel regressions (cont. 3)",
+    "text": "Ex 2: Parallel regressions (cont. 3)\nAre we going any faster?\n\nmicrobenchmark::microbenchmark(\n  parallel = parApply(\n    cl = cl,\n    X = X, MARGIN = 2,\n    FUN = function(x) coef(lm(y ~ x))\n  ),\n  serial = apply(\n    X = X, MARGIN = 2,\n    FUN = function(x) coef(lm(y ~ x))\n  ), unit=\"relative\"\n)\n\nUnit: relative\n     expr      min       lq     mean   median       uq      max neval\n parallel 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000   100\n   serial 3.032261 2.913442 2.800931 2.856764 2.742683 2.569332   100"
+  },
+  {
+    "objectID": "slides/week08.html#extended-example-sars-cov2-simulation",
+    "href": "slides/week08.html#extended-example-sars-cov2-simulation",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Extended Example: SARS-CoV2 simulation",
+    "text": "Extended Example: SARS-CoV2 simulation\nAn altered version of Conway’s game of life\n\nPeople live on a grid, each individual having 8 neighbors.\nA healthy individual (A) interacting with a sick neighbor (B) has the following probabilities of contracting the disease:\n\n100% if neither wears a mask.\n50% if only A wears a mask.\n20% if only B wears a mask.\n5% if both wear masks.\n\nInfected individuals may die with probability 10%.\n\nWe want to illustrate the importance of wearing face masks. We are going to simulate a system with 2,500 (50 x 50) individuals, 1,000 times so we can analyze: (a) contagion curve, (b) death curve.\nMore models like this: The SIRD model (Susceptible-Infected-Recovered-Deceased)"
+  },
+  {
+    "objectID": "slides/week08.html#conways-game-of-masks",
+    "href": "slides/week08.html#conways-game-of-masks",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Conway’s Game of Masks",
+    "text": "Conway’s Game of Masks\nDownload the program here.\n\n# source(\"~/Downloads/sars-cov2.R\", echo=FALSE)\nsource(\"img/sars-cov2.R\", echo = FALSE)\n\n# Looking at some constants\nprobs_sick # Sick individual's probabilities\n\n deceased  infected recovered \n      0.1       0.4       0.5 \n\nprobs_susc # Probabilities of i getting the disease \n\n               j doesn't wear j wears\ni doesn't wear            0.9    0.20\ni wears                   0.5    0.05"
+  },
+  {
+    "objectID": "slides/week08.html#first-look-what-does-the-simulation-look-like",
+    "href": "slides/week08.html#first-look-what-does-the-simulation-look-like",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "First look: What does the simulation look like?",
+    "text": "First look: What does the simulation look like?\n\nset.seed(7123)\none &lt;- simulate_covid(\n    pop_size = 1600,\n    nsick = 160,\n    nwears_mask = 1:400,\n    nsteps = 20,\n    store = TRUE\n)\n\none$statistics[c(1:5, 16:20),]\n\n   susceptible infected recovered deceased\n0         1440      160         0        0\n1         1265      234        85       16\n2         1064      307       190       39\n3          876      321       334       69\n4          717      287       499       97\n15         430        1       990      179\n16         429        2       990      179\n17         429        0       992      179\n18         429        0       992      179\n19         429        0       992      179"
+  },
+  {
+    "objectID": "slides/week08.html#first-look-what-does-the-simulation-look-like-contd",
+    "href": "slides/week08.html#first-look-what-does-the-simulation-look-like-contd",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "First look: What does the simulation look like? (contd’)",
+    "text": "First look: What does the simulation look like? (contd’)\n\n# Location of who wears the facemask. This step is only for plotting\nwears &lt;- which(one$wears, arr.ind = TRUE) - 1\nwears &lt;- wears/(one$nr) * (1 + 1/one$nr)\n\n# Initializing the animation\nfig   &lt;- magick::image_device(600, 600, res = 96/2, pointsize = 24)\nfor (i in 1:one$current_step) {\n  \n  # Plot\n  image(\n    one$temporal[,,i], col=c(\"gray\", \"tomato\", \"steelblue\",\"black\"),\n    main = paste(\"Time\", i - 1L, \"of\", one$nsteps),\n    zlim = c(1,4)\n    )\n  points(wears, col=\"white\", pch=20, cex=1.5)\n  legend(\n    \"topright\",\n    col = c(\"gray\", \"tomato\", \"steelblue\",\"black\", \"black\"),\n    legend = c(names(codes), \"wears a mask\"),\n    pch = c(rep(15, 4), 21)\n  )\n}\n\n# Finalizing plot and writing the animation\ndev.off()\nanimation &lt;- magick::image_animate(fig, fps = 2)\nmagick::image_write(animation, \"covid1.gif\")"
+  },
+  {
+    "objectID": "slides/week08.html#speed-things-up-timing-under-the-serial-implementation",
+    "href": "slides/week08.html#speed-things-up-timing-under-the-serial-implementation",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Speed things up: Timing under the serial implementation",
+    "text": "Speed things up: Timing under the serial implementation\nWe will use the function system.time to measure how much time it takes to complete 20 simulations in serial versus parallel fashion using 4 cores.\n\ntime_serial &lt;- system.time({\n  ans_serial &lt;- replicate(50, {\n    simulate_covid(\n      pop_size = 900,\n      nsick = 10,\n      nwears_mask = 900,\n      nsteps = 20)$statistics[,\"deceased\"]\n    },\n    simplify = FALSE\n    )\n})"
+  },
+  {
+    "objectID": "slides/week08.html#speed-things-up-parallel-a-forking-cluster",
+    "href": "slides/week08.html#speed-things-up-parallel-a-forking-cluster",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Speed things up: Parallel a Forking Cluster",
+    "text": "Speed things up: Parallel a Forking Cluster\nAlternative 1: If you are using Unix-like system (Ubuntu, OSX, etc.), you can take advantage of process forking, and thus, parallel’s mclapply function:\n\nset.seed(1231)\ntime_parallel_fork &lt;- system.time({\n  ans_parallel &lt;- parallel::mclapply(1:50, function(i) {\n    simulate_covid(\n      pop_size = 900,\n      nsick = 10,\n      nwears_mask = 900,\n      nsteps = 20)$statistics[,\"deceased\"]\n    }, mc.cores = 2L\n  )\n})"
+  },
+  {
+    "objectID": "slides/week08.html#speed-things-up-parallel-with-a-socket-cluster",
+    "href": "slides/week08.html#speed-things-up-parallel-with-a-socket-cluster",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Speed things up: Parallel with a Socket Cluster",
+    "text": "Speed things up: Parallel with a Socket Cluster\nAlternative 2: Regardless of the operating system, we can use a Socket cluster, which is simply a group of fresh R sessions that listen to the parent/main/mother session.\n\n# Step 1: Make the cluster\ncl &lt;- parallel::makePSOCKcluster(2L)\n\n# Step 2: Prepare the cluster\n# We could either export all the needed variables\nparallel::clusterExport(\n  cl,\n  c(\"calc_stats\", \"codes\", \"dat\", \"get_neighbors\", \"init\", \"probs_sick\",\n    \"probs_susc\", \"simulate_covid\", \"update_status\", \"update_status_all\"\n    )\n  )\nOr simply run the simulation script in the other sessions:\n\n# Step 2 (alt): Prepare the cluster\nparallel::clusterEvalQ(cl, source(\"img/sars-cov2.R\"))\nparallel::clusterSetRNGStream(cl, 123) # Make sure it is reproducible!"
+  },
+  {
+    "objectID": "slides/week08.html#speed-things-up-parallel-with-a-socket-cluster-contd",
+    "href": "slides/week08.html#speed-things-up-parallel-with-a-socket-cluster-contd",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Speed things up: Parallel with a Socket Cluster (cont’d)",
+    "text": "Speed things up: Parallel with a Socket Cluster (cont’d)\n\n# Step 3: Do your call\ntime_parallel_sock &lt;- system.time({\n  ans_parallel &lt;- parallel::parLapply(cl, 1:50, function(i) {\n    simulate_covid(\n      pop_size    = 900,\n      nsick       = 10,\n      nwears_mask = 900,\n      nsteps      = 20)$statistics[,\"deceased\"]\n    }\n  )\n})\n\n# Step 4: Stop\nparallel::stopCluster(cl)"
+  },
+  {
+    "objectID": "slides/week08.html#cloud-computing-a.k.a.-on-demand-computing",
+    "href": "slides/week08.html#cloud-computing-a.k.a.-on-demand-computing",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Cloud Computing (a.k.a. on-demand computing)",
+    "text": "Cloud Computing (a.k.a. on-demand computing)\nHPC clusters, super-computers, etc. need not be bought… you can rent:\n\nAmazon Web Services (AWS)\nGoogle Cloud Computing\nMicrosoft Azure\n\nThese services provide more than just computing (storage, data analysis, etc.). But for computing and storage, there are other free resources, e.g.:\n\nThe Extreme Science and Engineering Discovery Environment (XSEDE)"
+  },
+  {
+    "objectID": "slides/week08.html#there-are-many-ways-to-run-r-in-the-cloud",
+    "href": "slides/week08.html#there-are-many-ways-to-run-r-in-the-cloud",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "There are many ways to run R in the cloud",
+    "text": "There are many ways to run R in the cloud\nAt UMich:\n\nGreat Lakes HPC Cluster (ARC). UMich users can request hundreds of cores (literally).\n\nRunning R in:\n\nGoogle Cloud: https://cloud.google.com/solutions/running-r-at-scale\nAmazon Web Services: https://aws.amazon.com/blogs/big-data/running-r-on-aws/\nMicrosoft Azure: https://docs.microsoft.com/en-us/azure/architecture/data-guide/technology-choices/r-developers-guide"
+  },
+  {
+    "objectID": "slides/week08.html#submitting-jobs",
+    "href": "slides/week08.html#submitting-jobs",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Submitting jobs",
+    "text": "Submitting jobs\n\nA key feature of cloud services: interact via command line.\nYou will need to be familiar with Rscript and R CMD BATCH.\nWhich is better? It depends on the application."
+  },
+  {
+    "objectID": "slides/week08.html#submitting-jobs-examples",
+    "href": "slides/week08.html#submitting-jobs-examples",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Submitting jobs (examples)",
+    "text": "Submitting jobs (examples)\nImagine we have the following R script (download here):\nlibrary(data.table)\nset.seed(1231)\ndat &lt;- data.table(y = rnorm(1e3), x = sample.int(5, 1e3, TRUE))\ndat[,mean(y), by = x]\nR CMD BATCH\nThis will run a non-interactive R session and put all the output (stdout and stderr) to the file dummy.Rout.\nR CMD BATCH --vanilla dummy.R dummy.Rout &\nRscript\nThis will also execute R in the background, with the difference that the output dummy.Rout will not capture stderr (messages, warnings and errors from R).\nRscript --vanilla dummy.R &gt; dummy.Rout &\nThe & at the end makes sure the job is submitted and does not wait for it to end."
+  },
+  {
+    "objectID": "slides/week08.html#rscript",
+    "href": "slides/week08.html#rscript",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Rscript",
+    "text": "Rscript\nThe R script can be executed as a program directly, if you specify where the Rscript program lives.\nThe following example works on Unix. This is an R script named since_born.R (download here)\n#!/usr/bin/Rscript\nargs &lt;- tail(commandArgs(), 0)\nmessage(Sys.Date() - as.Date(args), \" days since you were born.\")\nThis R script can be executed in various ways…"
+  },
+  {
+    "objectID": "slides/week08.html#rscript-as-a-program",
+    "href": "slides/week08.html#rscript-as-a-program",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Rscript as a program",
+    "text": "Rscript as a program\nFor this we would need to change it to an executable. In unix you can use the chmod command: chmod +x since_born.R. This allows us to do the following:"
+  },
+  {
+    "objectID": "slides/week08.html#rscript-in-a-bash-script-most-common",
+    "href": "slides/week08.html#rscript-in-a-bash-script-most-common",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Rscript in a bash script (most common)",
+    "text": "Rscript in a bash script (most common)\nIn the case of running jobs on a cluster or something similar, we usually need to have a bash script. In our case, we have a file named since_born_bash.sh that calls Rscript (download here)\n#!/bin/bash\nRscript since_born.R 1988-03-02\nWhich we would execute like this:\n\n\nFatal error: cannot open file 'since_born.R': No such file or directory"
+  },
+  {
+    "objectID": "slides/week08.html#session-info",
+    "href": "slides/week08.html#session-info",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Session info",
+    "text": "Session info\n\n\nR version 4.4.1 (2024-06-14)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS 26.3\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: America/Detroit\ntzcode source: internal\n\nattached base packages:\n[1] parallel  stats     graphics  grDevices utils     datasets  methods  \n[8] base     \n\nother attached packages:\n[1] microbenchmark_1.5.0\n\nloaded via a namespace (and not attached):\n [1] compiler_4.4.1    fastmap_1.2.0     cli_3.6.4         tools_4.4.1      \n [5] htmltools_0.5.8.1 rstudioapi_0.16.0 yaml_2.3.10       codetools_0.2-20 \n [9] rmarkdown_2.28    knitr_1.48        jsonlite_1.8.8    xfun_0.47        \n[13] digest_0.6.37     rlang_1.1.6       evaluate_1.0.3"
+  },
+  {
+    "objectID": "slides/week08.html#bonus-rcpp-r-c",
+    "href": "slides/week08.html#bonus-rcpp-r-c",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "(Bonus) Rcpp: R & C++",
+    "text": "(Bonus) Rcpp: R & C++\nThe Fibonacci series\n\n\\[\nFib(n) = \\left\\{\\begin{array}{ll}\nn & \\mbox{if }n \\leq 1 \\\\\nFib(n-1) + Fib(n - 2) & \\mbox{otherwise}\n\\end{array}\\right.\n\\]"
+  },
+  {
+    "objectID": "slides/week08.html#rcpp-hello-world-v1",
+    "href": "slides/week08.html#rcpp-hello-world-v1",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Rcpp: Hello world! v1",
+    "text": "Rcpp: Hello world! v1\nThe following C++ file, called fib.cpp\nCan be compiled within R using Rcpp::sourceCpp(\"fib.cpp\"). This exports the function back into R:\n\n\n[1] 1 1 2 3 5"
+  },
+  {
+    "objectID": "slides/week08.html#rcpp-hello-world-v2-with-function-overloading",
+    "href": "slides/week08.html#rcpp-hello-world-v2-with-function-overloading",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Rcpp: Hello world! v2 (with function overloading)",
+    "text": "Rcpp: Hello world! v2 (with function overloading)\nRcpp data types are mapped directly to R data types, e.g. vectors of integers in R can be used as IntegerVector in Rcpp.\nBack in R\n\n\n[1] 1 1 2 3 5"
+  },
+  {
+    "objectID": "slides/week08.html#rcpparmadillo-and-openmp",
+    "href": "slides/week08.html#rcpparmadillo-and-openmp",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "RcppArmadillo and OpenMP",
+    "text": "RcppArmadillo and OpenMP\n\nFriendlier than RcppParallel… at least for ‘I-use-Rcpp-but-don’t-actually-know-much-about-C++’ users (like myself!).\nMust run only ‘Thread-safe’ calls, so calling R within parallel blocks can cause problems (almost all the time).\nUse arma objects, e.g. arma::mat, arma::vec, etc. Or, if you are used to them std::vector objects as these are thread safe.\nPseudo-Random Number Generation is not very straight forward… But C++11 has a nice set of functions that can be used together with OpenMP\nNeed to think about how processors work, cache memory, etc. Otherwise you could get into trouble… if your code is slower when run in parallel, then you probably are facing false sharing\nIf R crashes… try running R with a debugger (see Section 4.3 in Writing R extensions):\n~$ R --debugger=valgrind"
+  },
+  {
+    "objectID": "slides/week08.html#rcpparmadillo-and-openmp-workflow",
+    "href": "slides/week08.html#rcpparmadillo-and-openmp-workflow",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "RcppArmadillo and OpenMP workflow",
+    "text": "RcppArmadillo and OpenMP workflow\n\nAdd the following to your C++ source code to use OpenMP, and tell Rcpp that you need to include that in the compiler:\n#include &lt;omp.h&gt;\n// [[Rcpp::plugins(openmp)]]\nTell the compiler that you’ll be running a block in parallel with openmp\n#pragma omp [directives] [options]\n{\n  ...your neat parallel code...\n}\nYou’ll need to specify how OMP should handle the data:\n\nshared: Default, all threads access the same copy.\nprivate: Each thread has its own copy (although not initialized).\nfirstprivate Each thread has its own copy initialized.\nlastprivate Each thread has its own copy. The last value is the one stored in the main program.\n\nSetting default(none) is a good practice.\nCompile!"
+  },
+  {
+    "objectID": "slides/week08.html#ex-3-rcpparmadillo-openmp",
+    "href": "slides/week08.html#ex-3-rcpparmadillo-openmp",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Ex 3: RcppArmadillo + OpenMP",
+    "text": "Ex 3: RcppArmadillo + OpenMP\nComputing the distance matrix (see ?dist)\n\n#include &lt;Rcpp.h&gt;\n#include &lt;omp.h&gt;\n#include &lt;RcppArmadillo.h&gt;\n// [[Rcpp::depends(RcppArmadillo)]]\n// [[Rcpp::plugins(openmp)]]\nusing namespace Rcpp;\n\n// [[Rcpp::export]]\narma::mat dist_par(const arma::mat & X, int cores = 1) {\n  \n  // Some constants and the result\n  int N = (int) X.n_rows; int K = (int) X.n_cols;\n  arma::mat D(N,N,arma::fill::zeros);\n  \n  omp_set_num_threads(cores); // Setting the cores\n  \n#pragma omp parallel for shared(D, N, K, X) default(none)\n  for (int i=0; i&lt;N; ++i)\n    for (int j=0; j&lt;i; ++j) {\n      for (int k=0; k&lt;K; k++) \n        D.at(i,j) += pow(X.at(i,k) - X.at(j,k), 2.0);\n      \n      // Computing square root\n      D.at(i,j) = sqrt(D.at(i,j)); D.at(j,i) = D.at(i,j);\n    }\n      \n  // My nice distance matrix\n  return D;\n}"
+  },
+  {
+    "objectID": "slides/week08.html#resources",
+    "href": "slides/week08.html#resources",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Resources",
+    "text": "Resources\n\nPackage parallel\nUsing the iterators package\nUsing the foreach package\n32 OpenMP traps for C++ developers\nThe OpenMP API specification for parallel programming\n‘openmp’ tag in Rcpp gallery\nOpenMP tutorials and articles\n\nFor more, checkout the CRAN Task View on HPC"
+  },
+  {
+    "objectID": "slides/week08.html#simulating-pi",
+    "href": "slides/week08.html#simulating-pi",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "Simulating \\(\\pi\\)",
+    "text": "Simulating \\(\\pi\\)\n\nWe know that \\(\\pi = \\frac{A}{r^2}\\). We approximate it by randomly adding points \\(x\\) to a square of size 2 centered at the origin.\nSo, we approximate \\(\\pi\\) as \\(\\Pr\\{\\|x\\| \\leq 1\\}\\times 2^2\\)"
+  },
+  {
+    "objectID": "slides/week08.html#bonus-overview-of-hpc",
+    "href": "slides/week08.html#bonus-overview-of-hpc",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "(Bonus) Overview of HPC",
+    "text": "(Bonus) Overview of HPC\nUsing Flynn’s classical taxonomy, we can classify parallel computing according to the following two dimensions:\n\nType of instruction: Single vs Multiple\nData stream: Single vs Multiple\n\n\n   \n\nMichael Flynn’s Taxonomy (wiki)"
+  },
+  {
+    "objectID": "slides/week08.html#bonus-parallel-computing-software",
+    "href": "slides/week08.html#bonus-parallel-computing-software",
+    "title": "Week 8: Efficiency and High Performance Computing",
+    "section": "(Bonus) Parallel computing: Software",
+    "text": "(Bonus) Parallel computing: Software\nImplicit parallelization:\n\ntensorflow: Machine learning framework\npqR: Branched version of R.\nMicrosoft R: Microsoft’s R private version (based on Revolution Analytics’ R version).\ndata.table (R package): Data wrangling using multiple cores.\ncaret (R package): A meta package, has various implementations using parallel computing.\n\nExplicit parallelization (DIY):\n\nCUDA (C/C++ library): Programming with GP-GPUs.\nOpen MP (C/C++ library): Multi-core programming (CPUs).\nOpen MPI (C/C++ library): Large scale programming with multi-node systems.\nThreading Building Blocks (C/C++ library): Intel’s parallel computing library.\nKokkos (C++ library): A hardware-agnostic programming framework for HPC applications.\nparallel (R package): R’s built-in parallel computing package\nfuture (R package): Framework for parallelzing R.\nRcppParallel (R C++ API wrapper): Header and templates for building Rcpp+multi-threaded programs.\njulia (programming language): High-performing, has a framework for parallel computing as well."
   }
 ]
