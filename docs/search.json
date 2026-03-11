@@ -4456,7 +4456,7 @@
     "href": "slides/week08.html#example-square-roots-cont.-4",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "Example: Square Roots (cont. 4)",
-    "text": "Example: Square Roots (cont. 4)\nThat’s a lot faster!\n\nlibrary(microbenchmark)\nmicrobenchmark(forLoopRoots(10000), VectorizedRoots(10000))\n\nUnit: microseconds\n                   expr     min       lq      mean   median       uq     max\n    forLoopRoots(10000) 229.682 240.1165 250.26728 247.7425 252.1295 405.203\n VectorizedRoots(10000)  11.398  16.8305  23.99443  17.2610  18.6755 495.362\n neval\n   100\n   100\n\n\nAnytime that you can use vectorized computation, you should! It will (almost) always save you a lot of computation time!"
+    "text": "Example: Square Roots (cont. 4)\nThat’s a lot faster!\n\nlibrary(microbenchmark)\nmicrobenchmark(forLoopRoots(10000), VectorizedRoots(10000))\n\nUnit: microseconds\n                   expr     min      lq      mean  median       uq     max\n    forLoopRoots(10000) 231.650 249.608 254.17130 250.756 253.2365 503.111\n VectorizedRoots(10000)  16.359  17.220  25.68814  18.040  19.2290 690.932\n neval\n   100\n   100\n\n\nAnytime that you can use vectorized computation, you should! It will (almost) always save you a lot of computation time!"
   },
   {
     "objectID": "slides/week08.html#use-pre-made-functions",
@@ -4484,14 +4484,14 @@
     "href": "slides/week08.html#example-repeated-elements-cont.-2",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "Example: Repeated elements (cont. 2)",
-    "text": "Example: Repeated elements (cont. 2)\nOr slightly faster with a loop and vectorized comparison:\n\nmethod2 &lt;- function(x){\n  # first element cannot be a duplicate\n  out &lt;- sapply(2:length(x), function(i){\n    return(any(x[1:(i-1)] == x[i]))\n  })\n  out &lt;- c(FALSE, out)\n  return(out)\n}\n\nmethod2(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nmicrobenchmark(method1(vec), method2(vec))\n\nUnit: microseconds\n         expr      min       lq      mean    median       uq      max neval\n method1(vec) 2556.309 2770.575 3000.7879 2829.1845 2931.849 5034.964   100\n method2(vec)   90.651   98.851  122.9155  102.5205  106.723 2022.981   100"
+    "text": "Example: Repeated elements (cont. 2)\nOr slightly faster with a loop and vectorized comparison:\n\nmethod2 &lt;- function(x){\n  # first element cannot be a duplicate\n  out &lt;- sapply(2:length(x), function(i){\n    return(any(x[1:(i-1)] == x[i]))\n  })\n  out &lt;- c(FALSE, out)\n  return(out)\n}\n\nmethod2(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nmicrobenchmark(method1(vec), method2(vec))\n\nUnit: microseconds\n         expr      min        lq      mean   median        uq      max neval\n method1(vec) 2669.592 2735.5405 2907.7311 2762.949 2833.8175 4936.113   100\n method2(vec)   94.423   96.7805  117.5097   98.113  100.2245 1960.210   100"
   },
   {
     "objectID": "slides/week08.html#example-repeated-elements-cont.-3",
     "href": "slides/week08.html#example-repeated-elements-cont.-3",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "Example: Repeated elements (cont. 3)",
-    "text": "Example: Repeated elements (cont. 3)\nBut the real speed-up comes when we use the base function duplicated:\n\nmethod3 &lt;- function(x){\n  duplicated(x)\n}\n\nmethod3(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nmicrobenchmark(method2(vec), method3(vec))\n\nUnit: microseconds\n         expr    min      lq      mean  median       uq     max neval\n method2(vec) 92.250 97.8465 103.92721 102.541 105.3085 181.712   100\n method3(vec)  1.804  1.9270   6.13278   2.050   2.1935 402.374   100"
+    "text": "Example: Repeated elements (cont. 3)\nBut the real speed-up comes when we use the base function duplicated:\n\nmethod3 &lt;- function(x){\n  duplicated(x)\n}\n\nmethod3(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nmicrobenchmark(method2(vec), method3(vec))\n\nUnit: microseconds\n         expr    min       lq      mean   median       uq     max neval\n method2(vec) 91.594 101.7825 103.80257 103.1765 105.8825 143.418   100\n method3(vec)  1.722   1.9270   5.83922   2.0500   2.2140 375.847   100"
   },
   {
     "objectID": "slides/week08.html#what-is-hpc",
@@ -4708,7 +4708,7 @@
     "href": "slides/week08.html#session-info",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "Session info",
-    "text": "Session info\n\n\nR version 4.4.1 (2024-06-14)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS 26.3\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: America/Detroit\ntzcode source: internal\n\nattached base packages:\n[1] parallel  stats     graphics  grDevices utils     datasets  methods  \n[8] base     \n\nother attached packages:\n[1] microbenchmark_1.5.0\n\nloaded via a namespace (and not attached):\n [1] compiler_4.4.1    fastmap_1.2.0     cli_3.6.4         tools_4.4.1      \n [5] htmltools_0.5.8.1 rstudioapi_0.16.0 yaml_2.3.10       rmarkdown_2.28   \n [9] knitr_1.48        jsonlite_1.8.8    xfun_0.47         digest_0.6.37    \n[13] rlang_1.1.6       evaluate_1.0.3"
+    "text": "Session info\n\n\nR version 4.4.1 (2024-06-14)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS 26.3\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: America/Detroit\ntzcode source: internal\n\nattached base packages:\n[1] parallel  stats     graphics  grDevices utils     datasets  methods  \n[8] base     \n\nother attached packages:\n[1] microbenchmark_1.5.0\n\nloaded via a namespace (and not attached):\n [1] compiler_4.4.1    fastmap_1.2.0     cli_3.6.4         tools_4.4.1      \n [5] htmltools_0.5.8.1 yaml_2.3.10       rmarkdown_2.28    knitr_1.48       \n [9] jsonlite_1.8.8    xfun_0.47         digest_0.6.37     rlang_1.1.6      \n[13] evaluate_1.0.3"
   },
   {
     "objectID": "slides/week08.html#bonus-rcpp-r-c",

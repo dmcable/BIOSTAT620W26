@@ -308,9 +308,9 @@ code.r,code.cpp{
 <span id="cb9-2"><a></a><span class="fu">microbenchmark</span>(<span class="fu">forLoopRoots</span>(<span class="dv">10000</span>), <span class="fu">VectorizedRoots</span>(<span class="dv">10000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: microseconds
-                   expr     min       lq      mean   median       uq     max
-    forLoopRoots(10000) 229.682 240.1165 250.26728 247.7425 252.1295 405.203
- VectorizedRoots(10000)  11.398  16.8305  23.99443  17.2610  18.6755 495.362
+                   expr     min      lq      mean  median       uq     max
+    forLoopRoots(10000) 231.650 249.608 254.17130 250.756 253.2365 503.111
+ VectorizedRoots(10000)  16.359  17.220  25.68814  18.040  19.2290 690.932
  neval
    100
    100</code></pre>
@@ -386,9 +386,9 @@ code.r,code.cpp{
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">microbenchmark</span>(<span class="fu">method1</span>(vec), <span class="fu">method2</span>(vec))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: microseconds
-         expr      min       lq      mean    median       uq      max neval
- method1(vec) 2556.309 2770.575 3000.7879 2829.1845 2931.849 5034.964   100
- method2(vec)   90.651   98.851  122.9155  102.5205  106.723 2022.981   100</code></pre>
+         expr      min        lq      mean   median        uq      max neval
+ method1(vec) 2669.592 2735.5405 2907.7311 2762.949 2833.8175 4936.113   100
+ method2(vec)   94.423   96.7805  117.5097   98.113  100.2245 1960.210   100</code></pre>
 </div>
 </div>
 </section>
@@ -407,9 +407,9 @@ code.r,code.cpp{
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">microbenchmark</span>(<span class="fu">method2</span>(vec), <span class="fu">method3</span>(vec))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: microseconds
-         expr    min      lq      mean  median       uq     max neval
- method2(vec) 92.250 97.8465 103.92721 102.541 105.3085 181.712   100
- method3(vec)  1.804  1.9270   6.13278   2.050   2.1935 402.374   100</code></pre>
+         expr    min       lq      mean   median       uq     max neval
+ method2(vec) 91.594 101.7825 103.80257 103.1765 105.8825 143.418   100
+ method3(vec)  1.722   1.9270   5.83922   2.0500   2.2140 375.847   100</code></pre>
 </div>
 </div>
 </section>
@@ -989,7 +989,7 @@ i wears                   0.5    0.05</code></pre>
 </section>
 <section id="submitting-jobs-examples" class="slide level2 smaller">
 <h2>Submitting jobs (examples)</h2>
-<p>Imagine we have the following R script (download <a href="dummy.R">here</a>):</p>
+<p>Imagine we have the following R script (download <a href="img/dummy.R">here</a>):</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a><span class="fu">library</span>(data.table)</span>
 <span id="cb59-2"><a></a><span class="fu">set.seed</span>(<span class="dv">1231</span>)</span>
 <span id="cb59-3"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">y =</span> <span class="fu">rnorm</span>(<span class="fl">1e3</span>), <span class="at">x =</span> <span class="fu">sample.int</span>(<span class="dv">5</span>, <span class="fl">1e3</span>, <span class="cn">TRUE</span>))</span>
@@ -1020,7 +1020,7 @@ i wears                   0.5    0.05</code></pre>
 </section>
 <section id="rscript-in-a-bash-script-most-common" class="slide level2 smaller">
 <h2>Rscript in a bash script (most common)</h2>
-<p>In the case of running jobs on a cluster or something similar, we usually need to have a bash script. In our case, we have a file named <code>since_born_bash.sh</code> that calls <code>Rscript</code> (download <a href="since_born_bash.sh">here</a>)</p>
+<p>In the case of running jobs on a cluster or something similar, we usually need to have a bash script. In our case, we have a file named <code>since_born_bash.sh</code> that calls <code>Rscript</code> (download <a href="img/since_born_bash.sh">here</a>)</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb64-1"><a></a><span class="co">#!/bin/bash</span></span>
 <span id="cb64-2"><a></a><span class="ex">Rscript</span> since_born.R 1988-03-02</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Which we would execute like this:</p>
@@ -1077,9 +1077,9 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] compiler_4.4.1    fastmap_1.2.0     cli_3.6.4         tools_4.4.1      
- [5] htmltools_0.5.8.1 rstudioapi_0.16.0 yaml_2.3.10       rmarkdown_2.28   
- [9] knitr_1.48        jsonlite_1.8.8    xfun_0.47         digest_0.6.37    
-[13] rlang_1.1.6       evaluate_1.0.3   </code></pre>
+ [5] htmltools_0.5.8.1 yaml_2.3.10       rmarkdown_2.28    knitr_1.48       
+ [9] jsonlite_1.8.8    xfun_0.47         digest_0.6.37     rlang_1.1.6      
+[13] evaluate_1.0.3   </code></pre>
 </div>
 </div>
 </section>
