@@ -13,7 +13,7 @@ title: "Schedule"
 | 6 | 2/17-19 | Text Mining & Sentiment Analysis	 | [Slides](slides/week06.qmd)  | [Lab](labs/lab6.qmd) | [Midterm Project](assignments/midterm.qmd)  |
 | 7 | 2/24-26 | Scraping, APIs, and Regular Expressions	 | [Slides](slides/week07.qmd)  | [Lab](labs/lab7.qmd) | |
 |   | 3/3-5 | NO CLASS - SPRING RECESS	 |  |  |  |
-| 8 | 3/10-12 | Efficiency and High Performance Computing | [Slides](slides/week08.qmd) | Lab 8 | HW3 |
+| 8 | 3/10-12 | Efficiency and High Performance Computing | [Slides](slides/week08.qmd) | [Lab](labs/lab8.qmd) | HW3 |
 | 9 | 3/17-19 | SQL and Managing Big Data	 |  | Lab 9 | Final Project  |
 | 10 | 3/24-26 | Interactive Visualization |  | Lab 10 | HW4 |
 | 11 | 3/31-4/2 | Building a Website with Quarto and GitHub |  | Lab 11 |  |
