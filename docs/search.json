@@ -4456,7 +4456,7 @@
     "href": "slides/week08.html#example-square-roots-cont.-4",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "Example: Square Roots (cont. 4)",
-    "text": "Example: Square Roots (cont. 4)\nThat’s a lot faster!\n\nlibrary(microbenchmark)\nmicrobenchmark(forLoopRoots(10000), VectorizedRoots(10000))\n\nUnit: microseconds\n                   expr     min      lq      mean  median       uq     max\n    forLoopRoots(10000) 231.650 249.608 254.17130 250.756 253.2365 503.111\n VectorizedRoots(10000)  16.359  17.220  25.68814  18.040  19.2290 690.932\n neval\n   100\n   100\n\n\nAnytime that you can use vectorized computation, you should! It will (almost) always save you a lot of computation time!"
+    "text": "Example: Square Roots (cont. 4)\nThat’s a lot faster!\n\nlibrary(microbenchmark)\nmicrobenchmark(forLoopRoots(10000), VectorizedRoots(10000))\n\nUnit: microseconds\n                   expr     min       lq      mean  median      uq     max\n    forLoopRoots(10000) 233.946 247.2505 253.65306 248.296 252.273 519.470\n VectorizedRoots(10000)  10.455  17.0970  25.08216  17.712  18.778 612.868\n neval\n   100\n   100\n\n\nAnytime that you can use vectorized computation, you should! It will (almost) always save you a lot of computation time!"
   },
   {
     "objectID": "slides/week08.html#use-pre-made-functions",
@@ -4484,14 +4484,14 @@
     "href": "slides/week08.html#example-repeated-elements-cont.-2",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "Example: Repeated elements (cont. 2)",
-    "text": "Example: Repeated elements (cont. 2)\nOr slightly faster with a loop and vectorized comparison:\n\nmethod2 &lt;- function(x){\n  # first element cannot be a duplicate\n  out &lt;- sapply(2:length(x), function(i){\n    return(any(x[1:(i-1)] == x[i]))\n  })\n  out &lt;- c(FALSE, out)\n  return(out)\n}\n\nmethod2(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nmicrobenchmark(method1(vec), method2(vec))\n\nUnit: microseconds\n         expr      min        lq      mean   median        uq      max neval\n method1(vec) 2669.592 2735.5405 2907.7311 2762.949 2833.8175 4936.113   100\n method2(vec)   94.423   96.7805  117.5097   98.113  100.2245 1960.210   100"
+    "text": "Example: Repeated elements (cont. 2)\nOr slightly faster with a loop and vectorized comparison:\n\nmethod2 &lt;- function(x){\n  # first element cannot be a duplicate\n  out &lt;- sapply(2:length(x), function(i){\n    return(any(x[1:(i-1)] == x[i]))\n  })\n  out &lt;- c(FALSE, out)\n  return(out)\n}\n\nmethod2(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nmicrobenchmark(method1(vec), method2(vec))\n\nUnit: microseconds\n         expr      min        lq     mean    median       uq      max neval\n method1(vec) 2640.933 2750.7925 2932.723 2782.0140 2845.872 4827.832   100\n method2(vec)   94.341   98.8715  121.599  101.5775  104.263 1961.645   100"
   },
   {
     "objectID": "slides/week08.html#example-repeated-elements-cont.-3",
     "href": "slides/week08.html#example-repeated-elements-cont.-3",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "Example: Repeated elements (cont. 3)",
-    "text": "Example: Repeated elements (cont. 3)\nBut the real speed-up comes when we use the base function duplicated:\n\nmethod3 &lt;- function(x){\n  duplicated(x)\n}\n\nmethod3(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nmicrobenchmark(method2(vec), method3(vec))\n\nUnit: microseconds\n         expr    min       lq      mean   median       uq     max neval\n method2(vec) 91.594 101.7825 103.80257 103.1765 105.8825 143.418   100\n method3(vec)  1.722   1.9270   5.83922   2.0500   2.2140 375.847   100"
+    "text": "Example: Repeated elements (cont. 3)\nBut the real speed-up comes when we use the base function duplicated:\n\nmethod3 &lt;- function(x){\n  duplicated(x)\n}\n\nmethod3(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nmicrobenchmark(method2(vec), method3(vec))\n\nUnit: microseconds\n         expr    min     lq      mean  median       uq     max neval\n method2(vec) 94.218 99.056 102.99364 102.992 104.9805 139.482   100\n method3(vec)  1.722  1.927   5.84701   2.009   2.2140 370.927   100"
   },
   {
     "objectID": "slides/week08.html#what-is-hpc",
