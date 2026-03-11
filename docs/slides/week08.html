@@ -308,9 +308,9 @@ code.r,code.cpp{
 <span id="cb9-2"><a></a><span class="fu">microbenchmark</span>(<span class="fu">forLoopRoots</span>(<span class="dv">10000</span>), <span class="fu">VectorizedRoots</span>(<span class="dv">10000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: microseconds
-                   expr     min       lq      mean  median      uq     max
-    forLoopRoots(10000) 226.115 237.6565 250.95362 251.535 259.776 299.833
- VectorizedRoots(10000)  10.004  16.4410  22.94196  17.179  18.450 585.357
+                   expr     min       lq      mean   median       uq     max
+    forLoopRoots(10000) 229.682 240.1165 250.26728 247.7425 252.1295 405.203
+ VectorizedRoots(10000)  11.398  16.8305  23.99443  17.2610  18.6755 495.362
  neval
    100
    100</code></pre>
@@ -386,9 +386,9 @@ code.r,code.cpp{
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">microbenchmark</span>(<span class="fu">method1</span>(vec), <span class="fu">method2</span>(vec))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: microseconds
-         expr      min        lq      mean   median       uq      max neval
- method1(vec) 2603.787 2754.8310 3008.0589 2795.298 2928.261 6641.918   100
- method2(vec)   89.667   97.6825  122.9541  100.614  106.805 2079.643   100</code></pre>
+         expr      min       lq      mean    median       uq      max neval
+ method1(vec) 2556.309 2770.575 3000.7879 2829.1845 2931.849 5034.964   100
+ method2(vec)   90.651   98.851  122.9155  102.5205  106.723 2022.981   100</code></pre>
 </div>
 </div>
 </section>
@@ -407,9 +407,9 @@ code.r,code.cpp{
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">microbenchmark</span>(<span class="fu">method2</span>(vec), <span class="fu">method3</span>(vec))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: microseconds
-         expr    min      lq      mean  median      uq     max neval
- method2(vec) 92.537 95.8375 103.23103 99.8145 107.420 152.479   100
- method3(vec)  1.640  1.8450   6.42429  2.0090   2.214 433.206   100</code></pre>
+         expr    min      lq      mean  median       uq     max neval
+ method2(vec) 92.250 97.8465 103.92721 102.541 105.3085 181.712   100
+ method3(vec)  1.804  1.9270   6.13278   2.050   2.1935 402.374   100</code></pre>
 </div>
 </div>
 </section>
@@ -745,7 +745,7 @@ x           -0.06082548  0.02748265 -0.01327855 -0.08012361 -0.04067826</code></
 </section>
 <section id="conways-game-of-masks" class="slide level2">
 <h2>Conway’s Game of Masks</h2>
-<p>Download the program <a href="sars-cov2.R">here</a>.</p>
+<p>Download the program <a href="img/sars-cov2.R">here</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="co"># source("~/Downloads/sars-cov2.R", echo=FALSE)</span></span>
 <span id="cb39-2"><a></a><span class="fu">source</span>(<span class="st">"img/sars-cov2.R"</span>, <span class="at">echo =</span> <span class="cn">FALSE</span>)</span>
@@ -1014,16 +1014,19 @@ i wears                   0.5    0.05</code></pre>
 <section id="rscript-as-a-program" class="slide level2 smaller">
 <h2>Rscript as a program</h2>
 <p>For this we would need to change it to an executable. In unix you can use the <a href="https://wikipedia.org/wiki/chmod">chmod</a> command: <code>chmod +x since_born.R</code>. This allows us to do the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb63-1"><a></a><span class="ex">./since_born.R</span> 1988-03-02</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="rscript-in-a-bash-script-most-common" class="slide level2 smaller">
 <h2>Rscript in a bash script (most common)</h2>
 <p>In the case of running jobs on a cluster or something similar, we usually need to have a bash script. In our case, we have a file named <code>since_born_bash.sh</code> that calls <code>Rscript</code> (download <a href="since_born_bash.sh">here</a>)</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb63-1"><a></a><span class="co">#!/bin/bash</span></span>
-<span id="cb63-2"><a></a><span class="ex">Rscript</span> since_born.R 1988-03-02</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb64-1"><a></a><span class="co">#!/bin/bash</span></span>
+<span id="cb64-2"><a></a><span class="ex">Rscript</span> since_born.R 1988-03-02</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Which we would execute like this:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Fatal error: cannot open file 'since_born.R': No such file or directory</code></pre>
+<pre><code>13888 days since you were born.</code></pre>
 </div>
 </div>
 </section>
@@ -1074,9 +1077,9 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] compiler_4.4.1    fastmap_1.2.0     cli_3.6.4         tools_4.4.1      
- [5] htmltools_0.5.8.1 rstudioapi_0.16.0 yaml_2.3.10       codetools_0.2-20 
- [9] rmarkdown_2.28    knitr_1.48        jsonlite_1.8.8    xfun_0.47        
-[13] digest_0.6.37     rlang_1.1.6       evaluate_1.0.3   </code></pre>
+ [5] htmltools_0.5.8.1 rstudioapi_0.16.0 yaml_2.3.10       rmarkdown_2.28   
+ [9] knitr_1.48        jsonlite_1.8.8    xfun_0.47         digest_0.6.37    
+[13] rlang_1.1.6       evaluate_1.0.3   </code></pre>
 </div>
 </div>
 </section>
@@ -1111,29 +1114,29 @@ Fib(n-1) + Fib(n - 2) &amp; \mbox{otherwise}
 </div>
 </div>
 </section>
-<section id="rcpparmadillo-and-openmp" class="slide level2">
+<section id="rcpparmadillo-and-openmp" class="slide level2 smaller">
 <h2>RcppArmadillo and OpenMP</h2>
 <ul>
-<li><p>Friendlier than <a href="http://rcppcore.github.io/RcppParallel/"><strong>RcppParallel</strong></a>… at least for ‘I-use-Rcpp-but-don’t-actually-know-much-about-C++’ users (like myself!).</p></li>
+<li><p>Friendlier than <a href="http://rcppcore.github.io/RcppParallel/"><strong>RcppParallel</strong></a>… at least for ‘I-use-Rcpp-but-don’t-actually-know-much-about-C++’ users.</p></li>
 <li><p>Must run only ‘Thread-safe’ calls, so calling R within parallel blocks can cause problems (almost all the time).</p></li>
 <li><p>Use <code>arma</code> objects, e.g.&nbsp;<code>arma::mat</code>, <code>arma::vec</code>, etc. Or, if you are used to them <code>std::vector</code> objects as these are thread safe.</p></li>
 <li><p>Pseudo-Random Number Generation is not very straight forward… But C++11 has a <a href="http://en.cppreference.com/w/cpp/numeric/random">nice set of functions</a> that can be used together with OpenMP</p></li>
 <li><p>Need to think about how processors work, cache memory, etc. Otherwise you could get into trouble… if your code is slower when run in parallel, then you probably are facing <a href="https://software.intel.com/en-us/articles/avoiding-and-identifying-false-sharing-among-threads">false sharing</a></p></li>
 <li><p>If R crashes… try running R with a debugger (see <a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Checking-memory-access">Section 4.3 in Writing R extensions</a>):</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb68-1"><a></a>~$ R --debugger=valgrind</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb69-1"><a></a>~$ R --debugger=valgrind</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 </section>
-<section id="rcpparmadillo-and-openmp-workflow" class="slide level2">
+<section id="rcpparmadillo-and-openmp-workflow" class="slide level2 smaller">
 <h2>RcppArmadillo and OpenMP workflow</h2>
 <ol type="1">
 <li><p>Add the following to your C++ source code to use OpenMP, and tell Rcpp that you need to include that in the compiler:</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb69-1"><a></a><span class="pp">#include </span><span class="im">&lt;omp.h&gt;</span></span>
-<span id="cb69-2"><a></a><span class="co">// [[Rcpp::plugins(openmp)]]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb70"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb70-1"><a></a><span class="pp">#include </span><span class="im">&lt;omp.h&gt;</span></span>
+<span id="cb70-2"><a></a><span class="co">// [[Rcpp::plugins(openmp)]]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Tell the compiler that you’ll be running a block in parallel with openmp</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb70-1"><a></a><span class="pp">#pragma omp [directives] [options]</span></span>
-<span id="cb70-2"><a></a><span class="op">{</span></span>
-<span id="cb70-3"><a></a>  <span class="op">...</span>your neat parallel code<span class="op">...</span></span>
-<span id="cb70-4"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb71-1"><a></a><span class="pp">#pragma omp [directives] [!q](location)</span></span>
+<span id="cb71-2"><a></a><span class="op">{</span></span>
+<span id="cb71-3"><a></a>  <span class="op">...</span>your neat parallel code<span class="op">...</span></span>
+<span id="cb71-4"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You’ll need to specify how OMP should handle the data:</p>
 <ul>
 <li><code>shared</code>: Default, all threads access the same copy.</li>
@@ -1149,53 +1152,53 @@ Fib(n-1) + Fib(n - 2) &amp; \mbox{otherwise}
 <h2>Ex 3: RcppArmadillo + OpenMP</h2>
 <p>Computing the distance matrix (see <code>?dist</code>)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb71-1"><a></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
-<span id="cb71-2"><a></a><span class="pp">#include </span><span class="im">&lt;omp.h&gt;</span></span>
-<span id="cb71-3"><a></a><span class="pp">#include </span><span class="im">&lt;RcppArmadillo.h&gt;</span></span>
-<span id="cb71-4"><a></a><span class="co">// [[Rcpp::depends(RcppArmadillo)]]</span></span>
-<span id="cb71-5"><a></a><span class="co">// [[Rcpp::plugins(openmp)]]</span></span>
-<span id="cb71-6"><a></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp<span class="op">;</span></span>
-<span id="cb71-7"><a></a></span>
-<span id="cb71-8"><a></a><span class="co">// [[Rcpp::export]]</span></span>
-<span id="cb71-9"><a></a>arma<span class="op">::</span>mat dist_par<span class="op">(</span><span class="at">const</span> arma<span class="op">::</span>mat <span class="op">&amp;</span> X<span class="op">,</span> <span class="dt">int</span> cores <span class="op">=</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb71-10"><a></a>  </span>
-<span id="cb71-11"><a></a>  <span class="co">// Some constants and the result</span></span>
-<span id="cb71-12"><a></a>  <span class="dt">int</span> N <span class="op">=</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> X<span class="op">.</span>n_rows<span class="op">;</span> <span class="dt">int</span> K <span class="op">=</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> X<span class="op">.</span>n_cols<span class="op">;</span></span>
-<span id="cb71-13"><a></a>  arma<span class="op">::</span>mat D<span class="op">(</span>N<span class="op">,</span>N<span class="op">,</span>arma<span class="op">::</span>fill<span class="op">::</span>zeros<span class="op">);</span></span>
-<span id="cb71-14"><a></a>  </span>
-<span id="cb71-15"><a></a>  omp_set_num_threads<span class="op">(</span>cores<span class="op">);</span> <span class="co">// Setting the cores</span></span>
-<span id="cb71-16"><a></a>  </span>
-<span id="cb71-17"><a></a><span class="pp">#pragma omp parallel for shared(D, N, K, X) default(none)</span></span>
-<span id="cb71-18"><a></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span>N<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span></span>
-<span id="cb71-19"><a></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j<span class="op">=</span><span class="dv">0</span><span class="op">;</span> j<span class="op">&lt;</span>i<span class="op">;</span> <span class="op">++</span>j<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb71-20"><a></a>      <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k<span class="op">=</span><span class="dv">0</span><span class="op">;</span> k<span class="op">&lt;</span>K<span class="op">;</span> k<span class="op">++)</span> </span>
-<span id="cb71-21"><a></a>        D<span class="op">.</span>at<span class="op">(</span>i<span class="op">,</span>j<span class="op">)</span> <span class="op">+=</span> pow<span class="op">(</span>X<span class="op">.</span>at<span class="op">(</span>i<span class="op">,</span>k<span class="op">)</span> <span class="op">-</span> X<span class="op">.</span>at<span class="op">(</span>j<span class="op">,</span>k<span class="op">),</span> <span class="fl">2.0</span><span class="op">);</span></span>
-<span id="cb71-22"><a></a>      </span>
-<span id="cb71-23"><a></a>      <span class="co">// Computing square root</span></span>
-<span id="cb71-24"><a></a>      D<span class="op">.</span>at<span class="op">(</span>i<span class="op">,</span>j<span class="op">)</span> <span class="op">=</span> sqrt<span class="op">(</span>D<span class="op">.</span>at<span class="op">(</span>i<span class="op">,</span>j<span class="op">));</span> D<span class="op">.</span>at<span class="op">(</span>j<span class="op">,</span>i<span class="op">)</span> <span class="op">=</span> D<span class="op">.</span>at<span class="op">(</span>i<span class="op">,</span>j<span class="op">);</span></span>
-<span id="cb71-25"><a></a>    <span class="op">}</span></span>
-<span id="cb71-26"><a></a>      </span>
-<span id="cb71-27"><a></a>  <span class="co">// My nice distance matrix</span></span>
-<span id="cb71-28"><a></a>  <span class="cf">return</span> D<span class="op">;</span></span>
-<span id="cb71-29"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb72-1"><a></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
+<span id="cb72-2"><a></a><span class="pp">#include </span><span class="im">&lt;omp.h&gt;</span></span>
+<span id="cb72-3"><a></a><span class="pp">#include </span><span class="im">&lt;RcppArmadillo.h&gt;</span></span>
+<span id="cb72-4"><a></a><span class="co">// [[Rcpp::depends(RcppArmadillo)]]</span></span>
+<span id="cb72-5"><a></a><span class="co">// [[Rcpp::plugins(openmp)]]</span></span>
+<span id="cb72-6"><a></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp<span class="op">;</span></span>
+<span id="cb72-7"><a></a></span>
+<span id="cb72-8"><a></a><span class="co">// [[Rcpp::export]]</span></span>
+<span id="cb72-9"><a></a>arma<span class="op">::</span>mat dist_par<span class="op">(</span><span class="at">const</span> arma<span class="op">::</span>mat <span class="op">&amp;</span> X<span class="op">,</span> <span class="dt">int</span> cores <span class="op">=</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb72-10"><a></a>  </span>
+<span id="cb72-11"><a></a>  <span class="co">// Some constants and the result</span></span>
+<span id="cb72-12"><a></a>  <span class="dt">int</span> N <span class="op">=</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> X<span class="op">.</span>n_rows<span class="op">;</span> <span class="dt">int</span> K <span class="op">=</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> X<span class="op">.</span>n_cols<span class="op">;</span></span>
+<span id="cb72-13"><a></a>  arma<span class="op">::</span>mat D<span class="op">(</span>N<span class="op">,</span>N<span class="op">,</span>arma<span class="op">::</span>fill<span class="op">::</span>zeros<span class="op">);</span></span>
+<span id="cb72-14"><a></a>  </span>
+<span id="cb72-15"><a></a>  omp_set_num_threads<span class="op">(</span>cores<span class="op">);</span> <span class="co">// Setting the cores</span></span>
+<span id="cb72-16"><a></a>  </span>
+<span id="cb72-17"><a></a><span class="pp">#pragma omp parallel for shared(D, N, K, X) default(none)</span></span>
+<span id="cb72-18"><a></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span>N<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span></span>
+<span id="cb72-19"><a></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j<span class="op">=</span><span class="dv">0</span><span class="op">;</span> j<span class="op">&lt;</span>i<span class="op">;</span> <span class="op">++</span>j<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb72-20"><a></a>      <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k<span class="op">=</span><span class="dv">0</span><span class="op">;</span> k<span class="op">&lt;</span>K<span class="op">;</span> k<span class="op">++)</span> </span>
+<span id="cb72-21"><a></a>        D<span class="op">.</span>at<span class="op">(</span>i<span class="op">,</span>j<span class="op">)</span> <span class="op">+=</span> pow<span class="op">(</span>X<span class="op">.</span>at<span class="op">(</span>i<span class="op">,</span>k<span class="op">)</span> <span class="op">-</span> X<span class="op">.</span>at<span class="op">(</span>j<span class="op">,</span>k<span class="op">),</span> <span class="fl">2.0</span><span class="op">);</span></span>
+<span id="cb72-22"><a></a>      </span>
+<span id="cb72-23"><a></a>      <span class="co">// Computing square root</span></span>
+<span id="cb72-24"><a></a>      D<span class="op">.</span>at<span class="op">(</span>i<span class="op">,</span>j<span class="op">)</span> <span class="op">=</span> sqrt<span class="op">(</span>D<span class="op">.</span>at<span class="op">(</span>i<span class="op">,</span>j<span class="op">));</span> D<span class="op">.</span>at<span class="op">(</span>j<span class="op">,</span>i<span class="op">)</span> <span class="op">=</span> D<span class="op">.</span>at<span class="op">(</span>i<span class="op">,</span>j<span class="op">);</span></span>
+<span id="cb72-25"><a></a>    <span class="op">}</span></span>
+<span id="cb72-26"><a></a>      </span>
+<span id="cb72-27"><a></a>  <span class="co">// My nice distance matrix</span></span>
+<span id="cb72-28"><a></a>  <span class="cf">return</span> D<span class="op">;</span></span>
+<span id="cb72-29"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a></a><span class="fu">set.seed</span>(<span class="dv">1231</span>)</span>
-<span id="cb72-2"><a></a>K <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb72-3"><a></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb72-4"><a></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>K), <span class="at">ncol=</span>K)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a></a><span class="fu">set.seed</span>(<span class="dv">1231</span>)</span>
+<span id="cb73-2"><a></a>K <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb73-3"><a></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb73-4"><a></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>K), <span class="at">ncol=</span>K)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a></a><span class="co"># Benchmarking!</span></span>
-<span id="cb73-2"><a></a>microbenchmark<span class="sc">::</span><span class="fu">microbenchmark</span>(</span>
-<span id="cb73-3"><a></a>  <span class="fu">dist</span>(x),                 <span class="co"># stats::dist</span></span>
-<span id="cb73-4"><a></a>  <span class="fu">dist_par</span>(x, <span class="at">cores =</span> <span class="dv">1</span>),  <span class="co"># 1 core</span></span>
-<span id="cb73-5"><a></a>  <span class="fu">dist_par</span>(x, <span class="at">cores =</span> <span class="dv">2</span>),  <span class="co"># 2 cores</span></span>
-<span id="cb73-6"><a></a>  <span class="at">times =</span> <span class="dv">10</span>, <span class="at">unit=</span><span class="st">"relative"</span></span>
-<span id="cb73-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a></a><span class="co"># Benchmarking!</span></span>
+<span id="cb74-2"><a></a>microbenchmark<span class="sc">::</span><span class="fu">microbenchmark</span>(</span>
+<span id="cb74-3"><a></a>  <span class="fu">dist</span>(x),                 <span class="co"># stats::dist</span></span>
+<span id="cb74-4"><a></a>  <span class="fu">dist_par</span>(x, <span class="at">cores =</span> <span class="dv">1</span>),  <span class="co"># 1 core</span></span>
+<span id="cb74-5"><a></a>  <span class="fu">dist_par</span>(x, <span class="at">cores =</span> <span class="dv">2</span>),  <span class="co"># 2 cores</span></span>
+<span id="cb74-6"><a></a>  <span class="at">times =</span> <span class="dv">10</span>, <span class="at">unit=</span><span class="st">"relative"</span></span>
+<span id="cb74-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="resources" class="slide level2">
@@ -1231,40 +1234,40 @@ Fib(n-1) + Fib(n - 2) &amp; \mbox{otherwise}
 
 <p>The R code to do this</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a></a>pisim <span class="ot">&lt;-</span> <span class="cf">function</span>(i, nsim) {  <span class="co"># Notice we don't use the -i-</span></span>
-<span id="cb74-2"><a></a>  <span class="co"># Random points</span></span>
-<span id="cb74-3"><a></a>  ans  <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(nsim<span class="sc">*</span><span class="dv">2</span>), <span class="at">ncol=</span><span class="dv">2</span>)</span>
-<span id="cb74-4"><a></a>  </span>
-<span id="cb74-5"><a></a>  <span class="co"># Distance to the origin</span></span>
-<span id="cb74-6"><a></a>  ans  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">rowSums</span>(ans<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb74-7"><a></a>  </span>
-<span id="cb74-8"><a></a>  <span class="co"># Estimated pi</span></span>
-<span id="cb74-9"><a></a>  (<span class="fu">sum</span>(ans <span class="sc">&lt;=</span> <span class="dv">1</span>)<span class="sc">*</span><span class="dv">4</span>)<span class="sc">/</span>nsim</span>
-<span id="cb74-10"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a>pisim <span class="ot">&lt;-</span> <span class="cf">function</span>(i, nsim) {  <span class="co"># Notice we don't use the -i-</span></span>
+<span id="cb75-2"><a></a>  <span class="co"># Random points</span></span>
+<span id="cb75-3"><a></a>  ans  <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(nsim<span class="sc">*</span><span class="dv">2</span>), <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb75-4"><a></a>  </span>
+<span id="cb75-5"><a></a>  <span class="co"># Distance to the origin</span></span>
+<span id="cb75-6"><a></a>  ans  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">rowSums</span>(ans<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb75-7"><a></a>  </span>
+<span id="cb75-8"><a></a>  <span class="co"># Estimated pi</span></span>
+<span id="cb75-9"><a></a>  (<span class="fu">sum</span>(ans <span class="sc">&lt;=</span> <span class="dv">1</span>)<span class="sc">*</span><span class="dv">4</span>)<span class="sc">/</span>nsim</span>
+<span id="cb75-10"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a><span class="fu">library</span>(parallel)</span>
-<span id="cb75-2"><a></a><span class="co"># Setup</span></span>
-<span id="cb75-3"><a></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(<span class="dv">4</span>L)</span>
-<span id="cb75-4"><a></a><span class="fu">clusterSetRNGStream</span>(cl, <span class="dv">123</span>)</span>
-<span id="cb75-5"><a></a></span>
-<span id="cb75-6"><a></a><span class="co"># Number of simulations we want each time to run</span></span>
-<span id="cb75-7"><a></a>nsim <span class="ot">&lt;-</span> <span class="fl">1e5</span></span>
-<span id="cb75-8"><a></a></span>
-<span id="cb75-9"><a></a><span class="co"># We need to make -nsim- and -pisim- available to the</span></span>
-<span id="cb75-10"><a></a><span class="co"># cluster</span></span>
-<span id="cb75-11"><a></a><span class="fu">clusterExport</span>(cl, <span class="fu">c</span>(<span class="st">"nsim"</span>, <span class="st">"pisim"</span>))</span>
-<span id="cb75-12"><a></a></span>
-<span id="cb75-13"><a></a><span class="co"># Benchmarking: parSapply and sapply will run this simulation</span></span>
-<span id="cb75-14"><a></a><span class="co"># a hundred times each, so at the end we have 1e5*100 points</span></span>
-<span id="cb75-15"><a></a><span class="co"># to approximate pi</span></span>
-<span id="cb75-16"><a></a>microbenchmark<span class="sc">::</span><span class="fu">microbenchmark</span>(</span>
-<span id="cb75-17"><a></a>  <span class="at">parallel =</span> <span class="fu">parSapply</span>(cl, <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, pisim, <span class="at">nsim=</span>nsim),</span>
-<span id="cb75-18"><a></a>  <span class="at">serial   =</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, pisim, <span class="at">nsim=</span>nsim), <span class="at">times =</span> <span class="dv">1</span>, <span class="at">unit=</span><span class="st">"relative"</span></span>
-<span id="cb75-19"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a></a><span class="fu">library</span>(parallel)</span>
+<span id="cb76-2"><a></a><span class="co"># Setup</span></span>
+<span id="cb76-3"><a></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(<span class="dv">4</span>L)</span>
+<span id="cb76-4"><a></a><span class="fu">clusterSetRNGStream</span>(cl, <span class="dv">123</span>)</span>
+<span id="cb76-5"><a></a></span>
+<span id="cb76-6"><a></a><span class="co"># Number of simulations we want each time to run</span></span>
+<span id="cb76-7"><a></a>nsim <span class="ot">&lt;-</span> <span class="fl">1e5</span></span>
+<span id="cb76-8"><a></a></span>
+<span id="cb76-9"><a></a><span class="co"># We need to make -nsim- and -pisim- available to the</span></span>
+<span id="cb76-10"><a></a><span class="co"># cluster</span></span>
+<span id="cb76-11"><a></a><span class="fu">clusterExport</span>(cl, <span class="fu">c</span>(<span class="st">"nsim"</span>, <span class="st">"pisim"</span>))</span>
+<span id="cb76-12"><a></a></span>
+<span id="cb76-13"><a></a><span class="co"># Benchmarking: parSapply and sapply will run this simulation</span></span>
+<span id="cb76-14"><a></a><span class="co"># a hundred times each, so at the end we have 1e5*100 points</span></span>
+<span id="cb76-15"><a></a><span class="co"># to approximate pi</span></span>
+<span id="cb76-16"><a></a>microbenchmark<span class="sc">::</span><span class="fu">microbenchmark</span>(</span>
+<span id="cb76-17"><a></a>  <span class="at">parallel =</span> <span class="fu">parSapply</span>(cl, <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, pisim, <span class="at">nsim=</span>nsim),</span>
+<span id="cb76-18"><a></a>  <span class="at">serial   =</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, pisim, <span class="at">nsim=</span>nsim), <span class="at">times =</span> <span class="dv">1</span>, <span class="at">unit=</span><span class="st">"relative"</span></span>
+<span id="cb76-19"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: relative
      expr      min       lq     mean   median       uq      max neval
@@ -1281,7 +1284,7 @@ Fib(n-1) + Fib(n - 2) &amp; \mbox{otherwise}
 <li><p>Data stream: Single vs Multiple</p></li>
 </ol>
 <figure>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/SISD.svg/480px-SISD.svg.png" style="width:23%;"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/MISD.svg/480px-MISD.svg.png" style="width:23%;"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/SIMD.svg/480px-SIMD.svg.png" style="width:23%;"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/MIMD.svg/480px-MIMD.svg.png" style="width:23%;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/SISD.svg" style="width:23%;"> <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/MISD.svg" style="width:23%;"> <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/SIMD.svg" style="width:23%;"> <img src="https://upload.wikimedia.org/wikipedia/commons/c/c6/MIMD.svg" style="width:23%;">
 <figcaption>
 <a href="https://en.wikipedia.org/wiki/Michael_J._Flynn" target="_blank">Michael Flynn</a>’s Taxonomy (<a href="https://en.wikipedia.org/wiki/Flynn%27s_taxonomy" target="_blank">wiki</a>)
 </figcaption>

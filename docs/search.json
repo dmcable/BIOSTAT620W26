@@ -4456,7 +4456,7 @@
     "href": "slides/week08.html#example-square-roots-cont.-4",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "Example: Square Roots (cont. 4)",
-    "text": "Example: Square Roots (cont. 4)\nThat’s a lot faster!\n\nlibrary(microbenchmark)\nmicrobenchmark(forLoopRoots(10000), VectorizedRoots(10000))\n\nUnit: microseconds\n                   expr     min       lq      mean  median      uq     max\n    forLoopRoots(10000) 226.115 237.6565 250.95362 251.535 259.776 299.833\n VectorizedRoots(10000)  10.004  16.4410  22.94196  17.179  18.450 585.357\n neval\n   100\n   100\n\n\nAnytime that you can use vectorized computation, you should! It will (almost) always save you a lot of computation time!"
+    "text": "Example: Square Roots (cont. 4)\nThat’s a lot faster!\n\nlibrary(microbenchmark)\nmicrobenchmark(forLoopRoots(10000), VectorizedRoots(10000))\n\nUnit: microseconds\n                   expr     min       lq      mean   median       uq     max\n    forLoopRoots(10000) 229.682 240.1165 250.26728 247.7425 252.1295 405.203\n VectorizedRoots(10000)  11.398  16.8305  23.99443  17.2610  18.6755 495.362\n neval\n   100\n   100\n\n\nAnytime that you can use vectorized computation, you should! It will (almost) always save you a lot of computation time!"
   },
   {
     "objectID": "slides/week08.html#use-pre-made-functions",
@@ -4484,14 +4484,14 @@
     "href": "slides/week08.html#example-repeated-elements-cont.-2",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "Example: Repeated elements (cont. 2)",
-    "text": "Example: Repeated elements (cont. 2)\nOr slightly faster with a loop and vectorized comparison:\n\nmethod2 &lt;- function(x){\n  # first element cannot be a duplicate\n  out &lt;- sapply(2:length(x), function(i){\n    return(any(x[1:(i-1)] == x[i]))\n  })\n  out &lt;- c(FALSE, out)\n  return(out)\n}\n\nmethod2(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nmicrobenchmark(method1(vec), method2(vec))\n\nUnit: microseconds\n         expr      min        lq      mean   median       uq      max neval\n method1(vec) 2603.787 2754.8310 3008.0589 2795.298 2928.261 6641.918   100\n method2(vec)   89.667   97.6825  122.9541  100.614  106.805 2079.643   100"
+    "text": "Example: Repeated elements (cont. 2)\nOr slightly faster with a loop and vectorized comparison:\n\nmethod2 &lt;- function(x){\n  # first element cannot be a duplicate\n  out &lt;- sapply(2:length(x), function(i){\n    return(any(x[1:(i-1)] == x[i]))\n  })\n  out &lt;- c(FALSE, out)\n  return(out)\n}\n\nmethod2(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nmicrobenchmark(method1(vec), method2(vec))\n\nUnit: microseconds\n         expr      min       lq      mean    median       uq      max neval\n method1(vec) 2556.309 2770.575 3000.7879 2829.1845 2931.849 5034.964   100\n method2(vec)   90.651   98.851  122.9155  102.5205  106.723 2022.981   100"
   },
   {
     "objectID": "slides/week08.html#example-repeated-elements-cont.-3",
     "href": "slides/week08.html#example-repeated-elements-cont.-3",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "Example: Repeated elements (cont. 3)",
-    "text": "Example: Repeated elements (cont. 3)\nBut the real speed-up comes when we use the base function duplicated:\n\nmethod3 &lt;- function(x){\n  duplicated(x)\n}\n\nmethod3(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nmicrobenchmark(method2(vec), method3(vec))\n\nUnit: microseconds\n         expr    min      lq      mean  median      uq     max neval\n method2(vec) 92.537 95.8375 103.23103 99.8145 107.420 152.479   100\n method3(vec)  1.640  1.8450   6.42429  2.0090   2.214 433.206   100"
+    "text": "Example: Repeated elements (cont. 3)\nBut the real speed-up comes when we use the base function duplicated:\n\nmethod3 &lt;- function(x){\n  duplicated(x)\n}\n\nmethod3(vec)[1:11]\n\n [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nmicrobenchmark(method2(vec), method3(vec))\n\nUnit: microseconds\n         expr    min      lq      mean  median       uq     max neval\n method2(vec) 92.250 97.8465 103.92721 102.541 105.3085 181.712   100\n method3(vec)  1.804  1.9270   6.13278   2.050   2.1935 402.374   100"
   },
   {
     "objectID": "slides/week08.html#what-is-hpc",
@@ -4694,21 +4694,21 @@
     "href": "slides/week08.html#rscript-as-a-program",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "Rscript as a program",
-    "text": "Rscript as a program\nFor this we would need to change it to an executable. In unix you can use the chmod command: chmod +x since_born.R. This allows us to do the following:"
+    "text": "Rscript as a program\nFor this we would need to change it to an executable. In unix you can use the chmod command: chmod +x since_born.R. This allows us to do the following:\n\n./since_born.R 1988-03-02"
   },
   {
     "objectID": "slides/week08.html#rscript-in-a-bash-script-most-common",
     "href": "slides/week08.html#rscript-in-a-bash-script-most-common",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "Rscript in a bash script (most common)",
-    "text": "Rscript in a bash script (most common)\nIn the case of running jobs on a cluster or something similar, we usually need to have a bash script. In our case, we have a file named since_born_bash.sh that calls Rscript (download here)\n#!/bin/bash\nRscript since_born.R 1988-03-02\nWhich we would execute like this:\n\n\nFatal error: cannot open file 'since_born.R': No such file or directory"
+    "text": "Rscript in a bash script (most common)\nIn the case of running jobs on a cluster or something similar, we usually need to have a bash script. In our case, we have a file named since_born_bash.sh that calls Rscript (download here)\n#!/bin/bash\nRscript since_born.R 1988-03-02\nWhich we would execute like this:\n\n\n13888 days since you were born."
   },
   {
     "objectID": "slides/week08.html#session-info",
     "href": "slides/week08.html#session-info",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "Session info",
-    "text": "Session info\n\n\nR version 4.4.1 (2024-06-14)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS 26.3\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: America/Detroit\ntzcode source: internal\n\nattached base packages:\n[1] parallel  stats     graphics  grDevices utils     datasets  methods  \n[8] base     \n\nother attached packages:\n[1] microbenchmark_1.5.0\n\nloaded via a namespace (and not attached):\n [1] compiler_4.4.1    fastmap_1.2.0     cli_3.6.4         tools_4.4.1      \n [5] htmltools_0.5.8.1 rstudioapi_0.16.0 yaml_2.3.10       codetools_0.2-20 \n [9] rmarkdown_2.28    knitr_1.48        jsonlite_1.8.8    xfun_0.47        \n[13] digest_0.6.37     rlang_1.1.6       evaluate_1.0.3"
+    "text": "Session info\n\n\nR version 4.4.1 (2024-06-14)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS 26.3\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: America/Detroit\ntzcode source: internal\n\nattached base packages:\n[1] parallel  stats     graphics  grDevices utils     datasets  methods  \n[8] base     \n\nother attached packages:\n[1] microbenchmark_1.5.0\n\nloaded via a namespace (and not attached):\n [1] compiler_4.4.1    fastmap_1.2.0     cli_3.6.4         tools_4.4.1      \n [5] htmltools_0.5.8.1 rstudioapi_0.16.0 yaml_2.3.10       rmarkdown_2.28   \n [9] knitr_1.48        jsonlite_1.8.8    xfun_0.47         digest_0.6.37    \n[13] rlang_1.1.6       evaluate_1.0.3"
   },
   {
     "objectID": "slides/week08.html#bonus-rcpp-r-c",
@@ -4736,14 +4736,14 @@
     "href": "slides/week08.html#rcpparmadillo-and-openmp",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "RcppArmadillo and OpenMP",
-    "text": "RcppArmadillo and OpenMP\n\nFriendlier than RcppParallel… at least for ‘I-use-Rcpp-but-don’t-actually-know-much-about-C++’ users (like myself!).\nMust run only ‘Thread-safe’ calls, so calling R within parallel blocks can cause problems (almost all the time).\nUse arma objects, e.g. arma::mat, arma::vec, etc. Or, if you are used to them std::vector objects as these are thread safe.\nPseudo-Random Number Generation is not very straight forward… But C++11 has a nice set of functions that can be used together with OpenMP\nNeed to think about how processors work, cache memory, etc. Otherwise you could get into trouble… if your code is slower when run in parallel, then you probably are facing false sharing\nIf R crashes… try running R with a debugger (see Section 4.3 in Writing R extensions):\n~$ R --debugger=valgrind"
+    "text": "RcppArmadillo and OpenMP\n\nFriendlier than RcppParallel… at least for ‘I-use-Rcpp-but-don’t-actually-know-much-about-C++’ users.\nMust run only ‘Thread-safe’ calls, so calling R within parallel blocks can cause problems (almost all the time).\nUse arma objects, e.g. arma::mat, arma::vec, etc. Or, if you are used to them std::vector objects as these are thread safe.\nPseudo-Random Number Generation is not very straight forward… But C++11 has a nice set of functions that can be used together with OpenMP\nNeed to think about how processors work, cache memory, etc. Otherwise you could get into trouble… if your code is slower when run in parallel, then you probably are facing false sharing\nIf R crashes… try running R with a debugger (see Section 4.3 in Writing R extensions):\n~$ R --debugger=valgrind"
   },
   {
     "objectID": "slides/week08.html#rcpparmadillo-and-openmp-workflow",
     "href": "slides/week08.html#rcpparmadillo-and-openmp-workflow",
     "title": "Week 8: Efficiency and High Performance Computing",
     "section": "RcppArmadillo and OpenMP workflow",
-    "text": "RcppArmadillo and OpenMP workflow\n\nAdd the following to your C++ source code to use OpenMP, and tell Rcpp that you need to include that in the compiler:\n#include &lt;omp.h&gt;\n// [[Rcpp::plugins(openmp)]]\nTell the compiler that you’ll be running a block in parallel with openmp\n#pragma omp [directives] [options]\n{\n  ...your neat parallel code...\n}\nYou’ll need to specify how OMP should handle the data:\n\nshared: Default, all threads access the same copy.\nprivate: Each thread has its own copy (although not initialized).\nfirstprivate Each thread has its own copy initialized.\nlastprivate Each thread has its own copy. The last value is the one stored in the main program.\n\nSetting default(none) is a good practice.\nCompile!"
+    "text": "RcppArmadillo and OpenMP workflow\n\nAdd the following to your C++ source code to use OpenMP, and tell Rcpp that you need to include that in the compiler:\n#include &lt;omp.h&gt;\n// [[Rcpp::plugins(openmp)]]\nTell the compiler that you’ll be running a block in parallel with openmp\n#pragma omp [directives] [!q](location)\n{\n  ...your neat parallel code...\n}\nYou’ll need to specify how OMP should handle the data:\n\nshared: Default, all threads access the same copy.\nprivate: Each thread has its own copy (although not initialized).\nfirstprivate Each thread has its own copy initialized.\nlastprivate Each thread has its own copy. The last value is the one stored in the main program.\n\nSetting default(none) is a good practice.\nCompile!"
   },
   {
     "objectID": "slides/week08.html#ex-3-rcpparmadillo-openmp",

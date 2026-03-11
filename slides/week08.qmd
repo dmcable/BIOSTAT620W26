@@ -508,7 +508,7 @@ More models like this: The [SIRD model](https://en.wikipedia.org/wiki/Compartmen
 
 ## Conway's Game of Masks
 
-Download the program [here](sars-cov2.R).
+Download the program [here](img/sars-cov2.R).
 
 ```{r covid-program, echo = TRUE, eval=TRUE}
 # source("~/Downloads/sars-cov2.R", echo=FALSE)
@@ -798,7 +798,7 @@ Running R in:
 
 ## Submitting jobs (examples){.smaller}
 
-Imagine we have the following R script (download [here](dummy.R)):
+Imagine we have the following R script (download [here](img/dummy.R)):
 
 ```r
 library(data.table)
@@ -851,7 +851,7 @@ This R script can be executed in various ways...
 For this we would need to change it to an executable. In unix you can use the
 [chmod](https://wikipedia.org/wiki/chmod) command: `chmod +x since_born.R`. This allows us to do the following:
 
-```{bash since-born, eval=FALSE}
+```{bash since-born, eval=FALSE, echo = TRUE}
 ./since_born.R 1988-03-02
 ```
 
@@ -859,7 +859,7 @@ For this we would need to change it to an executable. In unix you can use the
 
 ## Rscript in a bash script (most common){.smaller}
 
-In the case of running jobs on a cluster or something similar, we usually need to have a bash script. In our case, we have a file named `since_born_bash.sh` that calls `Rscript` (download [here](since_born_bash.sh))
+In the case of running jobs on a cluster or something similar, we usually need to have a bash script. In our case, we have a file named `since_born_bash.sh` that calls `Rscript` (download [here](img/since_born_bash.sh))
 
 ```bash
 #!/bin/bash
@@ -979,10 +979,10 @@ fibCpp(1:5)
 
 ---
 
-## RcppArmadillo and OpenMP
+## RcppArmadillo and OpenMP {.smaller}
 
 *   Friendlier than [**RcppParallel**](http://rcppcore.github.io/RcppParallel/)...
-    at least for 'I-use-Rcpp-but-don't-actually-know-much-about-C++' users (like myself!).
+    at least for 'I-use-Rcpp-but-don't-actually-know-much-about-C++' users.
 
 *   Must run only 'Thread-safe' calls, so calling R within parallel blocks can cause problems (almost all the time).
     
@@ -999,7 +999,7 @@ fibCpp(1:5)
     ```
 ---
 
-## RcppArmadillo and OpenMP workflow
+## RcppArmadillo and OpenMP workflow {.smaller}
 
 1.  Add the following to your C++ source code to use OpenMP, and tell Rcpp that you need to include that in the compiler:
     
@@ -1011,7 +1011,7 @@ fibCpp(1:5)
 2.  Tell the compiler that you'll be running a block in parallel with openmp
     
     ```cpp
-    #pragma omp [directives] [options]
+    #pragma omp [directives] [!q](location)
     {
       ...your neat parallel code...
     }
@@ -1168,10 +1168,10 @@ a. Type of instruction: Single vs Multiple
 b. Data stream: Single vs Multiple
 
 <figure>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/SISD.svg/480px-SISD.svg.png" style="width:23%;">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/MISD.svg/480px-MISD.svg.png" style="width:23%;">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/SIMD.svg/480px-SIMD.svg.png" style="width:23%;">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/MIMD.svg/480px-MIMD.svg.png" style="width:23%;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/SISD.svg" style="width:23%;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/97/MISD.svg" style="width:23%;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/21/SIMD.svg" style="width:23%;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/c6/MIMD.svg" style="width:23%;">
 <figcaption><a href="https://en.wikipedia.org/wiki/Michael_J._Flynn" target="_blank">Michael Flynn</a>'s Taxonomy (<a href="https://en.wikipedia.org/wiki/Flynn%27s_taxonomy" target="_blank">wiki</a>)</figcaption>
 </figure>
 

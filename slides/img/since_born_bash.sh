@@ -1,2 +1,2 @@
 #!/bin/bash
-Rscript since_born.R 1988-03-02 &
+Rscript img/since_born.R 1988-03-02 &
