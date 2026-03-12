@@ -1,0 +1,53 @@
+---
+title: "Assignment 3 - Text Mining"
+link-citations: true
+toc: false
+format: 
+  html:
+    theme: simplex
+    embed-resources: true
+---
+
+## Due Date
+
+This assignment is due by 11:59pm Eastern Time on Friday, March 27th, 2025, submitted on [Github issues](https://github.com/dmcable/BIOSTAT620W26/issues/12).
+
+## Text Mining
+
+On the course Github, navigate to the page for dataset `pubmed`
+(<https://github.com/dmcable/BIOSTAT620W26/tree/main/data/pubmed>) and
+download the `pubmed.csv` dataset. This dataset contains 3,241 abstracts from
+articles collected via 5 PubMed searches. The search terms are listed in the
+second column, `term` and these will serve as the "documents." Your job is to
+analyze these abstracts to find interesting insights.
+
+1. (15 points) How many abstracts are associated with each search term? Tokenize
+the abstracts and count the number of each token. Do you see anything
+interesting? What are the 5 most common tokens for each search term?
+
+2. (15 points) Does removing stop words change what tokens appear as the
+most frequent? What are the 5 most common tokens for each search term after
+removing stop words?
+
+3. (15 points) Tokenize the abstracts into bigrams. Find the 10 most common
+bigrams and visualize them.
+
+<!--# look at bigrams were neither word is a stop word -->
+
+4. (15 points) Calculate the TF-IDF value for each word-search term combination
+(here you want the search term to be the "document"). What are the 5 tokens from
+each search term with the highest TF-IDF value? How are the results different
+from the answers you got in Question 1?
+
+## Sentiment Analysis
+
+5. (20 points) Perform a sentiment analysis using the NRC lexicon. What is the
+most common sentiment for each search term? What if you remove `"positive"` and
+`"negative"` from the list?
+
+6. (20 points) Now perform a sentiment analysis using the AFINN lexicon to get
+an average positivity score for each abstract (hint: you may want to create a
+variable that indexes, or counts, the abstracts). Create a visualization that
+shows these scores grouped by search term. Are any search terms noticeably
+different from the others?
+

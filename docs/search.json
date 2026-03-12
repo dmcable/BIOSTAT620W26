@@ -4807,5 +4807,33 @@
     "title": "Lab 8 - Efficiency and Parallelization",
     "section": "",
     "text": "Explain in your own words how you can decide if a problem is fit for parallelization?\nWe have covered vectorization and parallelization in this lab. Explain in your own words how you can think about the relationship between vectorization and paralleization? How do we know whether we should use one or the other or both?"
+  },
+  {
+    "objectID": "assignments/hw3.html",
+    "href": "assignments/hw3.html",
+    "title": "Assignment 3 - Text Mining",
+    "section": "",
+    "text": "This assignment is due by 11:59pm Eastern Time on Friday, March 27th, 2025, submitted on Github issues."
+  },
+  {
+    "objectID": "assignments/hw3.html#due-date",
+    "href": "assignments/hw3.html#due-date",
+    "title": "Assignment 3 - Text Mining",
+    "section": "",
+    "text": "This assignment is due by 11:59pm Eastern Time on Friday, March 27th, 2025, submitted on Github issues."
+  },
+  {
+    "objectID": "assignments/hw3.html#text-mining",
+    "href": "assignments/hw3.html#text-mining",
+    "title": "Assignment 3 - Text Mining",
+    "section": "Text Mining",
+    "text": "Text Mining\nOn the course Github, navigate to the page for dataset pubmed (https://github.com/dmcable/BIOSTAT620W26/tree/main/data/pubmed) and download the pubmed.csv dataset. This dataset contains 3,241 abstracts from articles collected via 5 PubMed searches. The search terms are listed in the second column, term and these will serve as the “documents.” Your job is to analyze these abstracts to find interesting insights.\n\n(15 points) How many abstracts are associated with each search term? Tokenize the abstracts and count the number of each token. Do you see anything interesting? What are the 5 most common tokens for each search term?\n(15 points) Does removing stop words change what tokens appear as the most frequent? What are the 5 most common tokens for each search term after removing stop words?\n(15 points) Tokenize the abstracts into bigrams. Find the 10 most common bigrams and visualize them.\n\n\n\n(15 points) Calculate the TF-IDF value for each word-search term combination (here you want the search term to be the “document”). What are the 5 tokens from each search term with the highest TF-IDF value? How are the results different from the answers you got in Question 1?"
+  },
+  {
+    "objectID": "assignments/hw3.html#sentiment-analysis",
+    "href": "assignments/hw3.html#sentiment-analysis",
+    "title": "Assignment 3 - Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\n\n(20 points) Perform a sentiment analysis using the NRC lexicon. What is the most common sentiment for each search term? What if you remove \"positive\" and \"negative\" from the list?\n(20 points) Now perform a sentiment analysis using the AFINN lexicon to get an average positivity score for each abstract (hint: you may want to create a variable that indexes, or counts, the abstracts). Create a visualization that shows these scores grouped by search term. Are any search terms noticeably different from the others?"
   }
 ]
