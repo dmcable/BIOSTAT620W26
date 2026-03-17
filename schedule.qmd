@@ -14,7 +14,7 @@ title: "Schedule"
 | 7 | 2/24-26 | Scraping, APIs, and Regular Expressions	 | [Slides](slides/week07.qmd)  | [Lab](labs/lab7.qmd) | |
 |   | 3/3-5 | NO CLASS - SPRING RECESS	 |  |  |  |
 | 8 | 3/10-12 | Efficiency and High Performance Computing | [Slides](slides/week08.qmd) | [Lab](labs/lab8.qmd) | [HW3](assignments/hw3.qmd)  |
-| 9 | 3/17-19 | SQL and Managing Big Data	 | [Slides](slides/week09.qmd) | Lab 9 | Final Project  |
+| 9 | 3/17-19 | SQL and Managing Big Data	 | [Slides](slides/week09.qmd) | [Lab](labs/lab9.qmd) | Final Project  |
 | 10 | 3/24-26 | Interactive Visualization |  | Lab 10 | HW4 |
 | 11 | 3/31-4/2 | Building a Website with Quarto and GitHub |  | Lab 11 |  |
 | 12 | 4/7-9 | Special Topics	 |  | Final Project Workshop  | |
