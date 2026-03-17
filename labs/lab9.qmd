@@ -1,0 +1,125 @@
+---
+title: "Lab 9 - SQL"
+link-citations: true
+toc: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+library(RSQLite)
+library(DBI)
+
+# Initialize a temporary in memory database
+con <- dbConnect(SQLite(), ":memory:")
+```
+
+## Intro
+
+In this lab, you will be working with a hospital database. There will be four tables that we will be working with: **doctor**, **visit**, **patient**, and **payment**. The main goal of the lab is to gain experience working with SQL databases. First, we will set up our SQL database:
+
+```{r}
+# install.packages(c("RSQLite", "DBI"))
+
+library(RSQLite)
+library(DBI)
+
+# Initialize a temporary in memory database
+con <- dbConnect(SQLite(), ":memory:")
+
+# Download tables
+doctor <- read.csv("https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/doctor.csv")
+visit <- read.csv("https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/visit.csv")
+patient <- read.csv("https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/patient.csv")
+payment <- read.csv("https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/payment.csv")
+
+# Copy data.frames to database
+dbWriteTable(con, "doctor", doctor)
+dbWriteTable(con, "visit", visit)
+dbWriteTable(con, "patient", patient)
+dbWriteTable(con, "payment", payment)
+```
+
+```{r}
+dbListTables(con)
+```
+
+TIP: You can use the following QUERY to see the structure of a table
+
+```{sql, connection=con}
+PRAGMA table_info(doctor)
+```
+
+SQL references:
+
+[https://www.w3schools.com/sql/](https://www.w3schools.com/sql/)
+
+# Exercise 1
+
+Edit the code below to retrieve the doctor ID, first name and last name for all doctors using the `doctor` table. Sort by last name and then by first name (note that the code chunk below is set up to run SQL code rather than R code).
+
+```{sql, connection=con}
+SELECT 
+FROM 
+ORDER by 
+```
+
+# Exercise 2
+
+Retrieve the doctor ID, first name, and last name for doctors whose last name equals 'WILLIAMS' or 'DAVIS'.
+
+```{sql, connection=con}
+SELECT 
+FROM 
+WHERE ___ IN ('WILLIAMS', 'DAVIS')
+```
+
+# Exercise 3
+
+Write a query against the `visit` table that returns the IDs of the patients who visited a hospital starting on July 5, 2005 (use the visit_start_date column, and you can use the `date()` function to ignore the time component). Include a single row for each distinct patient ID. 
+
+```{sql, connection=con}
+SELECT DISTINCT 
+FROM 
+WHERE date(___) = '2005-07-05'
+```
+
+# Exercise 4
+
+## Exercise 4.1
+
+Construct a query that retrieves all columns of rows from the `payment` table where the amount is either 199, 799, or 999.
+
+```{sql, connection=con}
+SELECT *
+FROM ___
+WHERE ___ IN (199, 799, 999)
+```
+
+## Exercise 4.2
+
+Construct a query that retrieves all columns of rows from the `payment` table where the amount is greater then 500.
+
+```{sql, connection=con}
+SELECT *
+FROM 
+WHERE 
+```
+
+## Exercise 4.2
+
+Construct a query that retrieves all columns of rows from the `payment` table where the amount is greater then 500 and less then 800.
+
+```{sql, connection=con}
+SELECT *
+FROM ___
+WHERE ___ AND ___
+```
+
+# Cleanup
+
+Run the following chunk to disconnect from the connection.
+
+```{r}
+# clean up
+dbDisconnect(con)
+```

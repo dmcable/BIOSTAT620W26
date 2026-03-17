@@ -5171,5 +5171,96 @@
     "title": "SQL",
     "section": "Test your understanding",
     "text": "Test your understanding\nConsider the following SQL operations: SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY.\nComplete the following analogy (choosing X, Y, and Z from the operations above): X for Y is like Z for rows."
+  },
+  {
+    "objectID": "labs/lab9.html",
+    "href": "labs/lab9.html",
+    "title": "Lab 9 - SQL",
+    "section": "",
+    "text": "In this lab, you will be working with a hospital database. There will be four tables that we will be working with: doctor, visit, patient, and payment. The main goal of the lab is to gain experience working with SQL databases. First, we will set up our SQL database:\n\n# install.packages(c(\"RSQLite\", \"DBI\"))\n\nlibrary(RSQLite)\nlibrary(DBI)\n\n# Initialize a temporary in memory database\ncon &lt;- dbConnect(SQLite(), \":memory:\")\n\n# Download tables\ndoctor &lt;- read.csv(\"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/doctor.csv\")\nvisit &lt;- read.csv(\"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/visit.csv\")\npatient &lt;- read.csv(\"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/patient.csv\")\npayment &lt;- read.csv(\"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/payment.csv\")\n\n# Copy data.frames to database\ndbWriteTable(con, \"doctor\", doctor)\ndbWriteTable(con, \"visit\", visit)\ndbWriteTable(con, \"patient\", patient)\ndbWriteTable(con, \"payment\", payment)\n\n\ndbListTables(con)\n\nTIP: You can use the following QUERY to see the structure of a table\n\nPRAGMA table_info(doctor)\n\nSQL references:\nhttps://www.w3schools.com/sql/"
+  },
+  {
+    "objectID": "labs/lab9.html#intro",
+    "href": "labs/lab9.html#intro",
+    "title": "Lab 9 - SQL",
+    "section": "",
+    "text": "In this lab, you will be working with a hospital database. There will be four tables that we will be working with: doctor, visit, patient, and payment. The main goal of the lab is to gain experience working with SQL databases. First, we will set up our SQL database:\n\n# install.packages(c(\"RSQLite\", \"DBI\"))\n\nlibrary(RSQLite)\nlibrary(DBI)\n\n# Initialize a temporary in memory database\ncon &lt;- dbConnect(SQLite(), \":memory:\")\n\n# Download tables\ndoctor &lt;- read.csv(\"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/doctor.csv\")\nvisit &lt;- read.csv(\"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/visit.csv\")\npatient &lt;- read.csv(\"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/patient.csv\")\npayment &lt;- read.csv(\"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/payment.csv\")\n\n# Copy data.frames to database\ndbWriteTable(con, \"doctor\", doctor)\ndbWriteTable(con, \"visit\", visit)\ndbWriteTable(con, \"patient\", patient)\ndbWriteTable(con, \"payment\", payment)\n\n\ndbListTables(con)\n\nTIP: You can use the following QUERY to see the structure of a table\n\nPRAGMA table_info(doctor)\n\nSQL references:\nhttps://www.w3schools.com/sql/"
+  },
+  {
+    "objectID": "labs/lab9.html#exercise-4.1",
+    "href": "labs/lab9.html#exercise-4.1",
+    "title": "Lab 9 - SQL",
+    "section": "Exercise 4.1",
+    "text": "Exercise 4.1\nConstruct a query that retrieves all columns of rows from the payment table where the amount is either 199, 799, or 999.\n\nSELECT *\nFROM ___\nWHERE ___ IN (199, 799, 999)"
+  },
+  {
+    "objectID": "labs/lab9.html#exercise-4.2",
+    "href": "labs/lab9.html#exercise-4.2",
+    "title": "Lab 9 - SQL",
+    "section": "Exercise 4.2",
+    "text": "Exercise 4.2\nConstruct a query that retrieves all columns of rows from the payment table where the amount is greater then 500.\n\nSELECT *\nFROM \nWHERE"
+  },
+  {
+    "objectID": "labs/lab9.html#exercise-4.2-1",
+    "href": "labs/lab9.html#exercise-4.2-1",
+    "title": "Lab 9 - SQL",
+    "section": "Exercise 4.2",
+    "text": "Exercise 4.2\nConstruct a query that retrieves all columns of rows from the payment table where the amount is greater then 500 and less then 800.\n\nSELECT *\nFROM ___\nWHERE ___ AND ___"
+  },
+  {
+    "objectID": "labs/lab9.html#exercise-6.1",
+    "href": "labs/lab9.html#exercise-6.1",
+    "title": "Lab 9 - SQL",
+    "section": "Exercise 6.1",
+    "text": "Exercise 6.1\nUse COUNT(*) to count the number of rows in visit."
+  },
+  {
+    "objectID": "labs/lab9.html#exercise-6.2",
+    "href": "labs/lab9.html#exercise-6.2",
+    "title": "Lab 9 - SQL",
+    "section": "Exercise 6.2",
+    "text": "Exercise 6.2\nUse COUNT(*) and GROUP BY to count the number of visits for each patient_id."
+  },
+  {
+    "objectID": "labs/lab9.html#exercise-6.3",
+    "href": "labs/lab9.html#exercise-6.3",
+    "title": "Lab 9 - SQL",
+    "section": "Exercise 6.3",
+    "text": "Exercise 6.3\nRepeat the previous query and sort by the count in descending order."
+  },
+  {
+    "objectID": "labs/lab9.html#exercise-6.4",
+    "href": "labs/lab9.html#exercise-6.4",
+    "title": "Lab 9 - SQL",
+    "section": "Exercise 6.4",
+    "text": "Exercise 6.4\nRepeat the previous query but use HAVING to only keep the groups with 40 or more."
+  },
+  {
+    "objectID": "labs/lab9.html#exercise-7.1",
+    "href": "labs/lab9.html#exercise-7.1",
+    "title": "Lab 9 - SQL",
+    "section": "Exercise 7.1",
+    "text": "Exercise 7.1\nModify the above query to do those calculations for each patient_id."
+  },
+  {
+    "objectID": "labs/lab9.html#exercise-7.2",
+    "href": "labs/lab9.html#exercise-7.2",
+    "title": "Lab 9 - SQL",
+    "section": "Exercise 7.2",
+    "text": "Exercise 7.2\nModify the above query to only keep the patient_ids that have more then 5 payments."
+  },
+  {
+    "objectID": "labs/lab9.html#exercise-8.1",
+    "href": "labs/lab9.html#exercise-8.1",
+    "title": "Lab 9 - SQL",
+    "section": "Exercise 8.1",
+    "text": "Exercise 8.1\nCreate a SQL query to join the doctor and visit tables. Then, use SQL to compute the average visit length for each doctor."
+  },
+  {
+    "objectID": "labs/lab9.html#exercise-8.2",
+    "href": "labs/lab9.html#exercise-8.2",
+    "title": "Lab 9 - SQL",
+    "section": "Exercise 8.2",
+    "text": "Exercise 8.2\nWhat are the names of the doctors with the 5 longest and 5 shortest average visits?"
   }
 ]
