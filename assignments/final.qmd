@@ -17,7 +17,7 @@ findings or deepens your understanding.
 Your final project will consist of a website, containing your full report, with
 interactive graphics. The only thing you need to submit is a URL directing us to
 your report. The report does not need to be on the main page of your website
-(for example, if you want to include your report on your personal website).
+(for example, if you want to include your report on your personal website). Submit your wesbtie URL as a comment on this [issue](https://github.com/dmcable/BIOSTAT620W26/issues/14).
 
 ### Report
 For the analysis, we will expect to see a cleaner report than for the midterm,
