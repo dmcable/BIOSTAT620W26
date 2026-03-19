@@ -18,6 +18,6 @@ title: "Schedule"
 | 10 | 3/24-26 | Interactive Visualization |  | Lab 10 | HW4 |
 | 11 | 3/31-4/2 | Building a Website with Quarto and GitHub |  | Lab 11 |  |
 | 12 | 4/7-9 | Special Topics	 |  | Final Project Workshop  | |
-| 13 | 4/14-16 | Special Topics	 |  |  |  |
+| 13 | 4/14-16 | Special Topics and Final Project Presentations	 |  | Final Project Presentations |  |
 | 14 | 4/21 (NO CLASS ON 4/23) | Final Project Presentations	 |  |  |  |
 

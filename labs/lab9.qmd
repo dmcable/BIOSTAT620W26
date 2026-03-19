@@ -60,7 +60,7 @@ Edit the code below to retrieve the doctor ID, first name and last name for all 
 ```{sql, connection=con}
 SELECT 
 FROM 
-ORDER by 
+ORDER BY
 ```
 
 # Exercise 2
@@ -105,7 +105,7 @@ FROM
 WHERE 
 ```
 
-## Exercise 4.2
+## Exercise 4.3
 
 Construct a query that retrieves all columns of rows from the `payment` table where the amount is greater then 500 and less then 800.
 
@@ -114,6 +114,93 @@ SELECT *
 FROM ___
 WHERE ___ AND ___
 ```
+
+# Exercise 5
+
+Retrieve all the payment IDs and their amounts from the patients whose last name is 'DAVIS'.
+
+```{sql, connection=con}
+SELECT 
+FROM 
+  INNER JOIN 
+WHERE 
+AND 
+```
+
+# Exercise 6
+
+## Exercise 6.1
+
+Use `COUNT(*)` to count the number of rows in `visit`.
+
+```{sql, connection=con}
+
+```
+
+## Exercise 6.2
+
+Use `COUNT(*)` and `GROUP BY` to count the number of visits for each `patient_id`.
+
+```{sql, connection=con}
+
+```
+
+## Exercise 6.3
+
+Repeat the previous query and sort by the count in descending order.
+
+```{sql, connection=con}
+
+```
+
+## Exercise 6.4
+
+Repeat the previous query but use `HAVING` to only keep the groups with 40 or more.
+
+```{sql, connection=con}
+
+```
+
+# Exercise 7
+
+Write a query that calculates a number of summary statistics for `amount` in the payment table using `MAX`, `MIN`, `AVG` and `SUM`
+
+```{sql, connection=con}
+
+```
+
+## Exercise 7.1
+
+Modify the above query to do those calculations for each `patient_id`.
+
+```{sql, connection=con}
+
+```
+
+## Exercise 7.2
+
+Modify the above query to only keep the `patient_id`s that have more then 5 payments.
+
+```{sql, connection=con}
+
+```
+
+## Exercise 8.1
+
+Create a SQL query to join the `doctor` and `visit` tables. Then, use SQL to compute the average visit length for each doctor. Hint: use the SQLite function `julianday` to convert a text date into a number.
+
+```{sql, connection=con}
+
+```
+
+## Exercise 8.2
+
+What are the names of the doctors with the 5 longest and 5 shortest average visits? Hint: use the `LIMIT` command.
+
+```{sql, connection=con}
+
+```
+
 
 # Cleanup
 

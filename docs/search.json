@@ -5254,13 +5254,34 @@
     "href": "labs/lab9.html#exercise-8.1",
     "title": "Lab 9 - SQL",
     "section": "Exercise 8.1",
-    "text": "Exercise 8.1\nCreate a SQL query to join the doctor and visit tables. Then, use SQL to compute the average visit length for each doctor."
+    "text": "Exercise 8.1\nCreate a SQL query to join the doctor and visit tables. Then, use SQL to compute the average visit length for each doctor. Hint: use the SQLite function julianday to convert a text date into a number."
   },
   {
     "objectID": "labs/lab9.html#exercise-8.2",
     "href": "labs/lab9.html#exercise-8.2",
     "title": "Lab 9 - SQL",
     "section": "Exercise 8.2",
-    "text": "Exercise 8.2\nWhat are the names of the doctors with the 5 longest and 5 shortest average visits?"
+    "text": "Exercise 8.2\nWhat are the names of the doctors with the 5 longest and 5 shortest average visits? Hint: use the LIMIT command."
+  },
+  {
+    "objectID": "labs/lab9.html#exercise-4.3",
+    "href": "labs/lab9.html#exercise-4.3",
+    "title": "Lab 9 - SQL",
+    "section": "Exercise 4.3",
+    "text": "Exercise 4.3\nConstruct a query that retrieves all columns of rows from the payment table where the amount is greater then 500 and less then 800.\n\nSELECT *\nFROM ___\nWHERE ___ AND ___"
+  },
+  {
+    "objectID": "assignments/final.html",
+    "href": "assignments/final.html",
+    "title": "Final Project",
+    "section": "",
+    "text": "Due date: Friday April 17th, 2026, by 11:59pm Eastern Time.\nLearning Objective: To apply the skills learned in BIOSTAT 620 by analyzing and interpreting a dataset of your choice. This should include at least one clear, overarching research question to guide your analysis. Remember that the answer to most worthwhile research questions is complicated, so don’t be afraid to add follow-up analysis that clarifies your findings or deepens your understanding."
+  },
+  {
+    "objectID": "assignments/final.html#deliverables",
+    "href": "assignments/final.html#deliverables",
+    "title": "Final Project",
+    "section": "Deliverables",
+    "text": "Deliverables\nYour final project will consist of a website, containing your full report, with interactive graphics. The only thing you need to submit is a URL directing us to your report. The report does not need to be on the main page of your website (for example, if you want to include your report on your personal website).\n\nReport\nFor the analysis, we will expect to see a cleaner report than for the midterm, with clear explanations and more sophisticated analysis. This should be intended for a general audience, as your website will be accessible to anyone with an internet connection.\nThe report should have the following sections:\n\nIntroduction: provide background on your dataset and research question.\nMethods: briefly discuss how the data was acquired and cleaned, and the tools you used for data exploration (further details should be provided on another page of your website).\nResults: provide final, publication-ready tables and figures from your analysis, including at least one interactive graphic. Make separate subsections as needed.\nConclusion and Summary: a brief recap where you describe your findings.\n\nYour report can contain code, but please do not include any unformatted output (eg. from cat() or nrow()) or partial datasets (eg. head() or str()). And as always, be sure not to upload the dataset to GitHub.\n\n\nWebsite\nYour website should be created with Quarto and hosted on GitHub Pages (so the URL will start with &lt;username&gt;.github.io). It should include at least one interactive graphic.\nIn addition to the main report, you should have another page on your website dedicated to describing how the data was acquired, processed, and explored. This page should be linked in the navbar and be called something like “About the Data” or “Data Processing.” Describe the raw data in detail and every step you took to prepare it for your analysis. This is also where you should include any exploratory plots.\nMake sure that your website actually works! This means that the website is live (accessible by anyone on the internet), and figures and interactive graphics render properly (Hint: double check the URL! Make sure you aren’t looking at your local version)."
   }
 ]
