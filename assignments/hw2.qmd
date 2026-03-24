@@ -26,7 +26,7 @@ measurements at the community level.  You will need to do the following:
 ### 1. (20 points)
 Once downloaded, you can merge these datasets using the `location` variable. 
 After merging the data, make sure you don’t have any duplicates by counting
-the number of rows. Make sure it matches.
+the number of rows. Make sure the number of rows in `individual` matches the number of rows of the merged object.
    
 In the case of missing values, impute data using the average amongst 
 individuals with the same values for the "male" and "hispanic" variables. 
@@ -46,7 +46,7 @@ the minimum BMI, maximum BMI, and the total number of observations per category.
 ### 3. (10 points)
 Create another categorical variable named "smoke_gas_exposure" that summarizes
 "Second Hand Smoke" and "Gas Stove." The variable should have four categories
-in total.
+in total. Count the number in each category.
 
 ### 4. (10 points)
 Create four summary tables showing the average (or proportion, if binary) and
