@@ -4,6 +4,8 @@ link-citations: true
 toc: false
 ---
 
+Due date: Tuesday, March 31st at 8:30am EST.
+
 We recommend downloading this QMD file to use as a template for your answers.
 You can download the file from: [https://github.com/dmcable/BIOSTAT620W26/blob/main/labs/lab10.qmd](https://github.com/dmcable/BIOSTAT620W26/blob/main/labs/lab10.qmd)
 
@@ -128,7 +130,7 @@ max(cv_states$date)
 
 - Use `plotly` for EDA: See if there are outliers or values that don't make sense for `new_cases` and `new_deaths`. Which states and which dates have strange values?
 
-- Correct outliers: Set negative values for `new_cases` or `new_deaths` to 0
+- Correct implausible values: Set negative values for `new_cases` or `new_deaths` to 0
 
 - Recalculate `cases` and `deaths` as cumulative sum of updated `new_cases` and `new_deaths`
 
@@ -160,11 +162,12 @@ for (i in 1:length(state_list)) {
 # Focus on recent dates
 cv_states <- cv_states |> dplyr::filter(date >= "2021-06-01")
 
-# Inspect outliers in new_cases using plotly
+# Inspect implausible values in new_cases using plotly
 ### COMPLETE CODE HERE
 p1 <- ggplot(---------)
 ggplotly(p1)
 
+# Inspect implausible values in new_deaths using plotly
 p2 <- ggplot(---------)
 ggplotly(p2)
 
@@ -249,8 +252,8 @@ cv_states_today |>
           type = _______, mode = 'markers', color = ~______,
           size = ~population, sizes = c(5, 70), marker = list(sizemode='diameter', opacity=0.5))
 
-# filter out "District of Columbia"
-cv_states_today_filter <- cv_states_today |> filter(state!="District of Columbia")
+# filter out one outlier state
+cv_states_today_filter <- cv_states_today |> filter(state!="_________")
 
 # pop_density vs. cases after filtering
 cv_states_today_filter |> 
@@ -270,7 +273,7 @@ cv_states_today_filter |>
           type = _______, mode = _______, color = ~_______,
           size = _______, sizes = _______, marker = list(_______),
           hoverinfo = 'text',
-          text = ~paste( paste(state, ":", sep=""), paste(" Cases per 100k: ", per100k, sep="") , 
+          text = ~paste( paste(_______, ":", sep=""), paste(" Cases per 100k: ", _______, sep="") , 
                          paste(" Deaths per 100k: ", _______, sep=""), sep = "<br>")) |>
   layout(title = "Population-normalized COVID-19 deaths (per 100k) vs. population density for US states",
                   yaxis = list(title = "Deaths per 100k"), xaxis = list(title = "Population Density"),
@@ -279,22 +282,23 @@ cv_states_today_filter |>
 
 ### 7. Explore scatterplot trend interactively using `ggplotly()` and `geom_smooth()`
 
-- For `pop_density` vs. `newdeathsper100k` create a chart with the same variables using `gglot_ly()`
+- For `pop_density` vs. `deathsper100k` create a chart with the same variables using `gglot_ly()`
 - Explore the pattern between $x$ and $y$ using `geom_smooth()`
 
 ```{r}
 ### FINISH CODE HERE
-p <- ggplot(cv_states_today_scatter, aes(x=_______, y=_______, size=population)) + geom_point() + _______
+p <- ggplot(cv_states_today_filter, aes(x=_______, y=_______, size=population)) + geom_point() + _______
 ggplotly(p)
 ```
 
 
-### 8. Multiple line chart
+### 8. Multiple line charts
 
 - Create a line chart of the `naive_CFR` for all states over time using `plot_ly()`
   - Use the zoom and pan tools to inspect the `naive_CFR` for the states that had an increase in September.
 - Create one more line chart, for Florida only, which shows `new_cases` and `new_deaths` together in one plot. Hint: look for an `add_*()`
   - Use hoverinfo to "eyeball" the approximate peak of deaths and peak of cases. What is the time delay between the peak of cases and the peak of deaths?
+  - HINT: select mult factor to be approximately 1 / CFR (and also a round number) to get cases and deaths on the same scale.
   
 
 ```{r}
@@ -304,9 +308,10 @@ ggplotly(p)
 plot_ly(cv_states, _______)
 
 ### FINISH CODE HERE
+MULT_FACTOR <- _____ ### HINT: select mult factor to be approximately 1 / CFR (and also a round number) to get cases and deaths on the same scale.
 # Line chart for Florida showing new_cases and new_deaths together (two lines)
 cv_states |> filter(state=="Florida") |> 
-  plot_ly(x = ~date, y = ~new_cases, type = "scatter", mode = "lines") |> 
+  plot_ly(x = ~date, y = ~new_cases/MULT_FACTOR, type = "scatter", mode = "lines") |> 
   _______(x = ~date, y = ~new_deaths, type = "scatter", mode = "lines") 
 ```
 
@@ -325,7 +330,7 @@ Create a heatmap to visualize `new_cases` for each state on each date greater th
 # Map state, date, and new_cases to a matrix
 library(tidyr)
 cv_states_mat <- cv_states |> select(state, date, new_cases) |> dplyr::filter(date>as.Date("2021-06-15"))
-cv_states_mat2 <- as.data.frame(pivot_wider(cv_states_mat, names_from = state, values_from = ________))
+cv_states_mat2 <- as.data.frame(pivot_wider(cv_states_mat, names_from = ________, values_from = ________))
 rownames(cv_states_mat2) <- cv_states_mat2$date
 cv_states_mat2$date <- NULL
 cv_states_mat2 <- as.matrix(cv_states_mat2)
@@ -333,19 +338,19 @@ cv_states_mat2 <- as.matrix(cv_states_mat2)
 # Create a heatmap using plot_ly()
 plot_ly(x=colnames(cv_states_mat2), y=rownames(cv_states_mat2),
              z=~cv_states_mat2,
-             type="heatmap",
+             type=________,
              showscale=T)
 
 # Repeat with newper100k
 cv_states_mat <- cv_states |> select(state, date, newper100k) |> dplyr::filter(date>as.Date("2021-06-15"))
-cv_states_mat2 <- as.data.frame(pivot_wider(cv_states_mat, names_from = state, values_from = ________))
+cv_states_mat2 <- as.data.frame(pivot_wider(cv_states_mat, names_from = ________, values_from = ________))
 rownames(cv_states_mat2) <- cv_states_mat2$date
 cv_states_mat2$date <- NULL
 cv_states_mat2 <- as.matrix(cv_states_mat2)
 
 plot_ly(x=colnames(cv_states_mat2), y=rownames(cv_states_mat2),
-             z=~cv_states_mat2,
-             type="heatmap",
+             z=~_________,
+             type=________,
              showscale=T)
 
 # Create a second heatmap after filtering to only include dates every other week
@@ -358,9 +363,9 @@ cv_states_mat2$date <- NULL
 cv_states_mat2 <- as.matrix(cv_states_mat2)
 
 # Create a heatmap using plot_ly()
-plot_ly(x=colnames(cv_states_mat2), y=rownames(cv_states_mat2),
-             z=~cv_states_mat2,
-             type="heatmap",
+plot_ly(x=________, y=________,
+             z=~________,
+             type=________,
              showscale=TRUE)
 ```
 

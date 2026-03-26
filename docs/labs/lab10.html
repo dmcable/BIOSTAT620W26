@@ -204,6 +204,7 @@ window.Quarto = {
 </header>
 
 
+<p>Due date: Tuesday, March 31st at 8:30am EST.</p>
 <p>We recommend downloading this QMD file to use as a template for your answers. You can download the file from: <a href="https://github.com/dmcable/BIOSTAT620W26/blob/main/labs/lab10.qmd">https://github.com/dmcable/BIOSTAT620W26/blob/main/labs/lab10.qmd</a></p>
 <p><strong>We have set <code>eval=FALSE</code> as a global option.</strong></p>
 <p><strong>To run a specific chunk, you can set <code>eval=TRUE</code> in that chunk.</strong></p>
@@ -307,7 +308,7 @@ window.Quarto = {
 </ul></li>
 <li><p>Filter to dates after June 1, 2021</p></li>
 <li><p>Use <code>plotly</code> for EDA: See if there are outliers or values that don’t make sense for <code>new_cases</code> and <code>new_deaths</code>. Which states and which dates have strange values?</p></li>
-<li><p>Correct outliers: Set negative values for <code>new_cases</code> or <code>new_deaths</code> to 0</p></li>
+<li><p>Correct implausible values: Set negative values for <code>new_cases</code> or <code>new_deaths</code> to 0</p></li>
 <li><p>Recalculate <code>cases</code> and <code>deaths</code> as cumulative sum of updated <code>new_cases</code> and <code>new_deaths</code></p></li>
 <li><p>Get the rolling average of new cases and new deaths to smooth over time</p></li>
 <li><p>Inspect data again interactively</p></li>
@@ -336,43 +337,44 @@ window.Quarto = {
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Focus on recent dates</span></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>cv_states <span class="ot">&lt;-</span> cv_states <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(date <span class="sc">&gt;=</span> <span class="st">"2021-06-01"</span>)</span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect outliers in new_cases using plotly</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect implausible values in new_cases using plotly</span></span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="do">### COMPLETE CODE HERE</span></span>
 <span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="sc">---------</span>)</span>
 <span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(p1)</span>
 <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="sc">---------</span>)</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(p2)</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co"># set negative new case or death counts to 0</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>cv_states<span class="sc">$</span>new_cases[cv_states<span class="sc">$</span>new_cases<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>cv_states<span class="sc">$</span>new_deaths[cv_states<span class="sc">$</span>new_deaths<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-calculate `cases` and `deaths` as cumulative sum of updated `new_cases` and `new_deaths`</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(state_list)) {</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  cv_subset <span class="ot">=</span> <span class="fu">subset</span>(cv_states, state <span class="sc">==</span> state_list[i])</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add starting level for new cases and deaths</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  cv_subset<span class="sc">$</span>cases <span class="ot">&lt;-</span> cv_subset<span class="sc">$</span>cases[<span class="dv">1</span>]</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  cv_subset<span class="sc">$</span>deaths <span class="ot">&lt;-</span> cv_subset<span class="sc">$</span>deaths[<span class="dv">1</span>]</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  <span class="do">### FINISH CODE HERE</span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(cv_subset)) {</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    cv_subset<span class="sc">$</span>cases[j] <span class="ot">&lt;-</span> cv_subset<span class="sc">$</span>new_cases[j] <span class="sc">+</span> cv_subset<span class="sc">$</span>_________</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    cv_subset<span class="sc">$</span>deaths[j] <span class="ot">&lt;-</span> cv_subset<span class="sc">$</span>new_deaths[j] <span class="sc">+</span> cv_subset<span class="sc">$</span>__________</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># include in main dataset</span></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  cv_states<span class="sc">$</span>cases[cv_states<span class="sc">$</span>state<span class="sc">==</span>state_list[i]] <span class="ot">&lt;-</span> cv_subset<span class="sc">$</span>cases</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  cv_states<span class="sc">$</span>deaths[cv_states<span class="sc">$</span>state<span class="sc">==</span>state_list[i]] <span class="ot">&lt;-</span> cv_subset<span class="sc">$</span>deaths</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Smooth new counts</span></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>cv_states<span class="sc">$</span>new_cases <span class="ot">&lt;-</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(cv_states<span class="sc">$</span>new_cases, <span class="at">k=</span><span class="dv">7</span>, <span class="at">fill=</span><span class="cn">NA</span>, <span class="at">align=</span><span class="st">'right'</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">0</span>)</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>cv_states<span class="sc">$</span>new_deaths <span class="ot">&lt;-</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(cv_states<span class="sc">$</span>new_deaths, <span class="at">k=</span><span class="dv">7</span>, <span class="at">fill=</span><span class="cn">NA</span>, <span class="at">align=</span><span class="st">'right'</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">0</span>)</span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect data again interactively</span></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(cv_states, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> new_deaths, <span class="at">color =</span> state)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> .<span class="dv">5</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect implausible values in new_deaths using plotly</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="sc">---------</span>)</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(p2)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co"># set negative new case or death counts to 0</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>cv_states<span class="sc">$</span>new_cases[cv_states<span class="sc">$</span>new_cases<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>cv_states<span class="sc">$</span>new_deaths[cv_states<span class="sc">$</span>new_deaths<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-calculate `cases` and `deaths` as cumulative sum of updated `new_cases` and `new_deaths`</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(state_list)) {</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  cv_subset <span class="ot">=</span> <span class="fu">subset</span>(cv_states, state <span class="sc">==</span> state_list[i])</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add starting level for new cases and deaths</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  cv_subset<span class="sc">$</span>cases <span class="ot">&lt;-</span> cv_subset<span class="sc">$</span>cases[<span class="dv">1</span>]</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  cv_subset<span class="sc">$</span>deaths <span class="ot">&lt;-</span> cv_subset<span class="sc">$</span>deaths[<span class="dv">1</span>]</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="do">### FINISH CODE HERE</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(cv_subset)) {</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    cv_subset<span class="sc">$</span>cases[j] <span class="ot">&lt;-</span> cv_subset<span class="sc">$</span>new_cases[j] <span class="sc">+</span> cv_subset<span class="sc">$</span>_________</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    cv_subset<span class="sc">$</span>deaths[j] <span class="ot">&lt;-</span> cv_subset<span class="sc">$</span>new_deaths[j] <span class="sc">+</span> cv_subset<span class="sc">$</span>__________</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># include in main dataset</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  cv_states<span class="sc">$</span>cases[cv_states<span class="sc">$</span>state<span class="sc">==</span>state_list[i]] <span class="ot">&lt;-</span> cv_subset<span class="sc">$</span>cases</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>  cv_states<span class="sc">$</span>deaths[cv_states<span class="sc">$</span>state<span class="sc">==</span>state_list[i]] <span class="ot">&lt;-</span> cv_subset<span class="sc">$</span>deaths</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Smooth new counts</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>cv_states<span class="sc">$</span>new_cases <span class="ot">&lt;-</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(cv_states<span class="sc">$</span>new_cases, <span class="at">k=</span><span class="dv">7</span>, <span class="at">fill=</span><span class="cn">NA</span>, <span class="at">align=</span><span class="st">'right'</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">0</span>)</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>cv_states<span class="sc">$</span>new_deaths <span class="ot">&lt;-</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(cv_states<span class="sc">$</span>new_deaths, <span class="at">k=</span><span class="dv">7</span>, <span class="at">fill=</span><span class="cn">NA</span>, <span class="at">align=</span><span class="st">'right'</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">0</span>)</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect data again interactively</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(cv_states, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> new_deaths, <span class="at">color =</span> state)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> .<span class="dv">5</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="add-additional-variables" class="level3">
@@ -430,8 +432,8 @@ window.Quarto = {
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> _______, <span class="at">mode =</span> <span class="st">'markers'</span>, <span class="at">color =</span> <span class="sc">~</span>______,</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="sc">~</span>population, <span class="at">sizes =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">70</span>), <span class="at">marker =</span> <span class="fu">list</span>(<span class="at">sizemode=</span><span class="st">'diameter'</span>, <span class="at">opacity=</span><span class="fl">0.5</span>))</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># filter out "District of Columbia"</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>cv_states_today_filter <span class="ot">&lt;-</span> cv_states_today <span class="sc">|&gt;</span> <span class="fu">filter</span>(state<span class="sc">!=</span><span class="st">"District of Columbia"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># filter out one outlier state</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>cv_states_today_filter <span class="ot">&lt;-</span> cv_states_today <span class="sc">|&gt;</span> <span class="fu">filter</span>(state<span class="sc">!=</span><span class="st">"_________"</span>)</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># pop_density vs. cases after filtering</span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>cv_states_today_filter <span class="sc">|&gt;</span> </span>
@@ -451,7 +453,7 @@ window.Quarto = {
 <span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> _______, <span class="at">mode =</span> _______, <span class="at">color =</span> <span class="sc">~</span>_______,</span>
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> _______, <span class="at">sizes =</span> _______, <span class="at">marker =</span> <span class="fu">list</span>(_______),</span>
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>          <span class="at">hoverinfo =</span> <span class="st">'text'</span>,</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>          <span class="at">text =</span> <span class="sc">~</span><span class="fu">paste</span>( <span class="fu">paste</span>(state, <span class="st">":"</span>, <span class="at">sep=</span><span class="st">""</span>), <span class="fu">paste</span>(<span class="st">" Cases per 100k: "</span>, per100k, <span class="at">sep=</span><span class="st">""</span>) , </span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>          <span class="at">text =</span> <span class="sc">~</span><span class="fu">paste</span>( <span class="fu">paste</span>(_______, <span class="st">":"</span>, <span class="at">sep=</span><span class="st">""</span>), <span class="fu">paste</span>(<span class="st">" Cases per 100k: "</span>, _______, <span class="at">sep=</span><span class="st">""</span>) , </span>
 <span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">paste</span>(<span class="st">" Deaths per 100k: "</span>, _______, <span class="at">sep=</span><span class="st">""</span>), <span class="at">sep =</span> <span class="st">"&lt;br&gt;"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">"Population-normalized COVID-19 deaths (per 100k) vs. population density for US states"</span>,</span>
 <span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>                  <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Deaths per 100k"</span>), <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Population Density"</span>),</span>
@@ -461,17 +463,17 @@ window.Quarto = {
 <section id="explore-scatterplot-trend-interactively-using-ggplotly-and-geom_smooth" class="level3">
 <h3 class="anchored" data-anchor-id="explore-scatterplot-trend-interactively-using-ggplotly-and-geom_smooth">7. Explore scatterplot trend interactively using <code>ggplotly()</code> and <code>geom_smooth()</code></h3>
 <ul>
-<li>For <code>pop_density</code> vs.&nbsp;<code>newdeathsper100k</code> create a chart with the same variables using <code>gglot_ly()</code></li>
+<li>For <code>pop_density</code> vs.&nbsp;<code>deathsper100k</code> create a chart with the same variables using <code>gglot_ly()</code></li>
 <li>Explore the pattern between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> using <code>geom_smooth()</code></li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">### FINISH CODE HERE</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(cv_states_today_scatter, <span class="fu">aes</span>(<span class="at">x=</span>_______, <span class="at">y=</span>_______, <span class="at">size=</span>population)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> _______</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(cv_states_today_filter, <span class="fu">aes</span>(<span class="at">x=</span>_______, <span class="at">y=</span>_______, <span class="at">size=</span>population)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> _______</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="multiple-line-chart" class="level3">
-<h3 class="anchored" data-anchor-id="multiple-line-chart">8. Multiple line chart</h3>
+<section id="multiple-line-charts" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-line-charts">8. Multiple line charts</h3>
 <ul>
 <li>Create a line chart of the <code>naive_CFR</code> for all states over time using <code>plot_ly()</code>
 <ul>
@@ -480,6 +482,7 @@ window.Quarto = {
 <li>Create one more line chart, for Florida only, which shows <code>new_cases</code> and <code>new_deaths</code> together in one plot. Hint: look for an <code>add_*()</code>
 <ul>
 <li>Use hoverinfo to “eyeball” the approximate peak of deaths and peak of cases. What is the time delay between the peak of cases and the peak of deaths?</li>
+<li>HINT: select mult factor to be approximately 1 / CFR (and also a round number) to get cases and deaths on the same scale.</li>
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
@@ -488,10 +491,11 @@ window.Quarto = {
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(cv_states, _______)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="do">### FINISH CODE HERE</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Line chart for Florida showing new_cases and new_deaths together (two lines)</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>cv_states <span class="sc">|&gt;</span> <span class="fu">filter</span>(state<span class="sc">==</span><span class="st">"Florida"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_ly</span>(<span class="at">x =</span> <span class="sc">~</span>date, <span class="at">y =</span> <span class="sc">~</span>new_cases, <span class="at">type =</span> <span class="st">"scatter"</span>, <span class="at">mode =</span> <span class="st">"lines"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">_______</span>(<span class="at">x =</span> <span class="sc">~</span>date, <span class="at">y =</span> <span class="sc">~</span>new_deaths, <span class="at">type =</span> <span class="st">"scatter"</span>, <span class="at">mode =</span> <span class="st">"lines"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>MULT_FACTOR <span class="ot">&lt;-</span> _____ <span class="do">### HINT: select mult factor to be approximately 1 / CFR (and also a round number) to get cases and deaths on the same scale.</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Line chart for Florida showing new_cases and new_deaths together (two lines)</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>cv_states <span class="sc">|&gt;</span> <span class="fu">filter</span>(state<span class="sc">==</span><span class="st">"Florida"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_ly</span>(<span class="at">x =</span> <span class="sc">~</span>date, <span class="at">y =</span> <span class="sc">~</span>new_cases<span class="sc">/</span>MULT_FACTOR, <span class="at">type =</span> <span class="st">"scatter"</span>, <span class="at">mode =</span> <span class="st">"lines"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">_______</span>(<span class="at">x =</span> <span class="sc">~</span>date, <span class="at">y =</span> <span class="sc">~</span>new_deaths, <span class="at">type =</span> <span class="st">"scatter"</span>, <span class="at">mode =</span> <span class="st">"lines"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="heatmaps" class="level3">
@@ -502,7 +506,7 @@ window.Quarto = {
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Map state, date, and new_cases to a matrix</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>cv_states_mat <span class="ot">&lt;-</span> cv_states <span class="sc">|&gt;</span> <span class="fu">select</span>(state, date, new_cases) <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(date<span class="sc">&gt;</span><span class="fu">as.Date</span>(<span class="st">"2021-06-15"</span>))</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>cv_states_mat2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">pivot_wider</span>(cv_states_mat, <span class="at">names_from =</span> state, <span class="at">values_from =</span> ________))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>cv_states_mat2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">pivot_wider</span>(cv_states_mat, <span class="at">names_from =</span> ________, <span class="at">values_from =</span> ________))</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cv_states_mat2) <span class="ot">&lt;-</span> cv_states_mat2<span class="sc">$</span>date</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>cv_states_mat2<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>cv_states_mat2 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(cv_states_mat2)</span>
@@ -510,19 +514,19 @@ window.Quarto = {
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a heatmap using plot_ly()</span></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(<span class="at">x=</span><span class="fu">colnames</span>(cv_states_mat2), <span class="at">y=</span><span class="fu">rownames</span>(cv_states_mat2),</span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">z=</span><span class="sc">~</span>cv_states_mat2,</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">type=</span><span class="st">"heatmap"</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">type=</span>________,</span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">showscale=</span>T)</span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeat with newper100k</span></span>
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>cv_states_mat <span class="ot">&lt;-</span> cv_states <span class="sc">|&gt;</span> <span class="fu">select</span>(state, date, newper100k) <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(date<span class="sc">&gt;</span><span class="fu">as.Date</span>(<span class="st">"2021-06-15"</span>))</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>cv_states_mat2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">pivot_wider</span>(cv_states_mat, <span class="at">names_from =</span> state, <span class="at">values_from =</span> ________))</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>cv_states_mat2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">pivot_wider</span>(cv_states_mat, <span class="at">names_from =</span> ________, <span class="at">values_from =</span> ________))</span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cv_states_mat2) <span class="ot">&lt;-</span> cv_states_mat2<span class="sc">$</span>date</span>
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>cv_states_mat2<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>cv_states_mat2 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(cv_states_mat2)</span>
 <span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(<span class="at">x=</span><span class="fu">colnames</span>(cv_states_mat2), <span class="at">y=</span><span class="fu">rownames</span>(cv_states_mat2),</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>             <span class="at">z=</span><span class="sc">~</span>cv_states_mat2,</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>             <span class="at">type=</span><span class="st">"heatmap"</span>,</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>             <span class="at">z=</span><span class="sc">~</span>_________,</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>             <span class="at">type=</span>________,</span>
 <span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>             <span class="at">showscale=</span>T)</span>
 <span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a second heatmap after filtering to only include dates every other week</span></span>
@@ -535,9 +539,9 @@ window.Quarto = {
 <span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>cv_states_mat2 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(cv_states_mat2)</span>
 <span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a heatmap using plot_ly()</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(<span class="at">x=</span><span class="fu">colnames</span>(cv_states_mat2), <span class="at">y=</span><span class="fu">rownames</span>(cv_states_mat2),</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>             <span class="at">z=</span><span class="sc">~</span>cv_states_mat2,</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>             <span class="at">type=</span><span class="st">"heatmap"</span>,</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(<span class="at">x=</span>________, <span class="at">y=</span>________,</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>             <span class="at">z=</span><span class="sc">~</span>________,</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>             <span class="at">type=</span>________,</span>
 <span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>             <span class="at">showscale=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
