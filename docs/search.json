@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Week\nDate\nTopic\nSlides\nLab\nAssignment Release (not due)\n\n\n\n\n0\n1/8\nSyllabus and Introduction\nSlides\n\n\n\n\n1\n1/13-15\nIntroduction to Data Science and R\nSlides\nLab\n\n\n\n2\n1/20-22\nVersion Control & Reproducible Research\nSlides\nLab\n\n\n\n3\n1/27-29\nExploratory data analysis\nSlides\nLab\nHW1\n\n\n4\n2/3-5\nData visualization\nSlides\nLab\n\n\n\n5\n2/10-12\nData Cleaning and Wrangling\nSlides\nLab\nHW2\n\n\n6\n2/17-19\nText Mining & Sentiment Analysis\nSlides\nLab\nMidterm Project\n\n\n7\n2/24-26\nScraping, APIs, and Regular Expressions\nSlides\nLab\n\n\n\n\n3/3-5\nNO CLASS - SPRING RECESS\n\n\n\n\n\n8\n3/10-12\nEfficiency and High Performance Computing\nSlides\nLab\nHW3\n\n\n9\n3/17-19\nSQL and Managing Big Data\nSlides\nLab\nFinal Project\n\n\n10\n3/24-26\nInteractive Visualization\nSlides\nLab\nHW4\n\n\n11\n3/31-4/2\nBuilding a Website with Quarto and GitHub\n\nLab 11\n\n\n\n12\n4/7-9\nSpecial Topics\n\nFinal Project Workshop\n\n\n\n13\n4/14-16\nSpecial Topics and Final Project Presentations\n\nFinal Project Presentations\n\n\n\n14\n4/21 (NO CLASS ON 4/23)\nFinal Project Presentations"
+    "text": "Week\nDate\nTopic\nSlides\nLab\nAssignment Release (not due)\n\n\n\n\n0\n1/8\nSyllabus and Introduction\nSlides\n\n\n\n\n1\n1/13-15\nIntroduction to Data Science and R\nSlides\nLab\n\n\n\n2\n1/20-22\nVersion Control & Reproducible Research\nSlides\nLab\n\n\n\n3\n1/27-29\nExploratory data analysis\nSlides\nLab\nHW1\n\n\n4\n2/3-5\nData visualization\nSlides\nLab\n\n\n\n5\n2/10-12\nData Cleaning and Wrangling\nSlides\nLab\nHW2\n\n\n6\n2/17-19\nText Mining & Sentiment Analysis\nSlides\nLab\nMidterm Project\n\n\n7\n2/24-26\nScraping, APIs, and Regular Expressions\nSlides\nLab\n\n\n\n\n3/3-5\nNO CLASS - SPRING RECESS\n\n\n\n\n\n8\n3/10-12\nEfficiency and High Performance Computing\nSlides\nLab\nHW3\n\n\n9\n3/17-19\nSQL and Managing Big Data\nSlides\nLab\nFinal Project\n\n\n10\n3/24-26\nInteractive Visualization\nSlides\nLab 10\nHW4\n\n\n11\n3/31-4/2\nBuilding a Website with Quarto and GitHub\n\nLab 11\n\n\n\n12\n4/7-9\nSpecial Topics\n\nFinal Project Workshop\n\n\n\n13\n4/14-16\nSpecial Topics and Final Project Presentations\n\nFinal Project Presentations\n\n\n\n14\n4/21 (NO CLASS ON 4/23)\nFinal Project Presentations"
   },
   {
     "objectID": "syllabus.html",
@@ -5723,7 +5723,7 @@
     "href": "labs/lab10.html",
     "title": "Lab 10 - Interactive Visualization",
     "section": "",
-    "text": "We recommend downloading this QMD file to use as a template for your answers. You can download the file from: https://github.com/dmcable/BIOSTAT620/blob/main/labs/lab10.qmd\nWe have set eval=FALSE as a global option.\nTo run a specific chunk, you can set eval=TRUE in that chunk.\nTo run all chunks, you can set eval=TRUE inside of opts_chunk$set() in the setup chunk."
+    "text": "We recommend downloading this QMD file to use as a template for your answers. You can download the file from: https://github.com/dmcable/BIOSTAT620W26/blob/main/labs/lab10.qmd\nWe have set eval=FALSE as a global option.\nTo run a specific chunk, you can set eval=TRUE in that chunk.\nTo run all chunks, you can set eval=TRUE inside of opts_chunk$set() in the setup chunk."
   },
   {
     "objectID": "labs/lab10.html#i.-reading-and-processing-the-new-york-times-nyt-state-level-covid-19-data",

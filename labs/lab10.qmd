@@ -5,7 +5,7 @@ toc: false
 ---
 
 We recommend downloading this QMD file to use as a template for your answers.
-You can download the file from: [https://github.com/dmcable/BIOSTAT620/blob/main/labs/lab10.qmd](https://github.com/dmcable/BIOSTAT620/blob/main/labs/lab10.qmd)
+You can download the file from: [https://github.com/dmcable/BIOSTAT620W26/blob/main/labs/lab10.qmd](https://github.com/dmcable/BIOSTAT620W26/blob/main/labs/lab10.qmd)
 
 **We have set `eval=FALSE` as a global option.**
 
