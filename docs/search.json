@@ -5513,14 +5513,14 @@
     "href": "slides/week10.html#scatterplot-with-ggplotly",
     "title": "Interactive Visualization",
     "section": "Scatterplot with ggplotly()",
-    "text": "Scatterplot with ggplotly()\n\nYou can create a scatterplot with the ggplotly() function in 1 additional line of code\nThe advantage of ggplotly() is that it allows taking advantage of the geom geom_smooth() to see the pattern in the scatter\n\n\nlibrary(ggplot2)\np &lt;- ggplot(cv_states_today, aes(x=deathsper100k, y=per100k, size=naive_CFR)) + \n          geom_point() + geom_smooth()\nggplotly(p)"
+    "text": "Scatterplot with ggplotly()\n\nYou can create a scatterplot with the ggplotly() function in 1 additional line of code\nThe advantage of ggplotly() is that it allows taking advantage of the geom geom_smooth() to see the pattern in the scatter\n\n\nlibrary(ggplot2)\np &lt;- ggplot(cv_states_today, aes(x=deathsper100k, y=per100k, size=naive_CFR)) + \n          geom_point() + geom_smooth()\n\nggplotly(p)"
   },
   {
     "objectID": "slides/week10.html#scatterplot-with-ggplotly-1",
     "href": "slides/week10.html#scatterplot-with-ggplotly-1",
     "title": "Interactive Visualization",
     "section": "Scatterplot with ggplotly()",
-    "text": "Scatterplot with ggplotly()\nThe geom_smooth() helps us to see there is not a clear correlation between cases and deaths relative to population across the states. Note that the geom_smooth() line also appears upon hover."
+    "text": "Scatterplot with ggplotly()\n\n\n\n\n\n\nThe geom_smooth() helps us to see there is not a clear correlation between cases and deaths relative to population across the states. Note that the geom_smooth() line also appears upon hover."
   },
   {
     "objectID": "slides/week10.html#annotations",

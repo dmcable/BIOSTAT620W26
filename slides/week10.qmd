@@ -507,6 +507,7 @@ p
 library(ggplot2)
 p <- ggplot(cv_states_today, aes(x=deathsper100k, y=per100k, size=naive_CFR)) + 
           geom_point() + geom_smooth()
+
 ggplotly(p)
 ```
 
@@ -514,7 +515,7 @@ ggplotly(p)
 
 ## Scatterplot with `ggplotly()`{.smaller}
 
-```{r, eval = FALSE, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE}
 p <- ggplot(cv_states_today, aes(x=deathsper100k, y=per100k, size=naive_CFR)) + geom_point() + geom_smooth()
 p1<-ggplotly(p)
 p1
@@ -543,7 +544,7 @@ fig <- ggplotly(p)
 
 ## Annotations
 
-```{r, eval = FALSE, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 p <- ggplot(cv_states_today, aes(x=deathsper100k, y=per100k, size=naive_CFR)) + 
   geom_point() + 
   geom_smooth() +
@@ -610,7 +611,7 @@ subplot(g1, g2_plotly)
 
 ## Line graph: `ggplotly()`{.smaller}
 
-```{r, eval = FALSE, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE}
 g1 = plot_ly(cv_states, x = ~date, y = ~deaths, color = ~state, type = "scatter", mode = "lines")
 g2 = ggplot(cv_states, aes(x = date, y = cases, color = state)) + 
             geom_line() + geom_point(size = .5, alpha = 0.5)
@@ -639,7 +640,7 @@ ggplotly(g1, tooltip = "text")
 
 ## Specifying text with `ggplotly()` (cont.) {.smaller}
 
-```{r, eval = FALSE, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE}
 g1 = ggplot(cv_states, aes(x = date, y = cases, color = state, 
                 text=paste(paste(state,":", sep=""), 
                            paste("Date: ", date, sep=""),
@@ -674,7 +675,7 @@ subplot(g1, g2_plotly)
          
 ```
 
-```{r, eval = FALSE, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE}
 g1 <- cv_states_today |> 
   plot_ly(x = ~new_deaths, type = "histogram", xbins = list(size = 1, end=30 ))
 g2 <- cv_states_today |> ggplot( aes(x=new_deaths)) + geom_histogram(binwidth=1)
