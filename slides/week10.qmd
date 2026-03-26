@@ -206,7 +206,7 @@ ggplotly(p)
 ```
 
 -   This functionality can be really helpful for quickly adding interactivity to your existing **ggplot2** workflow.
-
+ 
 ------------------------------------------------------------------------
 
 ## `ggplotly()` (cont.) {.smaller}
