@@ -7,7 +7,7 @@ toc: false
 Due date: Friday April 17th, 2026, by 11:59pm Eastern Time.
 
 **Learning Objective**: To apply the skills learned in
-BIOSTAT 620 by analyzing and interpreting a dataset of your choice. This should
+BIOSTAT 620 by analyzing and interpreting a health or biology dataset of your choice. This should
 include at least one clear, overarching research question to guide your
 analysis. Remember that the answer to most worthwhile research questions is
 complicated, so don't be afraid to add follow-up analysis that clarifies your

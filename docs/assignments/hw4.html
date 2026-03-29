@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Midterm Project – BIOSTAT 620</title>
+<title>Assignment 4 - HPC, SQL, and interactive plots – BIOSTAT 620</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -69,6 +103,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -124,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Midterm Project</h1>
+<h1 class="title">Assignment 4 - HPC, SQL, and interactive plots</h1>
 </div>
 
 
@@ -141,21 +204,180 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Due <strong>Friday, March 13th, 2026</strong> by 11:59pm Eastern Time.</p>
-<p><strong>Learning Objective</strong>: To apply the skills learned in BIOSTAT620 (through Week 6) by analyzing and interpreting a dataset of your choice.</p>
-<p><strong>Narrative</strong>: As we have discussed in class, the practice of data science requires both quantitative skills and qualitative knowledge of the domain from which the data was collected. The first step in any data analysis is to have a dataset for which you have formulated an interesting question. If you do not have a dataset to work with, you may choose one from our <a href="../references.html#data">list of suggestions</a>. With your dataset, formulate a clear and concise question to answer and conduct data wrangling, exploratory data analysis, and data visualization to explore/answer this question.</p>
-<p><strong>Deliverable</strong>: A <em>written report</em> generated in Quarto (HTML or PDF) with embedded tables and figures that is submitted to a project-specific GitHub repository that you create. The report should have the following sections:</p>
+<section id="due-date" class="level2">
+<h2 class="anchored" data-anchor-id="due-date">Due Date</h2>
+<p>This assignment is due by 11:59pm Eastern Time on Monday, April 13th, 2026.</p>
+<p>The learning objectives are to write faster code for a computational task requiring a loop and to implement some queries and basic data wrangling in SQL.</p>
+</section>
+<section id="hpc" class="level1">
+<h1>HPC</h1>
+<p>For Questions 1-2, rewrite the provided R functions to make them faster. It is OK (and recommended) to take a look at StackOverflow and Google.</p>
+<p>Using the synthetic dataset provided, show that your new function returns the same output as the original function. Then use <code>microbenchmark</code> to show that your version is faster and provide a visualization of the runtimes.</p>
+<section id="question-1-6-points" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-6-points">Question 1 (6 points)</h3>
 <ul>
-<li>Introduction - provide background on your dataset and formulated question</li>
-<li>Data Preparation - how and where the data were acquired, how you cleaned and wrangled the data</li>
-<li>Exploratory Analysis - dataset characteristics, variables included, distribution of key variables</li>
-<li>Preliminary Results - analysis of the primary research question and any subsequent follow-up questions, including summary statistics in tabular form and publication-quality figures (look at the <code>kable()</code> function from <code>knitr</code> for making nice tables)</li>
-<li>a brief Conclusion - summary of what you found in the data</li>
+<li><code>fun2</code>: Calculate the running (cumulative) total along each row of a numeric matrix. Output should be a matrix with dimensions equal to the input matrix.</li>
 </ul>
-<p>In your report, please do not include any unformatted text output (e.g.&nbsp;output from <code>head()</code>, <code>str()</code>, <code>print()</code>, etc.). You should summarize these aspects of your data within the text, figures, and/or tables. We expect to see text that organizes your project stylistically into a paper. You should not just be stringing together figures, tables, and code with little context. Rather, these elements should be integrated into your overall paper narrative and framework.</p>
-<p>Note that you cannot use the same dataset on both the Midterm and Final. So if you came into this class with a dataset that you wanted to analyze, you may want to save that for later.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># running cumulative sum by row</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fun2 <span class="ot">&lt;-</span> <span class="cf">function</span>(mat) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(mat)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="fu">ncol</span>(mat)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  ans <span class="ot">&lt;-</span> mat</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>k) {</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      ans[i,j] <span class="ot">&lt;-</span> mat[i, j] <span class="sc">+</span> ans[i, j <span class="sc">-</span> <span class="dv">1</span>]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  ans</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>fun2alt <span class="ot">&lt;-</span> <span class="cf">function</span>(mat) {</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Generate and test using the following synthetic data (<code>dat</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the functions with this data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2315</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">200</span> <span class="sc">*</span> <span class="dv">100</span>), <span class="at">nrow =</span> <span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-2-8-points" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-8-points">Question 2 (8 points)</h3>
+<ul>
+<li><code>fun3</code>: Calculate the running (cumulative) total of a vector, where the sum resets when a zero is encountered.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fun3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">length</span>(x))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  cumsum_x <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(x)) {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (x[i] <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      cumsum_x <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      cumsum_x <span class="ot">&lt;-</span> cumsum_x <span class="sc">+</span> x[i] </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    out[i] <span class="ot">&lt;-</span> cumsum_x</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  out</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Generate your own synthetic datasets to test accuracy and speed.</p>
+</section>
+<section id="question-3-12-points" class="level3">
+<h3 class="anchored" data-anchor-id="question-3-12-points">Question 3 (12 points)</h3>
+<p>For this question, we will ask you to parallelize a process for computationally estimating the value of <span class="math inline">\(\pi\)</span>.</p>
+<p>The following function allows us to estimate <span class="math inline">\(\pi\)</span> through a simple simulation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sim_pi <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">i =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(n<span class="sc">*</span><span class="dv">2</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="fu">rowSums</span>(p<span class="sc">^</span><span class="dv">2</span>) <span class="sc">&lt;</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">4</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is an example of the run</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">156</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_pi</span>(<span class="dv">1000</span>) <span class="co"># 3.132</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In order to get more accurate estimates, we can run this function multiple times and take the mean:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This runs the simulation a 4,000 times, each with 10,000 points</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1231</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>({</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  ans <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4000</span>, sim_pi, <span class="at">n =</span> <span class="dv">10000</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">mean</span>(ans))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Rewrite the previous code using <code>parLapply()</code> (or your parallelization method of choice) to parallelize it. Run the code once, using <code>system.time()</code>, to show that your version is faster.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>({</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  ans <span class="ot">&lt;-</span> <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">mean</span>(ans))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Visualize your results in two ways:</p>
+<ol type="1">
+<li>Show that both versions produce similar ranges of estimates for <span class="math inline">\(\pi\)</span>.</li>
+<li>Show that the parallel version runs faster.</li>
+</ol>
+</section>
+</section>
+<section id="sql" class="level1">
+<h1>SQL</h1>
+<p>Dataset Description</p>
+<p>The data we will be using is a time-series for a small mammal community in southern Arizona. This is part of a project studying the effects of rodents and ants on the plant community that has been running for almost 40 years. The rodents are sampled on a series of 24 plots, with different experimental manipulations controlling which rodents are allowed to access which plots.</p>
+<p>Download data</p>
+<p>You’ll need the following three files from this <a href="https://figshare.com/articles/dataset/Portal_Project_Teaching_Database/1314459">repository</a>:</p>
+<ul>
+<li><code>surveys.csv</code></li>
+<li><code>species.csv</code></li>
+<li><code>plots.csv</code></li>
+</ul>
+<p>Setup a temporary database of ecology data by editing and running the following code chunk:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(c("RSQLite", "DBI"))</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSQLite)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize a temporary in memory database</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">#### YOUR CODE HERE</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in tables</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">### YOUR CODE HERE</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy data.frames to database</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="do">#### YOUR CODE HERE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When you write a new chunk, remember to replace the <code>r</code> with <code>sql, connection=con</code>. Some of these questions will require you to use an inner join. Read more about them here <a href="https://www.w3schools.com/sql/sql_join_inner.asp" class="uri">https://www.w3schools.com/sql/sql_join_inner.asp</a></p>
+<p>Answer each of the questions below with SQL queries. Make sure to show the results of your queries.</p>
+<section id="question-4-6-points" class="level2">
+<h2 class="anchored" data-anchor-id="question-4-6-points">Question 4 (6 points)</h2>
+<p>First, using the approach from Lab 9, create a query to to see the structure of the surveys table. Then, using the surveys table, write a query to display the three date fields, species_id, and weight in kilograms (rounded to two decimal places), for individuals captured in 1999, ordered alphabetically by the species_id.</p>
+</section>
+<section id="question-5-6-points" class="level2">
+<h2 class="anchored" data-anchor-id="question-5-6-points">Question 5 (6 points)</h2>
+<p>Write a query that returns: the total weight, average weight, minimum and maximum weights for all animals caught over the duration of the survey. Can you modify it so that it outputs these values only for weights between 5 and 10 inclusive?</p>
+</section>
+<section id="question-6-8-points" class="level2">
+<h2 class="anchored" data-anchor-id="question-6-8-points">Question 6 (8 points)</h2>
+<p>Write a single query that returns:</p>
+<ol type="1">
+<li>How many were counted each year, for each different species</li>
+<li>The average weights of each species in each year</li>
+</ol>
+<p>Show the result and also store the resulting SQL data table as an R object. Hint, use the R function <code>DBI::dbGetQuery</code>. Note: to do so, you may need to, rather than running a SQL chunk, call SQL within an R chunk.</p>
+</section>
+<section id="question-7-8-points" class="level2">
+<h2 class="anchored" data-anchor-id="question-7-8-points">Question 7 (8 points)</h2>
+<p>Write a query that returns, from the species table, the number of species in each taxa, only for the taxa with more than 10 species.</p>
+</section>
+<section id="question-8-10-points" class="level2">
+<h2 class="anchored" data-anchor-id="question-8-10-points">Question 8 (10 points)</h2>
+<p>Write a query that returns the number of animals caught of each genus in each plot. Order the results by plot number (ascending) and by descending number of individuals in each plot. Show the result and also store the resulting SQL data table as an R object.</p>
+</section>
+<section id="question-9-8-points" class="level2">
+<h2 class="anchored" data-anchor-id="question-9-8-points">Question 9 (8 points)</h2>
+<p>How many specimens of each species were captured in each type of plot, excluding specimens of unknown species?</p>
+</section>
+<section id="question-10-8-points" class="level2">
+<h2 class="anchored" data-anchor-id="question-10-8-points">Question 10 (8 points)</h2>
+<p>Write a query that finds the average weight of each rodent species (i.e., only include species with Rodent in the taxa field).</p>
+</section>
+<section id="question-11-10-points" class="level2">
+<h2 class="anchored" data-anchor-id="question-11-10-points">Question 11 (10 points)</h2>
+<p>Using <code>plotly::ggplotly</code> and the data table resultant from question 8, make an interactive grouped bar chart of the number of species by plot id, subseting to plot id 1-5.</p>
+</section>
+<section id="question-12-10-points" class="level2">
+<h2 class="anchored" data-anchor-id="question-12-10-points">Question 12 (10 points)</h2>
+<p>Using native <code>plotly</code> functions (no <code>ggplot2</code>) and the data table resultant from question 6, make an interactive line chart of average species weight over time for each species. Make sure to properly handle missing data. Can you do anything to reduce the noise in your plot?</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

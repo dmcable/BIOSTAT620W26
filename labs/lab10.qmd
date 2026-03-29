@@ -224,7 +224,7 @@ cv_states$deathsper100k <- as.numeric(format(round(cv_states$________/(cv_states
 cv_states$newdeathsper100k <- as.numeric(format(round(cv_states$________/(cv_states$________/100000),1),nsmall=1))
 
 # add a naive_CFR variable = deaths / cases
-cv_states <- cv_states |> mutate(naive_CFR = round((________),2))
+cv_states <- cv_states |> mutate(naive_CFR = (________))
 
 # create a `cv_states_today` variable
 cv_states_today <- subset(cv_states, date==max(cv_states$date))
@@ -371,8 +371,8 @@ plot_ly(x=________, y=________,
 
 ### 10. Map
 
-- Create a map to visualize the `naive_CFR` by state on October 15, 2021
-- Compare with a map visualizing the `naive_CFR` by state on most recent date
+- Create a map to visualize the `newper100k` by state on October 15, 2021
+- Compare with a map visualizing the `newper100k` by state on most recent date
 - Create hover text to include state name, new cases per 100k, cases, and deaths
 - Plot the two maps together using `subplot()`. Make sure the shading is for the same range of values (google is your friend for this)
 - Describe the difference in the pattern of the CFR.

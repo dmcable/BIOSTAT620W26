@@ -1,0 +1,225 @@
+---
+title: "Assignment 4 - HPC, SQL, and interactive plots"
+link-citations: true
+toc: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+## Due Date
+
+This assignment is due by 11:59pm Eastern Time on Monday, April 13th,
+2026.
+
+The learning objectives are to write faster code for a computational
+task requiring a loop and to implement some queries and basic data
+wrangling in SQL.
+
+# HPC
+
+For Questions 1-2, rewrite the provided R functions to make them faster.
+It is OK (and recommended) to take a look at StackOverflow and Google.
+
+Using the synthetic dataset provided, show that your new function
+returns the same output as the original function. Then use
+`microbenchmark` to show that your version is faster and provide a
+visualization of the runtimes.
+
+### Question 1 (6 points)
+
+-   `fun2`: Calculate the running (cumulative) total along each row of a
+    numeric matrix. Output should be a matrix with dimensions equal to
+    the input matrix.
+
+```{r, eval = FALSE}
+# running cumulative sum by row
+fun2 <- function(mat) {
+  n <- nrow(mat)
+  k <- ncol(mat)
+  ans <- mat
+  for (i in 1:n) {
+    for (j in 2:k) {
+      ans[i,j] <- mat[i, j] + ans[i, j - 1]
+    }
+  }
+  ans
+}
+
+fun2alt <- function(mat) {
+  # YOUR CODE HERE
+}
+```
+
+Generate and test using the following synthetic data (`dat`):
+
+```{r, eval = FALSE}
+# Use the functions with this data
+set.seed(2315)
+dat <- matrix(rnorm(200 * 100), nrow = 200)
+```
+
+### Question 2 (8 points)
+
+-   `fun3`: Calculate the running (cumulative) total of a vector, where
+    the sum resets when a zero is encountered.
+
+```{r, eval = FALSE}
+fun3 <- function(x) {
+  out <- numeric(length(x))
+  cumsum_x <- 0
+  for (i in seq_along(x)) {
+    if (x[i] == 0) {
+      cumsum_x <- 0
+    } else {
+      cumsum_x <- cumsum_x + x[i] 
+    }
+    out[i] <- cumsum_x
+  }
+  out
+}
+```
+
+Generate your own synthetic datasets to test accuracy and speed.
+
+### Question 3 (12 points)
+
+For this question, we will ask you to parallelize a process for
+computationally estimating the value of $\pi$.
+
+The following function allows us to estimate $\pi$ through a simple
+simulation:
+
+```{r, eval = FALSE}
+sim_pi <- function(n = 1000, i = NULL) {
+  p <- matrix(runif(n*2), ncol = 2)
+  mean(rowSums(p^2) < 1) * 4
+}
+
+# Here is an example of the run
+set.seed(156)
+sim_pi(1000) # 3.132
+```
+
+In order to get more accurate estimates, we can run this function
+multiple times and take the mean:
+
+```{r, eval = FALSE}
+# This runs the simulation a 4,000 times, each with 10,000 points
+set.seed(1231)
+system.time({
+  ans <- unlist(lapply(1:4000, sim_pi, n = 10000))
+  print(mean(ans))
+})
+```
+
+Rewrite the previous code using `parLapply()` (or your parallelization
+method of choice) to parallelize it. Run the code once, using
+`system.time()`, to show that your version is faster.
+
+```{r, eval = FALSE}
+# YOUR CODE HERE
+system.time({
+  # YOUR CODE HERE
+  ans <- # YOUR CODE HERE
+  print(mean(ans))
+  # YOUR CODE HERE
+})
+```
+
+Visualize your results in two ways:
+
+1.  Show that both versions produce similar ranges of estimates for
+    $\pi$.
+2.  Show that the parallel version runs faster.
+
+# SQL
+
+Dataset Description
+
+The data we will be using is a time-series for a small mammal community
+in southern Arizona. This is part of a project studying the effects of
+rodents and ants on the plant community that has been running for almost
+40 years. The rodents are sampled on a series of 24 plots, with
+different experimental manipulations controlling which rodents are
+allowed to access which plots.
+
+Download data
+
+You’ll need the following three files from this [repository](https://figshare.com/articles/dataset/Portal_Project_Teaching_Database/1314459):
+
+- `surveys.csv` 
+- `species.csv` 
+- `plots.csv`
+
+Setup a temporary database of ecology data by editing and running the following code
+chunk:
+
+```{r, eval = FALSE}
+# install.packages(c("RSQLite", "DBI"))
+
+library(RSQLite)
+library(DBI)
+
+# Initialize a temporary in memory database
+#### YOUR CODE HERE
+
+# Read in tables
+### YOUR CODE HERE
+
+# Copy data.frames to database
+#### YOUR CODE HERE
+```
+
+When you write a new chunk, remember to replace the `r` with
+`sql, connection=con`. Some of these questions will require you to use
+an inner join. Read more about them here
+<https://www.w3schools.com/sql/sql_join_inner.asp>
+
+Answer each of the questions below with SQL queries. Make sure to show the results of your queries.
+
+## Question 4 (6 points)
+
+First, using the approach from Lab 9, create a query to to see the structure of the surveys table. Then, using the surveys table, write a query to display the three date fields, species_id, and weight in kilograms (rounded to two decimal places), for individuals captured in 1999, ordered alphabetically by the species_id.
+
+## Question 5 (6 points)
+
+Write a query that returns: the total weight, average weight, minimum and maximum weights for all animals caught over the duration of the survey. Can you modify it so that it outputs these values only for weights between 5 and 10 inclusive?
+
+## Question 6 (8 points)
+
+Write a single query that returns:
+
+1. How many were counted each year, for each different species
+2. The average weights of each species in each year
+
+Show the result and also store the resulting SQL data table as
+an R object. Hint, use the R function `DBI::dbGetQuery`. Note: to do so,
+you may need to, rather than running a SQL chunk, call SQL within an R
+chunk.
+
+## Question 7 (8 points)
+
+Write a query that returns, from the species table, the number of species in each taxa, only for the taxa with more than 10 species.
+
+## Question 8 (10 points)
+
+Write a query that returns the number of animals caught of each genus in each plot. Order the results by plot number (ascending) and by descending number of individuals in each plot. Show the result and also store the resulting SQL data table as an R object. 
+
+## Question 9 (8 points)
+
+How many specimens of each species were captured in each type of plot, excluding specimens of unknown species?
+
+## Question 10 (8 points)
+
+Write a query that finds the average weight of each rodent species (i.e., only include species with Rodent in the taxa field).
+
+
+## Question 11 (10 points)
+
+Using `plotly::ggplotly` and the data table resultant from question 8,
+make an interactive grouped bar chart of the number of species by plot id, subseting to plot id 1-5.
+
+## Question 12 (10 points)
+
+Using native `plotly` functions (no `ggplot2`) and the data table resultant from question 6, make an interactive line chart of average species weight over time for each species. Make sure to properly handle missing data. Can you do anything to reduce the noise in your plot?

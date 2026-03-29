@@ -8,7 +8,7 @@ Due **Friday, March 13th, 2026** by 11:59pm Eastern Time.
 
 **Learning Objective**:
 To apply the skills learned in BIOSTAT620 (through Week 6) by analyzing and
-interpreting a dataset of your choice.
+interpreting a health or biology dataset of your choice.
 
 **Narrative**:
 As we have discussed in class, the practice of data science requires both
@@ -38,7 +38,11 @@ create. The report should have the following sections:
 
 In your report, please do not include any unformatted text output (e.g. output
 from `head()`, `str()`, `print()`, etc.). You should summarize these aspects of
-your data within the text, figures, and/or tables.
+your data within the text, figures, and/or tables. We expect to see text that organizes
+your project stylistically into a paper. You should not just be stringing together
+figures, tables, and code with little context. Rather, these elements should be integrated
+into your overall paper narrative and framework.
+
 
 Note that you cannot use the same dataset on both the Midterm and Final. So if
 you came into this class with a dataset that you wanted to analyze, you may want

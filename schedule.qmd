@@ -15,7 +15,7 @@ title: "Schedule"
 |   | 3/3-5 | NO CLASS - SPRING RECESS	 |  |  |  |
 | 8 | 3/10-12 | Efficiency and High Performance Computing | [Slides](slides/week08.qmd) | [Lab](labs/lab8.qmd) | [HW3](assignments/hw3.qmd)  |
 | 9 | 3/17-19 | SQL and Managing Big Data	 | [Slides](slides/week09.qmd) | [Lab](labs/lab9.qmd) | [Final Project](assignments/final.qmd)  |
-| 10 | 3/24-26 | Interactive Visualization | [Slides](slides/week10.qmd) | [Lab](labs/lab10.qmd) | HW4 |
+| 10 | 3/24-26 | Interactive Visualization | [Slides](slides/week10.qmd) | [Lab](labs/lab10.qmd) | [HW4](assignments/hw4.qmd) |
 | 11 | 3/31-4/2 | Building a Website with Quarto and GitHub |  | Lab 11 |  |
 | 12 | 4/7-9 | Special Topics	 |  | Final Project Workshop  | |
 | 13 | 4/14-16 | Special Topics and Final Project Presentations	 |  | Final Project Presentations |  |

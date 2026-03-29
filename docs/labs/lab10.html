@@ -399,7 +399,7 @@ window.Quarto = {
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>cv_states<span class="sc">$</span>newdeathsper100k <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">format</span>(<span class="fu">round</span>(cv_states<span class="sc">$</span>________<span class="sc">/</span>(cv_states<span class="sc">$</span>________<span class="sc">/</span><span class="dv">100000</span>),<span class="dv">1</span>),<span class="at">nsmall=</span><span class="dv">1</span>))</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># add a naive_CFR variable = deaths / cases</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>cv_states <span class="ot">&lt;-</span> cv_states <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">naive_CFR =</span> <span class="fu">round</span>((________),<span class="dv">2</span>))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>cv_states <span class="ot">&lt;-</span> cv_states <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">naive_CFR =</span> (________))</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># create a `cv_states_today` variable</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>cv_states_today <span class="ot">&lt;-</span> <span class="fu">subset</span>(cv_states, date<span class="sc">==</span><span class="fu">max</span>(cv_states<span class="sc">$</span>date))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -548,8 +548,8 @@ window.Quarto = {
 <section id="map" class="level3">
 <h3 class="anchored" data-anchor-id="map">10. Map</h3>
 <ul>
-<li>Create a map to visualize the <code>naive_CFR</code> by state on October 15, 2021</li>
-<li>Compare with a map visualizing the <code>naive_CFR</code> by state on most recent date</li>
+<li>Create a map to visualize the <code>newper100k</code> by state on October 15, 2021</li>
+<li>Compare with a map visualizing the <code>newper100k</code> by state on most recent date</li>
 <li>Create hover text to include state name, new cases per 100k, cases, and deaths</li>
 <li>Plot the two maps together using <code>subplot()</code>. Make sure the shading is for the same range of values (google is your friend for this)</li>
 <li>Describe the difference in the pattern of the CFR.</li>
