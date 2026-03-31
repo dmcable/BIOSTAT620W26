@@ -33,11 +33,11 @@ options(htmltools.dir.version = TRUE)
 
 These slides were originally developed by Abigail Horn.
 
-------------------------------------------------------------------------
+---
 
 # Introduction
 
-------------------------------------------------------------------------
+---
 
 ## What is interactive visualization? {.smaller}
 
@@ -52,7 +52,7 @@ Some example products and packages in R:
 -   Interactive applications (`shiny`)
 -   Websites (Static using `Quarto`, `R Markdown`, `blogdown`, `Hugo`, `Jeckyll`)
 
-------------------------------------------------------------------------
+---
 
 ## What is interactive visualization (cont.) {.smaller}
 
@@ -68,7 +68,7 @@ Features of interactivity include:
 -   Animate
 -   Change parameters
 
-------------------------------------------------------------------------
+---
 
 ## Why use interactive visualization?
 
@@ -76,7 +76,7 @@ Interactive visualization helps with both the **exploration** and **communicatio
 
 ![](img/data-science-2.png)
 
-------------------------------------------------------------------------
+---
 
 ## Interactive Visualization for **exploratory data analysis** (EDA) {.smaller}
 
@@ -88,7 +88,7 @@ Interactive graphics are well suited to aid the exploration of high-dimensional 
 
 3.  **Understand or diagnose problems with data, models, or algorithms** (Wickham, Cook, and Hofmann 2015)
 
-------------------------------------------------------------------------
+---
 
 ## Interactive visualization for **communication**
 
@@ -96,13 +96,13 @@ Interactive graphics are well suited to communicating high-dimensional or otherw
 
 (1) Engagement with information has been shown to improve the ability to retain information
 
-------------------------------------------------------------------------
+---
 
 ## Interactive visualization for **communication** (cont. 1)
 
 ![](https://i0.wp.com/www.worklearning.com/wp-content/uploads/2015/01/Cone_of_learning_export_from_Wikipedia_11-11-2007.jpg)
 
-------------------------------------------------------------------------
+---
 
 ## Interactive visualization for **communication** (cont. 2) {.smaller}
 
@@ -114,7 +114,7 @@ Interactive graphics are well suited to communicating high-dimensional or otherw
 
 [EpiModel Shiny app](https://epimodel.shinyapps.io/covid-university/) for COVID testing at universities
 
-------------------------------------------------------------------------
+---
 
 ## Interactive visualization for **communication** (cont. 3) {.smaller}
 
@@ -126,7 +126,7 @@ Interactive graphics are well suited to communicating high-dimensional or otherw
 
 [MIT Media Lab Atlas of Inequality](https://inequality.media.mit.edu/)
 
-------------------------------------------------------------------------
+---
 
 ## Two Classes on Interactive Visualization in Data Science {.smaller}
 
@@ -140,11 +140,11 @@ Interactive graphics are well suited to communicating high-dimensional or otherw
 -   Sharing your interactive graphics
 -   Survey other options for sharing interactive graphics (Shiny apps, dashboards)
 
-------------------------------------------------------------------------
+---
 
 # Plotly
 
-------------------------------------------------------------------------
+---
 
 ## What is Plotly? {.smaller}
 
@@ -158,7 +158,7 @@ Interactive graphics are well suited to communicating high-dimensional or otherw
 
 -   Plotly for R graphics are based on the `htmlwidgets` framework, which allows them to work seamlessly inside of larger rmarkdown documents, inside shiny apps, RStudio, Jupyter notebooks, the R prompt, and more.
 
-------------------------------------------------------------------------
+---
 
 ## `plot_ly()` vs. `ggplotly()`
 
@@ -170,7 +170,7 @@ There are two main ways to create a plotly object:
 
 Both approaches are powered by plotly.js so many of the same concepts and tools that you learn for one interface can be reused in the other
 
-------------------------------------------------------------------------
+---
 
 ## `plot_ly()` function {.smaller}
 
@@ -180,7 +180,7 @@ The `plot_ly()` function has numerous arguments that are unique to the R package
 
 -   The `layout()` function, which modifies layout components of the plotly object, anticipates a **plotly** object in its first argument and its other arguments add and/or modify various layout components of that object (e.g., the title)
 
-------------------------------------------------------------------------
+---
 
 ## `plot_ly()` function (cont.) {.smaller}
 
@@ -192,7 +192,7 @@ The `plot_ly()` function has numerous arguments that are unique to the R package
     -   statistical transformations (e.g., sum, mean, etc.)
     -   positional adjustments (e.g., dodge, stack, etc.)
 
-------------------------------------------------------------------------
+---
 
 ## `ggplotly()`{.smaller}
 
@@ -207,17 +207,17 @@ ggplotly(p)
 
 -   This functionality can be really helpful for quickly adding interactivity to your existing **ggplot2** workflow.
  
-------------------------------------------------------------------------
+---
 
 ## `ggplotly()` (cont.) {.smaller}
 
 -   `ggplotly()` provides advantages to `plot_ly()` in particular when it comes to exploring statistical summaries across groups. The ability to quickly generate statistical summaries across groups and map to an interactive plot works for basically any geom (e.g., `geom_boxplot()`, `geom_histogram()`, `geom_density()`, etc.)
 
-------------------------------------------------------------------------
+---
 
 # Getting started
 
-------------------------------------------------------------------------
+---
 
 ## Install Plotly
 
@@ -226,7 +226,7 @@ if(!require(plotly)) install.packages("plotly", repos = "http://cran.us.r-projec
 library(plotly)
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Load data for examples {.smaller}
 
@@ -234,7 +234,7 @@ For examples today we will be using COVID data direct downloaded from the New Yo
 
 -   This data source provides COVID cases (confirmed infections) and deaths for each US state by date
 
-------------------------------------------------------------------------
+---
 
 ## Load data for examples (cont. 1) {.smaller}
 
@@ -251,7 +251,7 @@ We have pre-processed this data and added some additional variables in the file 
 
 In the lab we will preprocess this data together.
 
-------------------------------------------------------------------------
+---
 
 ## Load data for examples (cont. 2) {.smaller}
 
@@ -266,7 +266,7 @@ cv_states$date <- as.Date(cv_states$date, format="%Y-%m-%d")
 cv_states_today <- subset(cv_states, date==max(cv_states$date))
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Load data for examples (cont. 3) {.smaller}
 
@@ -276,7 +276,7 @@ Inspect the data
 str(cv_states)
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Load data for examples (cont. 4) {.smaller}
 
@@ -287,11 +287,11 @@ Inspect the data
 summary(cv_states)
 ```
 
-------------------------------------------------------------------------
+---
 
 # Examples
 
-------------------------------------------------------------------------
+---
 
 ## Basic Scatterplot {.smaller}
 
@@ -311,7 +311,7 @@ cv_states_today |>
                    colors = "Blues")
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Basic Scatterplot (cont. 1) {.smaller}
 
@@ -332,7 +332,7 @@ fig
 -   Notice the automatic `tooltip` that appears when your mouse hovers over each point
 -   Doubleclick any item in legend to isolate that point in the plot
 
-------------------------------------------------------------------------
+---
 
 ## Scatterplot: `size`{.smaller}
 
@@ -353,7 +353,7 @@ cv_states_today |>
 
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Scatterplot: `size` (cont.) {.smaller}
 
@@ -371,7 +371,7 @@ fig
 
 The closer to the bottom right corner of the plot, the higher the CFR, and the larger the point's circle.
 
-------------------------------------------------------------------------
+---
 
 ## Hover information {.smaller}
 
@@ -393,7 +393,7 @@ cv_states_today |>
                          sep = "<br>")) 
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Hover information (cont.) {.smaller}
 
@@ -413,7 +413,7 @@ p
 
 We can now clearly understand the information being shown in the `tooltip`
 
-------------------------------------------------------------------------
+---
 
 ## Layout {.smaller}
 
@@ -437,7 +437,7 @@ cv_states_today |>
          hovermode = "compare")
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Layout (cont.) {.smaller}
 
@@ -455,7 +455,7 @@ p<- cv_states_today |>
 p
 ```
 
-------------------------------------------------------------------------
+---
 
 ## 3D Scatterplot {.smaller}
 
@@ -478,7 +478,7 @@ cv_states_today |>
          hovermode = "compare")
 ```
 
-------------------------------------------------------------------------
+---
 
 ## 3D Scatterplot (cont.) {.smaller}
 
@@ -496,7 +496,7 @@ p <- cv_states_today |>
 p
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Scatterplot with `ggplotly()`{.smaller}
 
@@ -511,7 +511,7 @@ p <- ggplot(cv_states_today, aes(x=deathsper100k, y=per100k, size=naive_CFR)) +
 ggplotly(p)
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Scatterplot with `ggplotly()`{.smaller}
 
@@ -523,7 +523,7 @@ p1
 
 The `geom_smooth()` helps us to see there is not a clear correlation between cases and deaths relative to population across the states. Note that the `geom_smooth()` line also appears upon hover.
 
-------------------------------------------------------------------------
+---
 
 ## Annotations
 
@@ -540,7 +540,7 @@ p <- ggplot(cv_states_today, aes(x=deathsper100k, y=per100k, size=naive_CFR)) +
 fig <- ggplotly(p)
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Annotations
 
@@ -556,7 +556,7 @@ fig <- ggplotly(p)
 fig
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Line graph {.smaller}
 
@@ -574,7 +574,7 @@ plot_ly(x = ~date, y = ~deaths, color = ~state, type = "scatter", mode = "lines"
                   paste(" Deaths per 100k: ", deathsper100k, sep=""), sep = "<br>"))
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Line graph (cont.) {.smaller}
 
@@ -591,7 +591,7 @@ p
 
 Deaths stabilized for New York and New Jersey around the time they started to rise for California, Texas, and Florida. It helps to be able to see the exact values for each date upon hover.
 
-------------------------------------------------------------------------
+---
 
 ## Line graph: `ggplotly()`{.smaller}
 
@@ -607,7 +607,7 @@ g2_plotly <- ggplotly(g2)
 subplot(g1, g2_plotly)
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Line graph: `ggplotly()`{.smaller}
 
@@ -620,7 +620,7 @@ sp <- subplot(g1, g2_plotly)
 sp
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Specifying text with `ggplotly()`{.smaller}
 
@@ -636,7 +636,7 @@ g1 = ggplot(cv_states, aes(x = date, y = cases, color = state,
 ggplotly(g1, tooltip = "text")
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Specifying text with `ggplotly()` (cont.) {.smaller}
 
@@ -651,7 +651,7 @@ g2<-ggplotly(g1, tooltip = "text")
 g2
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Histograms
 
@@ -666,7 +666,7 @@ g2_plotly <- ggplotly(g2)
 subplot(g1, g2_plotly)
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Histograms (cont.)
 
@@ -683,7 +683,7 @@ g2_plotly <- ggplotly(g2)
 subplot(g1, g2_plotly)
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Heatmap {.smaller}
 
@@ -716,7 +716,7 @@ rownames(cv_states_mat2) <- cv_states_mat2$date
 cv_states_mat2$date <- NULL
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Heatmap (cont. 1) {.smaller}
 
@@ -724,7 +724,7 @@ cv_states_mat2$date <- NULL
 head(cv_states_mat2)
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Heatmap (cont. 2) {.smaller}
 
@@ -741,7 +741,7 @@ plot_ly(x=colnames(data), y=rownames(data),
              showscale=T)
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Heatmap (cont. 3) {.smaller}
 
@@ -757,7 +757,7 @@ p
 
 We can see when new deaths started to rise and fall for each state. No other state approached the values seen in NY. The hover info conveniently allows us to inspect the exact date and number of new deaths.
 
-------------------------------------------------------------------------
+---
 
 ## 3D Surface
 
@@ -770,7 +770,7 @@ plot_ly(x=colnames(cv_states_mat2), y=rownames(cv_states_mat2),
              showscale=F)
 ```
 
-------------------------------------------------------------------------
+---
 
 ## 3D Surface (cont.)
 
@@ -782,7 +782,7 @@ ps <- plot_ly(x=colnames(cv_states_mat2), y=rownames(cv_states_mat2),
 ps
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Choropleth Maps: Setup {.smaller}
 
@@ -799,7 +799,7 @@ Making choropleth maps requires two main types of input:
 
 The GeoJSON data is passed to the geojson argument, and the data is passed into the **z argument** of the choropleth `trace`
 
-------------------------------------------------------------------------
+---
 
 ## Choropleth Maps: Setup (cont. 1) {.smaller}
 
@@ -820,7 +820,7 @@ cv_CFR2$state <- cv_CFR2$abb
 cv_CFR2$abb <- NULL
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Choropleth Maps: Setup (cont. 2) {.smaller}
 
@@ -840,7 +840,7 @@ set_map_details <- list(
 )
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Choropleth Maps: Mapping {.smaller}
 
@@ -864,7 +864,7 @@ fig <- fig |> layout(
   )
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Choropleth Maps: Mapping (cont.) {.smaller}
 
@@ -914,7 +914,7 @@ fig
 
 The northeast was hit hard with high CFRs. It would be interesting to see this map at different time points.
 
-------------------------------------------------------------------------
+---
 
 ## A note on interactive mapping
 
@@ -922,7 +922,7 @@ The northeast was hit hard with high CFRs. It would be interesting to see this m
 
 -   Plotly is a general purpose visualization library and doesn’t offer most fully featured geo-spatial visualization toolkit. If you run into limitations with plotly’s mapping functionality there are many other tools for interactive geospatial visualization in R, including: **leaflet**, **mapview**, **mapedit**, **tmap**, and **mapdeck**.
 
-------------------------------------------------------------------------
+---
 
 # Interactive tables
 
@@ -936,7 +936,7 @@ datatable(cv_california)
 
 Note that you can interactively reorder the values by clicking on the arrows at the top of each column, or search for specific values
 
-------------------------------------------------------------------------
+---
 
 ## Interactive tables
 
@@ -946,7 +946,7 @@ cv_california <- cv_states |> filter(state=="California") |> select(date,cases,d
 datatable(cv_california)
 ```
 
-------------------------------------------------------------------------
+---
 
 # Publishing views
 
@@ -956,7 +956,7 @@ You can also share your visualizations on https://plot.ly/ by making an account 
 
 But you may want to save and embed the interactive HTML file, or save a static image based on the plot
 
-------------------------------------------------------------------------
+---
 
 ## Saving and embedding HTML {.smaller}
 
@@ -971,7 +971,7 @@ saveWidget(p, "p1.html", selfcontained = F, libdir = "lib")
 saveWidget(p, "p2.html", selfcontained = F, libdir = "lib")
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Saving a static image {.smaller}
 
@@ -991,7 +991,7 @@ plot_ly() |>
   )
 ```
 
-------------------------------------------------------------------------
+---
 
 # Takeaways {.smaller}
 
@@ -1007,7 +1007,7 @@ Hopefully in this class you have learned:
 
 -   Get inspired to create engaging, effective data visualizations and tell stories with your data and findings!
 
-------------------------------------------------------------------------
+---
 
 ## Avoid pitfals
 
@@ -1019,7 +1019,7 @@ Hopefully in this class you have learned:
 
 -   And just hilariously bad examples: [(link)](https://viz.wtf/)
 
-------------------------------------------------------------------------
+---
 
 ## More Resources {.smaller}
 
@@ -1036,7 +1036,7 @@ Hopefully in this class you have learned:
 -   [The `Shiny` Website](http://shiny.rstudio.com)
 -   [R Markdown: The Definitive Guide, Chapter 5: Dashboards (Layout, Components, Shiny)](https://bookdown.org/yihui/rmarkdown/dashboards.html)
 
-------------------------------------------------------------------------
+---
 
 ## More Resources (cont.) {.smaller}
 
@@ -1051,7 +1051,7 @@ Data visualization best practices
 -   [Data Visualization: A Practical Introduction](https://kieranhealy.org/publications/dataviz/), Kieran Healy
 -   [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/), Claus O. Wilke
 
-------------------------------------------------------------------------
+---
 
 # References
 
