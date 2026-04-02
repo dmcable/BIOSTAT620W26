@@ -10,6 +10,5 @@ For this lab, follow the instructions from the lecture on how to build a website
 
 Additional tips / tutorials can be found [here](https://quarto.org/docs/publishing/github-pages.html). Adding a custom domain is optional (not required).
 
-```
 
 
