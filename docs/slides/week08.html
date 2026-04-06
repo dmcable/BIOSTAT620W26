@@ -308,9 +308,9 @@ code.r,code.cpp{
 <span id="cb9-2"><a></a><span class="fu">microbenchmark</span>(<span class="fu">forLoopRoots</span>(<span class="dv">10000</span>), <span class="fu">VectorizedRoots</span>(<span class="dv">10000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: microseconds
-                   expr     min       lq      mean  median      uq     max
-    forLoopRoots(10000) 233.946 247.2505 253.65306 248.296 252.273 519.470
- VectorizedRoots(10000)  10.455  17.0970  25.08216  17.712  18.778 612.868
+                   expr     min       lq      mean   median      uq     max
+    forLoopRoots(10000) 231.650 248.3575 252.23733 249.8335 250.469 592.081
+ VectorizedRoots(10000)  14.965  16.9945  24.95752  17.6710  18.532 680.395
  neval
    100
    100</code></pre>
@@ -386,9 +386,9 @@ code.r,code.cpp{
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">microbenchmark</span>(<span class="fu">method1</span>(vec), <span class="fu">method2</span>(vec))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: microseconds
-         expr      min        lq     mean    median       uq      max neval
- method1(vec) 2640.933 2750.7925 2932.723 2782.0140 2845.872 4827.832   100
- method2(vec)   94.341   98.8715  121.599  101.5775  104.263 1961.645   100</code></pre>
+         expr      min        lq      mean   median       uq      max neval
+ method1(vec) 2685.541 2719.2840 2929.1200 2793.945 2875.391 4882.772   100
+ method2(vec)   93.480   99.1995  121.8688  101.475  103.607 2056.478   100</code></pre>
 </div>
 </div>
 </section>
@@ -407,9 +407,9 @@ code.r,code.cpp{
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">microbenchmark</span>(<span class="fu">method2</span>(vec), <span class="fu">method3</span>(vec))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: microseconds
-         expr    min     lq      mean  median       uq     max neval
- method2(vec) 94.218 99.056 102.99364 102.992 104.9805 139.482   100
- method3(vec)  1.722  1.927   5.84701   2.009   2.2140 370.927   100</code></pre>
+         expr    min       lq      mean  median       uq     max neval
+ method2(vec) 93.685 102.0285 104.29457 103.361 104.5295 146.657   100
+ method3(vec)  1.763   1.9270   5.79166   2.091   2.2140 371.214   100</code></pre>
 </div>
 </div>
 </section>
@@ -1026,7 +1026,7 @@ i wears                   0.5    0.05</code></pre>
 <p>Which we would execute like this:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>13888 days since you were born.</code></pre>
+<pre><code>13914 days since you were born.</code></pre>
 </div>
 </div>
 </section>
@@ -1056,7 +1056,7 @@ i wears                   0.5    0.05</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.4.1 (2024-06-14)
 Platform: aarch64-apple-darwin20
-Running under: macOS 26.3
+Running under: macOS 26.4
 
 Matrix products: default
 BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
@@ -1077,8 +1077,8 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] compiler_4.4.1    fastmap_1.2.0     cli_3.6.4         tools_4.4.1      
- [5] htmltools_0.5.8.1 yaml_2.3.10       rmarkdown_2.28    knitr_1.48       
- [9] jsonlite_1.8.8    xfun_0.47         digest_0.6.37     rlang_1.1.6      
+ [5] htmltools_0.5.8.1 yaml_2.3.10       rmarkdown_2.30    knitr_1.51       
+ [9] jsonlite_1.8.8    xfun_0.56         digest_0.6.37     rlang_1.1.6      
 [13] evaluate_1.0.3   </code></pre>
 </div>
 </div>
