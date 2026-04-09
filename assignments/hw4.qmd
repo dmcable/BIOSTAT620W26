@@ -218,7 +218,7 @@ Write a query that finds the average weight of each rodent species (i.e., only i
 ## Question 11 (10 points)
 
 Using `plotly::ggplotly` and the data table resultant from question 8,
-make an interactive grouped bar chart of the number of species by plot id, subseting to plot id 1-5.
+make an interactive grouped bar chart of the number of genus by plot id, subseting to plot id 1-5.
 
 ## Question 12 (10 points)
 

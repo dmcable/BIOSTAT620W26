@@ -3294,7 +3294,7 @@
     "href": "assignments/hw4.html#question-11-10-points",
     "title": "Assignment 4 - HPC, SQL, and interactive plots",
     "section": "Question 11 (10 points)",
-    "text": "Question 11 (10 points)\nUsing plotly::ggplotly and the data table resultant from question 8, make an interactive grouped bar chart of the number of species by plot id, subseting to plot id 1-5."
+    "text": "Question 11 (10 points)\nUsing plotly::ggplotly and the data table resultant from question 8, make an interactive grouped bar chart of the number of genus by plot id, subseting to plot id 1-5."
   },
   {
     "objectID": "assignments/hw4.html#question-12-10-points",
